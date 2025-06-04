@@ -45,6 +45,7 @@ nav:
     - Installation: getting-started/installation.md
     - Verification: getting-started/verification.md
     - First Project: getting-started/first-project.md
+    - Brownfield Projects: getting-started/brownfield-projects.md
   - Commands:
     - Quick Reference: commands/quick-reference.md
     - Behavioral Commands: commands/behavioral-commands-guide.md
