@@ -153,27 +153,36 @@ Continuous learning and pattern recognition:
 
 ## 🚀 Quick Start
 
-### 1. **Initialize BMAD**
+### 1. **Install BMAD Method** (Recommended)
 ```bash
-# Clone the repository
+# Clone the BMAD Method repository
 git clone https://github.com/your-org/bmad-method
 cd bmad-method
 
-# Copy to your project
-cp -r bmad-agent /path/to/your/project/
+# Install to your project (auto-detects project type)
+./install-bmad.sh /path/to/your/project
+
+# Result: Clean installation with project-specific initialization
 ```
 
-### 2. **Activate AI Behavioral Optimization**
+### 2. **Manual Installation** (Alternative)
+```bash
+# For manual setup
+cp -r bmad-agent /path/to/your/project/
+mkdir -p /path/to/your/project/.bmad/{state,memory,config}
+```
+
+### 3. **Activate AI Behavioral Optimization**
 ```markdown
 # In your AI assistant, load:
 /path/to/your/project/bmad-agent/ide-bmad-orchestrator.md
 
-# Initialize with behavioral optimization
-The orchestrator will activate with:
+# The orchestrator will automatically activate with:
 - All behavioral systems enabled
 - 47+ example patterns loaded from bmad-agent/examples/
 - Penalty/reward system active (-$1,000 for missing examples)
-- Each persona aware of its example libraries
+- Project-specific state in .bmad/ directory
+- Memory system ready for learning
 ```
 
 ### 3. **Experience the Difference**
@@ -312,17 +321,18 @@ npm install @openmemory/mcp-client
 
 ### **Verification**
 ```bash
-# Verify behavioral optimization setup
-./verify-setup.sh
+# Verify BMAD installation and setup
+./bmad-agent/verify-setup.sh --mode=project
 
 # Expected output:
+✅ BMAD Method installation verified
+✅ Project structure (.bmad/) validated
 ✅ Behavioral shaping system active
 ✅ Example libraries loaded (47 patterns)
 ✅ Anti-pattern detection enabled (23 rules)
 ✅ Structured thinking enforcement active
-✅ Progressive disclosure configured
-✅ Context awareness operational
-✅ Quality validation running
+✅ Memory system operational
+✅ State management configured
 ```
 
 ## 📚 Documentation
