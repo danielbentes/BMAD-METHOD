@@ -33,6 +33,12 @@ categories:
   consultation:
     description: "Multi-perspective collaboration"
     behavioral_focus: "diverse expertise synthesis"
+  behavioral:
+    description: "Behavioral tracking and gamification"
+    behavioral_focus: "motivation and performance optimization"
+  system:
+    description: "System management and orchestrator control"
+    behavioral_focus: "infrastructure and operational excellence"
   advanced:
     description: "Meta-prompting and system optimization"
     behavioral_focus: "prompt generation and effectiveness"
@@ -442,7 +448,7 @@ commands:
   insights:
     category: memory
     description: "Get AI-powered insights from memory patterns"
-    aliases: [analyze, patterns, intelligence]
+    aliases: [analyze, intelligence]
     usage: |
       /insights [--focus] [--depth] [--actionable]
       Examples:
@@ -469,6 +475,50 @@ commands:
       - pattern_recognition: "Identify trends and successful approaches"
       - actionable_recommendations: "Provide specific next steps"
       - evidence_based: "Back insights with memory data"
+
+  patterns:
+    category: memory
+    description: "Show recognized patterns in working style and project approach"
+    aliases: [workflow-patterns, success-patterns, behavioral-patterns]
+    usage: |
+      /patterns [--type] [--success-rate] [--context] [--timeframe]
+      Examples:
+        /patterns                           # All recognized patterns
+        /patterns --type=workflow           # Workflow patterns only
+        /patterns --success-rate=high       # High success patterns
+        /patterns --context=current         # Current project patterns
+    parameters:
+      type:
+        type: string
+        required: false
+        default: "all"
+        values: [workflow, decision, collaboration, quality, learning, technical, all]
+        description: "Pattern type to show"
+      success_rate:
+        type: string
+        required: false
+        default: "all"
+        values: [low, medium, high, critical, all]
+        description: "Filter by success rate"
+      context:
+        type: string
+        required: false
+        default: "all"
+        values: [current, project, team, personal, all]
+        description: "Pattern context scope"
+      timeframe:
+        type: string
+        required: false
+        default: "recent"
+        values: [recent, month, quarter, year, all]
+        description: "Time period for pattern analysis"
+    behavioral_requirements:
+      - memory_integration: "Surface patterns from memory system"
+      - evidence_based: "Show patterns backed by actual data"
+      - actionable_insights: "Identify how to leverage successful patterns"
+      - anti_pattern_awareness: "Highlight patterns to avoid"
+      - progressive_disclosure: "Start with most relevant patterns"
+    implementation: "memory-pattern-analysis-task.md"
 
   # Quality Commands
   udtm:
@@ -1135,6 +1185,423 @@ commands:
       - anti_pattern_detection: "Flag problematic code patterns"
       - context_understanding: "Build comprehensive project knowledge"
     implementation: "memory-bootstrap-task.md"
+
+  # Behavioral Tracking Commands
+  balance:
+    category: behavioral
+    description: "Check current behavioral balance and status"
+    aliases: [bal, score, status-balance]
+    usage: |
+      /balance [--detailed] [--history] [--trend]
+      Examples:
+        /balance                    # Quick balance check
+        /balance --detailed         # Show recent transactions
+        /balance --history          # Full transaction history
+        /balance --trend           # Show trend analysis
+    parameters:
+      detailed:
+        type: boolean
+        required: false
+        default: false
+        description: "Show detailed recent activity"
+      history:
+        type: boolean
+        required: false
+        default: false
+        description: "Show full transaction history"
+      trend:
+        type: boolean
+        required: false
+        default: false
+        description: "Show balance trend analysis"
+    behavioral_requirements:
+      - real_time_tracking: "Current balance reflects all recent actions"
+      - motivation_display: "Show progress toward next level/achievement"
+      - transparent_calculation: "Clear breakdown of rewards and penalties"
+      - actionable_insights: "Suggest specific improvement actions"
+    implementation: "behavioral-tracking-task.md"
+
+  achievements:
+    category: behavioral
+    description: "View unlocked achievements and progress toward new ones"
+    aliases: [ach, awards, badges, accomplishments]
+    usage: |
+      /achievements [--category] [--available] [--progress] [--stats]
+      Examples:
+        /achievements                      # Show all achievements
+        /achievements --category=quality   # Filter by category
+        /achievements --available         # Show unlocked only
+        /achievements --progress          # Show in-progress achievements
+    parameters:
+      category:
+        type: string
+        required: false
+        values: [quality, speed, collaboration, innovation, learning, all]
+        description: "Achievement category filter"
+      available:
+        type: boolean
+        required: false
+        default: false
+        description: "Show only unlocked achievements"
+      progress:
+        type: boolean
+        required: false
+        default: false
+        description: "Show in-progress achievements"
+      stats:
+        type: boolean
+        required: false
+        default: false
+        description: "Show achievement statistics"
+    behavioral_requirements:
+      - motivation_enhancement: "Celebrate completed achievements prominently"
+      - progress_visibility: "Clear progress indicators for active achievements"
+      - goal_clarity: "Specific criteria for earning each achievement"
+      - social_recognition: "Team-appropriate achievement sharing"
+    implementation: "behavioral-tracking-task.md"
+
+  streaks:
+    category: behavioral
+    description: "Display active quality and efficiency streaks"
+    aliases: [str, consistency, momentum]
+    usage: |
+      /streaks [--all] [--category] [--potential]
+      Examples:
+        /streaks                    # Show active streaks
+        /streaks --all             # Include broken streaks
+        /streaks --category=quality # Quality streaks only
+        /streaks --potential       # Show potential new streaks
+    parameters:
+      all:
+        type: boolean
+        required: false
+        default: false
+        description: "Include broken and completed streaks"
+      category:
+        type: string
+        required: false
+        values: [quality, efficiency, learning, collaboration, all]
+        description: "Streak category filter"
+      potential:
+        type: boolean
+        required: false
+        default: false
+        description: "Show potential streak opportunities"
+    behavioral_requirements:
+      - momentum_preservation: "Clear indication of streak requirements"
+      - risk_awareness: "Warn about actions that could break streaks"
+      - reward_anticipation: "Show upcoming streak milestone rewards"
+      - recovery_guidance: "Help restart broken streaks"
+    implementation: "behavioral-tracking-task.md"
+
+  leaderboard:
+    category: behavioral
+    description: "View anonymized team rankings and performance"
+    aliases: [lead, rankings, team-stats]
+    usage: |
+      /leaderboard [--timeframe] [--category] [--team] [--anonymous]
+      Examples:
+        /leaderboard                    # Weekly leaderboard
+        /leaderboard --timeframe=monthly # Monthly rankings
+        /leaderboard --category=quality  # Quality-focused rankings
+        /leaderboard --team=my-team     # Team-only view
+    parameters:
+      timeframe:
+        type: string
+        required: false
+        default: "weekly"
+        values: [daily, weekly, monthly, quarterly, all-time]
+        description: "Ranking timeframe"
+      category:
+        type: string
+        required: false
+        default: "overall"
+        values: [overall, quality, speed, collaboration, innovation]
+        description: "Ranking category"
+      team:
+        type: string
+        required: false
+        description: "Filter to specific team"
+      anonymous:
+        type: boolean
+        required: false
+        default: true
+        description: "Show anonymous rankings"
+    behavioral_requirements:
+      - privacy_respect: "Maintain anonymity unless explicitly opted in"
+      - healthy_competition: "Focus on improvement, not just ranking"
+      - learning_opportunities: "Highlight successful approaches from top performers"
+      - inclusive_recognition: "Multiple categories for different strengths"
+    implementation: "behavioral-tracking-task.md"
+
+  behavioral-report:
+    category: behavioral
+    description: "Generate detailed behavioral analytics and insights"
+    aliases: [behav, analytics, behavior-analysis, performance-report]
+    usage: |
+      /behavioral-report [--period] [--focus] [--compare] [--export]
+      Examples:
+        /behavioral-report                    # Current week summary
+        /behavioral-report --period=monthly   # Monthly analysis
+        /behavioral-report --focus=patterns   # Pattern analysis
+        /behavioral-report --compare=team     # Compare with team
+    parameters:
+      period:
+        type: string
+        required: false
+        default: "week"
+        values: [day, week, month, quarter, year, custom]
+        description: "Analysis period"
+      focus:
+        type: string
+        required: false
+        default: "comprehensive"
+        values: [violations, rewards, patterns, improvement, trends, comprehensive]
+        description: "Report focus area"
+      compare:
+        type: string
+        required: false
+        values: [team, previous-period, goals, industry]
+        description: "Comparison baseline"
+      export:
+        type: boolean
+        required: false
+        default: false
+        description: "Export detailed data"
+    behavioral_requirements:
+      - actionable_insights: "Specific recommendations for improvement"
+      - pattern_identification: "Recognition of behavioral trends"
+      - goal_alignment: "Progress toward behavioral objectives"
+      - predictive_guidance: "Proactive suggestions for success"
+    implementation: "behavioral-tracking-task.md"
+
+  behavioral-preferences:
+    category: behavioral
+    description: "Configure behavioral tracking and notification preferences"
+    aliases: [behav-prefs, behavior-settings, tracking-config]
+    usage: |
+      /behavioral-preferences [--set] [--get] [--reset]
+      Examples:
+        /behavioral-preferences                        # Show current settings
+        /behavioral-preferences --set notifications=minimal
+        /behavioral-preferences --set leaderboard=opt-out
+        /behavioral-preferences --reset               # Reset to defaults
+    parameters:
+      set:
+        type: string
+        required: false
+        description: "Set preference key=value"
+      get:
+        type: string
+        required: false
+        description: "Get specific preference value"
+      reset:
+        type: boolean
+        required: false
+        default: false
+        description: "Reset all preferences to defaults"
+    behavioral_requirements:
+      - user_control: "Full control over tracking and notifications"
+      - privacy_options: "Granular privacy settings"
+      - personalization: "Adapt to individual work styles"
+      - reversible_changes: "Easy to modify or reset preferences"
+    implementation: "behavioral-tracking-task.md"
+
+  # System Management Commands
+  init:
+    category: system
+    description: "Initialize BMAD orchestrator with configuration and memory"
+    aliases: [initialize, startup, boot, setup]
+    usage: |
+      /init [--config] [--memory] [--force] [--minimal]
+      Examples:
+        /init                        # Standard initialization
+        /init --config --memory      # Full initialization with memory
+        /init --force               # Force re-initialization
+        /init --minimal             # Minimal initialization
+    parameters:
+      config:
+        type: boolean
+        required: false
+        default: true
+        description: "Load and validate configuration files"
+      memory:
+        type: boolean
+        required: false
+        default: true
+        description: "Initialize memory system integration"
+      force:
+        type: boolean
+        required: false
+        default: false
+        description: "Force re-initialization even if already initialized"
+      minimal:
+        type: boolean
+        required: false
+        default: false
+        description: "Minimal initialization for basic functionality"
+    behavioral_requirements:
+      - configuration_validation: "Verify all configuration files are valid"
+      - memory_integration: "Establish connection to memory systems"
+      - persona_validation: "Ensure all persona files are accessible"
+      - quality_framework: "Initialize behavioral enforcement system"
+      - session_preparation: "Prepare session state management"
+    implementation: "system-diagnostics-task.md"
+
+  status:
+    category: system
+    description: "Show BMAD orchestrator system status and health"
+    aliases: [health, system-status, info]
+    usage: |
+      /status [--detailed] [--components] [--performance]
+      Examples:
+        /status                      # Basic status overview
+        /status --detailed          # Detailed system information
+        /status --components        # Component-by-component status
+        /status --performance       # Performance metrics
+    parameters:
+      detailed:
+        type: boolean
+        required: false
+        default: false
+        description: "Show detailed status information"
+      components:
+        type: boolean
+        required: false
+        default: false
+        description: "Show individual component status"
+      performance:
+        type: boolean
+        required: false
+        default: false
+        description: "Include performance metrics"
+    behavioral_requirements:
+      - real_time_status: "Current operational state of all components"
+      - health_indicators: "Clear indicators of system health"
+      - performance_metrics: "Key performance indicators and trends"
+      - issue_identification: "Highlight any problems or warnings"
+    implementation: "system-diagnostics-task.md"
+
+  config:
+    category: system
+    description: "Manage BMAD orchestrator configuration"
+    aliases: [configuration, settings, cfg]
+    usage: |
+      /config [--validate] [--reload] [--backup] [--restore]
+      Examples:
+        /config                      # Show current configuration
+        /config --validate          # Validate configuration files
+        /config --reload            # Reload configuration from files
+        /config --backup            # Backup current configuration
+    parameters:
+      validate:
+        type: boolean
+        required: false
+        default: false
+        description: "Validate configuration files"
+      reload:
+        type: boolean
+        required: false
+        default: false
+        description: "Reload configuration from files"
+      backup:
+        type: boolean
+        required: false
+        default: false
+        description: "Create configuration backup"
+      restore:
+        type: string
+        required: false
+        description: "Restore from backup file"
+    behavioral_requirements:
+      - configuration_integrity: "Ensure configuration files are valid and complete"
+      - change_management: "Track and manage configuration changes"
+      - backup_safety: "Reliable backup and restore capabilities"
+      - validation_feedback: "Clear reporting of configuration issues"
+    implementation: "system-diagnostics-task.md"
+
+  session:
+    category: system
+    description: "Manage BMAD session state and persistence"
+    aliases: [session-state, state, persistence]
+    usage: |
+      /session [--save] [--restore] [--new] [--info]
+      Examples:
+        /session                    # Show current session info
+        /session --save            # Save current session state
+        /session --restore=backup  # Restore from specific backup
+        /session --new             # Start new session
+    parameters:
+      save:
+        type: boolean
+        required: false
+        default: false
+        description: "Save current session state"
+      restore:
+        type: string
+        required: false
+        description: "Restore from specific backup"
+      new:
+        type: boolean
+        required: false
+        default: false
+        description: "Start new session"
+      info:
+        type: boolean
+        required: false
+        default: true
+        description: "Show session information"
+    behavioral_requirements:
+      - state_preservation: "Reliable preservation of session context and progress"
+      - seamless_restoration: "Smooth restoration of previous session state"
+      - session_continuity: "Maintain context across session boundaries"
+      - data_integrity: "Ensure session data remains consistent and valid"
+    implementation: "system-diagnostics-task.md"
+
+  validate:
+    category: system
+    description: "Comprehensive system validation and health check"
+    aliases: [verify, check, validation, health-check]
+    usage: |
+      /validate [--full] [--memory] [--personas] [--fix] [--report]
+      Examples:
+        /validate                    # Standard validation
+        /validate --full            # Comprehensive validation
+        /validate --memory          # Memory system validation
+        /validate --personas        # Persona system validation
+        /validate --fix             # Attempt automatic fixes
+    parameters:
+      full:
+        type: boolean
+        required: false
+        default: false
+        description: "Perform comprehensive validation"
+      memory:
+        type: boolean
+        required: false
+        default: false
+        description: "Focus on memory system validation"
+      personas:
+        type: boolean
+        required: false
+        default: false
+        description: "Focus on persona system validation"
+      fix:
+        type: boolean
+        required: false
+        default: false
+        description: "Attempt automatic fixes for issues"
+      report:
+        type: boolean
+        required: false
+        default: true
+        description: "Generate detailed validation report"
+    behavioral_requirements:
+      - comprehensive_checking: "Validate all critical system components"
+      - issue_identification: "Clearly identify problems and their severity"
+      - automated_recovery: "Attempt safe automatic fixes where possible"
+      - detailed_reporting: "Provide actionable validation reports"
+    implementation: "system-diagnostics-task.md"
 
 # Behavioral Optimization Rules
 behavioral_optimization:
