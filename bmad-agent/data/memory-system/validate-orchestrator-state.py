@@ -98,7 +98,8 @@ class OrchestratorStateValidator:
     def validate_file(self, file_path: str | Path) -> ValidationResult:
         """Validate an orchestrator state file."""
         start_time = datetime.now(timezone.utc)
-        if isinstance(file_path, str):\n            file_path = Path(file_path)
+        if isinstance(file_path, str):
+            file_path = Path(file_path)
         
         if not file_path.exists():
             return ValidationResult(
@@ -261,7 +262,8 @@ class OrchestratorStateValidator:
     
     def fix_common_issues(self, file_path: str | Path) -> bool:
         """Attempt to fix common validation issues."""
-        if isinstance(file_path, str):\n            file_path = Path(file_path)
+        if isinstance(file_path, str):
+            file_path = Path(file_path)
         if not file_path.exists():
             return False
         

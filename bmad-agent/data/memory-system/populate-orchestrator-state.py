@@ -42,7 +42,7 @@ except ImportError as e:
     class MemoryWrapper:
         def get_memory_status(self) -> Dict[str, Any]:
             return {"provider": "file-based", "status": "offline"}
-        def sync_with_orchestrator_state(self, state_data: Dict[str, Any]) -> Dict[str, Any]:
+        def sync_with_orchestrator_state(self, state_data: Dict[str, Any]) -> Dict[str, Any]:  # noqa: ARG002
             return {"status": "offline", "memories_synced": 0, "insights_generated": 0}
 
 try:
@@ -371,7 +371,7 @@ class StatePopulator:
                         return "feature"
                     else:
                         return "mvp"
-            except:
+            except Exception:
                 pass
         return "brownfield"  # Default assumption
     
@@ -441,7 +441,7 @@ class StatePopulator:
                     return "6-10"
                 else:
                     return "11+"
-        except:
+        except Exception:
             pass
         return "1-5"  # Default
     
@@ -461,7 +461,7 @@ class StatePopulator:
                     return "established"
                 else:
                     return "legacy"
-        except:
+        except Exception:
             pass
         return "established"  # Default
     
@@ -498,18 +498,12 @@ class StatePopulator:
     def _has_config_files(self) -> bool:
         """Check if project has configuration files."""
         config_patterns = ["*.yml", "*.yaml", "*.json", "*.toml", "*.ini"]
-        for pattern in config_patterns:
-            if list(self.workspace_root.glob(pattern)):
-                return True
-        return False
+        return any(list(self.workspace_root.glob(pattern)) for pattern in config_patterns)
     
     def _has_documentation(self) -> bool:
         """Check if project has documentation."""
         doc_files = ["README.md", "docs/", "documentation/"]
-        for doc in doc_files:
-            if (self.workspace_root / doc).exists():
-                return True
-        return False
+        return any((self.workspace_root / doc).exists() for doc in doc_files)
     
     def _has_git_history(self) -> bool:
         """Check if project has meaningful git history."""
@@ -519,7 +513,7 @@ class StatePopulator:
                 capture_output=True, text=True, cwd=self.workspace_root
             )
             return result.returncode == 0 and int(result.stdout.strip()) > 1
-        except:
+        except Exception:
             return False
     
     def _detect_active_persona(self) -> str:
@@ -542,10 +536,7 @@ class StatePopulator:
         """Check if currently in architecture phase."""
         # Look for architecture documents, schemas, etc.
         arch_indicators = ["architecture.md", "*.schema.yml", "design/"]
-        for indicator in arch_indicators:
-            if list(self.workspace_root.glob(f"**/{indicator}")):
-                return True
-        return False
+        return any(list(self.workspace_root.glob(f"**/{indicator}")) for indicator in arch_indicators)
     
     def _is_in_development_phase(self) -> bool:
         """Check if currently in development phase."""
