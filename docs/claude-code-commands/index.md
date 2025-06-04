@@ -75,4 +75,4 @@ Zero-tolerance quality gates with comprehensive validation and automated improve
 !!! info "Auto-Generated Documentation"
     This documentation is automatically generated from BMAD Method Registry v3.0.0 and updates when the command registry changes.
     
-    **Last Updated:** 2025-06-04 12:10:58 UTC
+    **Last Updated:** 2025-06-04 12:20:52 UTC
