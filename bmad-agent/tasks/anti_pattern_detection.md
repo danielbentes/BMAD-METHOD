@@ -1,7 +1,7 @@
 # Anti-Pattern Detection Task
 
 ## Purpose
-Systematically identify and eliminate anti-patterns that compromise quality and reliability. Store violation reports at `.ai/quality/validations/anti-pattern-report-{date}.md` and scanning results at `.ai/quality/diagnostics/`.
+Systematically identify and eliminate anti-patterns that compromise quality and reliability. Store violation reports at `.bmad/quality/validations/anti-pattern-report-{date}.md` and scanning results at `.bmad/quality/diagnostics/`.
 
 ## Detection Categories
 
@@ -119,7 +119,7 @@ def scan_file(file_path):
 5. **VERIFICATION**: Confirm pattern fully eliminated
 
 ### Documentation Requirements
-Save violation reports at `.ai/quality/validations/anti-pattern-report-{date}.md`:
+Save violation reports at `.bmad/quality/validations/anti-pattern-report-{date}.md`:
 
 ```markdown
 ## Anti-Pattern Violation Report
@@ -176,8 +176,8 @@ Save violation reports at `.ai/quality/validations/anti-pattern-report-{date}.md
 - **Pre-Commit Hooks**: Automated scanning before code commits
 - **CI/CD Pipeline**: Pattern detection in automated builds  
 - **Code Reviews**: Manual pattern detection as part of review process
-- **Sprint Reviews**: Pattern trends analyzed and addressed at `.ai/quality/validations/`
-- **Retrospectives**: Process patterns examined for root causes, stored at `.ai/history/decisions/`
+- **Sprint Reviews**: Pattern trends analyzed and addressed at `.bmad/quality/validations/`
+- **Retrospectives**: Process patterns examined for root causes, stored at `.bmad/history/decisions/`
 
 ## Metrics and Reporting
 - **Pattern Frequency**: Track occurrence by type and team member
@@ -185,4 +185,4 @@ Save violation reports at `.ai/quality/validations/anti-pattern-report-{date}.md
 - **Trend Analysis**: Pattern emergence patterns over time
 - **Education Effectiveness**: Reduction in patterns after training
 - **Quality Correlation**: Relationship between patterns and defects
-- **Storage Location**: All metrics and reports saved to `.ai/quality/diagnostics/anti-pattern-metrics-{date}.md`
+- **Storage Location**: All metrics and reports saved to `.bmad/quality/diagnostics/anti-pattern-metrics-{date}.md`

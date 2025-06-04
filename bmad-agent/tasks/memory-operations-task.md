@@ -28,7 +28,7 @@
 > **Note**: This is the executable memory operations task. For detailed integration guidance and implementation details, see `bmad-agent/memory/memory-system-architecture.md`.
 
 ## Purpose
-Execute memory-aware context management for the current session, integrating historical insights and patterns to enhance decision-making and maintain continuity across interactions. When memory system is unavailable, use fallback storage at `.ai/system/memory/fallbacks/`.
+Execute memory-aware context management for the current session, integrating historical insights and patterns to enhance decision-making and maintain continuity across interactions. When memory system is unavailable, use fallback storage at `.bmad/system/memory/fallbacks/`.
 
 ## Progressive Disclosure Phases
 
@@ -1068,7 +1068,7 @@ def memory_enhanced_operation_with_fallback():
             # Secondary: Use fallback storage
             log_memory_unavailable()
             fallback_context = load_fallback_memories(
-                ".ai/system/memory/fallbacks/",
+                ".bmad/system/memory/fallbacks/",
                 validate=True
             )
             if fallback_context:
@@ -1094,7 +1094,7 @@ def memory_enhanced_operation_with_fallback():
             # Unknown error
             log_memory_error(e)
             save_to_fallback(
-                ".ai/system/memory/fallbacks/error-recovery.md",
+                ".bmad/system/memory/fallbacks/error-recovery.md",
                 sanitize_content(current_context)
             )
             error_count += 1
@@ -1110,7 +1110,7 @@ def save_to_fallback(path, content):
             content = redact_sensitive_data(content)
         
         # Ensure directory exists
-        ensure_directory_exists(".ai/system/memory/fallbacks/")
+        ensure_directory_exists(".bmad/system/memory/fallbacks/")
         
         # Check disk space
         if not has_sufficient_space(len(content)):

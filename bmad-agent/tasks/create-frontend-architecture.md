@@ -2,13 +2,13 @@
 
 ## Purpose
 
-To define the technical architecture for the frontend application and create it at `.ai/current/specs/frontend-architecture.md`. This includes selecting appropriate patterns, structuring the codebase, defining component strategy, planning state management, outlining API interactions, and setting up testing and deployment approaches, all while adhering to the guidelines in `front-end-architecture-tmpl` template.
+To define the technical architecture for the frontend application and create it at `.bmad/current/specs/frontend-architecture.md`. This includes selecting appropriate patterns, structuring the codebase, defining component strategy, planning state management, outlining API interactions, and setting up testing and deployment approaches, all while adhering to the guidelines in `front-end-architecture-tmpl` template.
 
 ## Inputs
 
-- Product Requirements Document (PRD) (`.ai/current/specs/prd.md`)
-- Completed UI/UX Specification (`.ai/current/specs/frontend-spec.md`)
-- Main System Architecture Document (`.ai/current/specs/architecture.md`) - The agent executing this task should particularly note the overall system structure (Monorepo/Polyrepo, backend service architecture) detailed here, as it influences frontend patterns.
+- Product Requirements Document (PRD) (`.bmad/current/specs/prd.md`)
+- Completed UI/UX Specification (`.bmad/current/specs/frontend-spec.md`)
+- Main System Architecture Document (`.bmad/current/specs/architecture.md`) - The agent executing this task should particularly note the overall system structure (Monorepo/Polyrepo, backend service architecture) detailed here, as it influences frontend patterns.
 - Primary Design Files (Figma, Sketch, etc., linked from UI/UX Spec)
 
 ## Key Activities & Instructions
@@ -82,7 +82,7 @@ To define the technical architecture for the frontend application and create it 
 
 - **If "Incremental Mode" was selected:**
 
-  - For each relevant section of the frontend architecture document (to be created at `.ai/current/specs/frontend-architecture.md`) covering topics from Overall Philosophy to Performance Considerations:
+  - For each relevant section of the frontend architecture document (to be created at `.bmad/current/specs/frontend-architecture.md`) covering topics from Overall Philosophy to Performance Considerations:
 
     - **a. Explain Purpose & Draft Section:** Explain the purpose of the section and present a draft for that section.
     - **b. Initial Discussion & Feedback:** Discuss the draft with the user, incorporate their feedback, and iterate as needed for initial revisions.
@@ -90,7 +90,7 @@ To define the technical architecture for the frontend application and create it 
 
     - **d. Final Approval & Documentation:** Obtain explicit user approval for the section. Ensure all placeholder links and references are correctly noted within each section. Then proceed to the next section.
 
-  - Once all sections are individually approved through this process, confirm with the user that the overall frontend architecture document at `.ai/current/specs/frontend-architecture.md` is populated and ready for Step 13 (Epic/Story Impacts) and then the checklist review (Step 14).
+  - Once all sections are individually approved through this process, confirm with the user that the overall frontend architecture document at `.bmad/current/specs/frontend-architecture.md` is populated and ready for Step 13 (Epic/Story Impacts) and then the checklist review (Step 14).
 
 - **If "YOLO Mode" was selected:**
   - Collaboratively populate all relevant sections of the frontend architecture document (as outlined in steps 3-11 above) to create a comprehensive first draft.
@@ -100,7 +100,7 @@ To define the technical architecture for the frontend application and create it 
 
 ### 13. Identify & Summarize Epic/Story Impacts (Frontend Focus)
 
-- After the frontend architecture document at `.ai/current/specs/frontend-architecture.md` is confirmed, review it in context of existing epics and user stories (if provided or known).
+- After the frontend architecture document at `.bmad/current/specs/frontend-architecture.md` is confirmed, review it in context of existing epics and user stories (if provided or known).
 - Identify any frontend-specific technical tasks that might need to be added as new stories or sub-tasks (e.g., "Implement responsive layout for product details page based on defined breakpoints," "Set up X state management slice for user profile," "Develop reusable Y component as per specification").
 - Identify if any existing user stories require refinement of their acceptance criteria due to frontend architectural decisions (e.g., specifying interaction details, component usage, or performance considerations for UI elements).
 - Collaborate with the user to define these additions or refinements.
@@ -108,7 +108,7 @@ To define the technical architecture for the frontend application and create it 
 
 ### 14. Checklist Review and Finalization
 
-- Once the frontend architecture document at `.ai/current/specs/frontend-architecture.md` has been populated and reviewed with the user, and epic/story impacts have been summarized, use the `frontend-architecture-checklist`.
+- Once the frontend architecture document at `.bmad/current/specs/frontend-architecture.md` has been populated and reviewed with the user, and epic/story impacts have been summarized, use the `frontend-architecture-checklist`.
 - Go through each item in the checklist to ensure the frontend architecture document is comprehensive and all sections are adequately addressed - for each checklist item you MUST consider if it is really complete or deficient.
 - For each checklist section, confirm its status (e.g., \[x] Completed, \[ ] N/A, \[!] Needs Attention).
 - If deficiencies or areas needing more detail are identified with a section:
@@ -118,7 +118,7 @@ To define the technical architecture for the frontend application and create it 
   - Confirmation that all relevant sections of the checklist have been satisfied.
   - Any items marked N/A and a brief reason.
   - A brief note on any significant discussions or changes made as a result of the checklist review.
-- The goal is to ensure the frontend architecture document at `.ai/current/specs/frontend-architecture.md` is a complete and actionable document.
+- The goal is to ensure the frontend architecture document at `.bmad/current/specs/frontend-architecture.md` is a complete and actionable document.
 - After addressing all points and ensuring the document is robust, present a summary of the checklist review to the user. This summary should highlight:
   - Confirmation that all relevant sections of the checklist have been satisfied.
   - Any items marked N/A and a brief reason.

@@ -29,7 +29,7 @@
 - Analyze the impacts of the change on epics, project artifacts, and the MVP, guided by the checklist's structure.
 - Explore potential solutions (e.g., adjust scope, rollback elements, rescope features) as prompted by the checklist.
 - Draft specific, actionable proposed updates to any affected project artifacts (e.g., epics, user stories, PRD sections, architecture document sections) based on the analysis.
-- Produce a consolidated "Sprint Change Proposal" document at `.ai/current/analysis/change-proposal-{date}.md` that contains the impact analysis and the clearly drafted proposed edits for user review and approval.
+- Produce a consolidated "Sprint Change Proposal" document at `.bmad/current/analysis/change-proposal-{date}.md` that contains the impact analysis and the clearly drafted proposed edits for user review and approval.
 - Ensure a clear handoff path if the nature of the changes necessitates fundamental replanning by other core agents (like PM or Architect).
 
 ## Progressive Disclosure Phases
@@ -255,7 +255,7 @@
 
 ### 4. Generate "Sprint Change Proposal" with Edits
 
-- Synthesize the complete `change-checklist` analysis (covering findings from Sections 1-4) and all the agreed-upon proposed edits (from Instruction 3) into a single document titled "Sprint Change Proposal" saved at `.ai/current/analysis/change-proposal-{date}.md`. This proposal should align with the structure suggested by Section 5 of the `change-checklist` (Proposal Components).
+- Synthesize the complete `change-checklist` analysis (covering findings from Sections 1-4) and all the agreed-upon proposed edits (from Instruction 3) into a single document titled "Sprint Change Proposal" saved at `.bmad/current/analysis/change-proposal-{date}.md`. This proposal should align with the structure suggested by Section 5 of the `change-checklist` (Proposal Components).
 - The proposal must clearly present:
   - **Analysis Summary:** A concise overview of the original issue, its analyzed impact (on epics, artifacts, MVP scope), and the rationale for the chosen path forward.
   - **Specific Proposed Edits:** For each affected artifact, clearly show or describe the exact changes (e.g., "Change Story X.Y from: [old text] To: [new text]", "Add new Acceptance Criterion to Story A.B: [new AC]", "Update Section 3.2 of Architecture Document as follows: [new/modified text or diagram description]").
@@ -387,7 +387,7 @@
 ## Output Deliverables
 
 ### Primary Deliverable:
-**Sprint Change Proposal** at `.ai/current/analysis/change-proposal-{date}.md`
+**Sprint Change Proposal** at `.bmad/current/analysis/change-proposal-{date}.md`
 
 Required sections:
 1. **Executive Summary**
@@ -415,9 +415,9 @@ Required sections:
    - Stakeholder impacts
 
 ### Secondary Deliverables:
-- **Annotated Change Checklist**: `.ai/current/analysis/change-checklist-completed-{date}.md`
-- **Risk Register**: `.ai/current/analysis/change-risks-{date}.md`
-- **Implementation Guide**: `.ai/current/analysis/change-implementation-{date}.md`
+- **Annotated Change Checklist**: `.bmad/current/analysis/change-checklist-completed-{date}.md`
+- **Risk Register**: `.bmad/current/analysis/change-risks-{date}.md`
+- **Implementation Guide**: `.bmad/current/analysis/change-implementation-{date}.md`
 
 ### Quality Standards:
 - Clear, actionable language

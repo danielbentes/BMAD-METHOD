@@ -91,7 +91,7 @@ The BMAD Orchestrator system has been comprehensively validated. The system is f
 
 ### Memory Architecture
 - **Status**: ✅ Operational
-- **Session State**: Active (`.ai/orchestrator-state.md`)
+- **Session State**: Active (`.bmad/state/orchestrator-state.md`)
 - **Memory Provider**: File-based fallback (OpenMemory MCP recommended)
 - **Features Verified**:
   - ✅ Session continuity tracking

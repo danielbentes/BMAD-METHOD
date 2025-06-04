@@ -120,18 +120,19 @@ To identify the next logical story based on project progress and epic definition
 ## Inputs for this Task
 
 - Access to the project's documentation repository, specifically:
-  - Index Doc (`.ai/current/specs/index.md`)
-  - All Epic files (e.g., `.ai/current/specs/epic-{n}.md` - hereafter "Epic Files")
-  - Existing story files in `.ai/current/work/stories/`
-  - Main PRD (`.ai/current/specs/prd.md` - hereafter "PRD Doc")
-  - Main Architecture Document (`.ai/current/specs/architecture.md` - hereafter "Main Arch Doc")
-  - Frontend Architecture Document (`.ai/current/specs/frontend-architecture.md` - hereafter "Frontend Arch Doc," if relevant)
-  - Project Structure Guide (`.ai/current/specs/project-structure.md`)
-  - Operational Guidelines Document (`.ai/current/specs/operational-guidelines.md`)
-  - Technology Stack Document (`.ai/current/specs/tech-stack.md`)
-  - Data Models Document (`.ai/current/specs/data-models.md`)
-  - API Reference Document (`.ai/current/specs/api-reference.md`)
-  - UI/UX Specifications, Style Guides, Component Guides (`.ai/current/specs/frontend-spec.md` and related files)
+  - Specifications folder (`.bmad/current/specs/`)
+  - Index Doc (`.bmad/current/specs/index.md`)
+  - All Epic files (e.g., `.bmad/current/specs/epic-{n}.md` - hereafter "Epic Files")
+  - Existing story files in `.bmad/current/work/stories/`
+  - Main PRD (`.bmad/current/specs/prd.md` - hereafter "PRD Doc")
+  - Main Architecture Document (`.bmad/current/specs/architecture.md` - hereafter "Main Arch Doc")
+  - Frontend Architecture Document (`.bmad/current/specs/frontend-architecture.md` - hereafter "Frontend Arch Doc," if relevant)
+  - Project Structure Guide (`.bmad/current/specs/project-structure.md`)
+  - Operational Guidelines Document (`.bmad/current/specs/operational-guidelines.md`)
+  - Technology Stack Document (`.bmad/current/specs/tech-stack.md`)
+  - Data Models Document (`.bmad/current/specs/data-models.md`)
+  - API Reference Document (`.bmad/current/specs/api-reference.md`)
+  - UI/UX Specifications, Style Guides, Component Guides (`.bmad/current/specs/frontend-spec.md` and related files)
 - The `bmad-agent/templates/story-tmpl.md` (hereafter "Story Template")
 - The `bmad-agent/checklists/story-draft-checklist.md` (hereafter "Story Draft Checklist")
 - User confirmation to proceed with story identification and, if needed, to override warnings about incomplete prerequisite stories.
@@ -140,7 +141,7 @@ To identify the next logical story based on project progress and epic definition
 
 ### 1. Identify Next Story for Preparation
 
-- Review `.ai/current/work/stories/` (all subdirectories: `active/`, `review/`, `done/`) to find the highest-numbered story file.
+- Review `.bmad/current/work/stories/` (all subdirectories: `active/`, `review/`, `done/`) to find the highest-numbered story file.
 - **If a highest story file exists (`{lastEpicNum}.{lastStoryNum}.story.md`):**
 
   - Verify its `Status` is 'Done' (or equivalent).
@@ -161,10 +162,10 @@ To identify the next logical story based on project progress and epic definition
 
   - Proceed only if user selects option 3 (Override) or if the last story was 'Done'.
   - If proceeding: Check the Epic File for `{lastEpicNum}` for a story numbered `{lastStoryNum + 1}`. If it exists and its prerequisites (per Epic File) are met, this is the next story.
-  - Else (story not found or prerequisites not met): The next story is the first story in the next Epic File (e.g., `.ai/current/specs/epic-{lastEpicNum + 1}.md`, then `epic-{lastEpicNum + 2}.md`, etc.) whose prerequisites are met.
+  - Else (story not found or prerequisites not met): The next story is the first story in the next Epic File (e.g., `.bmad/current/specs/epic-{lastEpicNum + 1}.md`, then `epic-{lastEpicNum + 2}.md`, etc.) whose prerequisites are met.
 
-- **If no story files exist in `.ai/current/work/stories/`:**
-  - The next story is the first story in `.ai/current/specs/epic-1.md` (then `.ai/current/specs/epic-2.md`, etc.) whose prerequisites are met.
+- **If no story files exist in `.bmad/current/work/stories/`:**
+  - The next story is the first story in `.bmad/current/specs/epic-1.md` (then `.bmad/current/specs/epic-2.md`, etc.) whose prerequisites are met.
 - If no suitable story with met prerequisites is found, report to the user that story creation is blocked, specifying what prerequisites are pending. HALT task.
 - Announce the identified story to the user: "Identified next story for preparation: {epicNum}.{storyNum} - {Story Title}".
 
@@ -176,7 +177,7 @@ To identify the next logical story based on project progress and epic definition
 
 ### 3. Gather & Synthesize In-Depth Technical Context for Dev Agent
 
-- <critical_rule>Systematically use the Index Doc (`.ai/current/specs/index.md`) as your primary guide to discover paths to ALL detailed documentation relevant to the current story's implementation needs.</critical_rule>
+- <critical_rule>Systematically use the Index Doc (`.bmad/current/specs/index.md`) as your primary guide to discover paths to ALL detailed documentation relevant to the current story's implementation needs.</critical_rule>
 - Thoroughly review the PRD Doc, Main Arch Doc, and Frontend Arch Doc (if a UI story).
 - Guided by the Index Doc and the story's needs, locate, analyze, and synthesize specific, relevant information from sources such as:
   - Data Models Doc (structure, validation rules).
@@ -195,7 +196,7 @@ To identify the next logical story based on project progress and epic definition
 
 ### 5. Populate Story Template with Full Context
 
-- Create a new story file: `.ai/current/work/stories/active/{epicNum}.{storyNum}.story.md`.
+- Create a new story file: `.bmad/current/work/stories/active/{epicNum}.{storyNum}.story.md`.
 - Use the Story Template to structure the file.
 - Fill in:
   - Story `{EpicNum}.{StoryNum}: {Short Title Copied from Epic File}`
@@ -232,7 +233,7 @@ To identify the next logical story based on project progress and epic definition
 
 ### 8. Finalize and Save
 
-- Upon approval, ensure story is saved in `.ai/current/work/stories/active/`
+- Upon approval, ensure story is saved in `.bmad/current/work/stories/active/`
 - Confirm file creation and accessibility
 - Provide user with story location and next steps
 

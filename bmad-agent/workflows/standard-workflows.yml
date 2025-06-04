@@ -12,7 +12,7 @@ workflows:
           - "Deep Research Prompt Generation" 
           - "Create Project Brief"
         artifacts: 
-          - ".ai/current/specs/project-brief.md"
+          - ".bmad/current/specs/project-brief.md"
         completion_criteria: 
           - "Project brief approved by user"
           - "Target users clearly defined"
@@ -30,8 +30,8 @@ workflows:
           - "Create PRD"
           - "Create UX/UI Spec"
         artifacts: 
-          - ".ai/current/specs/prd.md"
-          - ".ai/current/specs/frontend-spec.md"
+          - ".bmad/current/specs/prd.md"
+          - ".bmad/current/specs/frontend-spec.md"
         completion_criteria: 
           - "PRD validated by PM checklist"
           - "UI flows defined and approved"
@@ -51,8 +51,8 @@ workflows:
           - "Create Architecture"
           - "Create Frontend Architecture"
         artifacts: 
-          - ".ai/current/specs/architecture.md"
-          - ".ai/current/specs/frontend-architecture.md"
+          - ".bmad/current/specs/architecture.md"
+          - ".bmad/current/specs/frontend-architecture.md"
         completion_criteria: 
           - "Tech stack decisions finalized"
           - "Component structure defined"
@@ -73,8 +73,8 @@ workflows:
           - "Doc Sharding"
           - "Create Next Story"
         artifacts: 
-          - ".ai/current/work/stories/active/1.1.story.md"
-          - ".ai/current/specs/index.md"
+          - ".bmad/current/work/stories/active/1.1.story.md"
+          - ".bmad/current/specs/index.md"
         completion_criteria: 
           - "All documents validated by PO"
           - "First story ready for development"
@@ -96,7 +96,7 @@ workflows:
           - "Story DoD Checklist"
         artifacts: 
           - "src/**"
-          - ".ai/current/work/stories/**"
+          - ".bmad/current/work/stories/**"
           - "tests/**"
         completion_criteria: 
           - "Stories complete with DoD validation"
@@ -124,8 +124,8 @@ workflows:
           - "PRD Update"
           - "Architecture Review"
         artifacts:
-          - ".ai/current/specs/prd.md (updated)"
-          - ".ai/current/analysis/feature-analysis.md"
+          - ".bmad/current/specs/prd.md (updated)"
+          - ".bmad/current/analysis/feature-analysis.md"
         completion_criteria:
           - "Feature requirements clearly defined"
           - "Technical feasibility confirmed"
@@ -144,8 +144,8 @@ workflows:
           - "Integration Planning"
           - "UI/UX Updates"
         artifacts:
-          - ".ai/current/specs/architecture.md (updated)"
-          - ".ai/current/specs/feature-components.md"
+          - ".bmad/current/specs/architecture.md (updated)"
+          - ".bmad/current/specs/feature-components.md"
         completion_criteria:
           - "New components designed"
           - "Integration strategy defined"
@@ -162,7 +162,7 @@ workflows:
           - "Feature Implementation"
           - "Integration Testing"
         artifacts:
-          - ".ai/current/work/stories/active/feature-*.md"
+          - ".bmad/current/work/stories/active/feature-*.md"
           - "src/features/**"
           - "tests/feature/**"
         completion_criteria:
@@ -187,8 +187,8 @@ workflows:
           - "Impact Analysis"
           - "Stakeholder Alignment"
         artifacts:
-          - ".ai/current/analysis/change-analysis.md"
-          - ".ai/current/analysis/impact-assessment.md"
+          - ".bmad/current/analysis/change-analysis.md"
+          - ".bmad/current/analysis/impact-assessment.md"
         completion_criteria:
           - "Root cause identified"
           - "Change scope defined"
@@ -207,9 +207,9 @@ workflows:
           - "Update Architecture"
           - "Revise Timeline"
         artifacts:
-          - ".ai/current/specs/prd.md (revised)"
-          - ".ai/current/specs/architecture.md (revised)"
-          - ".ai/current/analysis/recovery-plan.md"
+          - ".bmad/current/specs/prd.md (revised)"
+          - ".bmad/current/specs/architecture.md (revised)"
+          - ".bmad/current/analysis/recovery-plan.md"
         completion_criteria:
           - "Updated plans approved"
           - "New timeline realistic"
@@ -226,7 +226,7 @@ workflows:
           - "Updated Story Creation"
           - "Recovery Development"
         artifacts:
-          - ".ai/current/work/stories/active/recovery-*.md"
+          - ".bmad/current/work/stories/active/recovery-*.md"
           - "src/** (updated)"
         completion_criteria:
           - "Recovery plan executed"
@@ -250,8 +250,8 @@ workflows:
           - "Scalability Review"
           - "Technical Debt Assessment"
         artifacts:
-          - ".ai/current/analysis/architecture-review.md"
-          - ".ai/current/analysis/performance-analysis.md"
+          - ".bmad/current/analysis/architecture-review.md"
+          - ".bmad/current/analysis/performance-analysis.md"
         completion_criteria:
           - "Current bottlenecks identified"
           - "Scalability limits documented"
@@ -266,8 +266,8 @@ workflows:
           - "Migration Planning"
           - "Risk Assessment"
         artifacts:
-          - ".ai/current/analysis/optimization-plan.md"
-          - ".ai/current/analysis/migration-strategy.md"
+          - ".bmad/current/analysis/optimization-plan.md"
+          - ".bmad/current/analysis/migration-strategy.md"
         completion_criteria:
           - "Optimization priorities set"
           - "Migration approach defined"
@@ -285,7 +285,7 @@ workflows:
           - "Validation Testing"
         artifacts:
           - "src/** (optimized)"
-          - ".ai/current/analysis/optimization-results.md"
+          - ".bmad/current/analysis/optimization-results.md"
         completion_criteria:
           - "Performance improvements validated"
           - "Architecture updates completed"
@@ -308,7 +308,7 @@ workflows:
           - "Prototype Goals"
           - "Success Criteria"
         artifacts:
-          - ".ai/current/specs/prototype-scope.md"
+          - ".bmad/current/specs/prototype-scope.md"
         completion_criteria:
           - "Core features defined"
           - "Success criteria clear"
@@ -323,7 +323,7 @@ workflows:
           - "Technology Selection"
           - "Prototype Structure"
         artifacts:
-          - ".ai/current/specs/prototype-architecture.md"
+          - ".bmad/current/specs/prototype-architecture.md"
         completion_criteria:
           - "Simple architecture defined"
           - "Technology stack selected"
@@ -341,7 +341,7 @@ workflows:
           - "Demo Preparation"
         artifacts:
           - "src/**"
-          - ".ai/current/guidance/demo-guide.md"
+          - ".bmad/current/guidance/demo-guide.md"
         completion_criteria:
           - "Core features working"
           - "Demo ready"

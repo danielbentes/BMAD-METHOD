@@ -178,7 +178,7 @@ The BMAD Method uses various checklists to ensure quality and completeness of di
    - List of failed items with context
    - Specific recommendations for improvement
    - Any sections or items marked as N/A with justification
-   - Save the final report at `.ai/quality/validations/checklist-{name}-{date}.md`
+   - Save the final report at `.bmad/quality/validations/checklist-{name}-{date}.md`
 
 ## Special Considerations
 
@@ -279,6 +279,6 @@ Agent: "Would you like to work through it section by section (interactive) or ge
 
 User: "Interactive please"
 
-Agent: "According to the mappings, I need to check for architecture.md. The default location is .ai/current/specs/architecture.md. Should I look there?"
+Agent: "According to the mappings, I need to check for architecture.md. The default location is .bmad/current/specs/architecture.md. Should I look there?"
 
 [Continue interaction based on user responses...]

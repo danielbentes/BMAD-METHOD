@@ -37,7 +37,7 @@
    - Time constraints prevent full analysis
 
 ## Purpose
-Execute rigorous analysis and verification protocol to ensure highest quality decision-making and implementation. Store UDTM analysis results at `.ai/quality/validations/udtm-analysis-{task}-{date}.md`.
+Execute rigorous analysis and verification protocol to ensure highest quality decision-making and implementation. Store UDTM analysis results at `.bmad/quality/validations/udtm-analysis-{task}-{date}.md`.
 
 ## Progressive Deep-Thinking Phases
 
@@ -98,7 +98,7 @@ Execute rigorous analysis and verification protocol to ensure highest quality de
 - [ ] Confirm all quality gates can be met
 
 ## Output Requirements
-Document all phases with specific findings, evidence, and confidence assessments. Save the complete UDTM analysis at `.ai/quality/validations/udtm-analysis-{task}-{date}.md`.
+Document all phases with specific findings, evidence, and confidence assessments. Save the complete UDTM analysis at `.bmad/quality/validations/udtm-analysis-{task}-{date}.md`.
 
 ## Success Criteria
 - All phases completed with documented evidence
@@ -108,7 +108,7 @@ Document all phases with specific findings, evidence, and confidence assessments
 
 ## Usage Instructions
 1. Execute this task before any major implementation or decision
-2. Document all findings in the UDTM Analysis Template at `.ai/quality/validations/udtm-analysis-{task}-{date}.md`
+2. Document all findings in the UDTM Analysis Template at `.bmad/quality/validations/udtm-analysis-{task}-{date}.md`
 3. Do not proceed without achieving >95% confidence
 4. Share analysis with team for brotherhood review
 5. Store completed analysis for future reference and learning
@@ -118,7 +118,7 @@ Document all phases with specific findings, evidence, and confidence assessments
 - **MAKE Phase**: Apply before each implementation sprint
 - **ANALYZE Phase**: Execute for issue investigation
 - **DELIVER Phase**: Final validation before deployment
-- **Documentation**: All UDTM analyses stored at `.ai/quality/validations/` for tracking and learning
+- **Documentation**: All UDTM analyses stored at `.bmad/quality/validations/` for tracking and learning
 - **Quality Metrics**: UDTM completion tracked in project quality metrics
 
 ## Error Recovery Procedures

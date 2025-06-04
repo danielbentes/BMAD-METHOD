@@ -86,7 +86,7 @@ memory_intelligence_state:
     total_memories: 24
     decisions: 0
     patterns: 0
-    storage_file: .ai/memory-fallback.json
+    storage_file: .bmad/memory/fallback-storage.json
 quality_framework_integration:
   quality_status:
     quality_gates_active: true

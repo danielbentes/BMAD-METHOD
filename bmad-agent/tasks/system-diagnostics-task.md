@@ -1,7 +1,7 @@
 # System Diagnostics Task
 
 ## Purpose
-Comprehensive health check of BMAD installation, memory integration, and project structure to ensure optimal system performance and identify potential issues before they cause failures. Generate diagnostic reports at `.ai/quality/diagnostics/system-health-{timestamp}.md`.
+Comprehensive health check of BMAD installation, memory integration, and project structure to ensure optimal system performance and identify potential issues before they cause failures. Generate diagnostic reports at `.bmad/quality/diagnostics/system-health-{timestamp}.md`.
 
 ## Diagnostic Procedures
 
@@ -175,7 +175,7 @@ def validate_session_state():
     session_checks = []
     
     # Check session state file location
-    state_file = ".ai/orchestrator-state.md"
+    state_file = ".bmad/state/orchestrator-state.md"
     
     if file_exists(state_file):
         # Validate state file format
@@ -212,7 +212,7 @@ def validate_session_state():
         })
     
     # Check backup directory
-    backup_dir = ".ai/backups"
+    backup_dir = ".bmad/backups"
     session_checks.append({
         "name": "Session Backup Directory",
         "status": "PASS" if directory_exists(backup_dir) else "INFO",
@@ -381,13 +381,13 @@ def generate_diagnostic_report():
 ```
 
 ### Diagnostic Report Output Format
-Save diagnostic reports at `.ai/quality/diagnostics/system-health-{timestamp}.md`:
+Save diagnostic reports at `.bmad/quality/diagnostics/system-health-{timestamp}.md`:
 
 ```markdown
 # 🔍 BMAD System Diagnostic Report
 **Generated**: {timestamp}
 **Project**: {project_path}
-**Report Location**: .ai/quality/diagnostics/system-health-{timestamp}.md
+**Report Location**: .bmad/quality/diagnostics/system-health-{timestamp}.md
 
 ## Overall Health Status: {HEALTHY|DEGRADED|CRITICAL}
 
@@ -466,9 +466,9 @@ Save diagnostic reports at `.ai/quality/diagnostics/system-health-{timestamp}.md
 3. **Long-term**: {long_term_recommendation}
 
 ## Report Storage
-- **Location**: `.ai/quality/diagnostics/system-health-{timestamp}.md`
-- **Historical Reports**: Previous diagnostics available in `.ai/quality/diagnostics/`
-- **Metrics Tracking**: Diagnostic trends tracked in `.ai/quality/diagnostics/`
+- **Location**: `.bmad/quality/diagnostics/system-health-{timestamp}.md`
+- **Historical Reports**: Previous diagnostics available in `.bmad/quality/diagnostics/`
+- **Metrics Tracking**: Diagnostic trends tracked in `.bmad/quality/diagnostics/`
 
 ---
 💡 **Quick Actions**:
@@ -504,8 +504,8 @@ def execute_automated_recovery(diagnostic_results):
 ```
 
 ## Output Deliverables
-- **Primary Report**: Comprehensive diagnostic report saved at `.ai/quality/diagnostics/system-health-{timestamp}.md`
-- **Recovery Log**: If recovery actions taken, log saved at `.ai/quality/diagnostics/recovery-{timestamp}.md`
-- **Metrics Data**: Performance metrics and trends stored in `.ai/quality/diagnostics/`
+- **Primary Report**: Comprehensive diagnostic report saved at `.bmad/quality/diagnostics/system-health-{timestamp}.md`
+- **Recovery Log**: If recovery actions taken, log saved at `.bmad/quality/diagnostics/recovery-{timestamp}.md`
+- **Metrics Data**: Performance metrics and trends stored in `.bmad/quality/diagnostics/`
 
 This comprehensive diagnostic system provides deep insight into BMAD system health and offers automated recovery capabilities to maintain optimal performance.

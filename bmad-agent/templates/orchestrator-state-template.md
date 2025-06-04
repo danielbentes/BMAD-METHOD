@@ -37,7 +37,7 @@
 **Key Requirements**: WebSocket support, mobile-first design, performance < 2s load time
 **Memory Insights Provided**: Similar real-time projects, proven WebSocket patterns
 **Pending Questions**: Database scaling strategy, caching approach
-**Files Modified**: `.ai/current/specs/prd.md`, `.ai/current/specs/epic-1.md`, `.ai/current/specs/epic-2.md`
+**Files Modified**: `.bmad/current/specs/prd.md`, `.bmad/current/specs/epic-1.md`, `.bmad/current/specs/epic-2.md`
 **Success Indicators**: Clear requirements understanding, no back-and-forth clarifications
 **Memory Learning**: PM→Architect handoffs most effective with concrete performance requirements
 
@@ -46,7 +46,7 @@
 **Key Constraints**: React-based, performance budget 2s, mobile-first approach
 **Memory Insights Provided**: Successful component architectures for similar apps
 **Collaboration Points**: Component API design, state management patterns
-**Files Modified**: `.ai/current/specs/architecture.md`, `.ai/current/specs/component-structure.md`
+**Files Modified**: `.bmad/current/specs/architecture.md`, `.bmad/current/specs/component-structure.md`
 **Success Indicators**: Design constraints acknowledged, technical feasibility confirmed
 **Memory Learning**: Early collaboration on component APIs prevents later redesign
 
@@ -76,15 +76,15 @@
 
 ## Artifact Evolution Tracking
 **Primary Documents**:
-- **.ai/current/specs/prd.md**: v1.0 → v1.3 (PM created → PM refined → Architect input)
-- **.ai/current/specs/architecture.md**: v1.0 → v1.1 (Architect created → Design Arch feedback)  
-- **.ai/current/specs/frontend-architecture.md**: v1.0 (Design Architect created)
-- **.ai/current/specs/epic-1.md**: v1.0 (PM created from PRD)
-- **.ai/current/specs/epic-2.md**: v1.0 (PM created from PRD)
+- **.bmad/current/specs/prd.md**: v1.0 → v1.3 (PM created → PM refined → Architect input)
+- **.bmad/current/specs/architecture.md**: v1.0 → v1.1 (Architect created → Design Arch feedback)  
+- **.bmad/current/specs/frontend-architecture.md**: v1.0 (Design Architect created)
+- **.bmad/current/specs/epic-1.md**: v1.0 (PM created from PRD)
+- **.bmad/current/specs/epic-2.md**: v1.0 (PM created from PRD)
 
 **Secondary Documents**:
-- **.ai/current/specs/project-brief.md**: v1.0 (Analyst created - foundational)
-- **.ai/current/specs/technical-preferences.md**: v1.0 (User input - referenced by Architect)
+- **.bmad/current/specs/project-brief.md**: v1.0 (Analyst created - foundational)
+- **.bmad/current/specs/technical-preferences.md**: v1.0 (User input - referenced by Architect)
 
 ## Memory Intelligence Summary
 ### Applied Memory Insights This Session

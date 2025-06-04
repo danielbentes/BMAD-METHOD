@@ -21,7 +21,7 @@ __pycache__/
 .vscode/
 
 # Memory files
-.ai/orchestrator-state.backup*
+.bmad/memory/
 
 # Claude
 .claude/

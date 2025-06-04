@@ -35,7 +35,7 @@
    - Production readiness lacking
 
 ## Purpose
-Conduct honest, rigorous peer review to ensure quality and eliminate sycophantic behavior. Store review records at `.ai/quality/reviews/brotherhood-review-{date}.md`.
+Conduct honest, rigorous peer review to ensure quality and eliminate sycophantic behavior. Store review records at `.bmad/quality/reviews/brotherhood-review-{date}.md`.
 
 ## Progressive Review Phases
 
@@ -210,7 +210,7 @@ Conduct honest, rigorous peer review to ensure quality and eliminate sycophantic
 ## Review Documentation
 
 ### Review Record Template
-Save the review record at `.ai/quality/reviews/brotherhood-review-{date}.md`:
+Save the review record at `.bmad/quality/reviews/brotherhood-review-{date}.md`:
 
 ```markdown
 ## Brotherhood Review: [Task/Story Name]
@@ -250,9 +250,9 @@ Save the review record at `.ai/quality/reviews/brotherhood-review-{date}.md`:
 ## Integration with BMAD Workflow
 - **Required for**: All story completion, architecture decisions, deployment
 - **Frequency**: At minimum before story done, optionally mid-implementation
-- **Documentation**: All reviews tracked in project quality metrics at `.ai/quality/reviews/`
+- **Documentation**: All reviews tracked in project quality metrics at `.bmad/quality/reviews/`
 - **Learning**: Review insights feed back into process improvement
-- **Storage**: Each review record saved as `.ai/quality/reviews/brotherhood-review-{date}.md`
+- **Storage**: Each review record saved as `.bmad/quality/reviews/brotherhood-review-{date}.md`
 
 ## Error Recovery Procedures
 

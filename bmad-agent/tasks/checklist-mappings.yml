@@ -3,22 +3,22 @@ architect-checklist:
   required_docs:
     - architecture.md
   default_locations:
-    - .ai/current/specs/architecture.md
+    - .bmad/current/specs/architecture.md
 
 frontend-architecture-checklist:
   checklist_file: bmad-agent/checklists/frontend-architecture-checklist.md
   required_docs:
     - frontend-architecture.md
   default_locations:
-    - .ai/current/specs/frontend-architecture.md
-    - .ai/current/specs/fe-architecture.md
+    - .bmad/current/specs/frontend-architecture.md
+    - .bmad/current/specs/fe-architecture.md
 
 pm-checklist:
   checklist_file: bmad-agent/checklists/pm-checklist.md
   required_docs:
     - prd.md
   default_locations:
-    - .ai/current/specs/prd.md
+    - .bmad/current/specs/prd.md
 
 po-master-checklist:
   checklist_file: bmad-agent/checklists/po-master-checklist.md
@@ -28,23 +28,23 @@ po-master-checklist:
   optional_docs:
     - frontend-architecture.md
   default_locations:
-    - .ai/current/specs/prd.md
-    - .ai/current/specs/frontend-architecture.md
-    - .ai/current/specs/architecture.md
+    - .bmad/current/specs/prd.md
+    - .bmad/current/specs/frontend-architecture.md
+    - .bmad/current/specs/architecture.md
 
 story-draft-checklist:
   checklist_file: bmad-agent/checklists/story-draft-checklist.md
   required_docs:
     - story.md
   default_locations:
-    - .ai/current/work/stories/active/*.md
-    - .ai/current/work/stories/review/*.md
+    - .bmad/current/work/stories/active/*.md
+    - .bmad/current/work/stories/review/*.md
 
 story-dod-checklist:
   checklist_file: bmad-agent/checklists/story-dod-checklist.md
   required_docs:
     - story.md
   default_locations:
-    - .ai/current/work/stories/active/*.md
-    - .ai/current/work/stories/review/*.md
-    - .ai/current/work/stories/done/*.md
+    - .bmad/current/work/stories/active/*.md
+    - .bmad/current/work/stories/review/*.md
+    - .bmad/current/work/stories/done/*.md

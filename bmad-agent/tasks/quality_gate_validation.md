@@ -1,7 +1,7 @@
 # Quality Gate Validation Task
 
 ## Purpose
-Validate that all quality standards and patterns are met before proceeding to next phase. Store validation results at `.ai/quality/validations/gate-results-{date}.md`.
+Validate that all quality standards and patterns are met before proceeding to next phase. Store validation results at `.bmad/quality/validations/gate-results-{date}.md`.
 
 ## Structured Thinking Validation (MANDATORY FIRST CHECK)
 
@@ -87,10 +87,10 @@ Track and report:
 - **Sprint Planning**: Gate history influences complexity estimates
 - **Release Planning**: Gate metrics inform release readiness
 - **Retrospectives**: Gate failures analyzed for process improvement
-- **Documentation**: All validation results stored at `.ai/quality/validations/gate-results-{date}.md`
-- **Tracking**: Gate metrics and trends maintained at `.ai/quality/diagnostics/gate-metrics.md`
+- **Documentation**: All validation results stored at `.bmad/quality/validations/gate-results-{date}.md`
+- **Tracking**: Gate metrics and trends maintained at `.bmad/quality/diagnostics/gate-metrics.md`
 
 ## Output Deliverables
-- **Primary Report**: Gate validation results at `.ai/quality/validations/gate-results-{date}.md`
-- **Metrics Update**: Gate performance metrics at `.ai/quality/diagnostics/gate-metrics.md`
+- **Primary Report**: Gate validation results at `.bmad/quality/validations/gate-results-{date}.md`
+- **Metrics Update**: Gate performance metrics at `.bmad/quality/diagnostics/gate-metrics.md`
 - **Action Items**: Any required fixes tracked in current work items

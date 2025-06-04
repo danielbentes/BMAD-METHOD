@@ -77,7 +77,7 @@ check_dir "bmad-agent/config" "Configuration directory"
 check_dir "bmad-agent/workflows" "Workflows directory"
 check_dir "bmad-agent/error_handling" "Error handling directory"
 check_dir "bmad-agent/quality-tasks" "Quality tasks directory"
-check_dir ".ai" "AI session state directory"
+check_dir ".bmad/state" "AI session state directory"
 check_dir "bmad-agent/commands" "Commands directory"
 
 echo ""
@@ -216,7 +216,7 @@ if [ -f "bmad-agent/ide-bmad-orchestrator.cfg.md" ]; then
                 [ -f "bmad-agent/error_handling/$filename" ] && found=true
                 ;;
             "orchestrator-state.md"|"error-log.md")
-                [ -f ".ai/$filename" ] && found=true
+                [ -f ".bmad/state/$filename" ] && found=true
                 ;;
             "performance-settings.yml")
                 [ -f "bmad-agent/config/$filename" ] && found=true
@@ -235,8 +235,8 @@ if [ -f "bmad-agent/ide-bmad-orchestrator.cfg.md" ]; then
                         break
                     fi
                 done
-                # Also check .ai directory for state files
-                [ -f ".ai/${filename}" ] && found=true
+                # Also check state directory for state files
+                [ -f ".bmad/state/${filename}" ] && found=true
                 
                 # Special check for persona examples in subdirectory
                 if [[ "$filename" =~ -examples\.md$ ]]; then

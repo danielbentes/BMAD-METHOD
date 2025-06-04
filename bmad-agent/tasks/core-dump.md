@@ -25,7 +25,7 @@
 
 ## Purpose
 
-To create a concise memory recording file (`.ai/system/core-dumps/core-dump-n.md`) that captures the essential context of the current agent session, enabling seamless continuation of work in future agent sessions. This task ensures persistent context across agent conversations while maintaining minimal token usage for efficient context loading.
+To create a concise memory recording file (`.bmad/system/core-dumps/core-dump-n.md`) that captures the essential context of the current agent session, enabling seamless continuation of work in future agent sessions. This task ensures persistent context across agent conversations while maintaining minimal token usage for efficient context loading.
 
 ## Progressive Disclosure Phases
 
@@ -78,11 +78,11 @@ To create a concise memory recording file (`.ai/system/core-dumps/core-dump-n.md
 ### 0. Pre-Execution Safety Protocol
 
 #### Existing Core Dump Check
-Before proceeding, check if `.ai/system/core-dumps/core-dump-1.md` already exists:
+Before proceeding, check if `.bmad/system/core-dumps/core-dump-1.md` already exists:
 
 ##### If File Exists:
 1. **Integrity Check**: Validate existing file structure and content
-2. **Backup Creation**: Create `.ai/system/core-dumps/backup/core-dump-1.bak`
+2. **Backup Creation**: Create `.bmad/system/core-dumps/backup/core-dump-1.bak`
 3. **User Query**: "Core dump file exists. Should I: 1. Overwrite, 2. Update, 3. Append or 4. Create new?"
    - **Overwrite**: Replace entire file with new content (after backup)
    - **Update**: Merge new session info with existing content, updating relevant sections
@@ -91,10 +91,10 @@ Before proceeding, check if `.ai/system/core-dumps/core-dump-1.md` already exist
 4. **Confirmation**: Require explicit user confirmation for destructive operations
 
 ##### If File Doesn't Exist:
-1. **Directory Check**: Ensure `.ai/system/core-dumps/` directory exists
+1. **Directory Check**: Ensure `.bmad/system/core-dumps/` directory exists
 2. **Permission Test**: Verify write permissions
 3. **Space Check**: Confirm adequate disk space
-4. **Proceed**: Create `.ai/system/core-dumps/core-dump-1.md`
+4. **Proceed**: Create `.bmad/system/core-dumps/core-dump-1.md`
 
 #### Error Conditions:
 - **Corrupted File**: Alert user, offer recovery options
@@ -165,7 +165,7 @@ Based on user's choice from step 0, handle the file accordingly:
 #### Common Failure Scenarios:
 
 1. **Write Permission Denied**
-   - Attempt alternate location: `.ai/temp/core-dump-emergency.md`
+   - Attempt alternate location: `.bmad/temp/core-dump-emergency.md`
    - Provide manual copy instructions
    - Suggest permission fix commands
 
