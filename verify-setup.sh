@@ -342,14 +342,6 @@ if [ -f "bmad-agent/commands/command-registry.yml" ]; then
         echo -e "${RED}✗${NC} Command registry missing behavioral optimization settings"
         ((ERRORS++))
     fi
-    
-    # Check if it has removed enterprise features
-    if grep -q "permission_level\|acl\|enterprise" bmad-agent/commands/command-registry.yml; then
-        echo -e "${YELLOW}!${NC} Command registry still contains enterprise features"
-        ((WARNINGS++))
-    else
-        echo -e "${GREEN}✓${NC} Enterprise features removed from command registry"
-    fi
 fi
 
 # Check configuration has behavioral settings

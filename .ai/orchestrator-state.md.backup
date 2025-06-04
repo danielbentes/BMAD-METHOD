@@ -52,18 +52,14 @@ decision_archaeology:
   major_decisions: []
   pending_decisions: []
 memory_intelligence_state:
-  memory_provider: file-based-fallback
-  memory_status: server-available-mcp-unavailable
-  openmemory_server_status: running
-  openmemory_server_accessible: true
-  mcp_tools_available: false
-  last_memory_sync: '2025-06-04T00:00:00.000000+00:00'
+  memory_provider: file-based
+  memory_status: offline
+  last_memory_sync: '2025-05-30T16:45:11.071803+00:00'
   connection_metrics:
-    server_latency_ms: 50.0
-    server_accessible: true
-    mcp_tool_availability: false
-    total_connection_tests: 1
-    last_check: '2025-06-04T00:00:00.000000+00:00'
+    latency_ms: 0.0
+    success_rate: 0.0
+    total_errors: 0
+    last_check: '2025-05-30T16:45:10.043926+00:00'
   pattern_recognition:
     workflow_patterns: []
     decision_patterns: []

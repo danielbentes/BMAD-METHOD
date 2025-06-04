@@ -49,6 +49,10 @@ nav:
     - Quick Reference: commands/quick-reference.md
     - Behavioral Commands: commands/behavioral-commands-guide.md
     - Advanced Search: commands/advanced-search.md
+  - Claude Code Integration:
+    - claude-code-commands/index.md
+    - Setup Guide: BMAD_CLAUDE_SETUP.md
+    - Commands Reference: claude-code-commands/claude-code-commands-reference.md
   - Workflows:
     - workflows/index.md
     - Persona Selection: workflows/persona-selection.md
