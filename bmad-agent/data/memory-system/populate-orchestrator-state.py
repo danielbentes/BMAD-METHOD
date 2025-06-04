@@ -10,7 +10,7 @@ Automatically populates orchestrator state data from multiple sources:
 - Performance metrics
 
 Usage:
-    python .ai/populate-orchestrator-state.py [--memory-sync] [--full-analysis] [--output FILE]
+    python bmad-agent/data/memory-system/populate-orchestrator-state.py [--memory-sync] [--full-analysis] [--output FILE]
 """
 
 import sys
@@ -59,7 +59,7 @@ class PopulationConfig:
     git_analysis_enabled: bool = True
     performance_monitoring_enabled: bool = True
     full_analysis: bool = False
-    output_file: str = ".ai/orchestrator-state.md"
+    output_file: str = ".bmad/state/orchestrator-state.md"
     
 class StatePopulator:
     """Main class for populating orchestrator state."""
@@ -980,7 +980,7 @@ class StatePopulator:
         
         return state
     
-    def populate_full_state(self, output_file: str = ".ai/orchestrator-state.md"):
+    def populate_full_state(self, output_file: str = ".bmad/state/orchestrator-state.md"):
         """Populate complete orchestrator state with full analysis and memory sync."""
         print("🎯 Generating Complete BMAD Orchestrator State...")
         print(f"📁 Base path: {self.workspace_root}")
@@ -1074,8 +1074,8 @@ def main():
     import argparse
     
     parser = argparse.ArgumentParser(description='BMAD Orchestrator State Population with Memory Integration')
-    parser.add_argument('--output-file', default='.ai/orchestrator-state.md',
-                       help='Output file path (default: .ai/orchestrator-state.md)')
+    parser.add_argument('--output-file', default='.bmad/state/orchestrator-state.md',
+                       help='Output file path (default: .bmad/state/orchestrator-state.md)')
     parser.add_argument('--base-path', default='.',
                        help='Base workspace path (default: current directory)')
     parser.add_argument('--full-analysis', action='store_true',

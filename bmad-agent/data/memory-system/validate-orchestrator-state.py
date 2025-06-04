@@ -2,11 +2,11 @@
 """
 BMAD Orchestrator State Validation Script
 
-Validates .ai/orchestrator-state.md against the YAML schema definition.
+Validates .bmad/state/orchestrator-state.md against the YAML schema definition.
 Provides detailed error reporting and validation summaries.
 
 Usage:
-    python .ai/validate-orchestrator-state.py [--file PATH] [--fix-common]
+    python bmad-agent/data/memory-system/validate-orchestrator-state.py [--file PATH] [--fix-common]
 """
 
 import sys
@@ -40,7 +40,7 @@ class ValidationResult:
 class OrchestratorStateValidator:
     """Main validator for orchestrator state files."""
     
-    def __init__(self, schema_path: str = ".ai/orchestrator-state-schema.yml"):
+    def __init__(self, schema_path: str = "bmad-agent/data/memory-system/orchestrator-state-schema.yml"):
         self.schema_path = Path(schema_path)
         self.schema = self._load_schema()
         self.validator = Draft7Validator(self.schema)
@@ -378,12 +378,12 @@ def print_validation_report(result: ValidationResult, file_path: str):
 def main():
     """Main function."""
     parser = argparse.ArgumentParser(description='Validate BMAD Orchestrator State files')
-    parser.add_argument('--file', '-f', default='.ai/orchestrator-state.md',
-                       help='Path to orchestrator state file (default: .ai/orchestrator-state.md)')
+    parser.add_argument('--file', '-f', default='.bmad/state/orchestrator-state.md',
+                       help='Path to orchestrator state file (default: .bmad/state/orchestrator-state.md)')
     parser.add_argument('--fix-common', action='store_true',
                        help='Attempt to fix common validation issues')
-    parser.add_argument('--schema', default='.ai/orchestrator-state-schema.yml',
-                       help='Path to schema file (default: .ai/orchestrator-state-schema.yml)')
+    parser.add_argument('--schema', default='bmad-agent/data/memory-system/orchestrator-state-schema.yml',
+                       help='Path to schema file (default: bmad-agent/data/memory-system/orchestrator-state-schema.yml)')
     
     args = parser.parse_args()
     

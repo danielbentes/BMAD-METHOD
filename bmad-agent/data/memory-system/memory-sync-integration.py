@@ -7,7 +7,7 @@ Provides real-time memory monitoring, pattern recognition sync, decision archaeo
 user preference persistence, and proactive intelligence hooks.
 
 Usage:
-    python .ai/memory-sync-integration.py [--sync-now] [--monitor] [--diagnose]
+    python bmad-agent/data/memory-system/memory-sync-integration.py [--sync-now] [--monitor] [--diagnose]
 """
 
 import sys
@@ -66,7 +66,7 @@ class MemoryPattern:
 class MemorySyncIntegration:
     """Main memory synchronization integration system."""
     
-    def __init__(self, state_file: str = ".ai/orchestrator-state.md", sync_interval: int = 30):
+    def __init__(self, state_file: str = ".bmad/state/orchestrator-state.md", sync_interval: int = 30):
         self.state_file = Path(state_file)
         self.sync_interval = sync_interval
         self.memory_available = False
@@ -330,7 +330,7 @@ class MemorySyncIntegration:
         """Add memory to fallback storage."""
         try:
             # Initialize fallback storage if not exists
-            fallback_file = Path('.ai/memory-fallback.json')
+            fallback_file = Path('.bmad/memory/fallback-storage.json')
             
             if fallback_file.exists():
                 with open(fallback_file, 'r') as f:
@@ -426,7 +426,7 @@ class MemorySyncIntegration:
         
         try:
             # Search fallback storage for patterns
-            fallback_file = Path('.ai/memory-fallback.json')
+            fallback_file = Path('.bmad/memory/fallback-storage.json')
             if fallback_file.exists():
                 with open(fallback_file, 'r') as f:
                     fallback_data = json.load(f)
@@ -515,7 +515,7 @@ class MemorySyncIntegration:
             current_phase = current_workflow.get("current_state", {}).get("current_phase")
             
             # Search fallback storage for relevant insights
-            fallback_file = Path('.ai/memory-fallback.json')
+            fallback_file = Path('.bmad/memory/fallback-storage.json')
             if fallback_file.exists():
                 with open(fallback_file, 'r') as f:
                     fallback_data = json.load(f)
@@ -691,7 +691,7 @@ def main():
                        help='Run memory integration diagnostics')
     parser.add_argument('--interval', type=int, default=30,
                        help='Sync interval in seconds (default: 30)')
-    parser.add_argument('--state-file', default='.ai/orchestrator-state.md',
+    parser.add_argument('--state-file', default='.bmad/state/orchestrator-state.md',
                        help='Path to orchestrator state file')
     
     args = parser.parse_args()

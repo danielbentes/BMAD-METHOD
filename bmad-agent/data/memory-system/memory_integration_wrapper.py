@@ -27,7 +27,7 @@ class MemoryWrapper:
     def __init__(self):
         self.memory_available = False
         self.memory_functions = {}
-        self.fallback_storage = Path('.ai/memory-fallback.json')
+        self.fallback_storage = Path('.bmad/memory/fallback-storage.json')
         self._initialize_memory_system()
     
     def _initialize_memory_system(self):
