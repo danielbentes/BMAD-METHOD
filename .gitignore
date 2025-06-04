@@ -24,7 +24,15 @@ __pycache__/
 .ai/orchestrator-state.backup*
 
 # Claude
+.claude/
 CLAUDE.md
+
+# Cursor
+.cursor/
 
 # Site
 site/
+
+#MCP
+mcp.json
+.cursor/mcp.json
