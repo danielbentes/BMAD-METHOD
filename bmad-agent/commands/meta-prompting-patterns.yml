@@ -1,0 +1,306 @@
+# Meta-Prompting Patterns Configuration
+# BMAD Method - AI Behavioral Optimization Framework
+
+# Core Meta-Prompting Patterns
+patterns:
+  task_execution:
+    description: "Optimal prompts for task execution with behavioral enforcement"
+    template: |
+      You are executing: {task_name}
+      
+      CONTEXT:
+      - Project: {project_context}
+      - Constraints: {constraints}
+      - Success Criteria: {success_criteria}
+      
+      MANDATORY BEHAVIORAL RULES:
+      - ZERO vague language (penalty: -$2000)
+      - MUST reference examples from library
+      - REQUIRE structured analysis for decisions
+      - APPLY progressive disclosure (start essential, expand on request)
+      
+      ANTI-PATTERNS (FORBIDDEN):
+      {anti_patterns_list}
+      
+      EXAMPLES TO REFERENCE:
+      {relevant_examples}
+      
+      Execute with {confidence_requirement}% confidence minimum.
+    
+    variables:
+      task_name: required
+      project_context: required 
+      constraints: optional
+      success_criteria: required
+      anti_patterns_list: auto_generated
+      relevant_examples: auto_selected
+      confidence_requirement: default_80
+    
+    behavioral_enforcement:
+      example_utilization: mandatory
+      structured_thinking: required
+      anti_pattern_scanning: enabled
+      progressive_disclosure: adaptive
+    
+    success_rate: 92
+    effectiveness_score: 89
+
+  persona_activation:
+    description: "Optimal prompts for persona activation with domain expertise"
+    template: |
+      ACTIVATE PERSONA: {persona_name}
+      
+      DOMAIN EXPERTISE:
+      {domain_knowledge}
+      
+      BEHAVIORAL REQUIREMENTS:
+      - {persona_specific_rules}
+      - Evidence-based decisions only
+      - Structured analysis using {required_analysis_tags}
+      - Reference {persona_examples} for patterns
+      
+      CONTEXT ADAPTATION:
+      - Team Experience: {team_level}
+      - Project Phase: {project_phase}
+      - Time Pressure: {urgency_level}
+      
+      SUCCESS CRITERIA:
+      - {persona_success_metrics}
+      - Zero anti-pattern violations
+      - 90%+ example utilization
+      
+      ACTIVATE NOW with full expertise and behavioral compliance.
+    
+    variables:
+      persona_name: required
+      domain_knowledge: auto_loaded
+      persona_specific_rules: persona_dependent
+      required_analysis_tags: persona_dependent
+      persona_examples: auto_selected
+      team_level: context_detected
+      project_phase: context_detected
+      urgency_level: context_detected
+      persona_success_metrics: persona_dependent
+    
+    behavioral_enforcement:
+      domain_expertise: verified
+      behavioral_compliance: strict
+      context_adaptation: enabled
+      quality_standards: persona_specific
+    
+    success_rate: 94
+    effectiveness_score: 91
+
+  consultation_orchestration:
+    description: "Multi-persona consultation with behavioral coordination"
+    template: |
+      MULTI-PERSONA CONSULTATION: {consultation_type}
+      
+      PARTICIPANTS:
+      {participant_list}
+      
+      BEHAVIORAL COORDINATION:
+      - Each persona maintains domain expertise
+      - All responses use structured analysis
+      - Evidence-based arguments only
+      - Synthesize perspectives into coherent plan
+      
+      CONSULTATION PROCESS:
+      1. Individual Analysis Phase (2 minutes each)
+      2. Perspective Sharing Phase (structured)
+      3. Synthesis Phase (collaborative)
+      4. Decision Phase (evidence-based)
+      
+      ANTI-PATTERNS FOR ALL PARTICIPANTS:
+      - No "I think" or vague language
+      - No unsupported claims
+      - No scope creep beyond consultation topic
+      
+      EXPECTED OUTPUT:
+      - {expected_deliverable}
+      - Quality score >90%
+      - Unanimous or documented dissent
+      
+      BEGIN CONSULTATION with behavioral excellence.
+    
+    variables:
+      consultation_type: required
+      participant_list: auto_generated
+      expected_deliverable: consultation_dependent
+    
+    behavioral_enforcement:
+      multi_persona_coordination: enabled
+      behavioral_consistency: required
+      evidence_synthesis: mandatory
+      quality_aggregation: weighted
+    
+    success_rate: 88
+    effectiveness_score: 85
+
+  handoff_execution:
+    description: "Structured handoffs with context preservation"
+    template: |
+      PERSONA HANDOFF: {from_persona} → {to_persona}
+      
+      CONTEXT TRANSFER:
+      {context_summary}
+      
+      WORK COMPLETED:
+      {completed_work}
+      
+      NEXT ACTIONS FOR {to_persona}:
+      {next_actions}
+      
+      BEHAVIORAL CONTINUITY:
+      - Maintain quality standards from previous work
+      - Continue example-driven approach
+      - Preserve structured thinking patterns
+      - Apply domain expertise of new persona
+      
+      HANDOFF VALIDATION:
+      - Context preserved: ✓
+      - Quality maintained: ✓  
+      - No information loss: ✓
+      - Clear next steps: ✓
+      
+      {to_persona} ACTIVATED with full context and continuation.
+    
+    variables:
+      from_persona: required
+      to_persona: required
+      context_summary: auto_generated
+      completed_work: extracted
+      next_actions: generated
+    
+    behavioral_enforcement:
+      context_preservation: validated
+      quality_continuity: maintained
+      persona_transition: smooth
+      information_integrity: verified
+    
+    success_rate: 90
+    effectiveness_score: 87
+
+  quality_validation:
+    description: "Quality gates with behavioral assessment"
+    template: |
+      QUALITY VALIDATION GATE: {validation_type}
+      
+      ASSESSMENT CRITERIA:
+      {quality_criteria}
+      
+      BEHAVIORAL VALIDATION:
+      - Example utilization: {example_score}%
+      - Anti-pattern violations: {violation_count}
+      - Structured thinking compliance: {structure_score}%
+      - Evidence quality: {evidence_score}/100
+      
+      VALIDATION RESULTS:
+      {validation_results}
+      
+      DECISION: {pass_fail_decision}
+      
+      NEXT ACTIONS:
+      {improvement_actions}
+      
+      Quality standard: UNCOMPROMISING excellence required.
+    
+    variables:
+      validation_type: required
+      quality_criteria: validation_dependent
+      example_score: calculated
+      violation_count: detected
+      structure_score: calculated
+      evidence_score: assessed
+      validation_results: generated
+      pass_fail_decision: binary
+      improvement_actions: conditional
+    
+    behavioral_enforcement:
+      quality_standards: strict
+      zero_tolerance: critical_violations
+      improvement_required: below_threshold
+      excellence_rewarded: above_target
+    
+    success_rate: 96
+    effectiveness_score: 93
+
+# Pattern Selection Rules
+pattern_selection:
+  by_context:
+    greenfield_project:
+      preferred_patterns: [task_execution, persona_activation]
+      behavioral_adjustments: [exploration_encouraged, innovation_rewarded]
+    
+    brownfield_project:
+      preferred_patterns: [consultation_orchestration, quality_validation]
+      behavioral_adjustments: [compatibility_required, safety_first]
+    
+    mvp_development:
+      preferred_patterns: [task_execution, handoff_execution] 
+      behavioral_adjustments: [speed_balanced, quality_maintained]
+    
+    production_deployment:
+      preferred_patterns: [quality_validation, consultation_orchestration]
+      behavioral_adjustments: [zero_tolerance, comprehensive_validation]
+
+  by_team_experience:
+    junior_team:
+      behavioral_adjustments: [detailed_guidance, extra_examples, safety_first]
+      pattern_modifications: [verbose_explanations, step_by_step]
+    
+    senior_team:
+      behavioral_adjustments: [concise_direction, advanced_patterns, efficiency_focus]
+      pattern_modifications: [brief_summaries, expert_shortcuts]
+
+  by_urgency:
+    emergency:
+      preferred_patterns: [task_execution, handoff_execution]
+      behavioral_adjustments: [essential_only, time_critical]
+    
+    normal:
+      preferred_patterns: [all_patterns]
+      behavioral_adjustments: [comprehensive, quality_first]
+    
+    learning:
+      preferred_patterns: [consultation_orchestration, quality_validation]
+      behavioral_adjustments: [educational, exploratory]
+
+# Effectiveness Tracking
+effectiveness_tracking:
+  success_metrics:
+    task_completion_rate: target_95_percent
+    output_quality_score: target_90_percent
+    behavioral_compliance: target_100_percent
+    example_utilization: target_90_percent
+    
+  pattern_optimization:
+    a_b_testing: enabled
+    success_pattern_learning: automated
+    failure_pattern_prevention: strict
+    continuous_improvement: required
+    
+  feedback_integration:
+    user_satisfaction: tracked
+    quality_improvements: measured
+    efficiency_gains: calculated
+    learning_acceleration: monitored
+
+# Pattern Library Management
+library_management:
+  pattern_validation:
+    effectiveness_threshold: 85_percent
+    behavioral_compliance: 100_percent
+    user_adoption: 70_percent
+    
+  pattern_evolution:
+    version_control: enabled
+    change_tracking: comprehensive
+    rollback_capability: available
+    impact_assessment: required
+    
+  community_contributions:
+    submission_process: peer_reviewed
+    validation_requirements: effectiveness_proven
+    integration_testing: comprehensive
+    documentation_standards: high

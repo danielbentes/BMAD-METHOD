@@ -1,8 +1,121 @@
 # Create Next Story Task
 
+## CRITICAL SAFETY RULES ⚠️
+
+**MANDATORY COMPLIANCE - NO EXCEPTIONS**
+
+1. **Prerequisite Validation**: NEVER create a story when:
+   - Previous story in sequence is incomplete
+   - Story dependencies are not satisfied
+   - Required documentation is missing
+   - User hasn't approved override
+
+2. **Context Completeness**: EVERY story MUST include:
+   - All technical guidance from architecture docs
+   - Complete acceptance criteria from epics
+   - Verified API contracts and data models
+   - Clear implementation path
+
+3. **Quality Gates**: MANDATORY checkpoints at:
+   - 25%: Story identification and validation
+   - 50%: Technical context gathering complete
+   - 75%: Story draft with all sections
+   - 100%: Checklist validation passed
+
+4. **AI Safety Rules**:
+   - NEVER skip dependency verification
+   - ALWAYS use Index Doc for navigation
+   - PROHIBIT creating stories with gaps
+   - REQUIRE explicit override for warnings
+
+5. **Error Recovery**: If ANY safety rule is violated:
+   - HALT story creation immediately
+   - Document what's missing/wrong
+   - Present clear options to user
+   - Wait for explicit direction
+
 ## Purpose
 
 To identify the next logical story based on project progress and epic definitions, and then to prepare a comprehensive, self-contained, and actionable story file using the `Story Template`. This task ensures the story is enriched with all necessary technical context, requirements, and acceptance criteria, making it ready for efficient implementation by a Developer Agent with minimal need for additional research.
+
+## Progressive Disclosure Phases
+
+### Phase 1: Discovery (0-25%) 🔍
+**Goal**: Identify and validate next story
+
+**Entry Criteria**:
+- Access to all project documentation
+- Story directory structure exists
+- User ready to proceed
+
+**Activities**:
+1. Scan story directory for latest
+2. Verify completion status
+3. Check epic sequence
+4. Validate prerequisites
+
+**Exit Criteria**:
+- Next story identified
+- Prerequisites confirmed met
+- User approved selection
+- 25% quality gate passed
+
+### Phase 2: Context Gathering (25-50%) 📚
+**Goal**: Collect all implementation details
+
+**Entry Criteria**:
+- Story identified and validated
+- All source docs accessible
+
+**Activities**:
+1. Extract epic requirements
+2. Gather architectural context
+3. Collect API specifications
+4. Compile UI/UX requirements
+
+**Exit Criteria**:
+- All contexts documented
+- No information gaps
+- Technical details verified
+- 50% quality gate passed
+
+### Phase 3: Story Assembly (50-75%) 🔨
+**Goal**: Create comprehensive story document
+
+**Entry Criteria**:
+- All context gathered
+- Template available
+
+**Activities**:
+1. Populate story template
+2. Write technical guidance
+3. Define detailed tasks
+4. Add implementation notes
+
+**Exit Criteria**:
+- Story draft complete
+- All sections filled
+- Tasks mapped to ACs
+- 75% quality gate passed
+
+### Phase 4: Validation (75-100%) ✅
+**Goal**: Ensure story quality and completeness
+
+**Entry Criteria**:
+- Story draft complete
+- Checklist available
+
+**Activities**:
+1. Run story draft checklist
+2. Verify dev guidance clarity
+3. Confirm no missing context
+4. Get user approval
+
+**Exit Criteria**:
+- Checklist 100% passed
+- User approved story
+- Ready for development
+- Story saved to active/
 
 ## Inputs for this Task
 
@@ -98,3 +211,109 @@ To identify the next logical story based on project progress and epic definition
   - Link tasks to ACs where applicable (e.g., `Task 1 (AC: 1, 3)`).
 - Add notes on project structure alignment or discrepancies found in Step 4.
 - Prepare content for the "Deviation Analysis" based on discrepancies noted in Step 3.
+
+### 6. Run Story Draft Validation
+
+- Execute the Story Draft Checklist against the populated story.
+- For any failed items:
+  - Document the gap
+  - Attempt to resolve if possible
+  - Flag for user attention if not
+- Only proceed when checklist passes or user approves exceptions.
+
+### 7. Present Story for Approval
+
+- Show user the story summary with:
+  - Story ID and title
+  - Prerequisite status
+  - Key technical elements included
+  - Any deviations or concerns
+- Request explicit approval to finalize
+
+### 8. Finalize and Save
+
+- Upon approval, ensure story is saved in `.ai/current/work/stories/active/`
+- Confirm file creation and accessibility
+- Provide user with story location and next steps
+
+## Error Recovery Procedures
+
+### Common Failure Scenarios
+
+1. **Incomplete Prerequisites**
+   - **Detection**: Required stories not done
+   - **Recovery**: List blocking stories, await direction
+   - **Prevention**: Check dependencies first
+
+2. **Missing Documentation**
+   - **Detection**: Referenced docs not found
+   - **Recovery**: List missing docs, request creation
+   - **Prevention**: Validate all docs upfront
+
+3. **Context Gaps**
+   - **Detection**: Technical details unavailable
+   - **Recovery**: Flag gaps, seek clarification
+   - **Prevention**: Thorough context gathering
+
+4. **Epic Misalignment**
+   - **Detection**: Story doesn't match epic definition
+   - **Recovery**: Reconcile with user input
+   - **Prevention**: Strict epic adherence
+
+### Recovery Protocol
+1. **Stop** at point of failure
+2. **Document** what's missing/wrong
+3. **Present** clear options to user
+4. **Wait** for explicit direction
+5. **Resume** only when issue resolved
+6. **Verify** fix before continuing
+
+## Success Metrics
+
+### Quantitative Metrics
+- **Story Completeness**: 100% sections filled
+- **Checklist Pass Rate**: >95% first attempt
+- **Dev Guidance Quality**: Zero clarification requests
+- **Dependency Accuracy**: 100% prerequisites met
+
+### Qualitative Metrics
+- **Clarity**: Developer can start immediately
+- **Completeness**: No research needed by dev
+- **Accuracy**: All technical details correct
+- **Traceability**: Clear links to source docs
+
+### Early Warning Indicators
+- Multiple missing documents
+- Unclear epic definitions
+- Conflicting technical guidance
+- Incomplete prerequisite stories
+
+## Continuous Improvement
+
+### Post-Story Review
+1. **Track Implementation**:
+   - Was guidance sufficient?
+   - What questions arose?
+   - What was missing?
+
+2. **Analyze Patterns**:
+   - Common missing elements
+   - Frequent clarifications
+   - Successful story patterns
+
+3. **Improve Process**:
+   - Enhance context gathering
+   - Refine task generation
+   - Update checklists
+
+### Knowledge Capture
+- Document story creation patterns
+- Record common technical contexts
+- Note successful task breakdowns
+- Build story quality metrics
+
+### Process Optimization
+- Track story creation time
+- Monitor dev success rate
+- Measure rework frequency
+- Optimize template usage

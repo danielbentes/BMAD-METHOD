@@ -1,29 +1,106 @@
 # Core Dump Task
 
+## CRITICAL SAFETY RULES - MANDATORY COMPLIANCE
+
+### STOP CONDITIONS - ABORT IMMEDIATELY IF:
+- User session contains sensitive data (passwords, API keys, secrets)
+- Core dump would exceed 10KB size limit
+- Previous core dump corruption detected
+- Memory system reports integrity issues
+- User explicitly requested no persistence
+
+### MANDATORY VALIDATIONS BEFORE PROCEEDING:
+1. **Privacy Check**: Scan for PII, credentials, or sensitive data
+2. **Size Projection**: Estimate final file size before creation
+3. **Integrity Verification**: Validate existing core dumps if present
+4. **Permission Confirmation**: Verify user consent for persistence
+5. **System State**: Confirm memory system health status
+
+### QUALITY GATES - MUST PASS ALL:
+- [ ] No sensitive data detected in session
+- [ ] File size projection under 10KB
+- [ ] User consent confirmed or implied
+- [ ] Memory system operational
+- [ ] Write permissions available
+
 ## Purpose
 
 To create a concise memory recording file (`.ai/system/core-dumps/core-dump-n.md`) that captures the essential context of the current agent session, enabling seamless continuation of work in future agent sessions. This task ensures persistent context across agent conversations while maintaining minimal token usage for efficient context loading.
 
+## Progressive Disclosure Phases
+
+### Phase 1: Safety Assessment (MANDATORY)
+1. Scan session for sensitive data patterns
+2. Check existing core dump integrity
+3. Validate system permissions
+4. Estimate content size
+5. **GATE**: All safety checks passed → Continue to Phase 2
+
+### Phase 2: Content Analysis
+1. Identify key accomplishments
+2. Extract critical decisions
+3. Document file changes
+4. Capture user preferences
+5. **GATE**: Meaningful content identified → Continue to Phase 3
+
+### Phase 3: Core Dump Creation
+1. Structure content for minimal tokens
+2. Apply compression strategies
+3. Validate completeness
+4. Write to persistent storage
+5. **GATE**: File created successfully → Continue to Phase 4
+
+### Phase 4: Verification
+1. Read back created file
+2. Verify content integrity
+3. Check file permissions
+4. Update memory indices
+5. **FINAL GATE**: All verifications passed → Task Complete
+
 ## Inputs for this Task
 
+### Required Inputs (MUST HAVE ALL):
 - Current session conversation history and accomplishments
 - Files created, modified, or deleted during the session
 - Key decisions made and procedures followed
 - Current project state and next logical steps
 - User requests and agent responses that shaped the session
 
+### Validation Requirements:
+- **Session History**: Must be complete and uncorrupted
+- **File Changes**: Must have accurate before/after states
+- **Decision Log**: Must include rationale and context
+- **Project State**: Must reflect actual current conditions
+- **User Interactions**: Must preserve intent and preferences
+
 ## Task Execution Instructions
 
-### 0. Check Existing Core Dump
+### 0. Pre-Execution Safety Protocol
 
+#### Existing Core Dump Check
 Before proceeding, check if `.ai/system/core-dumps/core-dump-1.md` already exists:
 
-- If file exists, ask user: "Core dump file exists. Should I: 1. Overwrite, 2. Update, 3. Append or 4. Create new?"
-- **Overwrite**: Replace entire file with new content
-- **Update**: Merge new session info with existing content, updating relevant sections
-- **Append**: Add new session as a separate entry while preserving existing content
-- **Create New**: Create a new file, appending the next possible -# to the file, such as core-dump-3.md if 1 and 2 already exist.
-- If file doesn't exist, proceed with creation of `.ai/system/core-dumps/core-dump-1.md`
+##### If File Exists:
+1. **Integrity Check**: Validate existing file structure and content
+2. **Backup Creation**: Create `.ai/system/core-dumps/backup/core-dump-1.bak`
+3. **User Query**: "Core dump file exists. Should I: 1. Overwrite, 2. Update, 3. Append or 4. Create new?"
+   - **Overwrite**: Replace entire file with new content (after backup)
+   - **Update**: Merge new session info with existing content, updating relevant sections
+   - **Append**: Add new session as a separate entry while preserving existing content
+   - **Create New**: Create next sequential file (e.g., core-dump-2.md)
+4. **Confirmation**: Require explicit user confirmation for destructive operations
+
+##### If File Doesn't Exist:
+1. **Directory Check**: Ensure `.ai/system/core-dumps/` directory exists
+2. **Permission Test**: Verify write permissions
+3. **Space Check**: Confirm adequate disk space
+4. **Proceed**: Create `.ai/system/core-dumps/core-dump-1.md`
+
+#### Error Conditions:
+- **Corrupted File**: Alert user, offer recovery options
+- **Permission Denied**: Provide troubleshooting steps
+- **Disk Full**: Calculate required space, suggest cleanup
+- **Invalid Path**: Create directory structure if missing
 
 ### 1. Analyze Session Context
 
@@ -67,8 +144,76 @@ Based on user's choice from step 0, handle the file accordingly:
 
 ### 7. Validate Completeness
 
-- Verify all significant session activities are captured
-- Ensure a future agent could understand the current state
-- Check that file changes are accurately recorded
-- Confirm next steps are clear and actionable
-- Verify user communication style and preferences are noted
+#### Content Validation Checklist:
+- [ ] All significant session activities captured
+- [ ] Future agent can understand current state
+- [ ] File changes accurately recorded with paths
+- [ ] Next steps clear and actionable
+- [ ] User preferences and style documented
+- [ ] No sensitive data included
+- [ ] File size within limits (<10KB)
+- [ ] Timestamps accurate and consistent
+
+#### Quality Metrics:
+- **Completeness Score**: Must be ≥90%
+- **Clarity Rating**: Must be "High" or "Very High"
+- **Token Efficiency**: Must use <2000 tokens when loaded
+- **Recovery Potential**: Must enable full context restoration
+
+### 8. Error Recovery Procedures
+
+#### Common Failure Scenarios:
+
+1. **Write Permission Denied**
+   - Attempt alternate location: `.ai/temp/core-dump-emergency.md`
+   - Provide manual copy instructions
+   - Suggest permission fix commands
+
+2. **File Size Exceeded**
+   - Apply aggressive summarization
+   - Split into multiple files if necessary
+   - Prioritize most recent/critical information
+
+3. **Corruption During Write**
+   - Restore from backup
+   - Retry with atomic write operation
+   - Fall back to append mode
+
+4. **Sensitive Data Detected**
+   - Abort write operation
+   - Report specific patterns found
+   - Offer sanitized version option
+
+### 9. Success Metrics
+
+#### Immediate Metrics:
+- Core dump created successfully
+- File size optimized (<10KB)
+- No sensitive data included
+- All phases completed without errors
+
+#### Long-term Metrics:
+- Successful context restorations: >95%
+- Average load time: <2 seconds
+- User satisfaction with continuity: >90%
+- Zero security incidents from dumps
+
+### 10. Continuous Improvement
+
+#### Post-Execution Analysis:
+1. Log execution time and file size
+2. Track any errors or warnings
+3. Note user feedback on format
+4. Identify optimization opportunities
+
+#### Feedback Integration:
+- Regular review of core dump effectiveness
+- User surveys on context restoration quality
+- Performance metrics analysis
+- Security audit results
+
+#### Update Triggers:
+- New sensitive data patterns identified
+- Performance degradation detected
+- User feedback indicates issues
+- Security vulnerabilities discovered

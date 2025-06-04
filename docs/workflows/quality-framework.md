@@ -29,6 +29,93 @@ Master the BMad Method's world-class quality standards with comprehensive gates,
 - Clear criteria define what "good enough" means
 - Evidence-based decisions about quality trade-offs
 
+## Structured Thinking Enforcement 🧠
+
+!!! warning "Mandatory for Quality Decisions"
+    All major quality decisions require structured analysis using XML-style tags. Penalties apply for missing analysis.
+
+### Required Analysis Tags
+
+#### 1. **Decision Analysis** (`<decision_analysis>`)
+**When to Use**: Architecture choices, technology selection, strategic decisions  
+**Penalty for Missing**: -$2,000
+
+```xml
+<decision_analysis>
+  <context>Current situation and constraints</context>
+  <options>
+    1. Option A with pros/cons
+    2. Option B with pros/cons
+    3. Option C with pros/cons
+  </options>
+  <evidence>Data supporting each option</evidence>
+  <risks>Potential failure points</risks>
+  <recommendation>Clear choice with rationale</recommendation>
+  <confidence>85% - based on similar past decisions</confidence>
+</decision_analysis>
+```
+
+#### 2. **Problem Analysis** (`<problem_analysis>`)
+**When to Use**: Bug fixes, performance issues, system failures  
+**Penalty for Missing**: -$1,500
+
+```xml
+<problem_analysis>
+  <symptoms>Observable issues and impacts</symptoms>
+  <investigation>Steps taken to understand</investigation>
+  <root_causes>Underlying issues identified</root_causes>
+  <solutions>Proposed fixes with trade-offs</solutions>
+  <prevention>How to avoid recurrence</prevention>
+  <confidence>90% - based on evidence</confidence>
+</problem_analysis>
+```
+
+#### 3. **Quality Analysis** (`<quality_analysis>`)
+**When to Use**: Code reviews, quality assessments, audits  
+**Penalty for Missing**: -$1,000
+
+```xml
+<quality_analysis>
+  <current_state>Existing quality metrics</current_state>
+  <quality_gaps>Issues identified</quality_gaps>
+  <improvement_plan>Steps to address gaps</improvement_plan>
+  <success_metrics>How to measure improvement</success_metrics>
+  <timeline>Implementation schedule</timeline>
+</quality_analysis>
+```
+
+### Enforcement Mechanisms
+
+- **Pre-Action Blocking**: System prevents proceeding without required analysis
+- **Quality Scoring**: Each analysis scored 0-100 (minimum 85 required)
+- **Historical Tracking**: Past analyses inform future decisions
+- **Progressive Complexity**: Junior teams get templates, seniors get flexibility
+
+## Behavioral Quality Tracking 🎮
+
+!!! success "Gamified Quality Excellence"
+    Quality achievements are tracked and rewarded through the behavioral system.
+
+### Quality-Driven Rewards
+
+| Achievement | Trigger | Reward |
+|-------------|---------|--------|
+| **First-Time Right** | Feature passes all gates without rework | +$1,000 |
+| **Zero Defect Hero** | Complete sprint with no bugs | +$2,000 |
+| **Quality Streak** | 7 days without quality violations | +$500/day |
+| **Gate Guardian** | Catch critical issue in review | +$1,500 |
+| **Documentation Star** | Comprehensive docs that prevent issues | +$750 |
+
+### Quality Penalties
+
+| Violation | Description | Penalty |
+|-----------|-------------|---------|
+| **Skip Quality Gate** | Bypassing required validation | -$3,000 |
+| **Ignore Test Failures** | Merging with failing tests | -$2,000 |
+| **Missing Analysis Tags** | No structured thinking for decisions | -$1,500 |
+| **Documentation Debt** | Inadequate or missing docs | -$1,000 |
+| **Anti-Pattern Introduction** | Adding known bad patterns | -$500 to -$2,000 |
+
 ## Quality Gates Overview
 
 BMad Method implements **5 Quality Gates** that ensure excellence at every stage of development.

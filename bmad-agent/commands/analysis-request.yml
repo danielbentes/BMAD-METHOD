@@ -1,0 +1,230 @@
+# Analysis Request Configuration
+# BMAD Method - AI Behavioral Optimization Framework
+
+# Analysis Types and Their Behavioral Requirements
+analysis_types:
+  decision_analysis:
+    description: "Systematic decision evaluation with evidence"
+    behavioral_requirements:
+      structured_thinking: mandatory
+      evidence_backing: required
+      confidence_scoring: required
+      alternative_evaluation: minimum_3
+    template: |
+      <decision_analysis>
+        <context>Current situation and constraints</context>
+        <options>
+          1. [Option A with evidence]
+          2. [Option B with evidence] 
+          3. [Option C with evidence]
+        </options>
+        <evidence>
+          - [Data point 1 with source]
+          - [Data point 2 with source]
+          - [Data point 3 with source]
+        </evidence>
+        <risks>Potential failure points and mitigations</risks>
+        <recommendation>Clear choice with rationale</recommendation>
+        <confidence>X% - based on [reasoning]</confidence>
+      </decision_analysis>
+    penalty_incomplete: -2000
+    reward_excellence: +1000
+
+  problem_analysis:
+    description: "Root cause analysis with systematic investigation"
+    behavioral_requirements:
+      structured_thinking: mandatory
+      evidence_backing: required
+      root_cause_identification: required
+    template: |
+      <problem_analysis>
+        <symptoms>Observable issues and their impact</symptoms>
+        <investigation>
+          - [Evidence gathering method 1]
+          - [Evidence gathering method 2]
+          - [Evidence gathering method 3]
+        </investigation>
+        <root_causes>
+          1. [Primary cause with evidence]
+          2. [Secondary cause with evidence]
+        </root_causes>
+        <solutions>
+          - [Solution A: addresses root cause X]
+          - [Solution B: addresses root cause Y]
+        </solutions>
+        <prevention>Future prevention strategies</prevention>
+        <confidence>X% - based on investigation depth</confidence>
+      </problem_analysis>
+    penalty_incomplete: -1500
+    reward_excellence: +800
+
+  architecture_analysis:
+    description: "Technical architecture evaluation with trade-offs"
+    behavioral_requirements:
+      structured_thinking: mandatory
+      evidence_backing: required
+      trade_off_analysis: required
+      scalability_consideration: required
+    template: |
+      <architecture_analysis>
+        <requirements>Functional and non-functional requirements</requirements>
+        <constraints>
+          - Technical constraints
+          - Business constraints
+          - Resource constraints
+        </constraints>
+        <options>
+          1. [Architecture A with pros/cons]
+          2. [Architecture B with pros/cons]
+          3. [Architecture C with pros/cons]
+        </options>
+        <trade_offs>
+          - Performance vs Complexity
+          - Cost vs Scalability
+          - Speed vs Quality
+        </trade_offs>
+        <recommendation>Chosen architecture with justification</recommendation>
+        <implementation_plan>Step-by-step approach</implementation_plan>
+        <confidence>X% - based on similar projects</confidence>
+      </architecture_analysis>
+    penalty_incomplete: -2500
+    reward_excellence: +1200
+
+  quality_analysis:
+    description: "Quality assessment with improvement plan"
+    behavioral_requirements:
+      structured_thinking: mandatory
+      evidence_backing: required
+      metrics_based: required
+      improvement_plan: required
+    template: |
+      <quality_analysis>
+        <current_state>Quality metrics and observations</current_state>
+        <assessment>
+          - Code quality score: X/100
+          - Test coverage: X%
+          - Performance metrics: X ms
+          - Security rating: X/10
+        </assessment>
+        <gaps>
+          1. [Gap 1 with impact assessment]
+          2. [Gap 2 with impact assessment]
+        </gaps>
+        <improvement_plan>
+          - [Action 1: timeline and owner]
+          - [Action 2: timeline and owner]
+        </improvement_plan>
+        <success_criteria>Measurable quality targets</success_criteria>
+        <confidence>X% - based on assessment thoroughness</confidence>
+      </quality_analysis>
+    penalty_incomplete: -2000
+    reward_excellence: +1000
+
+  risk_analysis:
+    description: "Risk assessment with mitigation strategies"
+    behavioral_requirements:
+      structured_thinking: mandatory
+      evidence_backing: required
+      impact_assessment: required
+      mitigation_planning: required
+    template: |
+      <risk_analysis>
+        <scope>Analysis scope and boundaries</scope>
+        <risks>
+          1. [Risk A: probability X%, impact Y]
+          2. [Risk B: probability X%, impact Y]
+          3. [Risk C: probability X%, impact Y]
+        </risks>
+        <impact_assessment>
+          - Business impact: [description]
+          - Technical impact: [description]
+          - Timeline impact: [description]
+        </impact_assessment>
+        <mitigation_strategies>
+          - [Strategy 1 for Risk A]
+          - [Strategy 2 for Risk B]
+        </mitigation_strategies>
+        <contingency_plans>Backup plans if mitigations fail</contingency_plans>
+        <confidence>X% - based on risk modeling accuracy</confidence>
+      </risk_analysis>
+    penalty_incomplete: -1800
+    reward_excellence: +900
+
+# Request Processing Rules
+processing_rules:
+  mandatory_sections:
+    enforcement: strict
+    penalty_missing_section: -500
+    penalty_incomplete_section: -200
+    
+  evidence_requirements:
+    minimum_evidence_points: 3
+    evidence_quality_threshold: 80
+    penalty_insufficient_evidence: -1000
+    
+  confidence_scoring:
+    required_confidence_level: 70
+    penalty_low_confidence: -300
+    reward_high_confidence: +200
+    
+  alternative_evaluation:
+    minimum_alternatives: 3
+    penalty_insufficient_alternatives: -800
+    reward_comprehensive_alternatives: +400
+
+# Behavioral Integration
+behavioral_integration:
+  example_driven_learning:
+    requirement: "All analyses must reference relevant examples"
+    example_sources: 
+      - "bmad-agent/examples/good/"
+      - "bmad-agent/examples/bad/"
+    penalty_no_examples: -1000
+    reward_good_examples: +500
+    
+  anti_pattern_detection:
+    scan_for_patterns: true
+    patterns_to_avoid:
+      - "I think"
+      - "probably"
+      - "should work"
+      - "quick fix"
+    penalty_per_pattern: -250
+    
+  progressive_disclosure:
+    level_0: "Essential conclusion only"
+    level_1: "Key evidence and reasoning"
+    level_2: "Full analysis with details"
+    level_3: "Complete investigation with appendices"
+    
+  context_awareness:
+    adapt_to_project_phase: true
+    adapt_to_team_expertise: true
+    adapt_to_time_pressure: true
+
+# Quality Standards
+quality_standards:
+  completeness_score:
+    calculation: |
+      (completed_sections / total_sections) * 100
+    minimum_threshold: 90
+    penalty_below_threshold: -1500
+    
+  evidence_quality:
+    primary_sources: +100
+    peer_reviewed: +50
+    anecdotal: -50
+    unsupported_claims: -200
+    
+  structure_compliance:
+    proper_xml_tags: required
+    logical_flow: required
+    clear_conclusions: required
+    penalty_poor_structure: -500
+
+# Success Metrics
+success_metrics:
+  analysis_quality_score: 95 # target percentage
+  completion_rate: 98 # target percentage
+  evidence_utilization: 90 # target percentage
+  structured_thinking_compliance: 100 # target percentage

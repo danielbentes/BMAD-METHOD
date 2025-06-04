@@ -1,7 +1,124 @@
 # Brotherhood Review Task
 
+## CRITICAL SAFETY RULES ⚠️
+
+**MANDATORY COMPLIANCE - NO EXCEPTIONS**
+
+1. **Honesty Requirement**: ABSOLUTELY PROHIBITED:
+   - Sycophantic "looks good" responses
+   - Approval without thorough testing
+   - Hiding or downplaying issues
+   - Agreeing to avoid conflict
+
+2. **Evidence Mandate**: EVERY assessment MUST have:
+   - Specific code/artifact references
+   - Actual test execution results
+   - Measurable quality metrics
+   - Clear pass/fail criteria
+
+3. **Review Gates**: MANDATORY activities:
+   - 30 minutes minimum independent analysis
+   - Actual functionality testing required
+   - Production scenario validation
+   - Written findings before discussion
+
+4. **AI Safety Rules**:
+   - NEVER approve without testing
+   - ALWAYS document negative findings
+   - PROHIBIT rubber-stamp reviews
+   - REQUIRE specific improvement actions
+
+5. **Rejection Triggers**: MUST REJECT if:
+   - Core functionality doesn't work
+   - Quality standards violated
+   - Security vulnerabilities found
+   - Production readiness lacking
+
 ## Purpose
 Conduct honest, rigorous peer review to ensure quality and eliminate sycophantic behavior. Store review records at `.ai/quality/reviews/brotherhood-review-{date}.md`.
+
+## Progressive Review Phases
+
+### Phase 1: Preparation (0-20%) 📝
+**Goal**: Ready for thorough review
+
+**Entry Criteria**:
+- Work claimed complete
+- All artifacts available
+- Test environment ready
+- Time allocated (60+ min)
+
+**Activities**:
+1. Gather all deliverables
+2. Set up test environment
+3. Review quality gates
+4. Prepare review workspace
+
+**Exit Criteria**:
+- All materials collected
+- Tests ready to run
+- Review template open
+- 20% checkpoint passed
+
+### Phase 2: Independent Analysis (20-60%) 🔍
+**Goal**: Thorough unbiased assessment
+
+**Entry Criteria**:
+- Phase 1 complete
+- No communication with reviewee
+- Fresh perspective maintained
+
+**Activities**:
+1. Code/artifact inspection
+2. Functionality testing
+3. Quality standard checks
+4. Document all findings
+
+**Exit Criteria**:
+- All tests executed
+- Findings documented
+- Issues categorized
+- 60% checkpoint passed
+
+### Phase 3: Collaborative Review (60-80%) 🤝
+**Goal**: Discuss findings openly
+
+**Entry Criteria**:
+- Independent analysis complete
+- Findings documented
+- Both parties available
+
+**Activities**:
+1. Present findings honestly
+2. Discuss disagreements
+3. Identify root causes
+4. Agree on assessment
+
+**Exit Criteria**:
+- Consensus reached
+- Actions identified
+- Decision made
+- 80% checkpoint passed
+
+### Phase 4: Documentation (80-100%) 📝
+**Goal**: Record review outcomes
+
+**Entry Criteria**:
+- Review complete
+- Decision finalized
+- Actions defined
+
+**Activities**:
+1. Complete review record
+2. File in quality folder
+3. Update metrics
+4. Share learnings
+
+**Exit Criteria**:
+- Record filed
+- Team notified
+- Metrics updated
+- 100% complete
 
 ## Review Protocol
 
@@ -136,3 +253,85 @@ Save the review record at `.ai/quality/reviews/brotherhood-review-{date}.md`:
 - **Documentation**: All reviews tracked in project quality metrics at `.ai/quality/reviews/`
 - **Learning**: Review insights feed back into process improvement
 - **Storage**: Each review record saved as `.ai/quality/reviews/brotherhood-review-{date}.md`
+
+## Error Recovery Procedures
+
+### Common Failure Scenarios
+
+1. **Sycophantic Behavior Detected**
+   - **Detection**: Vague approval without specifics
+   - **Recovery**: Restart with specific checklist
+   - **Prevention**: Use evidence requirements
+
+2. **Rushed Review**
+   - **Detection**: <30 minutes spent
+   - **Recovery**: Schedule proper review time
+   - **Prevention**: Block calendar in advance
+
+3. **Missing Test Evidence**
+   - **Detection**: No test results documented
+   - **Recovery**: Execute tests before proceeding
+   - **Prevention**: Test environment ready first
+
+4. **Conflict Avoidance**
+   - **Detection**: Issues downplayed or hidden
+   - **Recovery**: Anonymous issue reporting
+   - **Prevention**: Emphasize honesty principle
+
+### Recovery Protocol
+1. **Recognize** the compromised review
+2. **Reset** to proper review process
+3. **Execute** with full rigor
+4. **Document** what went wrong
+5. **Learn** from the failure
+6. **Prevent** future occurrences
+
+## Success Metrics
+
+### Quantitative Metrics
+- **Issue Discovery Rate**: >2 issues per review average
+- **Rejection Rate**: 15-25% (healthy skepticism)
+- **Review Duration**: >60 minutes average
+- **Action Item Generation**: >3 improvements per review
+
+### Qualitative Metrics
+- **Honesty**: Direct feedback without softening
+- **Specificity**: Concrete examples in all feedback
+- **Actionability**: Clear improvement paths
+- **Learning**: New insights gained
+
+### Early Warning Indicators
+- All reviews passing without issues
+- Reviews completing too quickly
+- Vague or generic feedback
+- No difficult conversations
+
+## Continuous Improvement
+
+### Post-Review Analysis
+1. **Review Effectiveness**:
+   - Did we catch real issues?
+   - Was feedback actionable?
+   - Did quality improve?
+
+2. **Pattern Recognition**:
+   - Common quality issues
+   - Frequent blind spots
+   - Successful practices
+
+3. **Process Enhancement**:
+   - Refine review checklists
+   - Improve testing approaches
+   - Enhance documentation
+
+### Knowledge Capture
+- Archive significant findings
+- Build review best practices
+- Document quality patterns
+- Share team learnings
+
+### Cultural Reinforcement
+- Celebrate honest feedback
+- Reward issue discovery
+- Support improvement efforts
+- Model brotherhood principles

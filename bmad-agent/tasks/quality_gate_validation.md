@@ -3,12 +3,32 @@
 ## Purpose
 Validate that all quality standards and patterns are met before proceeding to next phase. Store validation results at `.ai/quality/validations/gate-results-{date}.md`.
 
+## Structured Thinking Validation (MANDATORY FIRST CHECK)
+
+### Analysis Tag Verification
+Before ANY gate validation proceeds:
+- [ ] **Required Analysis Tag Present**: Appropriate tag for work type
+- [ ] **All Sections Complete**: No missing mandatory sections
+- [ ] **Evidence Provided**: Each section backed by data
+- [ ] **Quality Score ≥85%**: Calculated from completeness/clarity
+- [ ] **Confidence Level Stated**: With supporting factors
+
+**GATE BLOCKED** if analysis tag missing or incomplete. Penalty: -$2000
+
+### Valid Analysis Tags by Work Type:
+- **Architecture Work**: `<architecture_analysis>` required
+- **Feature Decisions**: `<decision_analysis>` required  
+- **Bug Fixes**: `<problem_analysis>` required
+- **Code Reviews**: `<quality_analysis>` required
+- **Production Changes**: `<risk_analysis>` required
+
 ## Pre-Implementation Gate
 - [ ] **Planning Complete**: Comprehensive plan documented
 - [ ] **Context Gathered**: All necessary information collected
 - [ ] **UDTM Executed**: Ultra-deep thinking mode completed
 - [ ] **Assumptions Challenged**: All assumptions explicitly verified
 - [ ] **Root Cause Identified**: For any existing issues
+- [ ] **Analysis Tag Validated**: Structured thinking enforced
 
 ## Implementation Gate
 - [ ] **Real Implementation**: No mocks, stubs, or placeholders

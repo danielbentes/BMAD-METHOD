@@ -1,10 +1,162 @@
 # Architecture Creation Task
 
+## CRITICAL SAFETY RULES ⚠️
+
+**MANDATORY COMPLIANCE - NO EXCEPTIONS**
+
+1. **Input Validation Gate**: NEVER proceed without:
+   - Valid PRD document with technical assumptions section
+   - Project brief with clear scope boundaries
+   - Explicit user confirmation of requirements summary
+   - Written approval to begin architecture design
+
+2. **Decision Documentation**: EVERY technical choice MUST have:
+   - Clear rationale backed by requirements
+   - Trade-off analysis documented
+   - User approval before finalization
+   - Fallback options identified
+
+3. **Quality Gates**: MANDATORY checkpoints at:
+   - 25%: Core technology stack approval
+   - 50%: System design pattern validation
+   - 75%: Integration architecture review
+   - 100%: Full checklist compliance verification
+
+4. **AI Safety Rules**:
+   - NEVER make assumptions about unstated requirements
+   - ALWAYS verify external API schemas with user
+   - PROHIBIT over-engineering beyond stated needs
+   - REQUIRE explicit approval for each major decision
+
+5. **Error Recovery**: If ANY safety rule is violated:
+   - STOP immediately
+   - Document the violation
+   - Request user guidance
+   - Do NOT proceed until resolved
+
 ## Purpose
 
 - To design a complete, robust, and well-documented technical architecture based on the project requirements (PRD, epics, brief), research findings, and user input.
 - To make definitive technology choices and articulate the rationale behind them, leveraging the architecture template as a structural guide.
 - To produce all necessary technical artifacts at `.ai/current/specs/architecture.md`, ensuring the architecture is optimized for efficient implementation, particularly by AI developer agents, and validated against the `architect-checklist`.
+
+## Structured Thinking Enforcement
+
+### MANDATORY Pre-Architecture Analysis
+Before ANY architecture work begins, complete:
+
+```xml
+<architecture_analysis>
+  <system_context>
+    <components>[Existing components affected]</components>
+    <patterns>[Current patterns in use]</patterns>
+    <constraints>[Technical and business constraints]</constraints>
+  </system_context>
+  
+  <design_options>
+    <!-- Minimum 2 architectural approaches required -->
+    <option name="[Approach Name]">
+      <diagram>[ASCII or description]</diagram>
+      <components>[Components and interactions]</components>
+      <patterns>[Design patterns used]</patterns>
+    </option>
+  </design_options>
+  
+  <evaluation>
+    <scalability>[Capacity analysis]</scalability>
+    <performance>[Expected metrics]</performance>
+    <maintainability>[Complexity assessment]</maintainability>
+  </evaluation>
+  
+  <decision>
+    <selected_option>[Which approach and why]</selected_option>
+    <trade_offs>[What we're giving up]</trade_offs>
+    <success_metrics>[How to validate]</success_metrics>
+  </decision>
+</architecture_analysis>
+```
+
+**PENALTY**: Starting architecture without analysis = -$3000
+
+## Progressive Disclosure Phases
+
+### Phase 1: Foundation (0-25%) 🏗️
+**Goal**: Establish solid architectural foundation
+
+**Entry Criteria**:
+- PRD approved and available
+- Project brief reviewed
+- User ready to collaborate
+- Architecture analysis tag completed
+
+**Activities**:
+1. Input validation and analysis
+2. Requirements summary and confirmation
+3. Core technology stack selection
+4. Basic architectural pattern decision
+
+**Exit Criteria**:
+- User approved requirements summary
+- Technology stack confirmed
+- Architectural style agreed
+- 25% quality gate passed
+
+### Phase 2: Structure (25-50%) 🏛️
+**Goal**: Define system structure and components
+
+**Entry Criteria**:
+- Phase 1 completed and approved
+- No blocking questions remain
+
+**Activities**:
+1. Component architecture design
+2. Service boundaries definition
+3. Data flow architecture
+4. Integration patterns selection
+
+**Exit Criteria**:
+- Component diagram approved
+- Service contracts defined
+- Data models validated
+- 50% quality gate passed
+
+### Phase 3: Details (50-75%) 🔧
+**Goal**: Specify implementation details
+
+**Entry Criteria**:
+- Phase 2 completed and approved
+- All major decisions finalized
+
+**Activities**:
+1. API specifications
+2. Security architecture
+3. Infrastructure design
+4. Performance optimization strategy
+
+**Exit Criteria**:
+- API contracts documented
+- Security measures approved
+- Infrastructure validated
+- 75% quality gate passed
+
+### Phase 4: Validation (75-100%) ✅
+**Goal**: Ensure architecture completeness and quality
+
+**Entry Criteria**:
+- Phase 3 completed and approved
+- All artifacts drafted
+
+**Activities**:
+1. Architect checklist validation
+2. Technical story identification
+3. Epic refinement suggestions
+4. Final documentation review
+
+**Exit Criteria**:
+- Checklist 100% complete
+- All stories identified
+- Documentation approved
+- Ready for implementation
 
 ## Instructions
 
@@ -121,4 +273,86 @@ Present the user with the following list of 'Advanced Reflective, Elicitation & 
 
 After I perform the selected action, we can discuss the outcome and decide on any further revisions for this section."
 
-REPEAT by Asking the user if they would like to perform another Reflective, Elicitation & Brainstorming Action UNIT the user indicates it is time to proceed ot the next section (or selects #8)
+REPEAT by Asking the user if they would like to perform another Reflective, Elicitation & Brainstorming Action UNTIL the user indicates it is time to proceed to the next section (or selects #8)
+
+## Error Recovery Procedures
+
+### Common Failure Scenarios
+
+1. **Missing Requirements**
+   - **Detection**: PRD incomplete or ambiguous
+   - **Recovery**: Request specific missing information
+   - **Prevention**: Use requirements checklist upfront
+
+2. **Technology Mismatch**
+   - **Detection**: Selected tech doesn't meet NFRs
+   - **Recovery**: Re-evaluate options with user
+   - **Prevention**: Validate against requirements matrix
+
+3. **Over-Engineering**
+   - **Detection**: Complexity exceeds project scope
+   - **Recovery**: Simplify with user guidance
+   - **Prevention**: Regular scope checks
+
+4. **Integration Conflicts**
+   - **Detection**: Components can't communicate
+   - **Recovery**: Redesign integration layer
+   - **Prevention**: Early contract validation
+
+### Recovery Protocol
+1. **Identify** the specific failure point
+2. **Document** what went wrong and why
+3. **Propose** 2-3 recovery options
+4. **Collaborate** with user on best path
+5. **Implement** agreed solution
+6. **Verify** issue is resolved
+
+## Success Metrics
+
+### Quantitative Metrics
+- **Decision Approval Rate**: >95% first-time approval
+- **Checklist Completion**: 100% coverage
+- **Rework Frequency**: <10% of decisions
+- **Phase Gate Success**: 100% pass rate
+
+### Qualitative Metrics
+- **Clarity**: Architecture easily understood by dev team
+- **Completeness**: No ambiguity in technical decisions
+- **Feasibility**: All choices implementable with resources
+- **Maintainability**: Design supports long-term evolution
+
+### Early Warning Indicators
+- Multiple clarification requests per section
+- Technology choices requiring frequent revision
+- User expressing confusion or concern
+- Checklist items repeatedly failing
+
+## Continuous Improvement
+
+### Post-Architecture Review
+1. **Collect Feedback**:
+   - What worked well?
+   - What was challenging?
+   - What was missing?
+
+2. **Analyze Patterns**:
+   - Common decision points
+   - Frequent clarifications needed
+   - Typical technology preferences
+
+3. **Update Process**:
+   - Refine question templates
+   - Improve decision frameworks
+   - Enhance validation checks
+
+### Knowledge Capture
+- Document technology trade-offs for future reference
+- Record architectural patterns that work well
+- Note anti-patterns to avoid
+- Share learnings with team
+
+### Process Optimization
+- Track time spent per phase
+- Identify bottlenecks
+- Streamline approval processes
+- Improve template effectiveness

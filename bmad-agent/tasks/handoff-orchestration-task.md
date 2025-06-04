@@ -1,19 +1,89 @@
 # Memory-Enhanced Handoff Orchestration Task
 
+## CRITICAL SAFETY RULES - MANDATORY COMPLIANCE
+
+### STOP CONDITIONS - ABORT IMMEDIATELY IF:
+- Source persona has incomplete or corrupted state
+- Target persona definition cannot be loaded
+- Critical artifacts missing or inaccessible
+- Memory system reports integrity issues during handoff
+- User explicitly requests "skip handoff" or "just switch"
+
+### MANDATORY VALIDATIONS BEFORE PROCEEDING:
+1. **Source State Completeness**: Verify all work is saved and documented
+2. **Target Availability**: Confirm target persona can be loaded
+3. **Artifact Accessibility**: Ensure all referenced files are accessible
+4. **Memory System Health**: Check memory service operational status
+5. **User Intent**: Confirm user wants structured handoff, not quick switch
+
+### QUALITY GATES - MUST PASS ALL:
+- [ ] Source persona work is complete or at stable checkpoint
+- [ ] All decisions are documented with rationale
+- [ ] No unresolved blockers without mitigation plan
+- [ ] Target persona definition is valid and loadable
+- [ ] Handoff context package assembled successfully
+
 ## Purpose
 Facilitate structured, context-rich transitions between personas using memory insights to ensure optimal knowledge transfer and continuity.
 
+## Progressive Disclosure Phases
+
+### Phase 1: Readiness Assessment (MANDATORY)
+1. Evaluate source persona completion state
+2. Check for undocumented decisions
+3. Identify unresolved blockers
+4. Verify artifact availability
+5. **GATE**: Ready for handoff → Continue to Phase 2
+
+### Phase 2: Context Assembly
+1. Gather immediate session context
+2. Search relevant memory insights
+3. Identify success patterns
+4. Predict likely challenges
+5. **GATE**: Context complete → Continue to Phase 3
+
+### Phase 3: Handoff Execution
+1. Present handoff summary to user
+2. Transfer context to target persona
+3. Activate target with briefing
+4. Validate understanding
+5. **GATE**: Handoff validated → Continue to Phase 4
+
+### Phase 4: Quality Assurance
+1. Confirm target persona understanding
+2. Verify artifact accessibility
+3. Check decision continuity
+4. Create handoff memory
+5. **FINAL GATE**: Handoff successful → Task Complete
+
 ## Memory-Enhanced Handoff Process
 
-### 1. Pre-Handoff Analysis
+### 1. Pre-Handoff Analysis with Safety Checks
 ```python
 def analyze_handoff_readiness(source_persona, target_persona, current_context):
-    # Search for similar handoff patterns
-    handoff_memories = search_memory(
-        f"handoff {source_persona} to {target_persona} {current_context.phase}",
-        limit=5,
-        threshold=0.7
-    )
+    """Analyze readiness with comprehensive safety validation"""
+    
+    # Safety checks first
+    safety_status = {
+        "source_state_valid": validate_persona_state(source_persona),
+        "target_loadable": verify_persona_exists(target_persona),
+        "no_corruption": check_state_integrity(current_context),
+        "user_intent_confirmed": confirm_handoff_intent()
+    }
+    
+    if not all(safety_status.values()):
+        raise HandoffSafetyError(f"Safety checks failed: {safety_status}")
+    
+    # Search for similar handoff patterns with error handling
+    try:
+        handoff_memories = search_memory(
+            f"handoff {source_persona} to {target_persona} {current_context.phase}",
+            limit=5,
+            threshold=0.7,
+            timeout=3000  # 3 second timeout
+        )
+    except MemoryUnavailableError:
+        handoff_memories = []  # Proceed without memory enhancement
     
     # Analyze handoff quality factors
     readiness_assessment = {
@@ -21,52 +91,105 @@ def analyze_handoff_readiness(source_persona, target_persona, current_context):
         "decisions_documented": validate_decision_logging(current_context),
         "blockers_resolved": assess_outstanding_issues(current_context),
         "context_clarity": evaluate_context_completeness(current_context),
-        "historical_success_rate": calculate_handoff_success_rate(handoff_memories)
+        "historical_success_rate": calculate_handoff_success_rate(handoff_memories),
+        "safety_status": safety_status
     }
     
-    return readiness_assessment
+    # Calculate overall readiness score
+    readiness_score = calculate_readiness_score(readiness_assessment)
+    
+    # Enforce minimum readiness threshold
+    if readiness_score < 0.7:
+        return {
+            "ready": False,
+            "score": readiness_score,
+            "blocker": identify_primary_blocker(readiness_assessment),
+            "recommendation": generate_readiness_recommendations(readiness_assessment)
+        }
+    
+    return {
+        "ready": True,
+        "score": readiness_score,
+        "assessment": readiness_assessment
+    }
 ```
 
-### 2. Context Package Assembly
+### 2. Context Package Assembly with Error Resilience
 ```python
 def assemble_handoff_context(source_persona, target_persona, session_state):
+    """Assemble context with comprehensive error handling"""
+    
     context_package = {
-        # Immediate context
-        "session_state": session_state,
+        # Immediate context (always available)
+        "session_state": sanitize_session_state(session_state),
         "recent_decisions": extract_recent_decisions(session_state),
         "active_concerns": identify_active_concerns(session_state),
-        "completed_artifacts": list_completed_artifacts(session_state),
-        
-        # Memory-enhanced context
-        "relevant_experiences": search_memory(
+        "completed_artifacts": list_completed_artifacts(session_state)
+    }
+    
+    # Memory-enhanced context with graceful degradation
+    try:
+        context_package["relevant_experiences"] = search_memory(
             f"{target_persona} working on {session_state.project_type} {session_state.phase}",
             limit=3,
-            threshold=0.8
-        ),
-        "success_patterns": search_memory(
+            threshold=0.8,
+            timeout=2000
+        )
+    except Exception as e:
+        log_memory_error("relevant_experiences", e)
+        context_package["relevant_experiences"] = []
+    
+    try:
+        context_package["success_patterns"] = search_memory(
             f"successful handoff {source_persona} {target_persona}",
             limit=3,
-            threshold=0.7
-        ),
-        "potential_pitfalls": search_memory(
+            threshold=0.7,
+            timeout=2000
+        )
+    except Exception as e:
+        log_memory_error("success_patterns", e)
+        context_package["success_patterns"] = generate_default_patterns(source_persona, target_persona)
+    
+    try:
+        context_package["potential_pitfalls"] = search_memory(
             f"handoff problems {source_persona} {target_persona}",
             limit=2,
-            threshold=0.7
-        ),
-        
-        # Personalized context
-        "user_preferences": search_memory(
+            threshold=0.7,
+            timeout=2000
+        )
+    except Exception as e:
+        log_memory_error("potential_pitfalls", e)
+        context_package["potential_pitfalls"] = get_common_pitfalls(source_persona, target_persona)
+    
+    # Personalized context with fallbacks
+    try:
+        context_package["user_preferences"] = search_memory(
             f"user-preference {target_persona} workflow",
             limit=2,
-            threshold=0.9
-        ),
-        "working_style": extract_user_working_style(target_persona),
-        
-        # Proactive intelligence
-        "likely_questions": predict_target_persona_questions(source_persona, target_persona, session_state),
-        "recommended_focus": generate_focus_recommendations(target_persona, session_state),
-        "optimization_opportunities": identify_optimization_opportunities(session_state)
-    }
+            threshold=0.9,
+            timeout=2000
+        )
+        context_package["working_style"] = extract_user_working_style(target_persona)
+    except Exception as e:
+        log_memory_error("personalization", e)
+        context_package["user_preferences"] = []
+        context_package["working_style"] = get_default_working_style(target_persona)
+    
+    # Proactive intelligence
+    context_package["likely_questions"] = predict_target_persona_questions(
+        source_persona, target_persona, session_state
+    )
+    context_package["recommended_focus"] = generate_focus_recommendations(
+        target_persona, session_state
+    )
+    context_package["optimization_opportunities"] = identify_optimization_opportunities(
+        session_state
+    )
+    
+    # Validate context completeness
+    validation_result = validate_context_package(context_package)
+    if not validation_result.is_valid:
+        raise ContextAssemblyError(f"Invalid context: {validation_result.errors}")
     
     return context_package
 ```
@@ -284,6 +407,8 @@ def create_handoff_memory(handoff_session):
 ### 6. Handoff Success Tracking
 ```python
 def schedule_handoff_followup(handoff_memory_id):
+    """Schedule follow-up with error handling and metrics"""
+    
     # Schedule follow-up assessment
     followup_schedule = [
         {
@@ -293,7 +418,8 @@ def schedule_handoff_followup(handoff_memory_id):
                 "Was the target persona able to start work immediately?",
                 "Were any critical information gaps discovered?",
                 "Did the handoff context prove accurate and useful?"
-            ]
+            ],
+            "success_threshold": 0.8
         },
         {
             "timeframe": "24_hours", 
@@ -302,7 +428,8 @@ def schedule_handoff_followup(handoff_memory_id):
                 "How effective was the memory-enhanced context?",
                 "Were the predicted questions/issues accurate?",
                 "What additional context would have been helpful?"
-            ]
+            ],
+            "success_threshold": 0.7
         },
         {
             "timeframe": "1_week",
@@ -311,13 +438,106 @@ def schedule_handoff_followup(handoff_memory_id):
                 "Did the handoff contribute to overall project success?",
                 "Were there any downstream issues from context gaps?",
                 "What patterns can be learned for future handoffs?"
-            ]
+            ],
+            "success_threshold": 0.9
         }
     ]
     
-    for followup in followup_schedule:
-        schedule_memory_update(handoff_memory_id, followup)
+    try:
+        for followup in followup_schedule:
+            schedule_memory_update(handoff_memory_id, followup)
+    except SchedulingError as e:
+        log_scheduling_failure(e)
+        # Fall back to manual tracking
+        create_manual_followup_reminder(handoff_memory_id, followup_schedule)
 ```
+
+## Error Recovery Procedures
+
+### Common Handoff Failures
+
+1. **Target Persona Load Failure**
+   ```python
+   def handle_persona_load_failure(target_persona, error):
+       # Try alternate persona definition
+       if try_load_fallback_persona(target_persona):
+           log_fallback_used(target_persona)
+           return True
+       
+       # Offer manual persona selection
+       available_personas = list_available_personas()
+       user_choice = prompt_user_selection(available_personas)
+       return load_persona(user_choice)
+   ```
+
+2. **Context Assembly Failure**
+   ```python
+   def handle_context_failure(source_persona, target_persona):
+       # Create minimal viable context
+       minimal_context = {
+           "source": source_persona,
+           "target": target_persona,
+           "timestamp": current_timestamp(),
+           "critical_items": extract_critical_items_only(),
+           "fallback_mode": True
+       }
+       
+       # Warn user about degraded handoff
+       warn_user("Using minimal context due to assembly failure")
+       return minimal_context
+   ```
+
+3. **Memory System Unavailable**
+   ```python
+   def handle_memory_unavailable():
+       # Use static handoff patterns
+       return {
+           "patterns": load_static_handoff_patterns(),
+           "common_issues": load_common_handoff_issues(),
+           "best_practices": load_handoff_best_practices()
+       }
+   ```
+
+## Success Metrics
+
+### Immediate Success Indicators
+- Handoff completed within 5 minutes
+- All validation checks passed
+- Target persona activated successfully
+- No critical information gaps identified
+
+### Long-term Success Metrics
+- Target persona productivity within 30 minutes: >90%
+- Handoff-related rework: <5%
+- User satisfaction with handoff: >85%
+- Memory insights accuracy: >80%
+
+## Continuous Improvement
+
+### Feedback Integration
+1. **Collect Handoff Feedback**
+   - User satisfaction ratings
+   - Time to productivity metrics
+   - Information gap reports
+   - Success pattern identification
+
+2. **Analyze Patterns**
+   - Most successful persona transitions
+   - Common failure points
+   - Optimal context elements
+   - User preference patterns
+
+3. **Update Handoff Process**
+   - Refine context assembly
+   - Improve memory queries
+   - Enhance validation checks
+   - Optimize for common patterns
+
+### Review Triggers
+- Handoff success rate drops below 80%
+- Average handoff time exceeds 10 minutes
+- User complaints about context gaps
+- New persona types added
 
 ## Handoff Optimization Patterns
 
@@ -428,4 +648,24 @@ def handle_handoff_command(args, current_context):
         return execute_standard_handoff(target_persona, current_context)
 ```
 
-This memory-enhanced handoff system ensures that context transitions between personas are smooth, information-rich, and continuously improving based on past experiences.
+## Implementation Guidelines
+
+### Safety-First Approach
+1. Always validate readiness before handoff
+2. Never skip context assembly phase
+3. Require explicit confirmation for critical handoffs
+4. Maintain audit trail of all handoffs
+
+### Quality Standards
+- Minimum readiness score: 70%
+- Maximum handoff duration: 10 minutes
+- Required validation score: 80%
+- Memory query timeout: 3 seconds
+
+### User Experience
+- Clear progress indicators during handoff
+- Transparent error messages
+- Option to abort at any phase
+- Quick handoff mode for experienced users
+
+This memory-enhanced handoff system ensures that context transitions between personas are smooth, information-rich, and continuously improving based on past experiences while maintaining strict safety and quality standards.

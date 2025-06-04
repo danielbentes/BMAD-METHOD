@@ -1,8 +1,121 @@
 # Create UI/UX Specification Task
 
+## CRITICAL SAFETY RULES ⚠️
+
+**MANDATORY COMPLIANCE - NO EXCEPTIONS**
+
+1. **User-Centered Design Gate**: NEVER proceed without:
+   - Clear target user personas defined
+   - User needs explicitly validated
+   - Accessibility requirements confirmed
+   - User approval of design direction
+
+2. **Design Decision Rules**: EVERY UI/UX choice MUST have:
+   - User research or feedback backing
+   - Accessibility compliance verified
+   - Multiple options presented when viable
+   - Explicit user selection documented
+
+3. **Quality Gates**: MANDATORY checkpoints at:
+   - 25%: User personas and goals approved
+   - 50%: Information architecture validated
+   - 75%: User flows and wireframes reviewed
+   - 100%: Complete spec with accessibility audit
+
+4. **AI Safety Rules**:
+   - NEVER assume user preferences without asking
+   - ALWAYS present multiple design options
+   - PROHIBIT skipping accessibility requirements
+   - REQUIRE user testing plan inclusion
+
+5. **Error Recovery**: If ANY safety rule is violated:
+   - STOP the design process
+   - Document the issue clearly
+   - Present recovery options
+   - Await user guidance
+
 ## Purpose
 
 To collaboratively work with the user to define and document the User Interface (UI) and User Experience (UX) specifications for the project. This involves understanding user needs, defining information architecture, outlining user flows, and ensuring a solid foundation for visual design and frontend development. The output will populate a new document at `.ai/current/specs/frontend-spec.md` following the `front-end-spec-tmpl` template.
+
+## Progressive Disclosure Phases
+
+### Phase 1: Discovery (0-25%) 🔍
+**Goal**: Understand users and establish design foundation
+
+**Entry Criteria**:
+- PRD and Project Brief available
+- User ready to define UX goals
+- Time allocated for collaborative design
+
+**Activities**:
+1. User persona development
+2. Usability goals definition
+3. Design principles establishment
+4. Accessibility requirements setting
+
+**Exit Criteria**:
+- Personas documented and approved
+- Design principles agreed
+- Accessibility level confirmed
+- 25% quality gate passed
+
+### Phase 2: Structure (25-50%) 🏗️
+**Goal**: Define information architecture and navigation
+
+**Entry Criteria**:
+- Phase 1 completed and approved
+- User goals clearly understood
+
+**Activities**:
+1. Site map creation
+2. Navigation structure design
+3. Content hierarchy definition
+4. Key screen identification
+
+**Exit Criteria**:
+- IA diagram approved
+- Navigation patterns selected
+- Screen inventory complete
+- 50% quality gate passed
+
+### Phase 3: Flow Design (50-75%) 🌊
+**Goal**: Map user journeys and interactions
+
+**Entry Criteria**:
+- Phase 2 completed and approved
+- Key screens identified
+
+**Activities**:
+1. Critical user flow mapping
+2. Interaction pattern design
+3. Error state definition
+4. Wireframe conceptualization
+
+**Exit Criteria**:
+- User flows documented
+- Interaction patterns approved
+- Error handling defined
+- 75% quality gate passed
+
+### Phase 4: Specification (75-100%) 📝
+**Goal**: Complete detailed UI/UX documentation
+
+**Entry Criteria**:
+- Phase 3 completed and approved
+- All major design decisions made
+
+**Activities**:
+1. Component library planning
+2. Style guide basics
+3. Responsiveness strategy
+4. Final specification assembly
+
+**Exit Criteria**:
+- Complete frontend-spec.md
+- All sections reviewed
+- Accessibility validated
+- Ready for implementation
 
 ## Inputs
 
@@ -92,4 +205,86 @@ Present the user with the following list of 'Advanced Reflective, Elicitation & 
 
 After I perform the selected action, we can discuss the outcome and decide on any further revisions for this section."
 
-REPEAT by Asking the user if they would like to perform another Reflective, Elicitation & Brainstorming Action UNIT the user indicates it is time to proceed ot the next section (or selects #8)
+REPEAT by Asking the user if they would like to perform another Reflective, Elicitation & Brainstorming Action UNTIL the user indicates it is time to proceed to the next section (or selects #8)
+
+## Error Recovery Procedures
+
+### Common Failure Scenarios
+
+1. **Unclear User Needs**
+   - **Detection**: Conflicting requirements or vague goals
+   - **Recovery**: Conduct user research session
+   - **Prevention**: Start with persona validation
+
+2. **Accessibility Violations**
+   - **Detection**: Design choices exclude users
+   - **Recovery**: Redesign with inclusive principles
+   - **Prevention**: Check each decision against WCAG
+
+3. **Information Overload**
+   - **Detection**: Complex navigation or cluttered layouts
+   - **Recovery**: Simplify and prioritize content
+   - **Prevention**: Regular cognitive load assessment
+
+4. **Platform Conflicts**
+   - **Detection**: Design doesn't work across devices
+   - **Recovery**: Adjust responsive strategy
+   - **Prevention**: Mobile-first approach
+
+### Recovery Protocol
+1. **Pause** current design work
+2. **Assess** the specific issue
+3. **Present** alternative approaches
+4. **Test** proposed solutions conceptually
+5. **Validate** with user before proceeding
+6. **Document** lessons learned
+
+## Success Metrics
+
+### Quantitative Metrics
+- **Design Approval Rate**: >90% first-time approval
+- **Accessibility Score**: 100% WCAG compliance
+- **User Flow Efficiency**: <5 steps for key tasks
+- **Component Reusability**: >70% shared components
+
+### Qualitative Metrics
+- **Clarity**: Users understand navigation instantly
+- **Consistency**: Uniform patterns throughout
+- **Delight**: Positive emotional response
+- **Inclusivity**: Works for all user groups
+
+### Early Warning Indicators
+- User confusion about navigation
+- Multiple iterations on same element
+- Accessibility concerns raised
+- Technical feasibility questions
+
+## Continuous Improvement
+
+### Post-Design Review
+1. **Gather Feedback**:
+   - What resonated with users?
+   - What caused confusion?
+   - What was missing?
+
+2. **Analyze Patterns**:
+   - Common design preferences
+   - Recurring usability issues
+   - Successful UI patterns
+
+3. **Evolve Process**:
+   - Update persona templates
+   - Refine flow diagrams
+   - Enhance accessibility checks
+
+### Knowledge Capture
+- Document successful UI patterns
+- Record user preference trends
+- Note accessibility solutions
+- Build design system library
+
+### Process Optimization
+- Track design iteration cycles
+- Measure user satisfaction
+- Monitor implementation ease
+- Improve collaboration methods

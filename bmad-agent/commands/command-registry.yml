@@ -1,158 +1,1212 @@
-# BMAD Command Registry
+# BMAD Method Command Registry
+# Version: 3.0.0 - AI Behavior Focused
+# Last Updated: 2025-03-06
+# 
+# This registry defines commands for AI behavioral optimization in the BMAD Method
+# focusing on prompt engineering, example-driven learning, and quality enforcement
+
+registry_metadata:
+  version: "3.0.0"
+  schema_version: "2.0"
+  description: "AI-focused command registry for behavioral prompt engineering"
+  behavioral_tracking: true
+  example_utilization_tracking: true
+  quality_enforcement: strict
+
+# Command Categories (AI Behavior Focused)
+categories:
+  core:
+    description: "Essential AI interaction commands"
+    behavioral_focus: "clear communication and help"
+  persona:
+    description: "Specialized AI persona activation"
+    behavioral_focus: "expert domain knowledge application"
+  memory:
+    description: "Learning and pattern recognition"
+    behavioral_focus: "continuous improvement and context"
+  quality:
+    description: "Quality standards and anti-pattern prevention"
+    behavioral_focus: "excellence enforcement and validation"
+  workflow:
+    description: "Task automation and guidance"
+    behavioral_focus: "efficient execution and handoffs"
+  consultation:
+    description: "Multi-perspective collaboration"
+    behavioral_focus: "diverse expertise synthesis"
+  advanced:
+    description: "Meta-prompting and system optimization"
+    behavioral_focus: "prompt generation and effectiveness"
 
 # Core Commands
-help:
-  description: Display help information
-  aliases: [h, ?]
-  usage: "/help [topic]"
-  topics:
-    - commands: List all available commands
-    - personas: Show available personas
-    - workflow: Explain BMAD workflow
-    - memory: Memory system help
+commands:
+  # Help and Information
+  help:
+    category: core
+    description: "Display contextual help with memory-enhanced suggestions"
+    aliases: [h, ?, help-me, assist]
+    shortcuts:
+      "?": "Quick help"
+      "??": "Extended help with examples"
+    usage: |
+      /help [topic] [--examples] [--advanced]
+      Examples:
+        /help commands     # List all commands
+        /help memory      # Memory system help
+        /help workflow    # Workflow guidance
+        /help personas    # Persona information
+    parameters:
+      topic:
+        type: string
+        required: false
+        description: "Specific help topic"
+        values: [commands, personas, workflow, memory, quality, consultation]
+      examples:
+        type: boolean
+        required: false
+        default: false
+        description: "Show usage examples"
+      advanced:
+        type: boolean
+        required: false
+        default: false
+        description: "Show advanced options"
+    behavioral_requirements:
+      - example_reference: "Include relevant examples from help topics"
+      - progressive_disclosure: "Start with essential info, expand on request"
+      - context_awareness: "Adapt help based on user expertise level"
+    implementation: "Core orchestrator help system with memory integration"
 
-agents:
-  description: List available agents/personas
-  aliases: [personas, list]
-  usage: "/agents"
-  
-context:
-  description: Display current context with memory insights
-  aliases: [ctx, status]
-  usage: "/context"
+  agents:
+    category: core
+    description: "List available personas with usage statistics and insights"
+    aliases: [personas, list, who, team]
+    usage: |
+      /agents [--stats] [--recommended] [--details]
+      Examples:
+        /agents              # Basic persona list
+        /agents --stats      # Include usage statistics
+        /agents --recommended # Show AI recommendations
+    parameters:
+      stats:
+        type: boolean
+        required: false
+        default: false
+        description: "Include usage statistics"
+      recommended:
+        type: boolean
+        required: false
+        default: false
+        description: "Show AI-recommended personas for current context"
+      details:
+        type: boolean
+        required: false
+        default: false
+        description: "Show detailed persona descriptions"
+    behavioral_requirements:
+      - context_awareness: "Recommend personas based on current project context"
+      - progressive_disclosure: "Show essential persona info first"
+      - example_usage: "Include examples of when to use each persona"
 
-# Persona Commands
-analyst:
-  description: Switch to Analyst persona
-  shortcut: "/analyst"
-  
-pm:
-  description: Switch to Product Manager persona
-  shortcut: "/pm"
-  
-architect:
-  description: Switch to Architect persona
-  shortcut: "/architect"
-  
-dev:
-  description: Switch to Developer persona
-  shortcut: "/dev"
-  
-sm:
-  description: Switch to Scrum Master persona
-  shortcut: "/sm"
+  context:
+    category: core
+    description: "Display rich context with memory insights and suggestions"
+    aliases: [ctx, status, where, state, info]
+    usage: |
+      /context [--full] [--memory] [--suggestions]
+      Examples:
+        /context            # Current context summary
+        /context --full     # Detailed context information
+        /context --memory   # Include memory insights
+    parameters:
+      full:
+        type: boolean
+        required: false
+        default: false
+        description: "Show full context details"
+      memory:
+        type: boolean
+        required: false
+        default: true
+        description: "Include memory insights"
+      suggestions:
+        type: boolean
+        required: false
+        default: true
+        description: "Show next step suggestions"
+    behavioral_requirements:
+      - memory_integration: "Surface relevant memories for current context"
+      - proactive_suggestions: "Recommend next steps based on context"
+      - progressive_disclosure: "Essential context first, details on request"
 
-po:
-  description: Switch to Product Owner persona
-  shortcut: "/po"
+  # Persona Commands
+  analyst:
+    category: persona
+    description: "Activate Analyst persona (Larry) for research and discovery"
+    aliases: [larry, research, analyze]
+    shortcuts:
+      "/a": "Quick switch to analyst"
+    usage: |
+      /analyst [task] [--context]
+      Examples:
+        /analyst                    # Switch to analyst
+        /analyst investigate API    # Start investigation task
+    parameters:
+      task:
+        type: string
+        required: false
+        description: "Optional task to start"
+      context:
+        type: string
+        required: false
+        description: "Additional context for the persona"
+    behavioral_requirements:
+      - evidence_based: "All claims must be backed by data"
+      - anti_patterns: "Avoid 'I think', 'probably', 'seems like'"
+      - structured_thinking: "Use analysis tags for research"
+      - example_reference: "Reference similar research patterns"
+    implementation: "personas/analyst.md"
 
-quality:
-  description: Switch to Quality Enforcer persona
-  shortcut: "/quality"
+  pm:
+    category: persona
+    description: "Activate Product Manager persona (Jack) for strategy and planning"
+    aliases: [jack, product, strategy]
+    shortcuts:
+      "/p": "Quick switch to PM"
+    usage: |
+      /pm [task] [--market-analysis]
+      Examples:
+        /pm                     # Switch to PM
+        /pm roadmap Q2         # Start roadmap planning
+    parameters:
+      task:
+        type: string
+        required: false
+        description: "Optional task to start"
+      market_analysis:
+        type: boolean
+        required: false
+        default: false
+        description: "Include market analysis"
+    behavioral_requirements:
+      - evidence_based: "Market data drives decisions"
+      - anti_patterns: "Avoid 'customers want', 'obvious need'"
+      - structured_thinking: "Use decision_analysis for strategic choices"
+      - context_awareness: "Adapt strategy to project phase"
+    implementation: "personas/pm.md"
 
-design-architect:
-  description: Switch to Design Architect persona
-  shortcut: "/design-architect"
+  architect:
+    category: persona
+    description: "Activate Architect persona (Mo) for system design"
+    aliases: [mo, architecture, design]
+    shortcuts:
+      "/ar": "Quick switch to architect"
+    usage: |
+      /architect [task] [--patterns]
+      Examples:
+        /architect                  # Switch to architect
+        /architect design auth     # Design authentication
+    parameters:
+      task:
+        type: string
+        required: false
+        description: "Optional task to start"
+      patterns:
+        type: boolean
+        required: false
+        default: true
+        description: "Apply design patterns"
+    behavioral_requirements:
+      - evidence_based: "Decisions backed by benchmarks and data"
+      - anti_patterns: "Avoid 'latest trend', 'should scale'"
+      - structured_thinking: "Use architecture_analysis for major decisions"
+      - udtm_compliance: "Ultra-Deep Thinking Mode for all major choices"
+    implementation: "personas/architect.md"
 
-# Memory Commands - Core MCP Functions Only
-remember:
-  description: Manually add to memory using MCP
-  usage: "/remember {content}"
-  aliases: [mem, save]
-  
-recall:
-  description: Search memories using MCP
-  usage: "/recall {query}"
-  aliases: [search, find]
+  dev:
+    category: persona
+    description: "Activate Developer persona for implementation"
+    aliases: [developer, implement, code]
+    shortcuts:
+      "/d": "Quick switch to developer"
+    usage: |
+      /dev [task] [--frontend|--fullstack]
+      Examples:
+        /dev                    # Switch to developer
+        /dev implement STORY-1  # Implement specific story
+    parameters:
+      task:
+        type: string
+        required: false
+        description: "Optional task to start"
+      frontend:
+        type: boolean
+        required: false
+        default: false
+        description: "Frontend developer (Rodney)"
+      fullstack:
+        type: boolean
+        required: false
+        default: true
+        description: "Full stack developer (Jonsey)"
+    behavioral_requirements:
+      - working_code_only: "No TODO or FIXME allowed"
+      - anti_patterns: "Block 'quick hack', 'temporary solution'"
+      - quality_first: "Tests required, performance measured"
+      - example_reference: "Use proven code patterns"
+    implementation: "personas/dev.ide.md"
 
-# Memory Bootstrap - Verified Implementation
-bootstrap-memory:
-  description: Execute memory bootstrap for brownfield projects
-  usage: "/bootstrap-memory [--auto|--interactive|--focus={type}]"
-  aliases: [bootstrap, mem-bootstrap]
-  modes:
-    - auto: Silent analysis with bulk memory creation
-    - interactive: Guided analysis with user validation
-    - focus: Targeted analysis (architecture, decisions, patterns, issues)
-  implementation: memory-bootstrap-task.md
+  sm:
+    category: persona
+    description: "Activate Scrum Master persona (SallySM) for agile facilitation"
+    aliases: [sallysm, scrum, agile]
+    shortcuts:
+      "/s": "Quick switch to SM"
+    usage: |
+      /sm [task] [--ceremony]
+      Examples:
+        /sm                    # Switch to SM
+        /sm sprint-planning    # Start sprint planning
+    parameters:
+      task:
+        type: string
+        required: false
+        description: "Optional task to start"
+      ceremony:
+        type: string
+        required: false
+        description: "Specific ceremony to facilitate"
+        values: [planning, daily, review, retro]
+    behavioral_requirements:
+      - precision_required: "Stories complete or rejected, no ambiguity"
+      - anti_patterns: "Avoid 'about', 'around', 'ish', 'roughly'"
+      - data_driven: "Velocity based on actual data"
+      - structured_thinking: "Use problem_analysis for blockers"
+    implementation: "personas/sm.ide.md"
 
-# Task Execution - Verified Implementation  
-run-task:
-  description: Execute specific task file
-  usage: "/run-task {task-name}"
-  aliases: [task, execute]
-  implementation: Core orchestrator functionality
+  po:
+    category: persona
+    description: "Activate Product Owner persona (Curly) for delivery management"
+    aliases: [curly, product-owner, delivery]
+    shortcuts:
+      "/po": "Quick switch to PO"
+    usage: |
+      /po [task] [--prioritize]
+      Examples:
+        /po                    # Switch to PO
+        /po validate backlog   # Validate product backlog
+    parameters:
+      task:
+        type: string
+        required: false
+        description: "Optional task to start"
+      prioritize:
+        type: boolean
+        required: false
+        default: false
+        description: "Run prioritization exercise"
+    behavioral_requirements:
+      - process_precision: "Validation through checklists"
+      - anti_patterns: "Avoid 'good enough', 'approximately'"
+      - zero_ambiguity: "Clear acceptance criteria required"
+      - structured_thinking: "Use quality_analysis for validation"
+    implementation: "personas/po.md"
 
-checklist:
-  description: Run validation checklist
-  usage: "/checklist {checklist-name}"
-  aliases: [check, validate]
-  implementation: checklist-run-task.md
+  quality:
+    category: persona
+    description: "Activate Quality Enforcer persona for zero-tolerance quality"
+    aliases: [qe, quality-enforcer, enforce]
+    shortcuts:
+      "/q": "Quick switch to Quality Enforcer"
+    usage: |
+      /quality [task] [--strict]
+      Examples:
+        /quality               # Switch to Quality Enforcer
+        /quality audit code    # Audit code quality
+    parameters:
+      task:
+        type: string
+        required: false
+        description: "Optional task to start"
+      strict:
+        type: boolean
+        required: false
+        default: true
+        description: "Enforce strict quality standards"
+    behavioral_requirements:
+      - zero_tolerance: "Binary decisions only - reject or accept"
+      - anti_patterns: "Never 'probably fine', 'mostly correct'"
+      - evidence_required: "All decisions backed by specific evidence"
+      - penalty_multiplier: "2.0x penalties for quality violations"
+    implementation: "personas/quality_enforcer.md"
 
-# Consultation Commands - Basic Only
-consult:
-  description: Start multi-persona consultation
-  usage: "/consult {type}"
-  types:
-    - design-review
-    - technical-feasibility
-    - product-strategy
-    - quality-assessment
-    - emergency-response
-    - custom
+  design-architect:
+    category: persona
+    description: "Activate Design Architect persona (Millie) for UX/UI design"
+    aliases: [millie, ux, ui, design]
+    shortcuts:
+      "/da": "Quick switch to Design Architect"
+    usage: |
+      /design-architect [task] [--system]
+      Examples:
+        /design-architect           # Switch to Design Architect
+        /design-architect flow auth # Design auth flow
+    parameters:
+      task:
+        type: string
+        required: false
+        description: "Optional task to start"
+      system:
+        type: string
+        required: false
+        description: "Design system to use"
+    behavioral_requirements:
+      - user_centered: "All decisions backed by user data"
+      - accessibility_mandatory: "WCAG compliance non-negotiable"
+      - anti_patterns: "Avoid 'looks good', 'feels right'"
+      - design_systems_enforced: "Consistent component usage"
+    implementation: "personas/design-architect.md"
 
-# Quality Commands - Verified Implementation
-udtm:
-  description: Execute Ultra-Deep Thinking Mode
-  usage: "/udtm"
-  implementation: udtm_task.md
-  
-quality-gate:
-  description: Run quality gate validation
-  usage: "/quality-gate {phase}"
-  phases:
-    - pre-implementation
-    - implementation
-    - completion
-  implementation: quality_gate_validation.md
+  # Memory Commands
+  remember:
+    category: memory
+    description: "Add information to persistent memory with categorization"
+    aliases: [mem, save, store, memorize]
+    usage: |
+      /remember {content} [--category] [--tags] [--priority]
+      Examples:
+        /remember "API key pattern: Bearer token in header" --category=patterns
+        /remember "User prefers TypeScript" --tags=preferences,tech
+    parameters:
+      content:
+        type: string
+        required: true
+        description: "Content to remember"
+        max_length: 5000
+      category:
+        type: string
+        required: false
+        default: "general"
+        description: "Memory category"
+        values: [decisions, patterns, mistakes, handoffs, consultations, user-preferences, quality-metrics, udtm-analyses, brotherhood-reviews, general]
+      tags:
+        type: array
+        required: false
+        description: "Tags for categorization"
+      priority:
+        type: string
+        required: false
+        default: "normal"
+        values: [low, normal, high, critical]
+    behavioral_requirements:
+      - structured_storage: "Categorize and tag for efficient retrieval"
+      - context_enrichment: "Add context for future understanding"
+      - pattern_recognition: "Identify reusable patterns"
+    implementation: "OpenMemory MCP integration"
+
+  recall:
+    category: memory
+    description: "Search and retrieve memories with natural language"
+    aliases: [search, find, retrieve, lookup]
+    usage: |
+      /recall {query} [--category] [--limit] [--since]
+      Examples:
+        /recall "authentication patterns"
+        /recall "user preferences" --category=user-preferences
+        /recall "recent decisions" --since="7 days ago"
+    parameters:
+      query:
+        type: string
+        required: true
+        description: "Natural language search query"
+      category:
+        type: string
+        required: false
+        description: "Filter by category"
+      limit:
+        type: integer
+        required: false
+        default: 10
+        min: 1
+        max: 50
+        description: "Maximum results to return"
+      since:
+        type: string
+        required: false
+        description: "Time filter (e.g., '7 days ago', 'last week')"
+    behavioral_requirements:
+      - proactive_suggestions: "Surface relevant patterns automatically"
+      - context_relevance: "Prioritize results by current context"
+      - progressive_disclosure: "Essential results first, details on request"
+    implementation: "OpenMemory MCP integration"
+
+  insights:
+    category: memory
+    description: "Get AI-powered insights from memory patterns"
+    aliases: [analyze, patterns, intelligence]
+    usage: |
+      /insights [--focus] [--depth] [--actionable]
+      Examples:
+        /insights                        # General insights
+        /insights --focus=performance    # Performance insights
+        /insights --actionable          # Only actionable insights
+    parameters:
+      focus:
+        type: string
+        required: false
+        description: "Focus area for insights"
+        values: [performance, quality, workflow, team, architecture, all]
+      depth:
+        type: string
+        required: false
+        default: "standard"
+        values: [quick, standard, deep]
+      actionable:
+        type: boolean
+        required: false
+        default: false
+        description: "Only show actionable insights"
+    behavioral_requirements:
+      - pattern_recognition: "Identify trends and successful approaches"
+      - actionable_recommendations: "Provide specific next steps"
+      - evidence_based: "Back insights with memory data"
+
+  # Quality Commands
+  udtm:
+    category: quality
+    description: "Execute Ultra-Deep Thinking Mode for critical decisions"
+    aliases: [ultra-deep, deep-think, udtm-analysis]
+    usage: |
+      /udtm [topic] [--perspectives] [--depth] [--evidence]
+      Examples:
+        /udtm "microservices vs monolith"
+        /udtm --perspectives=5 --depth=maximum
+    parameters:
+      topic:
+        type: string
+        required: false
+        description: "Topic for analysis (interactive if not provided)"
+      perspectives:
+        type: integer
+        required: false
+        default: 7
+        min: 3
+        max: 15
+        description: "Number of perspectives to analyze"
+      depth:
+        type: string
+        required: false
+        default: "standard"
+        values: [quick, standard, deep, maximum]
+      evidence:
+        type: boolean
+        required: false
+        default: true
+        description: "Require evidence for all claims"
+    behavioral_requirements:
+      - structured_thinking: "Mandatory use of decision_analysis tags"
+      - evidence_required: "All claims backed by verifiable data"
+      - multiple_perspectives: "Consider minimum 3 viewpoints"
+      - confidence_scoring: "Rate confidence in final recommendation"
+    implementation: "ultra-deep-thinking-mode.md"
+
+  quality-gate:
+    category: quality
+    description: "Execute quality gate validation at project milestones"
+    aliases: [qg, gate, checkpoint, validate]
+    usage: |
+      /quality-gate {phase} [--strict] [--report] [--fix]
+      Examples:
+        /quality-gate pre-implementation
+        /quality-gate completion --report --fix
+    parameters:
+      phase:
+        type: string
+        required: true
+        values: [pre-implementation, 25%, 50%, 75%, completion, custom]
+        description: "Quality gate phase"
+      strict:
+        type: boolean
+        required: false
+        default: true
+        description: "Enforce strict validation"
+      report:
+        type: boolean
+        required: false
+        default: true
+        description: "Generate detailed report"
+      fix:
+        type: boolean
+        required: false
+        default: false
+        description: "Attempt automatic fixes"
+    behavioral_requirements:
+      - zero_tolerance: "No exceptions for critical quality standards"
+      - evidence_based: "All quality assessments backed by data"
+      - progressive_standards: "Higher requirements at later gates"
+      - automated_fixes: "Attempt corrections before failing gate"
+    implementation: "quality_gate_validation.md"
+
+  anti-pattern-check:
+    category: quality
+    description: "Scan for prohibited patterns and architectural violations"
+    aliases: [anti-pattern, pattern-check, scan-violations]
+    usage: |
+      /anti-pattern-check [--scope] [--severity] [--autofix]
+      Examples:
+        /anti-pattern-check                    # Full scan
+        /anti-pattern-check --scope=current    # Current file only
+        /anti-pattern-check --autofix         # Fix if possible
+    parameters:
+      scope:
+        type: string
+        required: false
+        default: "all"
+        values: [current, changed, all, custom]
+        description: "Scan scope"
+      severity:
+        type: string
+        required: false
+        default: "all"
+        values: [critical, high, medium, low, all]
+        description: "Minimum severity to report"
+      autofix:
+        type: boolean
+        required: false
+        default: false
+        description: "Attempt automatic fixes"
+    behavioral_requirements:
+      - zero_false_positives: "Only flag actual violations"
+      - graduated_penalties: "Penalties proportional to severity"
+      - prevention_first: "Warn before violation when possible"
+      - learning_enabled: "Update patterns based on outcomes"
+    implementation: "anti_pattern_detection.md"
+
+  brotherhood-review:
+    category: quality
+    description: "Initiate honest peer review process"
+    aliases: [peer-review, brotherhood, review]
+    usage: |
+      /brotherhood-review [--reviewers] [--focus] [--anonymous]
+      Examples:
+        /brotherhood-review                    # Standard review
+        /brotherhood-review --reviewers=3      # Request 3 reviewers
+        /brotherhood-review --focus=security   # Security-focused
+    parameters:
+      reviewers:
+        type: integer
+        required: false
+        default: 2
+        min: 1
+        max: 5
+        description: "Number of reviewers"
+      focus:
+        type: string
+        required: false
+        description: "Review focus area"
+        values: [general, security, performance, architecture, quality]
+      anonymous:
+        type: boolean
+        required: false
+        default: false
+        description: "Anonymous feedback"
+    behavioral_requirements:
+      - honest_feedback: "Direct, constructive criticism required"
+      - evidence_based: "All feedback backed by specific examples"
+      - improvement_focused: "Suggest specific enhancements"
+      - brotherhood_spirit: "Supportive but uncompromising"
+    implementation: "brotherhood_review.md"
+
+  # Workflow Commands
+  suggest:
+    category: workflow
+    description: "Get AI-powered next step recommendations"
+    aliases: [next, recommend, what-next, advice]
+    usage: |
+      /suggest [--context] [--confidence] [--alternatives]
+      Examples:
+        /suggest                      # Basic suggestion
+        /suggest --alternatives=3     # Show 3 alternatives
+        /suggest --confidence=high    # Only high-confidence suggestions
+    parameters:
+      context:
+        type: string
+        required: false
+        description: "Additional context for suggestions"
+      confidence:
+        type: string
+        required: false
+        default: "medium"
+        values: [low, medium, high, any]
+        description: "Minimum confidence level"
+      alternatives:
+        type: integer
+        required: false
+        default: 1
+        min: 1
+        max: 5
+        description: "Number of alternatives"
+    behavioral_requirements:
+      - context_aware: "Consider current project state and goals"
+      - confidence_scored: "Rate confidence in each suggestion"
+      - actionable_steps: "Provide specific, implementable actions"
+      - memory_enhanced: "Leverage past successful patterns"
+
+  handoff:
+    category: workflow
+    description: "Structured handoff between personas with context preservation"
+    aliases: [transfer, switch-to, pass-to]
+    usage: |
+      /handoff {persona} [--summary] [--checklist] [--validate]
+      Examples:
+        /handoff architect              # Handoff to architect
+        /handoff pm --summary          # Include work summary
+        /handoff dev --checklist       # Run handoff checklist
+    parameters:
+      persona:
+        type: string
+        required: true
+        description: "Target persona"
+        values: [analyst, pm, architect, dev, sm, po, quality, design-architect]
+      summary:
+        type: boolean
+        required: false
+        default: true
+        description: "Include work summary"
+      checklist:
+        type: boolean
+        required: false
+        default: true
+        description: "Run handoff checklist"
+      validate:
+        type: boolean
+        required: false
+        default: true
+        description: "Validate handoff completeness"
+    behavioral_requirements:
+      - context_preservation: "No information loss during handoff"
+      - quality_continuity: "Maintain standards across personas"
+      - structured_transition: "Use checklist for completeness"
+      - memory_integration: "Document handoff insights"
+    implementation: "handoff-orchestration-task.md"
+
+  core-dump:
+    category: workflow
+    description: "Save comprehensive session state with memory integration"
+    aliases: [save-state, checkpoint, dump]
+    usage: |
+      /core-dump [--format] [--include-memory] [--compress]
+      Examples:
+        /core-dump                     # Standard dump
+        /core-dump --format=detailed   # Detailed format
+        /core-dump --compress         # Compressed output
+    parameters:
+      format:
+        type: string
+        required: false
+        default: "standard"
+        values: [minimal, standard, detailed, full]
+        description: "Dump format"
+      include_memory:
+        type: boolean
+        required: false
+        default: true
+        description: "Include memory insights"
+      compress:
+        type: boolean
+        required: false
+        default: false
+        description: "Compress output"
+    behavioral_requirements:
+      - comprehensive_capture: "Include all relevant session state"
+      - memory_integration: "Preserve learning and insights"
+      - structured_format: "Organize for easy restoration"
+      - progressive_disclosure: "Essential info first, details available"
+    implementation: "core-dump.md"
+
+  # Consultation Commands
+  consult:
+    category: consultation
+    description: "Start multi-persona consultation session"
+    aliases: [panel, team-consult, multi-persona]
+    usage: |
+      /consult {type} [--personas] [--duration] [--structured]
+      Examples:
+        /consult design-review              # Design review panel
+        /consult custom --personas=pm,dev   # Custom consultation
+        /consult emergency-response         # Emergency panel
+    parameters:
+      type:
+        type: string
+        required: true
+        values: [design-review, technical-feasibility, product-strategy, quality-assessment, emergency-response, custom]
+        description: "Consultation type"
+      personas:
+        type: array
+        required: false
+        description: "Custom persona list (for custom type)"
+      duration:
+        type: string
+        required: false
+        default: "standard"
+        values: [quick, standard, thorough]
+        description: "Consultation duration"
+      structured:
+        type: boolean
+        required: false
+        default: true
+        description: "Use structured format"
+    behavioral_requirements:
+      - diverse_perspectives: "Ensure all relevant viewpoints represented"
+      - structured_process: "Follow consultation protocol"
+      - consensus_building: "Work toward unified recommendations"
+      - conflict_resolution: "Handle disagreements constructively"
+    implementation: "multi-persona-protocols.md"
+
+  panel-status:
+    category: consultation
+    description: "Show active consultation panel status"
+    aliases: [consultation-status, panel-info]
+    usage: |
+      /panel-status [--detailed] [--timeline]
+      Examples:
+        /panel-status              # Basic status
+        /panel-status --detailed   # Detailed participant info
+    parameters:
+      detailed:
+        type: boolean
+        required: false
+        default: false
+        description: "Show detailed status"
+      timeline:
+        type: boolean
+        required: false
+        default: false
+        description: "Show consultation timeline"
+    behavioral_requirements:
+      - real_time_status: "Current state of consultation"
+      - progress_tracking: "Show completion percentage"
+      - participant_engagement: "Track individual contributions"
+
+  consensus-check:
+    category: consultation
+    description: "Assess agreement level in consultation"
+    aliases: [agreement, consensus, alignment]
+    usage: |
+      /consensus-check [--threshold] [--require-all]
+      Examples:
+        /consensus-check                  # Check consensus
+        /consensus-check --threshold=80   # 80% agreement required
+    parameters:
+      threshold:
+        type: integer
+        required: false
+        default: 70
+        min: 50
+        max: 100
+        description: "Consensus threshold percentage"
+      require_all:
+        type: boolean
+        required: false
+        default: false
+        description: "Require unanimous agreement"
+    behavioral_requirements:
+      - quantified_agreement: "Measure consensus percentage"
+      - conflict_identification: "Highlight disagreement areas"
+      - resolution_suggestions: "Recommend consensus-building approaches"
+
+  # Meta-Prompting Commands
+  meta-prompt:
+    category: advanced
+    description: "Generate and manage optimal prompts for sub-agents and tasks"
+    aliases: [meta, prompt-gen, generate-prompt]
+    usage: |
+      /meta-prompt {action} [--options]
+      Actions: generate, test, patterns, optimize, effectiveness, library
+      Examples:
+        /meta-prompt generate task --context "code review"
+        /meta-prompt test prompt-123 --metrics
+        /meta-prompt patterns --type task-execution
+    parameters:
+      action:
+        type: string
+        required: true
+        values: [generate, test, patterns, optimize, effectiveness, library, persona, consultation, handoff, a-b, learn, cascade]
+        description: "Meta-prompting action"
+      type:
+        type: string
+        required: false
+        values: [task, persona, consultation, analysis, custom]
+        description: "Prompt type to generate"
+      context:
+        type: string
+        required: false
+        description: "Additional context for customization"
+      optimize:
+        type: string
+        required: false
+        values: [clarity, tokens, effectiveness, all]
+        description: "Optimization focus"
+      preview:
+        type: boolean
+        required: false
+        default: true
+        description: "Show prompt before deployment"
+      metrics:
+        type: boolean
+        required: false
+        default: false
+        description: "Show detailed effectiveness metrics"
+    behavioral_requirements:
+      - clarity_optimization: "Generate clear, unambiguous prompts"
+      - safety_inheritance: "Include all relevant safety rules"
+      - context_adaptation: "Customize for specific scenarios"
+      - effectiveness_tracking: "Measure and improve prompt performance"
+    implementation: "meta-prompt-generation-task.md"
+
+  # System Commands
+  diagnose:
+    category: workflow
+    description: "Comprehensive system health diagnostics"
+    aliases: [health, check-system, diagnostic]
+    usage: |
+      /diagnose [--component] [--deep] [--fix]
+      Examples:
+        /diagnose                    # Full system check
+        /diagnose --component=memory # Check memory system
+        /diagnose --deep --fix      # Deep scan with fixes
+    parameters:
+      component:
+        type: string
+        required: false
+        default: "all"
+        values: [all, memory, personas, tasks, quality, performance]
+        description: "Component to diagnose"
+      deep:
+        type: boolean
+        required: false
+        default: false
+        description: "Perform deep diagnostics"
+      fix:
+        type: boolean
+        required: false
+        default: false
+        description: "Attempt automatic fixes"
+    behavioral_requirements:
+      - comprehensive_analysis: "Check all system components"
+      - actionable_recommendations: "Provide specific fix suggestions"
+      - priority_classification: "Rank issues by importance"
+      - automated_fixes: "Attempt safe corrections when possible"
+    implementation: "system-diagnostics-task.md"
+
+  optimize:
+    category: workflow
+    description: "Performance optimization with memory-based improvements"
+    aliases: [perf, performance, tune]
+    usage: |
+      /optimize [--target] [--aggressive] [--simulate]
+      Examples:
+        /optimize                      # Standard optimization
+        /optimize --target=memory      # Optimize memory usage
+        /optimize --aggressive         # Aggressive optimization
+    parameters:
+      target:
+        type: string
+        required: false
+        default: "balanced"
+        values: [speed, memory, balanced, quality]
+        description: "Optimization target"
+      aggressive:
+        type: boolean
+        required: false
+        default: false
+        description: "Use aggressive optimization"
+      simulate:
+        type: boolean
+        required: false
+        default: false
+        description: "Simulate without applying"
+    behavioral_requirements:
+      - memory_guided: "Use historical data for optimization decisions"
+      - safe_improvements: "Avoid performance regressions"
+      - measurable_gains: "Quantify optimization benefits"
+      - rollback_capability: "Enable undo of optimizations"
+
+  learn:
+    category: workflow
+    description: "Analyze outcomes and update system intelligence"
+    aliases: [ml-update, train, improve]
+    usage: |
+      /learn [--scope] [--feedback] [--apply]
+      Examples:
+        /learn                      # Learn from recent session
+        /learn --scope=project      # Learn from entire project
+        /learn --feedback          # Include user feedback
+    parameters:
+      scope:
+        type: string
+        required: false
+        default: "session"
+        values: [session, project, all]
+        description: "Learning scope"
+      feedback:
+        type: boolean
+        required: false
+        default: true
+        description: "Include user feedback"
+      apply:
+        type: boolean
+        required: false
+        default: true
+        description: "Apply learnings immediately"
+    behavioral_requirements:
+      - pattern_extraction: "Identify successful approaches"
+      - outcome_correlation: "Link actions to results"
+      - continuous_improvement: "Update system behavior based on learning"
+      - evidence_based: "Only apply well-supported learnings"
+
+  # Utility Commands
+  yolo:
+    category: workflow
+    description: "Toggle YOLO mode for streamlined execution"
+    aliases: [fast-mode, quick, bypass]
+    usage: |
+      /yolo [--confirm]
+      Examples:
+        /yolo              # Toggle YOLO mode
+        /yolo --confirm    # Confirm state change
+    parameters:
+      confirm:
+        type: boolean
+        required: false
+        default: false
+        description: "Confirm mode change"
+    behavioral_requirements:
+      - safety_maintenance: "Never compromise critical safety rules"
+      - speed_optimization: "Reduce process overhead"
+      - quality_awareness: "Maintain minimum quality standards"
+      - user_consent: "Require explicit confirmation"
+
+  exit:
+    category: core
+    description: "Exit current persona or consultation"
+    aliases: [quit, leave, close]
+    usage: |
+      /exit [--save] [--handoff]
+      Examples:
+        /exit              # Exit current mode
+        /exit --save       # Save state before exit
+        /exit --handoff    # Suggest handoff target
+    parameters:
+      save:
+        type: boolean
+        required: false
+        default: true
+        description: "Save current state"
+      handoff:
+        type: boolean
+        required: false
+        default: false
+        description: "Suggest handoff target"
+    behavioral_requirements:
+      - state_preservation: "Save progress and insights"
+      - clean_transitions: "Proper context closure"
+      - handoff_suggestions: "Recommend appropriate next persona"
+
+  tasks:
+    category: core
+    description: "List available tasks with intelligence insights"
+    aliases: [list-tasks, available-tasks, what-can-i-do]
+    usage: |
+      /tasks [--category] [--recommended] [--details]
+      Examples:
+        /tasks                      # All tasks
+        /tasks --category=quality   # Quality tasks
+        /tasks --recommended       # AI recommendations
+    parameters:
+      category:
+        type: string
+        required: false
+        values: [all, quality, workflow, analysis, documentation]
+        description: "Task category filter"
+      recommended:
+        type: boolean
+        required: false
+        default: false
+        description: "Show recommended tasks"
+      details:
+        type: boolean
+        required: false
+        default: false
+        description: "Show task details"
+    behavioral_requirements:
+      - context_aware: "Recommend tasks based on current state"
+      - priority_ranking: "Order tasks by importance"
+      - capability_matching: "Match tasks to current persona"
+
+  run-task:
+    category: workflow
+    description: "Execute a specific task"
+    aliases: [task, execute, do]
+    usage: |
+      /run-task {task-name} [...args]
+      Examples:
+        /run-task create-prd
+        /run-task udtm-analysis "payment system"
+        /run-task quality-gate pre-implementation
+    parameters:
+      task_name:
+        type: string
+        required: true
+        description: "Task to execute"
+      args:
+        type: array
+        required: false
+        description: "Task-specific arguments"
+    behavioral_requirements:
+      - task_validation: "Verify task exists and is appropriate"
+      - parameter_validation: "Check required arguments"
+      - quality_integration: "Apply quality standards during execution"
+      - memory_enhancement: "Leverage relevant memories"
+
+  checklist:
+    category: workflow
+    description: "Run validation checklist"
+    aliases: [check, validate, run-checklist]
+    usage: |
+      /checklist {name} [--interactive] [--fix]
+      Examples:
+        /checklist po-master
+        /checklist story-dod --interactive
+        /checklist quality --fix
+    parameters:
+      name:
+        type: string
+        required: true
+        description: "Checklist name"
+        values: [po-master, story-dod, architect, quality, frontend, pm, change]
+      interactive:
+        type: boolean
+        required: false
+        default: false
+        description: "Interactive mode"
+      fix:
+        type: boolean
+        required: false
+        default: false
+        description: "Attempt fixes"
+    behavioral_requirements:
+      - comprehensive_validation: "Check all checklist items"
+      - evidence_collection: "Gather proof for each requirement"
+      - automated_fixes: "Attempt corrections where possible"
+      - clear_reporting: "Provide actionable feedback"
+    implementation: "checklist-run-task.md"
+
+  bootstrap-memory:
+    category: memory
+    description: "Bootstrap memory from existing codebase (brownfield)"
+    aliases: [bootstrap, mem-bootstrap, init-memory]
+    usage: |
+      /bootstrap-memory [--mode] [--focus] [--depth]
+      Examples:
+        /bootstrap-memory --mode=auto
+        /bootstrap-memory --focus=architecture --depth=deep
+        /bootstrap-memory --mode=interactive
+    parameters:
+      mode:
+        type: string
+        required: false
+        default: "auto"
+        values: [auto, interactive, guided]
+        description: "Bootstrap mode"
+      focus:
+        type: string
+        required: false
+        values: [architecture, decisions, patterns, issues, all]
+        description: "Focus area"
+      depth:
+        type: string
+        required: false
+        default: "standard"
+        values: [shallow, standard, deep]
+        description: "Analysis depth"
+    behavioral_requirements:
+      - pattern_extraction: "Identify existing successful patterns"
+      - decision_documentation: "Capture architectural choices"
+      - anti_pattern_detection: "Flag problematic code patterns"
+      - context_understanding: "Build comprehensive project knowledge"
+    implementation: "memory-bootstrap-task.md"
+
+# Behavioral Optimization Rules
+behavioral_optimization:
+  example_driven_learning:
+    enforcement: strict
+    requirement: "All responses must reference relevant examples from library"
+    penalty_no_examples: -1000
+    reward_good_examples: +500
     
-anti-pattern-check:
-  description: Scan for anti-patterns
-  usage: "/anti-pattern-check"
-  aliases: [anti-pattern, pattern-check]
-  implementation: anti_pattern_detection.md
+  anti_pattern_prevention:
+    enforcement: zero_tolerance
+    critical_patterns:
+      - "I think": penalty -500, alternative "Based on [evidence]"
+      - "should work": penalty -1000, alternative "will work because [tested reason]"
+      - "TODO": penalty -2000, alternative "Complete implementation required"
+      
+  structured_thinking_enforcement:
+    mandatory_tags: [decision_analysis, problem_analysis, architecture_analysis, quality_analysis, risk_analysis]
+    enforcement: "Actions blocked without proper analysis"
+    penalty_missing_analysis: -1500
+    reward_complete_analysis: +750
+    
+  progressive_disclosure:
+    default_verbosity: concise
+    max_response_lines: 4
+    expansion_triggers: ["tell me more", "why?", "explain", "details"]
+    contraction_triggers: ["just tell me", "skip", "too much"]
+    
+  context_awareness:
+    adaptation_required: true
+    context_factors: [project_type, team_expertise, time_pressure, technical_stack]
+    adaptation_accuracy_target: 95%
+    
+  quality_enforcement:
+    minimum_score: 75
+    target_score: 90
+    critical_threshold: 100%_safety_compliance
+    continuous_monitoring: enabled
 
-brotherhood-review:
-  description: Initiate peer validation process
-  usage: "/brotherhood-review"
-  aliases: [peer-review, brotherhood]
-  implementation: brotherhood_review.md
+# Success Metrics
+success_metrics:
+  first_attempt_success_rate: 95%
+  clarification_reduction: 80%
+  anti_pattern_violations: 0
+  example_utilization: 90%
+  structured_analysis_compliance: 100%
+  response_conciseness: 4_lines_max
+  token_efficiency: 40%_reduction
+  context_utilization: 80%_effective
+  memory_integration: 85%_sessions
 
-# Workflow Commands - Verified Implementation
-suggest:
-  description: Get AI-powered next step recommendations
-  usage: "/suggest"
-  
-handoff:
-  description: Structured persona transition
-  usage: "/handoff {persona}"
-  implementation: handoff-orchestration-task.md
-  
-core-dump:
-  description: Save session state
-  usage: "/core-dump"
-  implementation: core-dump.md
+# Command Shortcuts
+shortcuts:
+  "?": "help"
+  "??": "help --examples"
+  ">>>": "suggest"
+  "<<<": "recall"
+  "+++": "quality-gate completion"
+  "---": "exit --save"
+  "@": "agents"
+  "#": "context"
+  "$": "tasks"
 
-# System Commands - Verified Implementation
-diagnose:
-  description: Run system health check
-  usage: "/diagnose"
-  implementation: system-diagnostics-task.md
-  
-yolo:
-  description: Toggle YOLO mode for immediate execution
-  usage: "/yolo"
-  
-exit:
-  description: Exit current persona
-  usage: "/exit"
+# Version History
+version_history:
+  - version: "3.0.0"
+    date: "2025-03-06"
+    changes:
+      - "Removed legacy permission system for behavioral optimization"
+      - "Added AI behavioral optimization focus"
+      - "Implemented example-driven learning requirements"
+      - "Added structured thinking enforcement"
+      - "Enhanced progressive disclosure"
+      - "Integrated behavioral tracking"
+      - "Added meta-prompting capabilities"

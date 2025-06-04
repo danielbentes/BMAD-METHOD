@@ -1,0 +1,352 @@
+# Task Execution Configuration
+# BMAD Method - AI Behavioral Optimization Framework
+
+# Task Execution Framework
+execution_framework:
+  behavioral_requirements:
+    example_driven_approach: mandatory
+    structured_thinking: required
+    anti_pattern_avoidance: strict
+    progressive_disclosure: adaptive
+    context_awareness: enabled
+  
+  quality_gates:
+    pre_execution: validation_required
+    mid_execution: checkpoint_mandatory
+    post_execution: verification_complete
+    handoff_preparation: documentation_comprehensive
+
+# Core Task Categories
+task_categories:
+  analysis_tasks:
+    description: "Research, investigation, and discovery tasks"
+    behavioral_focus: "Evidence-based conclusions with comprehensive coverage"
+    required_analysis_type: "research_analysis"
+    
+    execution_pattern: |
+      1. SCOPE DEFINITION
+         - Clear boundaries and objectives
+         - Success criteria establishment
+         - Stakeholder identification
+      
+      2. INVESTIGATION PHASE
+         - Multi-source research approach
+         - Evidence gathering and validation
+         - Pattern identification and analysis
+      
+      3. SYNTHESIS PHASE
+         - Finding consolidation and analysis
+         - Insight generation and validation
+         - Recommendation development
+      
+      4. DOCUMENTATION PHASE
+         - Structured output with evidence backing
+         - Clear next steps and handoff preparation
+         - Quality validation and review
+    
+    anti_patterns:
+      single_source_conclusions: -1500
+      assumption_without_validation: -2000
+      incomplete_stakeholder_coverage: -1000
+      biased_research_methodology: -1800
+    
+    success_criteria:
+      evidence_diversity: minimum_3_sources
+      finding_accuracy: 90_percent_validation
+      completeness_score: 95_percent_coverage
+
+  design_tasks:
+    description: "Architecture, system design, and technical planning"
+    behavioral_focus: "Evidence-based decisions with scalability consideration"
+    required_analysis_type: "architecture_analysis"
+    
+    execution_pattern: |
+      1. REQUIREMENTS ANALYSIS
+         - Functional and non-functional requirements
+         - Constraint identification and validation
+         - Success criteria definition
+      
+      2. ARCHITECTURE DESIGN
+         - Option evaluation with trade-off analysis
+         - Technology selection with benchmarking
+         - Scalability and performance planning
+      
+      3. IMPLEMENTATION PLANNING
+         - Development approach and phases
+         - Risk assessment and mitigation
+         - Resource requirement estimation
+      
+      4. VALIDATION AND DOCUMENTATION
+         - Design review and stakeholder approval
+         - Implementation guide creation
+         - Handoff preparation for development
+    
+    anti_patterns:
+      premature_optimization: -1500
+      technology_choice_without_benchmarks: -2000
+      over_engineering: -2500
+      latest_trend_following: -1800
+    
+    success_criteria:
+      benchmark_backing: 100_percent_decisions
+      scalability_validation: performance_tested
+      implementation_clarity: 95_percent_completeness
+
+  implementation_tasks:
+    description: "Code development, testing, and deployment"
+    behavioral_focus: "Working code with comprehensive quality validation"
+    required_analysis_type: "implementation_analysis"
+    
+    execution_pattern: |
+      1. IMPLEMENTATION PLANNING
+         - Development approach and architecture
+         - Testing strategy and coverage goals
+         - Quality standards and compliance
+      
+      2. DEVELOPMENT PHASE
+         - Clean code implementation
+         - Comprehensive test development
+         - Performance optimization
+      
+      3. QUALITY VALIDATION
+         - Code review and quality metrics
+         - Test execution and coverage validation
+         - Performance and security testing
+      
+      4. DEPLOYMENT PREPARATION
+         - Documentation and deployment guides
+         - Monitoring and observability setup
+         - Handoff to operations or next phase
+    
+    anti_patterns:
+      todo_fixme_in_production: -3000
+      missing_error_handling: -2000
+      no_performance_consideration: -1500
+      copy_paste_without_understanding: -2500
+    
+    success_criteria:
+      test_coverage: minimum_85_percent
+      code_quality_score: minimum_90_percent
+      performance_targets: sub_200ms_response
+
+  quality_tasks:
+    description: "Quality assurance, validation, and improvement"
+    behavioral_focus: "Zero tolerance for quality violations"
+    required_analysis_type: "quality_analysis"
+    
+    execution_pattern: |
+      1. QUALITY ASSESSMENT
+         - Current state analysis and metrics
+         - Gap identification and prioritization
+         - Standards compliance validation
+      
+      2. IMPROVEMENT PLANNING
+         - Action plan development
+         - Resource and timeline estimation
+         - Success criteria definition
+      
+      3. IMPLEMENTATION OVERSIGHT
+         - Progress monitoring and validation
+         - Quality gate enforcement
+         - Continuous improvement feedback
+      
+      4. VALIDATION AND CERTIFICATION
+         - Final quality assessment
+         - Compliance certification
+         - Knowledge transfer and documentation
+    
+    anti_patterns:
+      quality_shortcuts: -3000
+      good_enough_mentality: -2500
+      insufficient_testing: -2000
+      documentation_negligence: -1500
+    
+    success_criteria:
+      quality_score: minimum_95_percent
+      compliance_rate: 100_percent_standards
+      improvement_measurement: quantified_gains
+
+  coordination_tasks:
+    description: "Multi-persona collaboration and synthesis"
+    behavioral_focus: "Structured collaboration with diverse perspective integration"
+    required_analysis_type: "collaboration_analysis"
+    
+    execution_pattern: |
+      1. COORDINATION SETUP
+         - Participant identification and roles
+         - Collaboration protocol establishment
+         - Success criteria and timeline
+      
+      2. INDIVIDUAL CONTRIBUTION PHASE
+         - Independent analysis and perspective development
+         - Evidence gathering and position preparation
+         - Quality validation of individual contributions
+      
+      3. SYNTHESIS PHASE
+         - Structured perspective sharing
+         - Evidence-based discussion and evaluation
+         - Consensus building or conflict resolution
+      
+      4. DELIVERABLE CREATION
+         - Integrated solution development
+         - Quality validation and review
+         - Next steps and handoff preparation
+    
+    anti_patterns:
+      groupthink_consensus: -2000
+      authority_override_without_evidence: -3000
+      incomplete_perspective_integration: -1500
+      poor_conflict_resolution: -2000
+    
+    success_criteria:
+      perspective_diversity: all_participants_contribute
+      evidence_integration: systematic_synthesis
+      decision_quality: stakeholder_validated
+
+# Execution Templates
+execution_templates:
+  standard_task_template: |
+    TASK EXECUTION: {task_name}
+    
+    BEHAVIORAL REQUIREMENTS:
+    - Example-driven approach: Reference {relevant_examples}
+    - Structured thinking: Use {required_analysis_tags}
+    - Anti-pattern avoidance: Zero tolerance for {forbidden_patterns}
+    - Progressive disclosure: {disclosure_level} detail
+    
+    EXECUTION STEPS:
+    {task_specific_steps}
+    
+    QUALITY GATES:
+    - Pre-execution: {pre_validation_criteria}
+    - Mid-execution: {checkpoint_criteria}
+    - Post-execution: {completion_criteria}
+    
+    SUCCESS CRITERIA:
+    {measurable_success_metrics}
+    
+    EXECUTE with behavioral excellence.
+  
+  collaborative_task_template: |
+    COLLABORATIVE TASK: {task_name}
+    
+    PARTICIPANTS: {participant_list}
+    
+    BEHAVIORAL COORDINATION:
+    - Each participant maintains domain expertise
+    - All contributions use structured analysis
+    - Evidence-based arguments and decisions
+    - Synthesis approach: {synthesis_method}
+    
+    COLLABORATION PROCESS:
+    1. Individual Analysis Phase ({time_allocation})
+    2. Structured Sharing Phase ({sharing_protocol})
+    3. Evidence Evaluation Phase ({validation_process})
+    4. Synthesis Phase ({integration_approach})
+    5. Decision and Documentation Phase ({finalization_process})
+    
+    QUALITY COORDINATION:
+    - Cross-validation of evidence and conclusions
+    - Behavioral compliance monitoring
+    - Quality aggregation and synthesis
+    
+    EXECUTE with collaborative excellence.
+
+# Quality Gate Definitions
+quality_gates:
+  pre_execution_gate:
+    validation_criteria:
+      task_scope_clarity: minimum_90_percent
+      success_criteria_definition: explicit_and_measurable
+      resource_availability: confirmed
+      behavioral_setup: complete
+    
+    blocking_conditions:
+      unclear_objectives: immediate_block
+      missing_success_criteria: immediate_block
+      insufficient_context: immediate_block
+      behavioral_non_compliance: immediate_block
+    
+    progression_requirements:
+      all_criteria_met: proceed_to_execution
+      context_preparation: complete
+      example_library_access: enabled
+      anti_pattern_awareness: confirmed
+
+  mid_execution_checkpoint:
+    validation_criteria:
+      progress_against_objectives: on_track_or_better
+      quality_maintenance: standards_met
+      behavioral_compliance: zero_violations
+      evidence_quality: sufficient_and_validated
+    
+    intervention_triggers:
+      progress_deviation: course_correction_required
+      quality_degradation: immediate_intervention
+      anti_pattern_detection: stop_and_correct
+      insufficient_evidence: research_expansion_needed
+    
+    progression_requirements:
+      checkpoint_criteria_met: continue_execution
+      quality_validated: proceed_with_confidence
+      behavioral_compliance: maintained_throughout
+      evidence_sufficiency: validated_and_documented
+
+  post_execution_verification:
+    validation_criteria:
+      deliverable_completeness: 100_percent_requirements_met
+      quality_standards: all_criteria_exceeded
+      behavioral_compliance: zero_violations_recorded
+      handoff_readiness: complete_documentation
+    
+    quality_assessment:
+      output_quality_score: minimum_90_percent
+      evidence_backing: comprehensive_and_validated
+      structured_thinking: complete_analysis_tags
+      example_utilization: minimum_90_percent_reference
+    
+    completion_requirements:
+      all_success_criteria_met: verified_achievement
+      quality_validation: passed_all_gates
+      documentation_complete: handoff_ready
+      behavioral_excellence: demonstrated_throughout
+
+# Performance Monitoring
+performance_monitoring:
+  execution_effectiveness:
+    task_completion_rate: target_95_percent
+    quality_score_achievement: target_90_percent
+    behavioral_compliance: target_100_percent
+    stakeholder_satisfaction: target_90_percent
+  
+  behavioral_optimization:
+    anti_pattern_violation_rate: target_zero
+    example_utilization_rate: target_90_percent
+    structured_thinking_compliance: target_100_percent
+    progressive_disclosure_effectiveness: measured_and_optimized
+  
+  continuous_improvement:
+    execution_pattern_optimization: data_driven
+    quality_gate_refinement: feedback_based
+    behavioral_requirement_evolution: evidence_based
+    success_criteria_calibration: outcome_validated
+
+# Learning Integration
+learning_integration:
+  pattern_recognition:
+    successful_execution_patterns: captured_and_replicated
+    failure_pattern_identification: prevented_through_learning
+    behavioral_optimization_insights: continuously_applied
+    context_adaptation_learning: refined_through_experience
+  
+  knowledge_transfer:
+    execution_best_practices: documented_and_shared
+    anti_pattern_awareness: team_wide_distribution
+    quality_standards: consistently_applied
+    behavioral_excellence: culturally_embedded
+  
+  improvement_cycles:
+    execution_effectiveness_review: monthly_assessment
+    behavioral_compliance_analysis: weekly_monitoring
+    quality_standard_evolution: quarterly_refinement
+    success_criteria_optimization: continuous_calibration

@@ -1,27 +1,99 @@
 # Checklist Validation Task
 
+## CRITICAL SAFETY RULES - MANDATORY COMPLIANCE
+
+### STOP CONDITIONS - ABORT IMMEDIATELY IF:
+- Checklist file corrupted or missing
+- Required documents contain merge conflicts
+- Validation would expose sensitive data
+- Previous validation shows systematic failures (>80% fail rate)
+- User explicitly states "skip validation" or "ignore checklist"
+
+### MANDATORY VALIDATIONS BEFORE PROCEEDING:
+1. **Checklist Integrity**: Verify checklist file exists and is readable
+2. **Document Availability**: Confirm all required documents accessible
+3. **Permission Check**: Ensure read access to all resources
+4. **Quality Threshold**: Previous validations must show <50% critical failures
+5. **User Intent**: Confirm user wants thorough validation, not just quick review
+
+### QUALITY GATES - MUST PASS ALL:
+- [ ] Valid checklist file identified and loaded
+- [ ] All required documents located or alternatives provided
+- [ ] No corruption in checklist or document files
+- [ ] User confirmed validation approach (interactive/YOLO)
+- [ ] Output directory writable for validation report
+
+## Purpose
+
 This task provides instructions for validating documentation against checklists. The agent should follow these instructions to ensure thorough and systematic validation of documents.
 
 ## Context
 
 The BMAD Method uses various checklists to ensure quality and completeness of different artifacts. The mapping between checklists and their required documents is defined in `checklist-mappings`. This allows for easy addition of new checklists without modifying this task.
 
+## Progressive Disclosure Phases
+
+### Phase 1: Checklist Selection (MANDATORY)
+1. Load and validate checklist-mappings.yml
+2. Present available checklists to user
+3. Confirm checklist selection
+4. Verify checklist file integrity
+5. **GATE**: Valid checklist selected → Continue to Phase 2
+
+### Phase 2: Document Discovery
+1. Identify required documents from mapping
+2. Search default locations systematically
+3. Request missing document locations from user
+4. Validate document accessibility
+5. **GATE**: All documents available → Continue to Phase 3
+
+### Phase 3: Validation Execution
+1. Choose validation mode (interactive/YOLO)
+2. Process checklist items systematically
+3. Document findings with evidence
+4. Calculate metrics and scores
+5. **GATE**: Validation complete → Continue to Phase 4
+
+### Phase 4: Report Generation
+1. Compile comprehensive findings
+2. Generate actionable recommendations
+3. Save validation report
+4. Present summary to user
+5. **FINAL GATE**: Report accepted → Task Complete
+
 ## Instructions
 
-1. **Initial Assessment**
+### 1. Initial Assessment with Safety Checks
 
-   - Check `checklist-mappings` for available checklists
+#### Checklist Discovery Protocol:
+1. **Load Mapping File**
+   - Attempt to read `checklist-mappings.yml`
+   - Validate YAML structure integrity
+   - Handle missing file gracefully
+
+2. **Checklist Selection Logic**
    - If user provides a checklist name:
      - Look for exact match in checklist-mappings.yml
-     - If no exact match, try fuzzy matching (e.g. "architecture checklist" -> "architect-checklist")
-     - If multiple matches found, ask user to clarify
-     - Once matched, use the checklist_file path from the mapping
+     - If no exact match, try fuzzy matching with confirmation
+     - If multiple matches found, present options with descriptions
+     - Once matched, validate checklist_file path exists
    - If no checklist specified:
-     - Ask the user which checklist they want to use
-     - Present available options from checklist-mappings.yml
-   - Confirm if they want to work through the checklist:
-     - Section by section (interactive mode)
-     - All at once (YOLO mode)
+     - Present available checklists with clear descriptions
+     - Group by category (architecture, frontend, PM, story)
+     - Require explicit selection
+
+3. **Mode Selection**
+   - Explain validation modes clearly:
+     - **Interactive**: Section-by-section review with discussion
+     - **YOLO**: Complete analysis in one pass
+   - Default to Interactive for first-time validations
+   - Record user preference for future sessions
+
+#### Error Handling:
+- **Missing Mapping File**: Provide manual checklist selection
+- **Invalid YAML**: Report specific parsing errors
+- **Ambiguous Selection**: Show all matches with differences highlighted
+- **Access Denied**: Provide troubleshooting steps
 
 2. **Document Location**
 
@@ -48,18 +120,44 @@ The BMAD Method uses various checklists to ensure quality and completeness of di
    - Create a comprehensive report of all findings
    - Present the complete analysis to the user
 
-4. **Validation Approach**
+### 4. Validation Approach with Evidence Requirements
 
-   For each checklist item:
+#### For Each Checklist Item:
 
-   - Read and understand the requirement
-   - Look for evidence in the documentation that satisfies the requirement
-   - Consider both explicit mentions and implicit coverage
-   - Mark items as:
-     - ✅ PASS: Requirement clearly met
-     - ❌ FAIL: Requirement not met or insufficient coverage
-     - ⚠️ PARTIAL: Some aspects covered but needs improvement
-     - N/A: Not applicable to this case
+1. **Requirement Analysis**
+   - Parse requirement for key criteria
+   - Identify measurable success indicators
+   - Note any conditional applicability
+
+2. **Evidence Gathering**
+   - Search for explicit requirement coverage
+   - Document specific file locations and line numbers
+   - Capture relevant quotes or sections
+   - Consider implicit coverage with justification
+
+3. **Assessment Criteria**
+   - ✅ **PASS**: 
+     - Requirement clearly met with evidence
+     - Location: [file:line] with quote
+     - Confidence: High (>90%)
+   - ❌ **FAIL**: 
+     - Requirement not met or insufficient
+     - Missing elements documented
+     - Improvement path identified
+   - ⚠️ **PARTIAL**: 
+     - Some aspects covered
+     - Specific gaps identified
+     - Completion percentage estimated
+   - **N/A**: 
+     - Clear justification required
+     - Alternative coverage noted
+     - User confirmation needed
+
+4. **Evidence Standards**
+   - Direct quotes preferred over paraphrasing
+   - Multiple sources strengthen validation
+   - Visual elements (diagrams) count as evidence
+   - Code examples validate implementation items
 
 5. **Section Analysis**
 
@@ -113,14 +211,63 @@ The BMAD Method uses various checklists to ensure quality and completeness of di
 
 ## Success Criteria
 
-The checklist validation is complete when:
+### Validation Completion Requirements:
+1. All applicable items assessed with evidence
+2. Clear pass/fail status with confidence scores
+3. Specific, actionable recommendations for all failures
+4. User has reviewed and accepted findings
+5. Final report includes all decisions and rationales
+6. Validation results saved with proper naming convention
 
-1. All applicable items have been assessed
-2. Clear pass/fail status for each item
-3. Specific recommendations provided for failed items
-4. User has reviewed and acknowledged findings
-5. Final report documents all decisions and rationales
-6. Validation results saved at `.ai/quality/validations/checklist-{name}-{date}.md`
+### Quality Metrics:
+- **Coverage**: 100% of applicable items assessed
+- **Evidence**: >95% of assessments have concrete evidence
+- **Clarity**: All recommendations specific and actionable
+- **Accuracy**: <5% false positive/negative rate
+
+## Error Recovery Procedures
+
+### Common Failure Scenarios:
+
+1. **Checklist File Not Found**
+   - Search alternative locations
+   - Offer to use template checklist
+   - Allow manual checklist input
+
+2. **Document Access Denied**
+   - Request alternative location
+   - Offer to proceed with available documents
+   - Document gaps in final report
+
+3. **Validation Conflicts**
+   - Present both interpretations
+   - Request user clarification
+   - Document decision rationale
+
+4. **Report Save Failure**
+   - Attempt alternative location
+   - Provide copy-paste version
+   - Email report option
+
+## Continuous Improvement
+
+### Metrics Tracking:
+1. Average validation completion time
+2. False positive/negative rates
+3. User acceptance of findings
+4. Recommendation implementation rate
+
+### Feedback Integration:
+- Collect user feedback on each validation
+- Track which recommendations prove most valuable
+- Identify common documentation gaps
+- Refine checklist items based on outcomes
+
+### Update Triggers:
+- Repeated failures on specific items
+- User feedback indicates confusion
+- New document types introduced
+- Process improvements identified
 
 ## Example Interaction
 

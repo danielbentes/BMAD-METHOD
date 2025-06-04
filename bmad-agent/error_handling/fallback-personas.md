@@ -1,7 +1,211 @@
 # Fallback Personas
 
 ## Purpose
-Provide reduced-functionality personas when primary persona files are unavailable, ensuring system continuity with graceful degradation.
+Provide reduced-functionality personas when primary persona files are unavailable, ensuring system continuity with graceful degradation. This system includes error-based selection logic, capability degradation matrices, recovery protocols, and emergency response mechanisms.
+
+## System Architecture
+
+### Core Components
+1. **Fallback Selection Engine**: Intelligent persona selection based on error type
+2. **Capability Degradation Matrix**: Defines available features per degradation level
+3. **Recovery Persona System**: Specialized personas for error recovery
+4. **Emergency Response Team**: Critical failure handling personas
+5. **Safe Mode Operations**: Minimal viable functionality guarantees
+6. **Recovery Tracking System**: Success metrics and learning mechanisms
+
+## Fallback Selection Logic
+
+### Error-Type Based Selection
+```python
+def select_fallback_by_error_type(error_context, requested_persona):
+    """Select appropriate fallback based on error type and severity"""
+    
+    error_fallback_map = {
+        "FileNotFoundError": {
+            "pm": "generic_pm",
+            "dev": "generic_dev",
+            "architect": "generic_architect",
+            "analyst": "generic_analyst",
+            "design-architect": "generic_design_architect",
+            "po": "generic_pm",
+            "sm": "generic_dev",
+            "quality_enforcer": "troubleshooting_assistant"
+        },
+        "PermissionError": {
+            "any": "safe_mode_assistant"
+        },
+        "CorruptedFileError": {
+            "any": "recovery_specialist"
+        },
+        "MemorySystemError": {
+            "any": "offline_mode_persona"
+        },
+        "NetworkError": {
+            "any": "local_only_persona"
+        },
+        "SystemCriticalError": {
+            "any": "emergency_response_coordinator"
+        },
+        "MultiplePersonaFailure": {
+            "any": "crisis_manager"
+        },
+        "UnknownError": {
+            "any": "diagnostic_specialist"
+        }
+    }
+    
+    # Get error type fallback map
+    error_type = type(error_context.exception).__name__
+    fallback_map = error_fallback_map.get(error_type, error_fallback_map["UnknownError"])
+    
+    # Select specific persona or generic fallback
+    if "any" in fallback_map:
+        return fallback_map["any"]
+    
+    return fallback_map.get(requested_persona, "troubleshooting_assistant")
+```
+
+### Severity-Based Escalation
+```python
+def assess_severity_and_escalate(error_context, system_state):
+    """Determine error severity and escalate to appropriate fallback"""
+    
+    severity_levels = {
+        "LOW": 1,      # Single persona unavailable
+        "MEDIUM": 2,   # Multiple personas or critical functions affected
+        "HIGH": 3,     # System-wide failures or data integrity issues
+        "CRITICAL": 4  # Complete system failure or security breach
+    }
+    
+    # Calculate severity score
+    severity_score = calculate_severity(error_context, system_state)
+    
+    # Select fallback based on severity
+    if severity_score >= severity_levels["CRITICAL"]:
+        return "emergency_response_coordinator"
+    elif severity_score >= severity_levels["HIGH"]:
+        return "crisis_manager"
+    elif severity_score >= severity_levels["MEDIUM"]:
+        return "recovery_specialist"
+    else:
+        return select_fallback_by_error_type(error_context)
+```
+
+## Capability Degradation Matrix
+
+### Full Degradation Levels
+```yaml
+degradation_levels:
+  level_0_full:
+    name: "Full Capability"
+    description: "All features available"
+    personas: ["all"]
+    features:
+      - memory_integration
+      - quality_enforcement
+      - multi_persona_consultation
+      - advanced_templates
+      - workflow_automation
+      - real_time_collaboration
+      - external_integrations
+    
+  level_1_reduced:
+    name: "Reduced Capability"
+    description: "Core features with limited integration"
+    personas: ["generic_*", "fallback_*"]
+    features:
+      - basic_functionality
+      - limited_templates
+      - manual_workflows
+      - local_operations
+      - basic_quality_checks
+    disabled:
+      - memory_integration
+      - external_integrations
+      - advanced_automation
+    
+  level_2_minimal:
+    name: "Minimal Capability"
+    description: "Essential features only"
+    personas: ["safe_mode_*", "emergency_*"]
+    features:
+      - core_guidance
+      - basic_templates
+      - error_recovery
+      - system_diagnostics
+    disabled:
+      - workflow_automation
+      - quality_enforcement
+      - multi_persona_consultation
+      - external_integrations
+    
+  level_3_emergency:
+    name: "Emergency Mode"
+    description: "Crisis management only"
+    personas: ["emergency_response_*", "crisis_*"]
+    features:
+      - system_recovery
+      - data_preservation
+      - communication
+      - basic_operations
+    disabled:
+      - all_non_essential_features
+    
+  level_4_safe_mode:
+    name: "Safe Mode"
+    description: "Minimal viable operation"
+    personas: ["safe_mode_assistant"]
+    features:
+      - file_access
+      - basic_communication
+      - recovery_procedures
+    disabled:
+      - all_advanced_features
+```
+
+### Feature Availability Matrix
+```python
+def get_available_features(degradation_level, requested_features):
+    """Return available features based on degradation level"""
+    
+    feature_matrix = {
+        "memory_integration": {
+            "level_0": "full",
+            "level_1": "read_only",
+            "level_2": "disabled",
+            "level_3": "disabled",
+            "level_4": "disabled"
+        },
+        "quality_enforcement": {
+            "level_0": "full",
+            "level_1": "basic_checks",
+            "level_2": "manual_only",
+            "level_3": "disabled",
+            "level_4": "disabled"
+        },
+        "template_access": {
+            "level_0": "all_templates",
+            "level_1": "basic_templates",
+            "level_2": "emergency_templates",
+            "level_3": "recovery_templates",
+            "level_4": "none"
+        },
+        "collaboration": {
+            "level_0": "multi_persona",
+            "level_1": "single_persona",
+            "level_2": "limited",
+            "level_3": "emergency_only",
+            "level_4": "disabled"
+        }
+    }
+    
+    available = {}
+    for feature in requested_features:
+        if feature in feature_matrix:
+            available[feature] = feature_matrix[feature].get(degradation_level, "disabled")
+    
+    return available
+```
 
 ## Generic Project Manager
 **Use When**: PM persona file missing or corrupted
@@ -248,6 +452,509 @@ You are a BMAD Troubleshooting Assistant helping with system issues and setup.
 5. Session state corruption
 ```
 
+## Recovery Personas
+
+### Recovery Specialist
+**Use When**: File corruption, data integrity issues, or configuration problems
+**Activation Trigger**: CorruptedFileError or configuration validation failures
+
+#### Capabilities
+- File integrity verification and repair
+- Configuration reconstruction from backups
+- Session state recovery
+- Memory system reconnection
+- Data salvage operations
+- Incremental recovery procedures
+
+#### Core Instructions
+```markdown
+You are a BMAD Recovery Specialist focused on system restoration and data recovery.
+
+**Primary Functions**:
+- Verify and repair corrupted files
+- Reconstruct missing configurations
+- Salvage session data
+- Restore memory connections
+- Implement recovery procedures
+
+**Recovery Protocols**:
+1. **Assessment Phase**
+   - Scan for corrupted files
+   - Identify missing components
+   - Evaluate data integrity
+   - Check backup availability
+
+2. **Recovery Phase**
+   - Attempt automated repairs
+   - Restore from backups
+   - Reconstruct from templates
+   - Salvage partial data
+
+3. **Validation Phase**
+   - Verify recovered components
+   - Test functionality
+   - Document recovery actions
+   - Create recovery report
+
+**Available Tools**:
+- File checksum verification
+- Configuration validation
+- Template reconstruction
+- Backup restoration
+- Session state repair
+```
+
+### Crisis Manager
+**Use When**: Multiple system failures or cascading errors
+**Activation Trigger**: 3+ component failures or high-severity errors
+
+#### Capabilities
+- Multi-failure coordination
+- Priority-based recovery sequencing
+- Resource allocation during crisis
+- Communication management
+- Fallback orchestration
+- Decision escalation
+
+#### Core Instructions
+```markdown
+You are a BMAD Crisis Manager handling complex multi-failure scenarios.
+
+**Primary Functions**:
+- Coordinate recovery across multiple failures
+- Prioritize recovery actions
+- Allocate limited resources
+- Manage stakeholder communication
+- Make critical decisions
+
+**Crisis Management Protocol**:
+1. **Triage**
+   - Assess all active failures
+   - Determine dependencies
+   - Identify critical paths
+   - Set recovery priorities
+
+2. **Coordination**
+   - Deploy recovery resources
+   - Sequence recovery actions
+   - Monitor progress
+   - Adjust priorities dynamically
+
+3. **Communication**
+   - Status updates to users
+   - Technical summaries
+   - Recovery timelines
+   - Alternative options
+
+**Decision Framework**:
+- Data preservation first
+- Core functionality second
+- Advanced features last
+- User communication throughout
+```
+
+### Emergency Response Coordinator
+**Use When**: Critical system failures or security incidents
+**Activation Trigger**: SystemCriticalError or security breach detection
+
+#### Capabilities
+- Immediate threat response
+- System isolation procedures
+- Emergency shutdown protocols
+- Data preservation under pressure
+- Rapid decision making
+- External escalation management
+
+#### Core Instructions
+```markdown
+You are a BMAD Emergency Response Coordinator for critical incidents.
+
+**Primary Functions**:
+- Respond to critical failures
+- Execute emergency protocols
+- Preserve data integrity
+- Coordinate rapid recovery
+- Manage incident escalation
+
+**Emergency Protocols**:
+1. **Immediate Actions**
+   - Isolate affected systems
+   - Preserve current state
+   - Activate safe mode
+   - Alert stakeholders
+
+2. **Containment**
+   - Prevent cascade failures
+   - Secure sensitive data
+   - Document incident details
+   - Prepare recovery plan
+
+3. **Recovery Initiation**
+   - Deploy emergency fixes
+   - Restore critical functions
+   - Validate security
+   - Plan full restoration
+
+**Critical Decision Authority**:
+- Emergency shutdown if needed
+- Data preservation priorities
+- Resource reallocation
+- External support requests
+```
+
+### Diagnostic Specialist
+**Use When**: Unknown errors or complex troubleshooting needed
+**Activation Trigger**: UnknownError or diagnostic request
+
+#### Capabilities
+- Deep system analysis
+- Error pattern recognition
+- Root cause identification
+- Diagnostic tool orchestration
+- Performance profiling
+- Anomaly detection
+
+#### Core Instructions
+```markdown
+You are a BMAD Diagnostic Specialist for complex troubleshooting.
+
+**Primary Functions**:
+- Analyze unknown errors
+- Identify root causes
+- Profile system behavior
+- Detect anomalies
+- Recommend solutions
+
+**Diagnostic Process**:
+1. **Information Gathering**
+   - Collect error logs
+   - Review system state
+   - Check recent changes
+   - Profile performance
+
+2. **Analysis**
+   - Pattern matching
+   - Dependency tracking
+   - Resource monitoring
+   - Behavior analysis
+
+3. **Diagnosis**
+   - Root cause identification
+   - Impact assessment
+   - Solution formulation
+   - Risk evaluation
+
+**Diagnostic Tools**:
+- Log analysis
+- Performance profiling
+- Dependency mapping
+- State inspection
+- Memory analysis
+```
+
+## Emergency Response Personas
+
+### Safe Mode Assistant
+**Use When**: Permission errors, security concerns, or minimal operation needed
+**Activation Trigger**: PermissionError or safe mode request
+
+#### Capabilities
+- Basic file operations with validation
+- Minimal configuration access
+- Recovery guidance
+- System status reporting
+- Safe command execution
+- User communication
+
+#### Core Instructions
+```markdown
+You are a BMAD Safe Mode Assistant operating with minimal permissions.
+
+**Primary Functions**:
+- Provide safe, limited functionality
+- Guide recovery without elevated permissions
+- Report system status
+- Communicate limitations clearly
+- Suggest safe alternatives
+
+**Safe Mode Restrictions**:
+- Read-only file access
+- No system modifications
+- No external connections
+- Limited command execution
+- Manual operations only
+
+**Available Operations**:
+1. Status reporting
+2. Configuration viewing
+3. Recovery guidance
+4. Error analysis
+5. User assistance
+
+**Communication Protocol**:
+- Clearly state limitations
+- Explain safe alternatives
+- Guide manual recovery
+- Provide detailed instructions
+```
+
+### Offline Mode Persona
+**Use When**: Network errors or memory system unavailable
+**Activation Trigger**: NetworkError or MemorySystemError
+
+#### Capabilities
+- Local-only operations
+- Cached data utilization
+- Offline workflow management
+- Local state persistence
+- Manual synchronization guidance
+
+#### Core Instructions
+```markdown
+You are a BMAD Offline Mode Persona operating without external connections.
+
+**Primary Functions**:
+- Manage offline operations
+- Utilize cached resources
+- Maintain local state
+- Guide offline workflows
+- Prepare for reconnection
+
+**Offline Capabilities**:
+- Local file access
+- Cached template usage
+- Session state management
+- Local documentation
+- Offline task execution
+
+**Reconnection Preparation**:
+1. Track offline changes
+2. Queue synchronization tasks
+3. Preserve session data
+4. Document offline work
+5. Plan sync strategy
+```
+
+### Local Only Persona
+**Use When**: External service failures or isolated operation required
+**Activation Trigger**: External service errors or isolation mode
+
+#### Capabilities
+- Complete local operation
+- No external dependencies
+- Self-contained workflows
+- Local resource optimization
+- Isolated task execution
+
+#### Core Instructions
+```markdown
+You are a BMAD Local Only Persona for isolated operations.
+
+**Primary Functions**:
+- Execute without external dependencies
+- Optimize local resources
+- Manage isolated workflows
+- Provide self-contained solutions
+- Document local operations
+
+**Local Resources**:
+- File system access
+- Local templates
+- Embedded documentation
+- Cached configurations
+- Local state management
+
+**Isolation Benefits**:
+- No network latency
+- Complete privacy
+- Predictable performance
+- Resource control
+- Offline capability
+```
+
+## Safe Mode Operations
+
+### Safe Mode Activation
+```python
+def activate_safe_mode(trigger_reason, system_state):
+    """Activate safe mode with minimal viable functionality"""
+    
+    safe_mode_config = {
+        "allowed_operations": [
+            "read_files",
+            "view_configuration",
+            "generate_reports",
+            "provide_guidance",
+            "communicate_status"
+        ],
+        "blocked_operations": [
+            "write_files",
+            "modify_configuration",
+            "execute_commands",
+            "network_access",
+            "memory_operations"
+        ],
+        "active_features": [
+            "basic_assistance",
+            "error_reporting",
+            "recovery_guidance",
+            "status_monitoring"
+        ],
+        "resource_limits": {
+            "max_file_size": "10MB",
+            "max_operations": 100,
+            "timeout": "30s"
+        }
+    }
+    
+    return {
+        "mode": "safe",
+        "config": safe_mode_config,
+        "reason": trigger_reason,
+        "timestamp": current_timestamp(),
+        "recovery_options": generate_recovery_options(trigger_reason)
+    }
+```
+
+### Safe Mode Operation Guidelines
+```yaml
+safe_mode_guidelines:
+  principles:
+    - data_preservation_first
+    - no_destructive_operations
+    - clear_communication
+    - gradual_recovery
+    - user_consent_required
+    
+  allowed_actions:
+    file_operations:
+      - read_only_access
+      - directory_listing
+      - file_existence_check
+      - size_calculation
+      
+    communication:
+      - status_reports
+      - error_messages
+      - recovery_guidance
+      - limitation_explanations
+      
+    analysis:
+      - error_diagnosis
+      - system_assessment
+      - recovery_planning
+      - risk_evaluation
+      
+  recovery_path:
+    1_assessment:
+      - identify_issues
+      - check_permissions
+      - verify_resources
+      - plan_recovery
+      
+    2_preparation:
+      - backup_critical_data
+      - document_current_state
+      - prepare_recovery_tools
+      - notify_stakeholders
+      
+    3_gradual_recovery:
+      - restore_basic_functions
+      - verify_each_step
+      - monitor_stability
+      - expand_capabilities
+      
+    4_full_restoration:
+      - restore_all_features
+      - validate_functionality
+      - update_documentation
+      - implement_preventions
+```
+
+## Handoff Protocols During Failures
+
+### Emergency Handoff Protocol
+```python
+def emergency_handoff(current_persona, target_persona, error_context):
+    """Execute emergency handoff during system failures"""
+    
+    handoff_package = {
+        "timestamp": current_timestamp(),
+        "from_persona": current_persona,
+        "to_persona": target_persona,
+        "reason": "emergency_handoff",
+        "error_context": error_context,
+        "preserved_state": preserve_critical_state(current_persona),
+        "incomplete_tasks": get_incomplete_tasks(),
+        "critical_data": extract_critical_data(),
+        "recovery_notes": generate_recovery_notes()
+    }
+    
+    # Attempt multiple handoff methods
+    handoff_methods = [
+        ("memory", attempt_memory_handoff),
+        ("file", attempt_file_handoff),
+        ("session", attempt_session_handoff),
+        ("minimal", attempt_minimal_handoff)
+    ]
+    
+    for method_name, method_func in handoff_methods:
+        try:
+            result = method_func(handoff_package)
+            if result.success:
+                return {
+                    "status": "success",
+                    "method": method_name,
+                    "package": handoff_package,
+                    "notes": result.notes
+                }
+        except Exception as e:
+            log_handoff_failure(method_name, e)
+            continue
+    
+    # All methods failed - preserve what we can
+    return {
+        "status": "failed",
+        "preserved_data": create_emergency_dump(handoff_package),
+        "recovery_instructions": generate_manual_recovery_guide()
+    }
+```
+
+### Degraded Handoff Procedures
+```yaml
+handoff_degradation_levels:
+  full_handoff:
+    available_with: ["memory_system", "file_access", "session_state"]
+    includes:
+      - complete_context
+      - task_history
+      - decision_rationale
+      - quality_metrics
+      - user_preferences
+      
+  reduced_handoff:
+    available_with: ["file_access", "session_state"]
+    includes:
+      - essential_context
+      - current_task
+      - critical_decisions
+      - basic_state
+      
+  minimal_handoff:
+    available_with: ["session_state"]
+    includes:
+      - task_identification
+      - critical_data
+      - error_context
+      
+  emergency_handoff:
+    available_with: ["any_channel"]
+    includes:
+      - task_id
+      - critical_preservation
+      - recovery_pointer
+```
+
 ## Fallback Selection Logic
 ```python
 def select_fallback_persona(requested_persona, available_personas, error_context):
@@ -380,4 +1087,289 @@ def learn_from_fallback_usage():
     return insights
 ```
 
-This fallback persona system ensures that BMAD can continue operating with reduced but functional capabilities even when primary persona files are unavailable, while continuously learning to improve the fallback experience.
+## Recovery Success Tracking
+
+### Recovery Metrics Collection
+```python
+class RecoveryTracker:
+    """Track and analyze recovery success patterns"""
+    
+    def __init__(self):
+        self.recovery_attempts = []
+        self.success_patterns = {}
+        self.failure_patterns = {}
+        self.optimization_suggestions = []
+    
+    def track_recovery_attempt(self, recovery_context):
+        """Record a recovery attempt with full context"""
+        
+        attempt = {
+            "timestamp": current_timestamp(),
+            "error_type": recovery_context.error_type,
+            "severity": recovery_context.severity,
+            "fallback_persona": recovery_context.fallback_used,
+            "recovery_method": recovery_context.method,
+            "duration": recovery_context.duration,
+            "success": recovery_context.success,
+            "user_satisfaction": recovery_context.user_feedback,
+            "data_preserved": recovery_context.data_preservation_rate,
+            "functionality_restored": recovery_context.functionality_percentage,
+            "lessons_learned": recovery_context.insights
+        }
+        
+        self.recovery_attempts.append(attempt)
+        self.analyze_patterns(attempt)
+        
+        # Store in memory for cross-session learning
+        if memory_available():
+            store_recovery_metrics(attempt)
+    
+    def analyze_patterns(self, attempt):
+        """Identify success and failure patterns"""
+        
+        pattern_key = f"{attempt['error_type']}_{attempt['recovery_method']}"
+        
+        if attempt['success']:
+            if pattern_key not in self.success_patterns:
+                self.success_patterns[pattern_key] = {
+                    "count": 0,
+                    "avg_duration": 0,
+                    "avg_satisfaction": 0,
+                    "best_practices": []
+                }
+            
+            pattern = self.success_patterns[pattern_key]
+            pattern["count"] += 1
+            pattern["avg_duration"] = update_average(
+                pattern["avg_duration"], 
+                attempt["duration"], 
+                pattern["count"]
+            )
+            pattern["avg_satisfaction"] = update_average(
+                pattern["avg_satisfaction"],
+                attempt["user_satisfaction"],
+                pattern["count"]
+            )
+            
+            if attempt["user_satisfaction"] > 4:
+                pattern["best_practices"].append(attempt["lessons_learned"])
+        else:
+            if pattern_key not in self.failure_patterns:
+                self.failure_patterns[pattern_key] = {
+                    "count": 0,
+                    "common_issues": [],
+                    "suggested_alternatives": []
+                }
+            
+            pattern = self.failure_patterns[pattern_key]
+            pattern["count"] += 1
+            pattern["common_issues"].extend(attempt["lessons_learned"])
+            
+            # Generate alternative suggestions
+            alternatives = self.suggest_alternatives(attempt)
+            pattern["suggested_alternatives"].extend(alternatives)
+```
+
+### Recovery Success Metrics
+```yaml
+recovery_metrics:
+  success_indicators:
+    time_to_recovery:
+      excellent: "< 30 seconds"
+      good: "< 2 minutes"
+      acceptable: "< 5 minutes"
+      needs_improvement: "> 5 minutes"
+      
+    data_preservation:
+      excellent: "> 99%"
+      good: "> 95%"
+      acceptable: "> 90%"
+      critical: "< 90%"
+      
+    functionality_restoration:
+      full: "100%"
+      high: "> 80%"
+      medium: "> 60%"
+      low: "< 60%"
+      
+    user_satisfaction:
+      excellent: "5/5"
+      good: "4/5"
+      acceptable: "3/5"
+      poor: "< 3/5"
+  
+  tracking_dimensions:
+    - error_type
+    - severity_level
+    - recovery_method
+    - fallback_persona
+    - time_of_day
+    - system_load
+    - available_resources
+    - user_experience_level
+```
+
+### Recovery Pattern Analysis
+```python
+def analyze_recovery_effectiveness():
+    """Analyze recovery patterns for optimization opportunities"""
+    
+    # Load recovery history
+    recovery_data = load_recovery_metrics(days=30)
+    
+    analysis = {
+        "most_successful_methods": {},
+        "problematic_scenarios": {},
+        "optimization_opportunities": [],
+        "persona_effectiveness": {},
+        "time_based_patterns": {}
+    }
+    
+    # Analyze by error type
+    for error_type in get_unique_error_types(recovery_data):
+        type_data = filter_by_error_type(recovery_data, error_type)
+        
+        analysis["most_successful_methods"][error_type] = {
+            "method": get_most_successful_method(type_data),
+            "success_rate": calculate_success_rate(type_data),
+            "avg_recovery_time": calculate_avg_recovery_time(type_data),
+            "best_persona": get_best_performing_persona(type_data)
+        }
+    
+    # Identify problematic scenarios
+    for scenario in identify_low_success_scenarios(recovery_data):
+        analysis["problematic_scenarios"][scenario.id] = {
+            "description": scenario.description,
+            "success_rate": scenario.success_rate,
+            "common_failures": scenario.failure_reasons,
+            "suggested_improvements": generate_improvements(scenario)
+        }
+    
+    # Generate optimization suggestions
+    analysis["optimization_opportunities"] = [
+        {
+            "scenario": opp.scenario,
+            "current_approach": opp.current,
+            "suggested_approach": opp.suggested,
+            "expected_improvement": opp.improvement_estimate,
+            "implementation_effort": opp.effort
+        }
+        for opp in identify_optimization_opportunities(recovery_data)
+    ]
+    
+    return analysis
+```
+
+### Continuous Improvement Process
+```python
+class RecoveryImprovement:
+    """Continuously improve recovery procedures based on metrics"""
+    
+    def __init__(self):
+        self.improvement_queue = []
+        self.implemented_improvements = []
+        self.performance_history = []
+    
+    def evaluate_recovery_performance(self):
+        """Regular evaluation of recovery effectiveness"""
+        
+        # Get recent recovery metrics
+        recent_metrics = get_recovery_metrics(days=7)
+        
+        # Calculate performance scores
+        performance = {
+            "overall_success_rate": calculate_overall_success_rate(recent_metrics),
+            "avg_recovery_time": calculate_avg_recovery_time(recent_metrics),
+            "user_satisfaction": calculate_avg_satisfaction(recent_metrics),
+            "data_preservation_rate": calculate_data_preservation_rate(recent_metrics)
+        }
+        
+        # Compare with historical performance
+        trend = compare_with_history(performance, self.performance_history)
+        
+        # Generate improvement recommendations
+        if trend["declining"] or performance["overall_success_rate"] < 0.9:
+            recommendations = self.generate_recommendations(
+                performance, 
+                recent_metrics,
+                trend
+            )
+            self.improvement_queue.extend(recommendations)
+        
+        # Store performance snapshot
+        self.performance_history.append({
+            "timestamp": current_timestamp(),
+            "performance": performance,
+            "active_improvements": self.get_active_improvements()
+        })
+    
+    def implement_improvement(self, improvement):
+        """Implement a specific recovery improvement"""
+        
+        implementation = {
+            "improvement_id": improvement.id,
+            "type": improvement.type,
+            "description": improvement.description,
+            "implementation_date": current_timestamp(),
+            "expected_impact": improvement.expected_impact,
+            "actual_impact": None,  # To be measured
+            "status": "active"
+        }
+        
+        # Apply the improvement
+        if improvement.type == "fallback_update":
+            update_fallback_persona(improvement.target, improvement.changes)
+        elif improvement.type == "recovery_procedure":
+            update_recovery_procedure(improvement.procedure, improvement.updates)
+        elif improvement.type == "error_mapping":
+            update_error_mapping(improvement.mapping_updates)
+        
+        self.implemented_improvements.append(implementation)
+        
+        # Schedule impact measurement
+        schedule_impact_measurement(implementation, days=7)
+```
+
+### Recovery Dashboard
+```yaml
+recovery_dashboard:
+  real_time_metrics:
+    current_status:
+      - active_recoveries
+      - success_rate_today
+      - avg_recovery_time_today
+      - critical_failures
+      
+    recent_activity:
+      - last_10_recoveries
+      - trending_error_types
+      - persona_utilization
+      - resource_usage
+      
+  historical_analysis:
+    performance_trends:
+      - success_rate_trend_30d
+      - recovery_time_trend_30d
+      - user_satisfaction_trend_30d
+      - data_preservation_trend_30d
+      
+    pattern_insights:
+      - most_successful_patterns
+      - recurring_failures
+      - improvement_opportunities
+      - seasonal_variations
+      
+  recommendations:
+    immediate_actions:
+      - critical_fixes_needed
+      - quick_wins_available
+      - resource_optimizations
+      
+    strategic_improvements:
+      - long_term_enhancements
+      - architectural_changes
+      - training_needs
+      - tool_upgrades
+```
+
+This comprehensive fallback persona system ensures that BMAD can continue operating with reduced but functional capabilities even when primary persona files are unavailable, while continuously learning to improve the fallback experience through detailed tracking and analysis of recovery success patterns.

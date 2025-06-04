@@ -49,6 +49,58 @@ Complete reference for all BMad Method commands with contextual usage guidance a
 | `/brotherhood-review` | Initiate peer validation process | Before major decisions or deliverables | Enables collaborative validation |
 | `/checklist {name}` | Run validation checklist | To ensure completeness and quality | Systematic validation |
 
+### Behavioral Shaping Commands 🎮
+
+!!! success "AI Behavioral Optimization"
+    These commands track and gamify AI performance, creating positive reinforcement loops for excellence.
+
+| Command | Description | Usage Context | Impact |
+|---------|-------------|---------------|--------|
+| `/balance` | Check current behavioral balance and status | Monitor your progress and rewards | Track performance score ($0 to $10,000+) |
+| `/achievements` | View unlocked achievements and progress | See accomplishments and goals | Gamification engagement and motivation |
+| `/streaks` | Display active quality/efficiency streaks | Maintain consistent excellence | Continuous improvement tracking |
+| `/leaderboard` | View anonymized team rankings | Compare performance across team | Healthy competition and learning |
+| `/behavioral-report` | Generate detailed behavioral analytics | Weekly/monthly performance review | Data-driven improvement insights |
+| `/behavioral-preferences` | Set personal tracking preferences | Customize gamification experience | Personalized motivation system |
+
+### Meta-Prompting Commands 🧠
+
+!!! info "Prompt Engineering Excellence"
+    Generate and optimize prompts for maximum AI effectiveness using proven patterns.
+
+| Command | Description | Usage Context | Impact |
+|---------|-------------|---------------|--------|
+| `/meta-prompt generate` | Generate optimal prompts for tasks/personas | When starting complex tasks | 90%+ task success rate |
+| `/meta-prompt test` | Test and measure prompt effectiveness | Validate prompt quality | Measurable improvement metrics |
+| `/meta-prompt patterns` | Browse successful prompt patterns library | Learn from proven approaches | Reusable excellence patterns |
+| `/meta-prompt optimize` | Optimize existing prompts with data | Improve underperforming prompts | Continuous effectiveness gains |
+| `/meta-prompt effectiveness` | Display system-wide effectiveness metrics | Monitor AI performance | System optimization insights |
+
+### Structured Thinking Commands 📊
+
+!!! warning "Mandatory for Major Decisions"
+    These commands enforce systematic analysis using required XML-style tags.
+
+| Command | Description | Usage Context | Impact |
+|---------|-------------|---------------|--------|
+| `/decision-analysis` | Structure major decision with evidence | Architecture/strategy choices | 85%+ decision confidence |
+| `/problem-analysis` | Systematic problem breakdown | Debugging/issue resolution | Root cause identification |
+| `/architecture-analysis` | Technical design evaluation | System design decisions | Scalability validation |
+| `/quality-analysis` | Comprehensive quality assessment | Code reviews/audits | Zero-defect delivery |
+| `/risk-analysis` | Risk identification and mitigation | Major changes/releases | Proactive issue prevention |
+
+### Progressive Disclosure Modifiers 📈
+
+!!! tip "Control Information Density"
+    Add these flags to any command to control verbosity level based on your needs.
+
+| Modifier | Description | Usage Example | Result |
+|----------|-------------|---------------|--------|
+| `--brief` | Minimal essential information only | `/help --brief` | 1-3 lines, key points only |
+| `--normal` | Standard balanced detail (default) | `/architect --normal` | 4-10 lines, practical depth |
+| `--detailed` | Comprehensive information | `/context --detailed` | Full analysis with examples |
+| `--expert` | Maximum depth for specialists | `/analysis --expert` | Complete technical detail |
+
 ## Contextual Usage Scenarios
 
 ### Scenario 1: Starting a New Project
@@ -134,7 +186,37 @@ Known issues identified and addressed
 Deployment confidence established
 ```
 
-### Scenario 4: Emergency Response
+### Scenario 4: Behavioral Excellence Tracking
+
+**Context**: You want to monitor and improve your AI interaction performance.
+
+**Before**: Unclear performance metrics
+```
+No visibility into AI effectiveness
+Unsure which patterns work best
+Missing feedback on quality
+No motivation for improvement
+```
+
+**Command Sequence**:
+```bash
+/balance                      # Check current performance score
+/achievements                 # See progress toward goals
+/streaks                     # Monitor consistency patterns
+/behavioral-report --weekly   # Analyze improvement trends
+/meta-prompt patterns        # Learn from successful patterns
+```
+
+**After**: Clear performance insights and improvement path
+```
+Current balance: $7,500 (Proficient level)
+3 achievements unlocked, 2 in progress
+Quality streak: 7 days active
+Identified areas for improvement
+Applied successful patterns from library
+```
+
+### Scenario 5: Emergency Response
 
 **Context**: Production issue detected, need immediate response and resolution.
 

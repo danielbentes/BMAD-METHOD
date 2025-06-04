@@ -47,6 +47,7 @@ nav:
     - First Project: getting-started/first-project.md
   - Commands:
     - Quick Reference: commands/quick-reference.md
+    - Behavioral Commands: commands/behavioral-commands-guide.md
     - Advanced Search: commands/advanced-search.md
   - Workflows:
     - workflows/index.md
@@ -72,6 +73,7 @@ plugins:
       minify_html: true
       minify_css: true
       minify_js: true
+# Note: assets/images/ASSETS_NEEDED.md warning is cosmetic only
 
 markdown_extensions:
   - admonition

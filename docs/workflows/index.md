@@ -110,6 +110,87 @@ graph TD
     style F fill:#fef7e0
 ```
 
+## Advanced Behavioral Workflows 🧠
+
+### **Meta-Prompted Excellence Pattern**
+Leverage AI prompt engineering for optimal outcomes:
+
+```mermaid
+graph LR
+    A[Task Identification] --> B[Meta-Prompt Generation]
+    B --> C[Prompt Testing]
+    C --> D[Effectiveness Measure]
+    D --> E[Pattern Library Update]
+    E --> F[Continuous Optimization]
+    
+    B --> B1[/meta-prompt generate<br/>Context-aware creation]
+    C --> C1[/meta-prompt test<br/>Validate effectiveness]
+    D --> D1[/behavioral-report<br/>Track improvements]
+    E --> E1[/meta-prompt patterns<br/>Share success]
+    
+    style A fill:#e8f5e8
+    style B fill:#f3e5f5
+    style C fill:#fff3e0
+    style D fill:#e1f5fe
+    style E fill:#fce4ec
+    style F fill:#f1f8e9
+```
+
+**Key Commands**: `/meta-prompt generate` → `/meta-prompt test` → `/behavioral-report`
+
+### **Behavioral Excellence Tracking Pattern**
+Monitor and improve AI interaction quality:
+
+```mermaid
+graph TD
+    A[Daily Work] --> B[Performance Tracking]
+    B --> C[Achievement Progress]
+    C --> D[Streak Management]
+    D --> E[Weekly Analysis]
+    E --> F[Improvement Planning]
+    
+    A --> A1[Regular interactions<br/>with quality focus]
+    B --> B1[/balance<br/>Monitor score]
+    C --> C1[/achievements<br/>Track progress]
+    D --> D1[/streaks<br/>Maintain consistency]
+    E --> E1[/behavioral-report<br/>Analyze patterns]
+    F --> F1[Apply learnings<br/>to future work]
+    
+    style A fill:#e8f5e8
+    style B fill:#f3e5f5
+    style C fill:#fff3e0
+    style D fill:#fce4ec
+    style E fill:#e1f5fe
+    style F fill:#f1f8e9
+```
+
+**Key Commands**: `/balance` → `/achievements` → `/streaks` → `/behavioral-report`
+
+### **Context-Adaptive Development Pattern**
+Dynamic behavior adjustment for optimal outcomes:
+
+```mermaid
+graph LR
+    A[Context Detection] --> B[Stakeholder Analysis]
+    B --> C[Communication Adapt]
+    C --> D[Progressive Disclosure]
+    D --> E[Feedback Integration]
+    
+    A --> A1[Auto-detect:<br/>• Project type<br/>• Team level<br/>• Urgency]
+    B --> B1[Identify:<br/>• Technical depth<br/>• Business focus<br/>• Time constraints]
+    C --> C1[Adjust:<br/>• Language<br/>• Examples<br/>• Detail level]
+    D --> D1[Apply:<br/>--brief<br/>--normal<br/>--detailed]
+    E --> E1[Learn &<br/>Optimize]
+    
+    style A fill:#e1f5fe
+    style B fill:#f3e5f5
+    style C fill:#fff3e0
+    style D fill:#e8f5e8
+    style E fill:#fce4ec
+```
+
+**Key Modifiers**: `--brief` | `--normal` | `--detailed` | `--expert`
+
 ## Workflow Success Indicators
 
 ### **Process Efficiency Metrics**

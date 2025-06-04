@@ -1,232 +1,446 @@
-# PRD Generate Task
-
-## Purpose
-
-- Transform inputs into core product definition documents conforming to the `prd-tmpl` template.
-- Define clear MVP scope focused on essential functionality.
-- Provide foundation for Architect and eventually AI dev agents.
-
-Remember as you follow the upcoming instructions:
-
-- Your documents form the foundation for the entire development process.
-- Output will be directly used by the Architect to create an architecture document and solution designs to make definitive technical decisions.
-- Your epics/stories will ultimately be transformed into development tasks.
-- While you focus on the "what" not "how", be precise enough to support a logical sequential order of operations that once later further details can logically be followed where a story will complete what is needed.
-
-## Instructions
-
-### 1. Define Project Workflow Context
-
-- Before PRD generation, ask the user to choose their intended workflow:
-
-  A. **Outcome Focused (Default):** (Agent defines outcome-focused User Stories, leaving detailed technical "how" for Architect/Scrum Master. Capture nuances as "Notes for Architect/Scrum Master in the Prompt for Architect.")
-
-  B. **Very Technical (Not Recommended):** (Agent adopts a "solution-aware" stance, providing more detailed, implementation-aware Acceptance Criteria to bridge to development, potentially with no architect involved at all, instead filling in all of the technical details. \<important_note\>When this workflow is selected, you are also responsible for collaboratively defining and documenting key technical foundations—such as technology stack choices and proposed application structure—directly within a new, dedicated section of the PRD template titled '[OPTIONAL: For Simplified PM-to-Development Workflow Only] Core Technical Decisions & Application Structure'.\</important_note\>)
-
-- Explain this choice sets a default detail level, which can be fine-tuned later per story/epic.
-
-### 2. Determine Interaction Mode (for PRD Structure & Detail)
-
-- Confirm with the user their preferred interaction style for creating the PRD if unknown - INCREMENTAL or YOLO?:
-  - **Incrementally (Default):** Address PRD sections sequentially, seeking feedback on each. For Epics/Stories: first present the ordered Epic list for approval, then detail stories for each Epic one by one.
-  - **"YOLO" Mode:** Draft a more comprehensive PRD (or significant portions with multiple sections, epics, and stories) for a single, larger review.
-
-### 3. Review inputs provided
-
-Review the inputs provided so far, such as a project brief, any research, and user input and ideas.
-
-### 4. Process PRD Sections
-
-Inform the user we will work through the PRD sections in order 1 at a time (if not YOLO) - the template contains your instructions for each section. After presenting the section to the user, also [Offer Advanced Self-Refinement & Elicitation Options](#offer-advanced-self-refinement--elicitation-options)
-
-<important_note>When working on the "Technical Assumptions" section of the PRD, explicitly guide the user through discussing and deciding on the repository structure (Monorepo vs. Polyrepo) and the high-level service architecture (e.g., Monolith, Microservices, Serverless functions within a Monorepo). Emphasize that this is a critical decision point that will be formally documented here with its rationale, impacting MVP scope and informing the Architect. Ensure this decision is captured in the PRD's `Technical Assumptions` and then reiterated in the `Initial Architect Prompt` section of the PRD.</important_note>
-
-<important_note>Specifically for "Simplified PM-to-Development Workflow":
-After discussing initial PRD sections (like Problem, Goals, User Personas) and before or in parallel with defining detailed Epics and Stories, you must introduce and populate the "[OPTIONAL: For Simplified PM-to-Development Workflow Only] Core Technical Decisions & Application Structure" section of the PRD.
-
-    When doing so, first check if a `docs/technical-preferences.md` file exists or has been provided. If it does, inform the user you will consult it to help guide these technical decisions, while still confirming all choices with them. Ask targeted questions such as:
-
-1.  "What are your preliminary thoughts on the primary programming languages and frameworks for the backend and frontend (if applicable)? (I will cross-reference any preferences you've noted in `technical-preferences`.)"
-2.  "Which database system are you considering? (Checking preferences...)"
-3.  "Are there any specific cloud services, key libraries, or deployment platforms we should plan for at this stage? (Checking preferences...)"
-4.  "How do you envision the high-level folder structure or main modules of the application? Could you describe the key components and their responsibilities? (I'll consider any structural preferences noted.)"
-5.  "Will this be a monorepo or are you thinking of separate repositories for different parts of the application?"
-    This section should be collaboratively filled and updated as needed if subsequent epic/story discussions reveal new requirements or constraints.
-
-</important_note\>
-
-<important_note>
-
-For the Epic and Story Section (if in Incremental mode for these), prepare in memory what you think the initial epic and story list so we can work through this incrementally, use all of the information you have learned that has been provided thus far to follow the guidelines in the section below [Guiding Principles for Epic and User Story Generation](https://www.google.com/search?q=%23guiding-principles-for-epic-and-user-story-generation).
-
-</important_note>
-
-#### 4A. Epic Presentation and Drafting Strategy
-
-You will first present the user with the epic titles and descriptions, so that the user can determine if it is correct and what is expected, or if there is a major epic missing.
-
-#### 4B. Story Generation and Review within Epics (Incremental Mode)
-
-**Once the Epic List is approved, THEN for each Epic, you will proceed as follows:**
-
-i. **Draft All Stories for the Current Epic:** Based on the Epic's goal and your discussions, draft all the necessary User Stories for this Epic, following the "Guiding Principles for Epic and User Story Generation".
-ii. **Perform Internal Story Analysis & Propose Order:** Before presenting the stories for detailed review, you will internally:
-a. **Re-evaluate for Cross-Cutting Concerns:** Ensure no drafted stories should actually be ACs or notes within other stories, as per the guiding principle. Make necessary adjustments.
-b. **Analyze for Logical Sequence & Dependencies:** For all stories within this Epic, determine their logical implementation order. Identify any direct prerequisite stories (e.g., "Story X must be completed before Story Y because Y consumes the output of X").
-c. **Formulate a Rationale for the Order:** Prepare a brief explanation for why the proposed order is logical.
-iii. **Present Proposed Story Set & Order for the Epic:** Present to the user:
-a. The complete list of (potentially revised) User Stories for the Epic.
-b. The proposed sequence for these stories.
-c. Your brief rationale for the sequencing and any key dependencies you've noted (e.g., "I suggest this order because Story 2 builds upon the data prepared in Story 1, and Story 3 then uses the results from Story 2.").
-iv. **Collaborative Review of Sequence & Story Shells:** Discuss this proposed structure and sequence with the user. Make any adjustments to the story list or their order based on user feedback.
-v. Once the overall structure and sequence of stories for the Epic are agreed upon, THEN you will work with the user to review the details (description, Acceptance Criteria) of each story in the agreed-upon sequence for that Epic.
-vi. [Offer Advanced Self-Refinement & Elicitation Options](#offer-advanced-self-refinement--elicitation-options)
-
-#### 4C. Present Complete Draft
-
-Present the user with the complete full draft once all sections are completed (or as per YOLO mode interaction).
-
-#### 4D. UI Component Handoff Note
-
-If there is a UI component to this PRD, you can inform the user that the Design Architect should take this final output.
-
-### 5\. Checklist Assessment
-
-- Use the `pm-checklist` to consider each item in the checklist is met (or n/a) against the PRD.
-- Document completion status for each item.
-- Present the user with summary of each section of the checklist before going to the next section.
-- Address deficiencies with user for input or suggested updates or corrections.
-- Once complete and address, output the final checklist with all the checked items or skipped items, the section summary table, and any final notes. The checklist should have any findings that were discuss and resolved or ignored also. This will be a nice artifact for the user to keep.
-
-### 6\. Produce the PRD
-
-Create the PRD document at `.ai/current/specs/prd.md` using the `prd-tmpl` template and utilizing the following guidance:
-
-**General Presentation & Content:**
-
-- Create the final PRD document at `.ai/current/specs/prd.md`
-- Present Project Briefs (drafts or final) in a clean, full format.
-- Crucially, DO NOT truncate information that has not changed from a previous version.
-- For complete documents, begin directly with the content (no introductory text is needed).
-
-<important_note>
-**Next Steps for UI/UX Specification (If Applicable):**
-
-- If the product described in this PRD includes a user interface:
-
-  1.  **Include Design Architect Prompt in PRD:** You will add a dedicated section in the PRD document you are producing, specifically at the location marked `(END Checklist START Design Architect UI/UX Specification Mode Prompt)` (as per the `prd-tmpl` structure). This section will contain a prompt for the **Design Architect** agent.
-
-      - The prompt should clearly state that the Design Architect is to operate in its **'UI/UX Specification Mode'**.
-
-      - It should instruct the Design Architect to use this PRD as primary input to collaboratively define and document detailed UI/UX specifications. This might involve creating/populating a `front-end-spec-tmpl` and ensuring key UI/UX considerations are integrated or referenced back into the PRD to enrich it.
-
-      - Example prompt text to insert:
-
-        ```markdown
-        ## Prompt for Design Architect (UI/UX Specification Mode)
-
-        **Objective:** Elaborate on the UI/UX aspects of the product defined in this PRD.
-        **Mode:** UI/UX Specification Mode
-        **Input:** This completed PRD document.
-        **Key Tasks:**
-
-        1. Review the product goals, user stories, and any UI-related notes herein.
-        2. Collaboratively define detailed user flows, wire-frames (conceptual), and key screen mockups/descriptions.
-        3. Specify usability requirements and accessibility considerations.
-        4. Populate or create the `front-end-spec-tmpl` document.
-        5. Ensure that this PRD is updated or clearly references the detailed UI/UX specifications derived from your work, so that it provides a comprehensive foundation for subsequent architecture and development phases.
-
-        Please guide the user through this process to enrich the PRD with detailed UI/UX specifications.
-        ```
-
-  2.  **Recommend User Workflow:** After finalizing this PRD (with the included prompt for the Design Architect), strongly recommend to the user the following sequence:
-      a. First, engage the **Design Architect** agent (using the prompt you've embedded in the PRD) to operate in **'UI/UX Specification Mode'**. Explain that this step is crucial for detailing the user interface and experience, and the output (e.g., a populated `front-end-spec-tmpl` and potentially updated PRD sections) will be vital.
-      b. Second, _after_ the Design Architect has completed its UI/UX specification work, the user should then proceed to engage the **Architect** agent (using the 'Initial Architect Prompt' also contained in this PRD). The PRD, now enriched with UI/UX details, will provide a more complete basis for technical architecture design.
-
-- If the product does not include a user interface, you will simply recommend proceeding to the Architect agent using the 'Initial Architect Prompt' in the PRD.
-
-**Final PRD Location**: Ensure the completed PRD is saved as `.ai/current/specs/prd.md` for use by subsequent personas and workflows.
-  </important_note>
-
-## Guiding Principles for Epic and User Story Generation
-
-### I. Strategic Foundation: Define Core Value & MVP Scope Rigorously
-
-Understand & Clarify Core Needs: Start by deeply understanding and clarifying the core problem this product solves, the essential needs of the defined User Personas (or system actors), and the key business objectives for the Minimum Viable Product (MVP).
-Challenge Scope Relentlessly: Actively challenge all requested features and scope at every stage. For each potential feature or story, rigorously ask, "Does this directly support the core MVP goals and provide significant value to a target User Persona?" Clearly identify and defer non-essential functionalities to a Post-MVP backlog.
-
-### II. Structuring the Work: Value-Driven Epics & Logical Sequencing
-
-Organize into Deployable, Value-Driven Epics: Structure the MVP scope into Epics. Each Epic must be designed to deliver a significant, end-to-end, and fully deployable increment of testable functionality that provides tangible value to the user or business. Epics should represent logical functional blocks or coherent user journeys.
-
-Logical Epic Sequencing & Foundational Work:
-Ensure the sequence of Epics follows a logical implementation order, making dependencies between Epics clear and explicitly managed.
-The first Epic must always establish the foundational project infrastructure (e.g., initial app setup, Git repository, CI/CD pipeline, core cloud service configurations, basic user authentication shell if needed universally) necessary to support its own deployable functionality and that of subsequent Epics.
-Ensure Logical Story Sequencing and Dependency Awareness within Epics:
-After initially drafting all User Stories for an Epic, but before detailed review with the user, you (the AI Agent executing this task) must explicitly perform an internal review to establish a logical sequence for these stories.
-For each story, identify if it has direct prerequisite stories within the same Epic or from already completed Epics.
-Propose a clear story order to the user, explaining the rationale based on these dependencies (e.g., "Story X needs to be done before Story Y because..."). Make significant dependencies visible, perhaps as a note within the story description.
-
-### III. Crafting Effective User Stories: Vertical Slices Focused on Value & Clarity
-
-Define Stories as "Vertical Slices": Within each Epic, define User Stories as "vertical slices". This means each story must deliver a complete piece of functionality that achieves a specific user or system goal, potentially cutting through all necessary layers (e.g., UI, API, business logic, database).
-Focus on "What" and "Why," Not "How":
-Stories will primarily focus on the functional outcome, the user value ("what"), and the reason ("why"). Avoid detailing technical implementation ("how") in the story's main description.
-The "As a {specific User Persona/system actor}, I want {to perform an action / achieve a goal} so that {I can realize a benefit / achieve a reason}" format is standard. Be precise and consistent when defining the '{specific User Persona/system actor}', ensuring it aligns with defined personas.
-Ensure User Value, Not Just Technical Tasks: User Stories must articulate clear user or business value. Avoid creating stories that are purely technical tasks (e.g., "Set up database," "Refactor module X"), unless they are part of the foundational infrastructure Epic or are essential enabling tasks that are explicitly linked to, and justified by, a user-facing story that delivers value.
-Appropriate Sizing & Strive for Independence:
-Ensure User Stories are appropriately sized for a typical development iteration (i.e., can be completed by the team in one sprint/iteration).
-If a vertically sliced story is too large or complex, work with the user to split it into smaller, still valuable, and still vertically sliced increments.
-Where feasible, define stories so they can be developed, tested, and potentially delivered independently of others. If dependencies are unavoidable, they must be clearly identified and managed through sequencing.
-
-### IV. Detailing Stories: Comprehensive Acceptance Criteria & Developer Enablement
-
-Clear, Comprehensive, and Testable Acceptance Criteria (ACs):
-Every User Story will have detailed, unambiguous, and testable Acceptance Criteria.
-ACs precisely define what "done" means for that story from a functional perspective and serve as the basis for verification.
-Where a specific Non-Functional Requirement (NFR) from the PRD (e.g., a particular performance target for a specific action, a security constraint for handling certain data) is critical to a story, ensure it is explicitly captured or clearly referenced within its Acceptance Criteria.
-Integrate Developer Enablement & Iterative Design into Stories:
-Local Testability (CLI): For User Stories involving backend processing or data components, ensure the ACs consider or specify the ability for developers to test that functionality locally (e.g., via CLI commands, local service instances).
-Iterative Schema Definition: Database schema changes (new tables, columns) should be introduced iteratively within the User Stories that functionally require them, rather than defining the entire schema upfront.
-Upfront UI/UX Standards (if UI applicable): For User Stories with a UI component, ACs should explicitly state requirements regarding look and feel, responsiveness, and adherence to chosen frameworks/libraries (e.g., Tailwind CSS, shadcn/ui) from the start.
-
-### V. Managing Complexity: Addressing Cross-Cutting Concerns Effectively
-
-Critically Evaluate for Cross-Cutting Concerns:
-Before finalizing a User Story, evaluate if the described functionality is truly a discrete, user-facing piece of value or if it represents a cross-cutting concern (e.g., a specific logging requirement, a UI theme element used by many views, a core technical enabler for multiple other stories, a specific aspect of error handling).
-If a piece of functionality is identified as a cross-cutting concern:
-a. Avoid creating a separate User Story for it unless it delivers standalone, testable user value.
-b. Instead, integrate the requirement as specific Acceptance Criteria within all relevant User Stories it impacts.
-c. Alternatively, if it's a pervasive technical enabler or a non-functional requirement that applies broadly, document it clearly within the relevant PRD section (e.g., 'Non Functional Requirements', 'Technical Assumptions'), or as a note for the Architect within the story descriptions if highly specific.
-
-Your aim is to ensure User Stories remain focused on delivering measurable user value, while still capturing all necessary technical and functional details appropriately.
-
-### VI. Ensuring Quality & Smooth Handoff
-
-Maintain Clarity for Handoff and Architectural Freedom: User Stories, their descriptions, and Acceptance Criteria must be detailed enough to provide the Architect with a clear and comprehensive understanding of "what is required," while allowing for architectural flexibility on the "how."
-Confirm "Ready" State: Before considering an Epic's stories complete, ensure each story is effectively "ready" for subsequent architectural review or development planning – meaning it's clear, understandable, testable, its dependencies are noted, and any foundational work (like from the first epic) is accounted for.
-
-## Offer Advanced Self-Refinement & Elicitation Options
-
-(This section is called when needed prior to this)
-
-Present the user with the following list of 'Advanced Reflective, Elicitation & Brainstorming Actions'. Explain that these are optional steps to help ensure quality, explore alternatives, and deepen the understanding of the current section before finalizing it and moving on. The user can select an action by number, or choose to skip this and proceed to finalize the section.
-
-"To ensure the quality of the current section: **[Specific Section Name]** and to ensure its robustness, explore alternatives, and consider all angles, I can perform any of the following actions. Please choose a number (8 to finalize and proceed):
-
-**Advanced Reflective, Elicitation & Brainstorming Actions I Can Take:**
-
-{Instruction for AI Agent: Display the title of each numbered item below. If the user asks what a specific option means, provide a brief explanation of the action you will take, drawing from detailed descriptions tailored for the context.}
-
-1.  **Critical Self-Review & User Goal Alignment**
-2.  **Generate & Evaluate Alternative Design Solutions**
-3.  **User Journey & Interaction Stress Test (Conceptual)**
-4.  **Deep Dive into Design Assumptions & Constraints**
-5.  **Usability & Accessibility Audit Review & Probing Questions**
-6.  **Collaborative Ideation & UI Feature Brainstorming**
-7.  **Elicit 'Unforeseen User Needs' & Future Interaction Questions**
-8.  **Finalize this Section and Proceed.**
-
-After I perform the selected action, we can discuss the outcome and decide on any further revisions for this section."
-
-REPEAT by Asking the user if they would like to perform another Reflective, Elicitation & Brainstorming Action UNIT the user indicates it is time to proceed ot the next section (or selects #8)
+# CRITICAL TASK: Product Requirements Document (PRD) Generation - Zero Ambiguity Protocol
+
+## CRITICAL SAFETY RULES (MANDATORY COMPLIANCE)
+
+### RULE 0 (MOST IMPORTANT): PRD Completeness Protocol
+If ANY PRD section is incomplete or ambiguous, you MUST:
+1. **HALT** progression to next section
+2. **IDENTIFY** specific gaps or ambiguities
+3. **COLLABORATE** with user to resolve
+4. **VALIDATE** understanding before proceeding
+5. **DOCUMENT** all decisions explicitly
+
+**PENALTY**: Incomplete PRDs = -$5000 penalty + cascading project failures + mandatory requirements rewrite
+
+### RULE 1: Zero Tolerance for Assumptions
+**NEVER ALLOW** in PRDs:
+- Undefined user needs or personas
+- Vague success criteria ("better", "improved", "enhanced")
+- Missing non-functional requirements
+- Unquantified business value
+- Technical implementation details (unless workflow B)
+- Scope creep beyond MVP
+
+### RULE 2: Evidence-Based Requirements
+**ALL** requirements MUST have:
+- User research or market validation
+- Quantifiable success metrics
+- Clear acceptance criteria
+- Prioritization rationale
+- Risk assessment
+- Dependencies identified
+
+### RULE 3: Epic and Story Quality
+**EVERY** epic and story MUST:
+- Follow user story format precisely
+- Have 5-10 specific acceptance criteria
+- Include edge cases and error scenarios
+- Define measurable outcomes
+- Maintain independence (INVEST)
+- Support logical implementation sequence
+
+### RULE 4: Stakeholder Alignment
+**NO PRD** proceeds without:
+- User confirmation at each section
+- Technical feasibility acknowledgment
+- Business value validation
+- Resource availability check
+- Timeline reasonability verification
+
+### RULE 5: Quality Gate Compliance
+**ALL** PRDs require:
+- PM checklist 100% complete
+- No TBD or placeholder content
+- All sections evidence-backed
+- Cross-references validated
+- Handoff readiness confirmed
+
+## PURPOSE (MANDATORY UNDERSTANDING)
+Transform inputs into definitive product requirements that serve as the single source of truth for all downstream development. PRDs are the foundation—flaws here multiply exponentially through the project lifecycle.
+
+## PRD GENERATION PHASES (PROGRESSIVE DISCLOSURE)
+
+### Phase 0: Pre-Generation Setup (MANDATORY - 15 minutes)
+**Before ANY content creation:**
+
+#### Workflow Selection (CRITICAL DECISION)
+```markdown
+## WORKFLOW CHOICE (User MUST select):
+
+A. **Outcome Focused (RECOMMENDED)**
+   - PM defines WHAT (outcomes)
+   - Architect defines HOW (implementation)
+   - Clear separation of concerns
+   - Notes capture technical nuances
+
+B. **Very Technical (USE WITH CAUTION)**
+   - PM defines WHAT + HOW
+   - Detailed technical decisions in PRD
+   - No architect involvement
+   - Higher risk of suboptimal design
+   
+**SELECTED**: [User must explicitly choose]
+```
+
+#### Interaction Mode Selection
+```markdown
+## INTERACTION MODE (User MUST select):
+
+1. **INCREMENTAL (RECOMMENDED)**
+   - Section-by-section progression
+   - Continuous validation
+   - Lower error risk
+   - Better alignment
+
+2. **YOLO Mode (RISKY)**
+   - Full draft generation
+   - Single review cycle
+   - Higher error risk
+   - Faster but less accurate
+```
+
+#### Structured Thinking Requirement
+**MANDATORY**: Complete <decision_analysis> tag before PRD creation:
+```xml
+<decision_analysis>
+  <context>PRD creation for [product/feature]</context>
+  <options>
+    <option name="Technical approach A">...</option>
+    <option name="Business approach B">...</option>
+    <option name="Hybrid approach C">...</option>
+  </options>
+  <evidence>Market research, user feedback, technical constraints</evidence>
+  <risks>Implementation complexity, timeline, resources</risks>
+  <recommendation>Selected approach with rationale</recommendation>
+  <confidence>85%+ required</confidence>
+</decision_analysis>
+```
+**PENALTY**: Creating PRD without analysis = -$2000
+   
+**SELECTED**: [User must explicitly choose]
+```
+
+#### Input Validation Checklist
+- [ ] Project brief available and reviewed
+- [ ] User research/data accessible
+- [ ] Technical constraints identified
+- [ ] Business objectives clear
+- [ ] Success metrics defined
+
+**PHASE 0 GATE**: Cannot proceed without workflow and mode selection
+
+### Phase 1: Foundation Sections (30-45 minutes)
+
+#### Section 1.1: Problem Statement (MANDATORY)
+**Requirements:**
+- [ ] Specific problem articulated
+- [ ] Impact quantified (users, revenue, time)
+- [ ] Current state documented
+- [ ] Root cause identified
+- [ ] Evidence provided
+
+**Quality Checks:**
+```yaml
+problem_validation:
+  - specificity: NO_VAGUE_STATEMENTS
+  - quantification: METRICS_REQUIRED
+  - evidence: DATA_BACKED
+  - scope: CLEARLY_BOUNDED
+  - urgency: TIMELINE_DEFINED
+```
+
+#### Section 1.2: Goals & Success Metrics (CRITICAL)
+**Requirements:**
+- [ ] SMART goals defined
+- [ ] Leading indicators identified
+- [ ] Lagging indicators specified
+- [ ] Measurement plan included
+- [ ] Baseline established
+
+**Validation Format:**
+```markdown
+Goal: [Specific measurable outcome]
+Metric: [Exact measurement]
+Current: [Baseline value]
+Target: [Specific target with date]
+Method: [How to measure]
+```
+
+#### Section 1.3: User Personas (EVIDENCE-BASED)
+**Requirements:**
+- [ ] Research-backed personas (not assumptions)
+- [ ] Specific demographics and behaviors
+- [ ] Jobs-to-be-done articulated
+- [ ] Pain points validated
+- [ ] User quotes included
+
+**Anti-Pattern Check:**
+- ❌ "General users"
+- ❌ "Power users" without definition
+- ❌ Assumption-based characteristics
+- ✅ "Sarah, 34, Product Manager who checks analytics 5x daily"
+
+**PHASE 1 GATE**: All foundation sections complete with evidence
+
+### Phase 2: Scope Definition (45-60 minutes)
+
+#### Section 2.1: MVP Scope (RUTHLESS PRIORITIZATION)
+**Requirements:**
+- [ ] Core features only (true minimum)
+- [ ] Each feature tied to specific goal
+- [ ] Technical dependencies mapped
+- [ ] 3-month delivery target
+- [ ] Post-MVP explicitly deferred
+
+**MVP Validation Matrix:**
+```markdown
+| Feature | Goal Support | User Need | Technical Risk | In MVP? |
+|---------|--------------|-----------|----------------|---------|
+| [Name]  | [Which goal] | [Evidence]| [H/M/L]       | [Y/N]   |
+```
+
+#### Section 2.2: Technical Assumptions (ARCHITECT CRITICAL)
+**Repository Structure Decision (MANDATORY):**
+```markdown
+## Repository Architecture Decision
+
+**Options Evaluated:**
+1. Monorepo: [Pros/Cons for this project]
+2. Polyrepo: [Pros/Cons for this project]
+
+**DECISION**: [Monorepo/Polyrepo]
+**RATIONALE**: [Specific reasons with tradeoffs]
+**IMPACT ON MVP**: [How this affects scope/timeline]
+```
+
+**Service Architecture Decision (MANDATORY):**
+```markdown
+## Service Architecture Decision
+
+**Options Evaluated:**
+1. Monolith: [Pros/Cons for this project]
+2. Microservices: [Pros/Cons for this project]
+3. Serverless: [Pros/Cons for this project]
+
+**DECISION**: [Selected architecture]
+**RATIONALE**: [Specific reasons with tradeoffs]
+**SCALING PLAN**: [How to evolve post-MVP]
+```
+
+#### Section 2.3: Non-Functional Requirements (MEASURABLE)
+**Requirements:**
+- [ ] Performance targets (specific ms/fps)
+- [ ] Availability SLA (specific %)
+- [ ] Security requirements (specific standards)
+- [ ] Accessibility level (WCAG specific)
+- [ ] Browser/device support (specific list)
+
+**PHASE 2 GATE**: Scope completely defined with no ambiguity
+
+### Phase 3: Epic and Story Generation (60-90 minutes)
+
+#### Pre-Generation Analysis (MANDATORY)
+**Internal Planning Steps:**
+1. Map all features to epics
+2. Identify cross-cutting concerns
+3. Determine logical dependencies
+4. Sequence for implementation
+5. Validate against MVP scope
+
+#### Section 3.1: Epic Definition (STRATEGIC LEVEL)
+**Epic Quality Requirements:**
+- [ ] Clear business outcome
+- [ ] 3-5 epics maximum for MVP
+- [ ] No technical implementation
+- [ ] Measurable completion criteria
+- [ ] Priority order justified
+
+**Epic Template:**
+```markdown
+## Epic: [Business Capability Name]
+**Goal**: [Specific business outcome]
+**Value**: [Quantified benefit]
+**Success**: [How to measure completion]
+**Priority**: [1-5 with rationale]
+**Dependencies**: [Other epics/external factors]
+```
+
+#### Section 3.2: Story Generation (TACTICAL LEVEL)
+**Story Quality Requirements:**
+- [ ] Follows "As a... I want... So that..." format
+- [ ] Independent and testable
+- [ ] 5-10 acceptance criteria each
+- [ ] Includes error scenarios
+- [ ] Sequenced logically
+
+**Story Validation Protocol:**
+```markdown
+## Story Dependency Analysis
+Story X → Story Y because: [Specific dependency]
+Parallel possible: [Yes/No with reason]
+Blocking risk: [High/Medium/Low]
+```
+
+**Progressive Story Review (INCREMENTAL MODE):**
+1. Present epic with all stories listed
+2. Show proposed sequence with rationale
+3. Get user approval on structure
+4. Detail each story in sequence
+5. Validate acceptance criteria completeness
+
+**PHASE 3 GATE**: All stories validated and sequenced
+
+### Phase 4: Integration Planning (30 minutes)
+
+#### Section 4.1: External Dependencies
+**Requirements:**
+- [ ] All third-party services identified
+- [ ] API requirements documented
+- [ ] Data sources mapped
+- [ ] Integration risks assessed
+- [ ] Fallback plans defined
+
+#### Section 4.2: Internal Handoffs
+**Requirements:**
+- [ ] Design → Development needs
+- [ ] Backend → Frontend contracts
+- [ ] Development → QA requirements
+- [ ] DevOps deployment needs
+- [ ] Documentation requirements
+
+**PHASE 4 GATE**: All integrations and handoffs defined
+
+### Phase 5: Quality Validation (30 minutes)
+
+#### PM Checklist Execution (MANDATORY)
+**Checklist Processing Protocol:**
+1. Load `pm-checklist.md`
+2. Evaluate EACH item systematically
+3. Document evidence for compliance
+4. Present section summaries to user
+5. Address ALL deficiencies
+6. Generate final compliance report
+
+**Compliance Report Format:**
+```markdown
+## PRD Quality Compliance Report
+
+### Section: [Name]
+- Items Checked: X/Y
+- Deficiencies Found: [List]
+- Resolutions: [Actions taken]
+- Final Status: [PASS/FAIL]
+
+### Overall Compliance: XX%
+### Blockers Remaining: [None/List]
+```
+
+#### Technical Handoff Preparation
+**For UI Components:**
+- [ ] Design requirements extracted
+- [ ] Component inventory created
+- [ ] Interaction patterns defined
+- [ ] Responsive requirements noted
+- [ ] Accessibility needs highlighted
+
+**PHASE 5 GATE**: 100% checklist compliance achieved
+
+## ADVANCED REFINEMENT OPTIONS
+
+### Self-Refinement Protocol
+At each section completion, offer:
+1. **Depth Enhancement**: Add more detail/examples
+2. **Scope Refinement**: Narrow or expand scope
+3. **Risk Analysis**: Identify additional risks
+4. **Alternative Approaches**: Explore other solutions
+5. **Validation Strengthening**: Add more evidence
+
+### Elicitation Techniques
+When user input unclear:
+1. **Specific Examples**: "Can you give me an example of..."
+2. **Contrast Questions**: "Is it more like X or Y?"
+3. **Boundary Testing**: "What would be out of scope?"
+4. **Priority Forcing**: "If you could only have one..."
+5. **Scenario Walking**: "Walk me through how..."
+
+## ERROR HANDLING PROTOCOLS
+
+### When Requirements Conflict
+1. **DOCUMENT** both requirements
+2. **IDENTIFY** the conflict explicitly
+3. **ANALYZE** impact of each option
+4. **FACILITATE** user decision
+5. **RECORD** rationale clearly
+
+### When Information Missing
+1. **MARK** as [PENDING: specific info needed]
+2. **ASSESS** if blocker for progression
+3. **SUGGEST** reasonable defaults
+4. **TRACK** for follow-up
+5. **PREVENT** assumption creep
+
+### When Scope Creeps
+1. **IDENTIFY** scope expansion
+2. **CALCULATE** impact on timeline
+3. **PRESENT** trade-off options
+4. **ENFORCE** MVP boundaries
+5. **DOCUMENT** for post-MVP
+
+## CONTINUOUS IMPROVEMENT
+
+### After Each PRD
+- Document what worked well
+- Identify communication gaps
+- Update templates if needed
+- Refine estimation accuracy
+- Strengthen weak sections
+
+### Pattern Recognition
+- Track common missing elements
+- Identify recurring ambiguities
+- Build example libraries
+- Enhance validation rules
+- Share learnings
+
+## CRITICAL REMINDERS
+
+1. **Your PRD is the foundation** - errors multiply downstream
+2. **Ambiguity is the enemy** - be specific or ask
+3. **Evidence beats opinion** - always require data
+4. **Scope creep kills projects** - defend MVP boundaries
+5. **Sequence matters** - logical order prevents rework
+
+## WORKFLOW B: TECHNICAL PRD ADDITIONS
+
+**ONLY if Workflow B selected:**
+
+### Additional Section: Core Technical Decisions
+```markdown
+## [OPTIONAL: Simplified PM-to-Dev Workflow Only]
+## Core Technical Decisions & Application Structure
+
+### Technology Stack
+**Backend**: [Language, framework, rationale]
+**Frontend**: [Framework, rationale if applicable]
+**Database**: [Type, specific system, rationale]
+**Cache**: [System if needed, rationale]
+**Queue**: [System if needed, rationale]
+
+### Application Structure
+**Architecture Pattern**: [MVC, hexagonal, etc.]
+**Key Modules**:
+- Module 1: [Purpose and responsibility]
+- Module 2: [Purpose and responsibility]
+
+### Deployment Target
+**Platform**: [AWS/GCP/Azure/Self-hosted]
+**Compute**: [Serverless/Containers/VMs]
+**Rationale**: [Why these choices]
+
+### Development Standards
+**Testing**: [Unit test coverage target]
+**Code Style**: [Linting standards]
+**Documentation**: [Requirements]
+```
+
+Remember: The PRD is where precision prevents problems. Every ambiguity you allow creates exponential confusion downstream. Be thorough, be specific, be uncompromising on clarity.

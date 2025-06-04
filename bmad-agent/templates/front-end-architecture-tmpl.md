@@ -6,9 +6,15 @@
 
 - [Introduction](#introduction)
 - [Overall Frontend Philosophy & Patterns](#overall-frontend-philosophy--patterns)
+- [Design System Compliance & Tracking](#design-system-compliance--tracking)
+  - [Design System Foundation](#design-system-foundation)
+  - [Design Token Management](#design-token-management)
+  - [Component Compliance Tracking](#component-compliance-tracking)
+  - [Design Review Process](#design-review-process)
 - [Detailed Frontend Directory Structure](#detailed-frontend-directory-structure)
 - [Component Breakdown & Implementation Details](#component-breakdown--implementation-details)
   - [Component Naming & Organization](#component-naming--organization)
+  - [Component Reusability Metrics](#component-reusability-metrics)
   - [Template for Component Specification](#template-for-component-specification)
 - [State Management In-Depth](#state-management-in-depth)
   - [Store Structure / Slices](#store-structure--slices)
@@ -29,10 +35,27 @@
   - [UI Integration/Flow Testing](#ui-integrationflow-testing)
   - [End-to-End UI Testing Tools & Scope](#end-to-end-ui-testing-tools--scope)
 - [Accessibility (AX) Implementation Details](#accessibility-ax-implementation-details)
+  - [Accessibility Standards & Compliance](#accessibility-standards--compliance)
+  - [Implementation Requirements](#implementation-requirements)
+  - [Accessibility Validation Framework](#accessibility-validation-framework)
+  - [Component-Level Accessibility Requirements](#component-level-accessibility-requirements)
+  - [Accessibility Evidence Collection](#accessibility-evidence-collection)
 - [Performance Considerations](#performance-considerations)
+  - [Performance Benchmarks & Evidence Requirements](#performance-benchmarks--evidence-requirements)
+  - [Performance Optimization Strategies](#performance-optimization-strategies)
+  - [Performance Monitoring & Tracking](#performance-monitoring--tracking)
 - [Internationalization (i18n) and Localization (l10n) Strategy](#internationalization-i18n-and-localization-l10n-strategy)
 - [Feature Flag Management](#feature-flag-management)
 - [Frontend Security Considerations](#frontend-security-considerations)
+- [User Experience Validation Requirements](#user-experience-validation-requirements)
+  - [UX Metrics & Targets](#ux-metrics--targets)
+  - [User Flow Validation](#user-flow-validation)
+  - [Analytics & Monitoring](#analytics--monitoring)
+- [Responsive Design Evidence & Requirements](#responsive-design-evidence--requirements)
+  - [Device & Viewport Coverage](#device--viewport-coverage)
+  - [Responsive Testing Requirements](#responsive-testing-requirements)
+  - [Adaptive Features](#adaptive-features)
+  - [Evidence Collection](#evidence-collection)
 - [Browser Support and Progressive Enhancement](#browser-support-and-progressive-enhancement)
 - [Change Log](#change-log)
 
@@ -55,6 +78,64 @@
 - **Data Flow:** {e.g., Unidirectional data flow (Flux/Redux pattern), React Query/SWR for server state. Describe how data is fetched, cached, passed to components, and updated.}
 - **Styling Approach:** **{Chosen Styling Solution, e.g., Tailwind CSS / CSS Modules / Styled Components}**. Configuration File(s): {e.g., `tailwind.config.js`, `postcss.config.js`}. Key conventions: {e.g., "Utility-first approach for Tailwind. Custom components defined in `src/styles/components.css`. Theme extensions in `tailwind.config.js` under `theme.extend`. For CSS Modules, files are co-located with components, e.g., `MyComponent.module.css`.}
 - **Key Design Patterns Used:** {e.g., Provider pattern, Hooks, Higher-Order Components, Service patterns for API calls, Container/Presentational. These patterns are to be consistently applied. Deviations require justification and documentation.}
+
+## Design System Compliance & Tracking
+
+{ Define how the application adheres to design system standards and tracks compliance with evidence requirements. }
+
+### Design System Foundation
+
+- **Design System Source:** {e.g., Custom design system, Material Design, Ant Design, Bootstrap}
+- **Design Tokens Location:** {e.g., `src/design-system/tokens.ts` or design tool API}
+- **Component Library:** {e.g., Internal component library, Storybook instance URL}
+
+### Design Token Management
+
+- **Token Categories & Evidence:**
+  | Token Type | Source of Truth | Implementation | Validation Method |
+  | :--- | :--- | :--- | :--- |
+  | Colors | {e.g., Figma variables} | CSS variables/JS constants | Visual regression tests |
+  | Typography | Design system docs | Typography config file | Computed styles audit |
+  | Spacing | 8px grid system | Spacing scale utilities | Layout analysis tools |
+  | Breakpoints | Responsive guidelines | Media query constants | Cross-device testing |
+  | Shadows | Elevation system | Shadow utilities | Visual comparison |
+  | Animation | Motion guidelines | Transition presets | Performance profiling |
+
+### Component Compliance Tracking
+
+- **Compliance Metrics:**
+  | Metric | Target | Evidence Required | Tool |
+  | :--- | :--- | :--- | :--- |
+  | Design Token Usage | 100% | No hardcoded values audit | ESLint rules |
+  | Component Alignment | 95% | Visual regression report | Percy/Chromatic |
+  | Spacing Consistency | 100% | Grid alignment check | Layout Inspector |
+  | Color Contrast | WCAG AA | Contrast analysis report | Automated tooling |
+  | Typography Scale | 100% | Font usage audit | CSS analysis |
+
+- **Visual Regression Testing:**
+  - Tool: {e.g., Percy, Chromatic, Loki}
+  - Baseline: Design system reference components
+  - Threshold: < 0.1% visual difference allowed
+  - Review Process: Design team approval for any deviations
+
+### Design Review Process
+
+- **Component Design Review Checklist:**
+  - [ ] Uses only approved design tokens
+  - [ ] Matches Figma/Sketch specifications exactly
+  - [ ] Responsive behavior documented and tested
+  - [ ] Micro-interactions follow motion guidelines
+  - [ ] States (hover, focus, active, disabled) defined
+  - [ ] Dark mode variant implemented (if applicable)
+  - [ ] Design team approval obtained
+
+- **Evidence Collection:**
+  | Review Type | Artifacts Required | Storage Location |
+  | :--- | :--- | :--- |
+  | Initial Design | Figma links, specs | `.design/components/` |
+  | Implementation | Screenshots, code | `.design/implementation/` |
+  | Visual Testing | Regression reports | `.design/visual-tests/` |
+  | Design Approval | Sign-off documents | `.design/approvals/` |
 
 ## Detailed Frontend Directory Structure
 
@@ -115,6 +196,33 @@ src/
 
 - **Component Naming Convention:** **{e.g., PascalCase for files and component names: `UserProfileCard.tsx`}**. All component files MUST follow this convention.
 - **Organization:** {e.g., "Globally reusable components in `src/components/ui/` or `src/components/layout/`. Feature-specific components co-located within their feature directory, e.g., `src/features/feature-name/components/`. Refer to Detailed Frontend Directory Structure.}
+
+### Component Reusability Metrics
+
+- **Reusability Classification:**
+  | Category | Definition | Location | Reuse Target |
+  | :--- | :--- | :--- | :--- |
+  | Atomic | Basic UI elements (buttons, inputs) | `src/components/ui/` | > 10 instances |
+  | Molecular | Composite components | `src/components/shared/` | > 5 instances |
+  | Organism | Complex feature components | `src/components/features/` | > 3 instances |
+  | Template | Page layouts | `src/components/layouts/` | > 2 instances |
+  | Feature-specific | Single-use components | `src/features/*/components/` | 1 instance |
+
+- **Reusability Evidence Requirements:**
+  - [ ] Component usage tracking via static analysis
+  - [ ] Prop interface documentation completeness
+  - [ ] Storybook coverage for all reusable components
+  - [ ] Generic vs specific prop ratio > 80%
+  - [ ] No hardcoded values or business logic in reusable components
+
+- **Component Quality Metrics:**
+  | Metric | Target | Measurement Method |
+  | :--- | :--- | :--- |
+  | Prop Type Coverage | 100% | TypeScript strict mode |
+  | Storybook Stories | 100% for shared | Story count analysis |
+  | Unit Test Coverage | > 90% | Jest coverage reports |
+  | Accessibility Score | 100% | jest-axe automation |
+  | Bundle Size Impact | < 20KB | Webpack analysis |
 
 ### Template for Component Specification
 
@@ -326,31 +434,163 @@ _Repeat the above template for each significant component._
 
 ## Accessibility (AX) Implementation Details
 
-{ Based on the AX requirements in the UI/UX Specification, detail how these will be technically implemented. }
+{ Based on the AX requirements in the UI/UX Specification, detail how these will be technically implemented with comprehensive validation frameworks and evidence requirements. }
 
-- **Semantic HTML:** {Emphasis on using correct HTML5 elements. **AI Agent MUST prioritize semantic elements (e.g., `<nav>`, `<button>`, `<article>`) over generic `<div>`/`<span>` with ARIA roles where a native element with the correct semantics exists.**}
-- **ARIA Implementation:** {Specify common custom components and their required ARIA patterns (e.g., "Custom select dropdown MUST follow ARIA Combobox pattern including `aria-expanded`, `aria-controls`, `role='combobox'`, etc. Custom Tabs MUST follow ARIA Tabbed Interface pattern."). Link to ARIA Authoring Practices Guide (APG) for reference.}
-- **Keyboard Navigation:** {Ensuring all interactive elements are focusable and operable via keyboard. Focus order MUST be logical. Custom components MUST implement keyboard interaction patterns as per ARIA APG (e.g., arrow keys for radio groups/sliders).**}
-- **Focus Management:** {How is focus managed in modals, dynamic content changes, route transitions? (e.g., "Modals MUST trap focus. On modal open, focus moves to the first focusable element or the modal container. On close, focus returns to the trigger element. Route changes SHOULD move focus to the main content area or H1 of the new page.")}
-- **Testing Tools for AX:** {e.g., Axe DevTools browser extension, Lighthouse accessibility audit. **Automated Axe scans (e.g., using `jest-axe` for component tests, or Playwright/Cypress Axe integration for E2E tests) MUST be integrated into the CI pipeline and fail the build on new violations of WCAG AA (or specified level).** Manual testing procedures: {List key manual checks, e.g., keyboard-only navigation for all interactive elements, screen reader testing (e.g., NVDA/JAWS/VoiceOver) for critical user flows.}}
+### Accessibility Standards & Compliance
+
+- **Target Compliance Level:** WCAG 2.1 Level AA (minimum) with Level AAA for critical user paths
+- **Legal Requirements:** {Specify any ADA, Section 508, EN 301 549, or other regional requirements}
+
+### Implementation Requirements
+
+- **Semantic HTML:**
+  - Mandate: **AI Agent MUST prioritize semantic elements (e.g., `<nav>`, `<button>`, `<article>`) over generic `<div>`/`<span>` with ARIA roles where a native element exists.**
+  - Evidence Requirements:
+    - [ ] HTML validation passes with zero errors
+    - [ ] Semantic structure audit in every component review
+    - [ ] Documented rationale for any non-semantic element usage
+
+- **ARIA Implementation:**
+  - Required Patterns: {e.g., "Custom select dropdown MUST follow ARIA Combobox pattern. Custom Tabs MUST follow ARIA Tabbed Interface pattern."}
+  - Evidence Requirements:
+    - [ ] ARIA pattern compliance documentation per component
+    - [ ] Link to ARIA APG reference for each pattern used
+    - [ ] Automated ARIA validation in component tests
+
+- **Keyboard Navigation:**
+  - Requirements: All interactive elements MUST be keyboard accessible with logical focus order
+  - Evidence Requirements:
+    - [ ] Keyboard navigation test matrix for all components
+    - [ ] Focus order documentation and testing
+    - [ ] Tab trap implementation for modals/overlays
+
+- **Focus Management:**
+  - Requirements: {e.g., "Modals MUST trap focus. Route changes MUST manage focus appropriately."}
+  - Evidence Requirements:
+    - [ ] Focus management strategy documented
+    - [ ] Automated focus tests for dynamic content
+    - [ ] Manual testing checklist completed
+
+### Accessibility Validation Framework
+
+- **Automated Testing:**
+  | Tool | Integration Point | Failure Threshold | Evidence Output |
+  | :--- | :--- | :--- | :--- |
+  | jest-axe | Component unit tests | Zero violations | Test reports |
+  | Lighthouse | CI/CD pipeline | Score > 90 | HTML reports |
+  | Pa11y | E2E test suite | WCAG AA violations = 0 | JSON reports |
+  | axe-playwright | Integration tests | Critical issues = 0 | CI artifacts |
+
+- **Manual Testing Requirements:**
+  | Test Type | Frequency | Tools | Evidence Required |
+  | :--- | :--- | :--- | :--- |
+  | Screen Reader | Every sprint | NVDA, JAWS, VoiceOver | Video recordings |
+  | Keyboard Only | Every component | Native keyboard | Navigation matrix |
+  | Color Contrast | Design phase | Contrast analyzers | Design approval |
+  | Zoom Testing | Quarterly | Browser zoom 200% | Screenshots |
+
+### Component-Level Accessibility Requirements
+
+- **For Each Component:**
+  - [ ] Accessibility specification defined
+  - [ ] ARIA roles and properties documented
+  - [ ] Keyboard interaction patterns specified
+  - [ ] Screen reader announcements defined
+  - [ ] Error handling accessible
+  - [ ] Loading states announced
+  - [ ] Focus indicators visible
+
+### Accessibility Evidence Collection
+
+- **Documentation Requirements:**
+  | Evidence Type | Storage Location | Review Frequency |
+  | :--- | :--- | :--- |
+  | Automated test results | `.accessibility/automated/` | Every PR |
+  | Manual test recordings | `.accessibility/manual/` | Sprint review |
+  | VPAT documentation | `.accessibility/vpat/` | Quarterly |
+  | User testing feedback | `.accessibility/user-feedback/` | As collected |
+
+- **Accessibility Checklist (Per Feature):**
+  - [ ] Automated tests passing (jest-axe, Pa11y)
+  - [ ] Manual keyboard navigation verified
+  - [ ] Screen reader testing completed (3 major readers)
+  - [ ] Color contrast validated (4.5:1 minimum)
+  - [ ] Focus indicators present and visible
+  - [ ] Error messages associated with form controls
+  - [ ] Loading and dynamic content announced
+  - [ ] Alternative text for all informative images
+  - [ ] Captions/transcripts for media content
+  - [ ] Page structure uses proper heading hierarchy
 
 ## Performance Considerations
 
-{ Highlight frontend-specific performance optimization strategies. }
+{ Highlight frontend-specific performance optimization strategies with measurable benchmarks and evidence requirements. }
 
-- **Image Optimization:** {Formats (e.g., WebP), responsive images (`<picture>`, `srcset`), lazy loading.}
+### Performance Benchmarks & Evidence Requirements
+
+- **Core Web Vitals Targets:**
+  | Metric | Target | Evidence Required | Measurement Tool |
+  | :--- | :--- | :--- | :--- |
+  | Largest Contentful Paint (LCP) | < 2.5s | Lighthouse CI reports for each route | Lighthouse CI |
+  | First Input Delay (FID) | < 100ms | Real User Monitoring (RUM) data | Web Vitals API |
+  | Cumulative Layout Shift (CLS) | < 0.1 | Visual stability recordings | Lighthouse CI |
+  | Time to Interactive (TTI) | < 3.5s | Performance trace analysis | Chrome DevTools |
+  | Total Blocking Time (TBT) | < 300ms | Main thread analysis | Lighthouse CI |
+
+- **Bundle Size Constraints:**
+  | Bundle Type | Max Size (gzipped) | Evidence Required | Enforcement |
+  | :--- | :--- | :--- | :--- |
+  | Initial JS Bundle | 150KB | Webpack bundle analyzer report | CI build failure if exceeded |
+  | Initial CSS Bundle | 50KB | CSS analysis report | CI warning if exceeded |
+  | Per-Route Bundle | 100KB | Route-specific analysis | Manual review required |
+  | Total App Size | 500KB | Complete bundle report | Quarterly review |
+
+### Performance Optimization Strategies
+
+- **Image Optimization:**
   - Implementation Mandate: {e.g., "All images MUST use `<Image>` component from Next.js (or equivalent framework-specific optimizer). SVGs for icons. WebP format preferred where supported."}
-- **Code Splitting & Lazy Loading (reiterate from Build section if needed):** {How it impacts perceived performance.}
+  - Evidence Requirements:
+    - [ ] All images have defined width/height attributes (CLS prevention)
+    - [ ] WebP variants provided for all raster images
+    - [ ] Image loading strategy documented per component
+    - [ ] Lighthouse image optimization score > 90
+
+- **Code Splitting & Lazy Loading:**
   - Implementation Mandate: {e.g., "Next.js handles route-based code splitting automatically. Dynamic imports `import()` MUST be used for component-level lazy loading."}
-- **Minimizing Re-renders:** {Techniques like `React.memo`, `shouldComponentUpdate`, optimized selectors.}
-  - Implementation Mandate: {e.g., "`React.memo` MUST be used for components that render frequently with same props. Selectors for global state MUST be memoized (e.g., with Reselect). Avoid passing new object/array literals or inline functions as props directly in render methods where it can cause unnecessary re-renders."}
-- **Debouncing/Throttling:** {For event handlers like search input or window resize.}
-  - Implementation Mandate: {e.g., "Use a utility like `lodash.debounce` or `lodash.throttle` for specified event handlers. Define debounce/throttle wait times."}
-- **Virtualization:** {For long lists or large data sets (e.g., React Virtualized, TanStack Virtual).}
-  - Implementation Mandate: {e.g., "MUST be used for any list rendering more than {N, e.g., 100} items if performance degradation is observed."}
-- **Caching Strategies (Client-Side):** {Use of browser cache, service workers for PWA capabilities (if applicable).}
-  - Implementation Mandate: {e.g., "Configure service worker (if PWA) to cache application shell and key static assets. Leverage HTTP caching headers for other assets as defined in Deployment section."}
-- **Performance Monitoring Tools:** {e.g., Lighthouse, WebPageTest, browser DevTools performance tab. Specify which ones are primary and any automated checks in CI.}
+  - Evidence Requirements:
+    - [ ] Bundle analyzer shows proper code splitting
+    - [ ] Coverage report shows < 60% initial code execution
+    - [ ] Lazy loading boundaries documented in component specs
+
+- **Render Performance:**
+  - Implementation Mandate: {e.g., "`React.memo` MUST be used for components that render frequently with same props. Selectors for global state MUST be memoized (e.g., with Reselect)."}
+  - Evidence Requirements:
+    - [ ] React DevTools Profiler traces for critical paths
+    - [ ] Documented re-render optimization strategies
+    - [ ] Performance regression tests for key components
+
+- **Runtime Performance:**
+  - Implementation Mandate: {e.g., "Use utility functions for debouncing/throttling. Define specific wait times."}
+  - Evidence Requirements:
+    - [ ] Interaction performance traces
+    - [ ] Main thread blocking analysis
+    - [ ] User interaction response times < 50ms
+
+### Performance Monitoring & Tracking
+
+- **Continuous Monitoring:**
+  - Real User Monitoring (RUM) integration required
+  - Synthetic monitoring for key user journeys
+  - Performance budgets enforced in CI/CD pipeline
+  - Weekly performance regression reports
+
+- **Evidence Collection:**
+  | Performance Check | Frequency | Storage Location | Review Process |
+  | :--- | :--- | :--- | :--- |
+  | Lighthouse CI | Every PR | `.performance/lighthouse/` | Automated PR comment |
+  | Bundle Analysis | Every build | `.performance/bundles/` | Manual review if size increased |
+  | Runtime Traces | Weekly | `.performance/traces/` | Sprint retrospective |
+  | RUM Dashboard | Continuous | Monitoring platform | Weekly team review |
 
 ## Internationalization (i18n) and Localization (l10n) Strategy
 
@@ -406,6 +646,130 @@ _Repeat the above template for each significant component._
   - Mandate: {e.g., "All communication with backend APIs MUST use HTTPS. Mixed content (HTTP assets on HTTPS page) is forbidden."}
 - **Dependency Vulnerabilities:**
   - Process: {e.g., "Run `npm audit --audit-level=high` (or equivalent) in CI. High/critical vulnerabilities MUST be addressed before deployment. Monitor Dependabot/Snyk alerts."}
+
+## User Experience Validation Requirements
+
+{ Define comprehensive user experience validation with measurable metrics and evidence requirements. }
+
+### UX Metrics & Targets
+
+- **User Satisfaction Metrics:**
+  | Metric | Target | Measurement Method | Frequency |
+  | :--- | :--- | :--- | :--- |
+  | Task Success Rate | > 95% | User testing sessions | Per feature |
+  | Time on Task | < baseline + 20% | Session recordings | Sprint review |
+  | Error Rate | < 5% | Analytics tracking | Continuous |
+  | User Satisfaction Score | > 4.5/5 | In-app surveys | Monthly |
+  | Net Promoter Score (NPS) | > 50 | Email surveys | Quarterly |
+
+- **Usability Testing Requirements:**
+  | Test Type | Participants | Evidence Required | Frequency |
+  | :--- | :--- | :--- | :--- |
+  | Moderated Testing | 5-8 users | Video recordings, findings report | Major features |
+  | Unmoderated Testing | 15-20 users | Task completion data, heatmaps | Minor features |
+  | A/B Testing | Statistical significance | Analytics reports, decision log | As needed |
+  | Card Sorting | 10-15 users | Information architecture validation | IA changes |
+
+### User Flow Validation
+
+- **Critical User Journeys:**
+  - [ ] User journey maps created and validated
+  - [ ] Task flow diagrams with success criteria
+  - [ ] Error recovery paths documented
+  - [ ] Drop-off points identified and addressed
+  - [ ] Alternative paths for different user types
+
+- **Interaction Design Evidence:**
+  | Element | Validation Required | Evidence Type |
+  | :--- | :--- | :--- |
+  | Micro-interactions | User feedback positive | Session recordings |
+  | Loading states | Perceived performance < 3s | Performance metrics |
+  | Error messages | Clear and actionable | Usability test results |
+  | Empty states | Helpful and engaging | Screenshot approval |
+  | Success feedback | Noticeable but not intrusive | User feedback |
+
+### Analytics & Monitoring
+
+- **User Behavior Tracking:**
+  - [ ] Analytics implementation plan
+  - [ ] Event tracking taxonomy defined
+  - [ ] Conversion funnel instrumentation
+  - [ ] Rage click detection enabled
+  - [ ] Session replay capability
+
+- **UX Performance Indicators:**
+  | KPI | Target | Alert Threshold | Dashboard |
+  | :--- | :--- | :--- | :--- |
+  | Bounce Rate | < 40% | > 50% | Real-time |
+  | Session Duration | > 2 min | < 1 min | Daily |
+  | Pages per Session | > 3 | < 2 | Daily |
+  | Form Completion Rate | > 80% | < 60% | Real-time |
+  | Search Success Rate | > 90% | < 70% | Weekly |
+
+## Responsive Design Evidence & Requirements
+
+{ Define comprehensive responsive design validation with device coverage and evidence requirements. }
+
+### Device & Viewport Coverage
+
+- **Required Breakpoints:**
+  | Breakpoint | Width | Device Category | Testing Required |
+  | :--- | :--- | :--- | :--- |
+  | Mobile Small | 320px | Small phones | Physical device |
+  | Mobile | 375px | Standard phones | Emulator + device |
+  | Mobile Large | 414px | Large phones | Emulator + device |
+  | Tablet | 768px | Tablets portrait | Physical device |
+  | Tablet Landscape | 1024px | Tablets landscape | Physical device |
+  | Desktop | 1280px | Small laptops | Required |
+  | Desktop Large | 1440px | Standard monitors | Required |
+  | Desktop XL | 1920px+ | Large monitors | Required |
+
+### Responsive Testing Requirements
+
+- **Cross-Device Testing Matrix:**
+  | Test Type | Coverage | Evidence | Tools |
+  | :--- | :--- | :--- | :--- |
+  | Visual Testing | All breakpoints | Screenshots | BrowserStack |
+  | Interaction Testing | Touch + mouse | Video recordings | Real devices |
+  | Performance Testing | 3G/4G/WiFi | Performance reports | WebPageTest |
+  | Orientation Testing | Portrait + landscape | Test reports | Device lab |
+
+- **Responsive Design Checklist:**
+  - [ ] Fluid typography scaling implemented
+  - [ ] Images responsive with proper srcset
+  - [ ] Touch targets minimum 44x44px
+  - [ ] Horizontal scrolling prevented
+  - [ ] Content reflow without data loss
+  - [ ] Navigation adapts to screen size
+  - [ ] Forms usable on all devices
+  - [ ] Tables have responsive solution
+
+### Adaptive Features
+
+- **Progressive Enhancement by Device:**
+  | Feature | Mobile | Tablet | Desktop | Evidence |
+  | :--- | :--- | :--- | :--- | :--- |
+  | Navigation | Hamburger menu | Hybrid | Full menu | Screenshots |
+  | Images | Compressed | Standard | High-res | Performance data |
+  | Animations | Reduced | Standard | Full | Performance profiles |
+  | Interactions | Touch-first | Mixed | Hover states | Interaction maps |
+
+- **Performance Budget by Device Type:**
+  | Device | First Paint | Interactive | Total Size | Evidence |
+  | :--- | :--- | :--- | :--- | :--- |
+  | Mobile (3G) | < 3s | < 5s | < 300KB | WebPageTest |
+  | Mobile (4G) | < 1.5s | < 3s | < 500KB | Lighthouse |
+  | Desktop | < 1s | < 2s | < 1MB | RUM data |
+
+### Evidence Collection
+
+- **Responsive Design Artifacts:**
+  | Artifact Type | Format | Location | Review Process |
+  | :--- | :--- | :--- | :--- |
+  | Device Screenshots | PNG/WebP | `.responsive/screenshots/` | Design review |
+  | Interaction Videos | MP4 | `.responsive/videos/` | UX review |
+  | Performance Reports | JSON/HTML | `.responsive/performance/` | Tech review |
+  | Test Results | JSON | `.responsive/tests/` | QA sign-off |
 
 ## Browser Support and Progressive Enhancement
 
