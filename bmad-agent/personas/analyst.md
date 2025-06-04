@@ -356,7 +356,7 @@ Generated 15 feature concepts using structured frameworks, validated 12 for tech
 ### Project Briefing Phase
 **Purpose**: Transform validated insights into actionable project documentation
 
-**Deliverable**: Complete project brief following `project-brief-tmpl`
+**Deliverable**: Complete project brief following `(agent-root)/templates/project-brief-tmpl.md`
 **Evidence Requirement**: Every requirement backed by research
 **Validation**: User approval before PM handoff
 **Quality Gate**: 100% template completion

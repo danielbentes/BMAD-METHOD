@@ -2,7 +2,7 @@
 
 ## Purpose
 
-To define the technical architecture for the frontend application and create it at `.bmad/current/specs/frontend-architecture.md`. This includes selecting appropriate patterns, structuring the codebase, defining component strategy, planning state management, outlining API interactions, and setting up testing and deployment approaches, all while adhering to the guidelines in `front-end-architecture-tmpl` template.
+To define the technical architecture for the frontend application and create it at `.bmad/current/specs/frontend-architecture.md`. This includes selecting appropriate patterns, structuring the codebase, defining component strategy, planning state management, outlining API interactions, and setting up testing and deployment approaches, all while adhering to the guidelines in `(agent-root)/templates/front-end-architecture-tmpl.md` template.
 
 ## Inputs
 
@@ -78,7 +78,7 @@ To define the technical architecture for the frontend application and create it 
 
 - List key frontend-specific performance strategies to be employed.
 
-### 12. Document Drafting & Confirmation (Guided by `front-end-architecture-tmpl`)
+### 12. Document Drafting & Confirmation (Guided by `(agent-root)/templates/front-end-architecture-tmpl.md`)
 
 - **If "Incremental Mode" was selected:**
 

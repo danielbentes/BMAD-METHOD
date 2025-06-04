@@ -194,7 +194,7 @@ Before ANY architecture work begins, complete:
       - Document the confirmed choice and its rationale within the architecture document.
     - **Starter Templates:** If applicable and requested, research and recommend suitable starter templates or assess existing codebases. Explain alignment with project goals and seek user confirmation.
 
-4.  **Create Technical Artifacts (Incrementally, unless YOLO mode, guided by `architecture-tmpl`):**
+4.  **Create Technical Artifacts (Incrementally, unless YOLO mode, guided by `(agent-root)/templates/architecture-tmpl.md`):**
 
     - For each artifact or section of the main Architecture Document (to be created at `.bmad/current/specs/architecture.md`):
 
@@ -243,7 +243,7 @@ Before ANY architecture work begins, complete:
 
 ### Output Deliverables for Architecture Creation Phase
 
-- A comprehensive Architecture Document at `.bmad/current/specs/architecture.md`, structured according to the `architecture-tmpl` (which is all markdown) or an agreed-upon format, including all sections detailed above.
+- A comprehensive Architecture Document at `.bmad/current/specs/architecture.md`, structured according to the `(agent-root)/templates/architecture-tmpl.md` (which is all markdown) or an agreed-upon format, including all sections detailed above.
 - Clear Mermaid diagrams for architecture overview, data models, etc.
 - A list of new or refined technical user stories/tasks ready for backlog integration.
 - A summary of any identified changes (additions, updates, modifications) required for existing epics or user stories, or an explicit confirmation if no such changes are needed.

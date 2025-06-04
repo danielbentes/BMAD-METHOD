@@ -26,13 +26,13 @@ To generate a masterful, comprehensive, and optimized prompt that can be used wi
       - Mention the styling approach (e.g., Tailwind CSS, CSS Modules).
     - **Design System & Visuals:**
       - Reference the primary design files (e.g., Figma link).
-      - If the tool doesn't directly ingest design files, describe the overall visual style, color palette, typography, and key branding elements (from `front-end-spec-tmpl`).
+      - If the tool doesn't directly ingest design files, describe the overall visual style, color palette, typography, and key branding elements (from `(agent-root)/templates/front-end-spec-tmpl.md`).
       - List any global UI components or design tokens that should be defined or adhered to.
     - **Application Structure & Routing:**
       - Describe the main pages/views and their routes (from `front-end-architecture` - Routing Strategy).
-      - Outline the navigation structure (from `front-end-spec-tmpl`).
+      - Outline the navigation structure (from `(agent-root)/templates/front-end-spec-tmpl.md`).
     - **Key User Flows & Page-Level Interactions:**
-      - For a few critical user flows (from `front-end-spec-tmpl`):
+      - For a few critical user flows (from `(agent-root)/templates/front-end-spec-tmpl.md`):
         - Describe the sequence of user actions and expected UI changes on each relevant page.
         - Specify API calls to be made (referencing API endpoints from the main `architecture`) and how data should be displayed or used.
     - **Component Generation Instructions (Iterative or Key Components):**

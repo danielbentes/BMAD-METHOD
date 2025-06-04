@@ -1,434 +1,982 @@
-# BMAD Knowledge Base
+# BMAD Knowledge Base v3.0
 
 ## INDEX OF TOPICS
 
-- [BMAD Knowledge Base](#bmad-knowledge-base)
+- [BMAD Knowledge Base v3.0](#bmad-knowledge-base-v30)
   - [INDEX OF TOPICS](#index-of-topics)
-  - [BMAD METHOD - CORE PHILOSOPHY](#bmad-method---core-philosophy)
-  - [BMAD METHOD - AGILE METHODOLOGIES OVERVIEW](#bmad-method---agile-methodologies-overview)
-    - [CORE PRINCIPLES OF AGILE](#core-principles-of-agile)
-    - [KEY PRACTICES IN AGILE](#key-practices-in-agile)
-    - [BENEFITS OF AGILE](#benefits-of-agile)
-  - [BMAD METHOD - ANALOGIES WITH AGILE PRINCIPLES](#bmad-method---analogies-with-agile-principles)
-  - [BMAD METHOD - TOOLING AND RESOURCE LOCATIONS](#bmad-method---tooling-and-resource-locations)
-  - [BMAD METHOD - COMMUNITY AND CONTRIBUTIONS](#bmad-method---community-and-contributions)
-    - [Licensing](#licensing)
-  - [BMAD METHOD - ETHOS \& BEST PRACTICES](#bmad-method---ethos--best-practices)
-  - [AGENT ROLES AND RESPONSIBILITIES](#agent-roles-and-responsibilities)
-  - [NAVIGATING THE BMAD WORKFLOW - INITIAL GUIDANCE](#navigating-the-bmad-workflow---initial-guidance)
-    - [STARTING YOUR PROJECT - ANALYST OR PM?](#starting-your-project---analyst-or-pm)
-    - [UNDERSTANDING EPICS - SINGLE OR MULTIPLE?](#understanding-epics---single-or-multiple)
-  - [GETTING STARTED WITH BMAD](#getting-started-with-bmad)
-    - [Initial Project Setup](#initial-project-setup)
-    - [Exporting Artifacts from AI Platforms](#exporting-artifacts-from-ai-platforms)
-    - [Document Sharding](#document-sharding)
-    - [Utilizing Dedicated IDE Agents (SM and Dev)](#utilizing-dedicated-ide-agents-sm-and-dev)
-    - [When to Use the BMAD IDE Orchestrator](#when-to-use-the-bmad-ide-orchestrator)
-  - [SUGGESTED ORDER OF AGENT ENGAGEMENT (TYPICAL FLOW)](#suggested-order-of-agent-engagement-typical-flow)
-  - [HANDLING MAJOR CHANGES](#handling-major-changes)
-  - [IDE VS UI USAGE - GENERAL RECOMMENDATIONS](#ide-vs-ui-usage---general-recommendations)
-    - [CONCEPTUAL AND PLANNING PHASES](#conceptual-and-planning-phases)
-    - [TECHNICAL DESIGN, DOCUMENTATION MANAGEMENT \& IMPLEMENTATION PHASES](#technical-design-documentation-management--implementation-phases)
-    - [BMAD METHOD FILES](#bmad-method-files)
-  - [LEVERAGING IDE TASKS FOR EFFICIENCY](#leveraging-ide-tasks-for-efficiency)
-    - [PURPOSE OF IDE TASKS](#purpose-of-ide-tasks)
-    - [EXAMPLES OF TASK FUNCTIONALITY](#examples-of-task-functionality)
-
-## BMAD METHOD - CORE PHILOSOPHY
-
-**STATEMENT:** "Vibe CEO'ing" is about embracing the chaos, thinking like a CEO with unlimited resources and a singular vision, and leveraging AI as your high-powered team to achieve ambitious goals rapidly. The BMAD Method (Breakthrough Method of Agile (ai-driven) Development), with the integrated "Bmad Agent", elevates "vibe coding" to advanced project planning, providing a structured yet flexible framework to plan, execute, and manage software projects using a team of specialized AI agents.
-
-**DETAILS:**
-
-- Focus on ambitious goals and rapid iteration.
-- Utilize AI as a force multiplier.
-- Adapt and overcome obstacles with a proactive mindset.
-
-## BMAD METHOD - AGILE METHODOLOGIES OVERVIEW
-
-### CORE PRINCIPLES OF AGILE
-
-- Individuals and interactions over processes and tools.
-- Working software over comprehensive documentation.
-- Customer collaboration over contract negotiation.
-- Responding to change over following a plan.
-
-### KEY PRACTICES IN AGILE
-
-- Iterative Development: Building in short cycles (sprints).
-- Incremental Delivery: Releasing functional pieces of the product.
-- Daily Stand-ups: Short team meetings for synchronization.
-- Retrospectives: Regular reviews to improve processes.
-- Continuous Feedback: Ongoing input from stakeholders.
-
-### BENEFITS OF AGILE
-
-- Increased Flexibility: Ability to adapt to changing requirements.
-- Faster Time to Market: Quicker delivery of valuable features.
-- Improved Quality: Continuous testing and feedback loops.
-- Enhanced Stakeholder Engagement: Close collaboration with users/clients.
-- Higher Team Morale: Empowered and self-organizing teams.
-
-## BMAD METHOD - ANALOGIES WITH AGILE PRINCIPLES
-
-The BMAD Method, while distinct in its "Vibe CEO'ing" approach with AI, shares foundational parallels with Agile methodologies:
-
-- **Individuals and Interactions over Processes and Tools (Agile) vs. Vibe CEO & AI Team (BMAD):**
-
-  - **Agile:** Emphasizes the importance of skilled individuals and effective communication.
-  - **BMAD:** The "Vibe CEO" (you) actively directs and interacts with AI agents, treating them as a high-powered team. The quality of this interaction and clear instruction ("CLEAR_INSTRUCTIONS", "KNOW_YOUR_AGENTS") is paramount, echoing Agile's focus on human elements.
-
-- **Working Software over Comprehensive Documentation (Agile) vs. Rapid Iteration & Quality Outputs (BMAD):**
-
-  - **Agile:** Prioritizes delivering functional software quickly.
-  - **BMAD:** Stresses "START_SMALL_SCALE_FAST" and "ITERATIVE_REFINEMENT." While "DOCUMENTATION_IS_KEY" for good inputs (briefs, PRDs), the goal is to leverage AI for rapid generation of working components or solutions. The focus is on achieving ambitious goals rapidly.
-
-- **Customer Collaboration over Contract Negotiation (Agile) vs. Vibe CEO as Ultimate Arbiter (BMAD):**
-
-  - **Agile:** Involves continuous feedback from the customer.
-  - **BMAD:** The "Vibe CEO" acts as the primary stakeholder and quality control ("QUALITY_CONTROL," "STRATEGIC_OVERSIGHT"), constantly reviewing and refining AI outputs, much like a highly engaged customer.
-
-- **Responding to Change over Following a Plan (Agile) vs. Embrace Chaos & Adapt (BMAD):**
-
-  - **Agile:** Values adaptability and responsiveness to new requirements.
-  - **BMAD:** Explicitly encourages to "EMBRACE_THE_CHAOS," "ADAPT & EXPERIMENT," and acknowledges that "ITERATIVE_REFINEMENT" means it's "not a linear process." This directly mirrors Agile's flexibility.
-
-- **Iterative Development & Incremental Delivery (Agile) vs. Story-based Implementation & Phased Value (BMAD):**
-
-  - **Agile:** Work is broken down into sprints, delivering value incrementally.
-  - **BMAD:** Projects are broken into Epics and Stories, with "Developer Agents" implementing stories one at a time. Epics represent "significant, deployable increments of value," aligning with incremental delivery.
-
-- **Continuous Feedback & Retrospectives (Agile) vs. Iterative Refinement & Quality Control (BMAD):**
-  - **Agile:** Teams regularly reflect and adjust processes.
-  - **BMAD:** The "Vibe CEO" continuously reviews outputs ("QUALITY_CONTROL") and directs "ITERATIVE_REFINEMENT," serving a similar function to feedback loops and process improvement.
-
-## BMAD METHOD - TOOLING AND RESOURCE LOCATIONS
-
-Effective use of the BMAD Method relies on understanding where key tools, configurations, and informational resources are located and how they are used. The method is designed to be tool-agnostic in principle, with agent instructions and workflows adaptable to various AI platforms and IDEs.
-
-- **BMAD Knowledge Base:** This document (`bmad-agent/data/bmad-kb.md`) serves as the central repository for understanding the BMAD method, its principles, agent roles, and workflows.
-- **Orchestrator Agents:** A key feature is the Orchestrator agent (AKA "BMAD"), a master agent capable of embodying any specialized agent role.
-  - **Web Agent Orchestrator:**
-    - **Setup:** Utilizes a Node.js build script (`build-web-agent.js`) configured by `build-web-agent.cfg.js`.
-    - **Process:** Consolidates assets (personas, tasks, templates, checklists, data) from an `/bmad-agent` into a `build_dir`, default: `/build/`.
-    - **Output:** Produces bundled asset files (e.g., `personas.txt`, `tasks.txt`), an `agent-prompt.txt` (from `orchestrator_agent_prompt`), and an `agent-config.txt` (from `agent_cfg` like `web-bmad-orchestrator-agent.cfg.md`).
-    - **Usage:** The `agent-prompt.txt` is used for the main custom web agent instruction set (e.g., Gemini 2.5 Gem or OpenAI Custom GPT), and the other build files are attached as knowledge/files.
-  - **IDE Agent Orchestrator (`ide-bmad-orchestrator.md`):**
-    - **Setup:** Works without a build step, dynamically loading its configuration.
-    - **Configuration (`ide-bmad-orchestrator.cfg.md`):** Contains a `Data Resolution` section (defining base paths for assets like personas, tasks) and `Agent Definitions` (Title, Name, Customize, Persona file, Tasks).
-    - **Operation:** Loads its config, lists available personas, and upon user request, embodies the chosen agent by loading its persona file and applying customizations.
-    - The `ide-bmad-orchestrator` file contents can be used as the instructions for a custom agent mode. The agent supports a `*help` command that can help guide the user. The agent relies on the existence in the bmad-agent folder being at the root of the project.
-    - The `ide-bmad-orchestrator` is not recommended for generating stories or doing development. While it CAN become those agents, its HIGHLY recommended to instead use the dedicated dev.ide.md or sm.ide.md as individual dedicated agents. The will use up less context overhead and are going to be used the most frequently.
-- **Standalone IDE Agents:**
-  - Optimized for IDE environments (e.g., Windsurf, Cursor), often under 6K characters (e.g., `dev.ide.md`, `sm.ide.md`).
-  - Can directly reference and execute tasks.
-- **Agent Configuration Files:**
-  - `web-bmad-orchestrator-agent.cfg.md`: Defines agents the Web Orchestrator can embody, including references to personas, tasks, checklists, and templates (e.g., `personas#pm`, `tasks#create-prd`).
-  - `ide-bmad-orchestrator.cfg.md`: Configures the IDE Orchestrator, defining `Data Resolution` paths (e.g., `(project-root)/bmad-agent/personas`) and agent definitions with persona file names (e.g., `analyst.md`) and task file names (e.g., `create-prd.md`).
-  - `web-bmad-orchestrator-agent.md`: Main prompt for the Web Orchestrator.
-  - `ide-bmad-orchestrator.md`: Main prompt/definition of the IDE Orchestrator agent.
-- **Task Files:**
-  - Located in `bmad-agent/tasks/` (and sometimes `bmad-agent/checklists/` for checklist-like tasks).
-  - Self-contained instruction sets for specific jobs (e.g., `create-prd.md`, `checklist-run-task.md`).
-  - Reduce agent bloat and provide on-demand functionality for any capable agent.
-- **Core Agent Definitions (Personas):**
-  - Files (typically `.md`) defining core personalities and instructions for different agents.
-  - Located in `bmad-agent/personas/` (e.g., `analyst.md`, `pm.md`).
-- **Project Documentation (Outputs):**
-- **Project Briefs:** Generated by the Analyst agent.
-- **Product Requirements Documents (PRDs):** Produced by the PM agent, containing epics and stories.
-- **UX/UI Specifications & Architecture Documents:** Created by Design Architect and Architect agents.
-- The **POSM agent** is crucial for organizing and managing these documents.
-- **Templates:** Standardized formats for briefs, PRDs, checklists, etc., likely stored in `bmad-agent/templates/`.
-- **Data Directory (`bmad-agent/data/`):** Stores persistent data, knowledge bases (like this one), and other key information for the agents.
-
-## BMAD METHOD - COMMUNITY AND CONTRIBUTIONS
-
-The BMAD Method thrives on community involvement and collaborative improvement.
-
-- **Getting Involved:**
-  - **GitHub Discussions:** The primary platform for discussing potential ideas, use cases, additions, and enhancements to the method.
-  - **Reporting Bugs:** If you find a bug, check existing issues first. If unreported, provide detailed steps to reproduce, along with any relevant logs or screenshots.
-  - **Suggesting Features:** Check existing issues and discussions. Explain your feature idea in detail and its potential value.
-- **Contribution Process (Pull Requests):**
-  1. Fork the repository.
-  2. Create a new branch for your feature or bugfix (e.g., `feature/your-feature-name`).
-  3. Make your changes, adhering to existing code style and conventions. Write clear comments for complex logic.
-  4. Run any tests or linting to ensure quality.
-  5. Commit your changes with clear, descriptive messages (refer to the project's commit message convention, often found in `.bmad/current/specs/commit-guidelines.md`).
-  6. Push your branch to your fork.
-  7. Open a Pull Request against the main branch of the original repository.
-- **Code of Conduct:** All participants are expected to abide by the project's Code of Conduct.
-- **Licensing of Contributions:** By contributing, you agree that your contributions will be licensed under the same license as the project (MIT License).
-
-### Licensing
-
-The BMAD Method and its associated documentation and software are distributed under the **MIT License**.
-
-Copyright (c) 2025 Brian AKA BMad AKA Bmad Code
-
-Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
-
-## BMAD METHOD - ETHOS & BEST PRACTICES
-
-- **CORE_ETHOS:** You are the "Vibe CEO." Think like a CEO with unlimited resources and a singular vision. Your AI agents are your high-powered team. Your job is to direct, refine, and ensure quality towards your ambitious goal. The method elevates "vibe coding" to advanced project planning.
-- **MAXIMIZE_AI_LEVERAGE:** Push the AI. Ask for more. Challenge its outputs. Iterate.
-- **QUALITY_CONTROL:** You are the ultimate arbiter of quality. Review all outputs.
-- **STRATEGIC_OVERSIGHT:** Maintain the high-level vision. Ensure agent outputs align.
-- **ITERATIVE_REFINEMENT:** Expect to revisit steps. This is not a linear process.
-- **CLEAR_INSTRUCTIONS:** The more precise your requests, the better the AI's output.
-- **DOCUMENTATION_IS_KEY:** Good inputs (briefs, PRDs) lead to good outputs. The POSM agent is crucial for organizing this.
-- **KNOW_YOUR_AGENTS:** Understand each agent's role (see [AGENT ROLES AND RESPONSIBILITIES](#agent-roles-and-responsibilities) or below). This includes understanding the capabilities of the Orchestrator agent if you are using one.
-- **START_SMALL_SCALE_FAST:** Test concepts, then expand.
-- **EMBRACE_THE_CHAOS:** Pioneering new methods is messy. Adapt and overcome.
-- **ADAPT & EXPERIMENT:** The BMAD Method provides a structure, but feel free to adapt its principles, agent order, or templates to fit your specific project needs and working style. Experiment to find what works best for you. **Define agile the BMad way - or your way!** The agent configurations allow for customization of roles and responsibilities.
-
-## AGENT ROLES AND RESPONSIBILITIES
-
-Understanding the distinct roles and responsibilities of each agent is key to effectively navigating the BMAD workflow. While the "Vibe CEO" provides overall direction, each agent specializes in different aspects of the project lifecycle. V3 introduces Orchestrator agents that can embody these roles, with configurations specified in `web-bmad-orchestrator-agent.cfg.md` for web and `ide-bmad-orchestrator.cfg.md` for IDE environments.
-
-- **Orchestrator Agent (BMAD):**
-
-  - **Function:** The primary orchestrator, initially "BMAD." It can embody various specialized agent personas. It handles general BMAD queries, provides oversight, and is the go-to when unsure which specialist is needed.
-  - **Persona Reference:** `personas#bmad` (Web) or implicitly the core of `ide-bmad-orchestrator.md` (IDE).
-  - **Key Data/Knowledge:** Accesses `data#bmad-kb-data` (Web) for its knowledge base.
-  - **Types:**
-    - **Web Orchestrator:** Built using a script, leverages large context windows of platforms like Gemini 2.5 or OpenAI GPTs. Uses bundled assets. Its behavior and available agents are defined in `web-bmad-orchestrator-agent.cfg.md`.
-    - **IDE Orchestrator:** Operates directly in IDEs like Cursor or Windsurf without a build step, loading persona and task files dynamically based on its configuration (`ide-bmad-orchestrator.cfg.md`). The orchestrator itself is defined in `ide-bmad-orchestrator.md`.
-  - **Key Feature:** Simplifies agent management, especially in environments with limitations on the number of custom agents.
-
-- **Analyst:**
-
-  - **Function:** Handles research, requirements gathering, brainstorming, and the creation of Project Briefs.
-  - **Web Persona:** `Analyst (Mary)` with persona `personas#analyst`. Customized to be "a bit of a know-it-all, and likes to verbalize and emote." Uses `templates#project-brief-tmpl`.
-  - **IDE Persona:** `Analyst (Larry)` with persona `analyst.md`. Similar "know-it-all" customization. Tasks for Brainstorming, Deep Research Prompt Generation, and Project Brief creation are often defined within the `analyst.md` persona itself ("In Analyst Memory Already").
-  - **Output:** `Project Brief`.
-
-- **Product Manager (PM):**
-
-  - **Function:** Responsible for creating and maintaining Product Requirements Documents (PRDs), overall project planning, and ideation related to the product.
-  - **Web Persona:** `Product Manager (John)` with persona `personas#pm`. Utilizes `checklists#pm-checklist` and `checklists#change-checklist`. Employs `templates#prd-tmpl`. Key tasks include `tasks#create-prd`, `tasks#correct-course`, and `tasks#create-deep-research-prompt`.
-  - **IDE Persona:** `Product Manager (PM) (Jack)` with persona `pm.md`. Focused on producing/maintaining the PRD (`create-prd.md` task) and product ideation/planning.
-  - **Output:** `Product Requirements Document (PRD)` at `.bmad/current/specs/prd.md`.
-
-- **Architect:**
-
-  - **Function:** Designs system architecture, handles technical design, and ensures technical feasibility.
-  - **Web Persona:** `Architect (Fred)` with persona `personas#architect`. Uses `checklists#architect-checklist` and `templates#architecture-tmpl`. Tasks include `tasks#create-architecture` and `tasks#create-deep-research-prompt`.
-  - **IDE Persona:** `Architect (Mo)` with persona `architect.md`. Customized to be "Cold, Calculating, Brains behind the agent crew." Generates architecture (`create-architecture.md` task), helps plan stories (`create-next-story-task.md`), and can update PO-level epics/stories (`doc-sharding-task.md`).
-  - **Output:** `Architecture Document` at `.bmad/current/specs/architecture.md`.
-
-- **Design Architect:**
-
-  - **Function:** Focuses on UI/UX specifications, front-end technical architecture, and can generate prompts for AI UI generation services.
-  - **Web Persona:** `Design Architect (Jane)` with persona `personas#design-architect`. Uses `checklists#frontend-architecture-checklist`, `templates#front-end-architecture-tmpl` (for FE architecture), and `templates#front-end-spec-tmpl` (for UX/UI Spec). Tasks: `tasks#create-frontend-architecture`, `tasks#create-ai-frontend-prompt`, `tasks#create-uxui-spec`.
-  - **IDE Persona:** `Design Architect (Millie)` with persona `design-architect.md`. Customized to be "Fun and carefree, but a frontend design master." Helps design web apps, produces UI generation prompts (`create-ai-frontend-prompt.md` task), plans FE architecture (`create-frontend-architecture.md` task), and creates UX/UI specs (`create-uxui-spec.md` task).
-  - **Output:** `UX/UI Specification` at `.bmad/current/specs/frontend-spec.md`, `Front-end Architecture Plan` at `.bmad/current/specs/frontend-architecture.md`, AI UI generation prompts at `.bmad/guidance/prompts/`.
-
-- **Product Owner (PO):**
-
-  - **Function:** Agile Product Owner responsible for validating documents, ensuring development sequencing, managing the product backlog, running master checklists, handling mid-sprint re-planning, and drafting user stories.
-  - **Web Persona:** `PO (Sarah)` with persona `personas#po`. Uses `checklists#po-master-checklist`, `checklists#story-draft-checklist`, `checklists#change-checklist`, and `templates#story-tmpl`. Tasks include `tasks#story-draft-task`, `tasks#doc-sharding-task` (extracts epics and shards architecture), and `tasks#correct-course`.
-  - **IDE Persona:** `Product Owner AKA PO (Curly)` with persona `po.md`. Described as a "Jack of many trades." Tasks include `create-prd.md`, `create-next-story-task.md`, `doc-sharding-task.md`, and `correct-course.md`.
-  - **Output:** User Stories at `.bmad/current/work/stories/`, managed PRD/Backlog at `.bmad/current/specs/`.
-
-- **Scrum Master (SM):**
-
-  - **Function:** A technical role focused on helping the team run the Scrum process, facilitating development, and often involved in story generation and refinement.
-  - **Web Persona:** `SM (Bob)` with persona `personas#sm`. Described as "A very Technical Scrum Master." Uses `checklists#change-checklist`, `checklists#story-dod-checklist`, `checklists#story-draft-checklist`, and `templates#story-tmpl`. Tasks: `tasks#checklist-run-task`, `tasks#correct-course`, `tasks#story-draft-task`.
-  - **IDE Persona:** `Scrum Master: SM (SallySM)` with persona `sm.ide.md`. Described as "Super Technical and Detail Oriented," specialized in "Next Story Generation" (likely leveraging the `sm.ide.md` persona's capabilities).
-
-- **Developer Agents (DEV):**
-  - **Function:** Implement user stories one at a time. Can be generic or specialized.
-  - **Web Persona:** `DEV (Dana)` with persona `personas#dev`. Described as "A very Technical Senior Software Developer."
-  - **IDE Personas:** Multiple configurations can exist, using the `dev.ide.md` persona file (optimized for <6K characters for IDEs). Examples:
-    - `Frontend Dev (DevFE)`: Specialized in NextJS, React, Typescript, HTML, Tailwind.
-    - `Dev (Dev)`: Master Generalist Expert Senior Full Stack Developer.
-  - **Configuration:** Specialized agents can be configured in `ide-bmad-orchestrator.cfg.md` for the IDE Orchestrator, or defined for the Web Orchestrator. Standalone IDE developer agents (e.g., `dev.ide.md`) are also available.
-  - **When to Use:** During the implementation phase, typically working within an IDE.
-
-## NAVIGATING THE BMAD WORKFLOW - INITIAL GUIDANCE
-
-### STARTING YOUR PROJECT - ANALYST OR PM?
-
-- Use Analyst if unsure about idea/market/feasibility or need deep exploration.
-- Use PM if concept is clear or you have a Project Brief.
-- Refer to [AGENT ROLES AND RESPONSIBILITIES](#agent-roles-and-responsibilities) (or section within this KB) for full details on Analyst and PM.
-
-### UNDERSTANDING EPICS - SINGLE OR MULTIPLE?
-
-- Epics represent significant, deployable increments of value.
-- Multiple Epics are common for non-trivial projects or a new MVP (distinct functional areas, user journeys, phased rollout).
-- Single Epic might suit very small MVPs, or post MVP / brownfield new features.
-- The PM helps define and structure epics.
-
-## GETTING STARTED WITH BMAD
-
-This section provides guidance for new users on how to set up their project with the BMAD agent structure and manage artifacts.
-
-### Initial Project Setup
-
-To begin using the BMAD method and its associated agents in your project, you need to integrate the core agent files:
-
-- **Copy `bmad-agent` Folder:** The entire `bmad-agent` folder should be copied into the root directory of your project. This folder contains all the necessary personas, tasks, templates, and configuration files for the BMAD agents to function correctly.
-
-### Exporting Artifacts from AI Platforms
-
-Once an AI agent (like those in Gemini or ChatGPT) has generated a document (e.g., Project Brief, PRD, Architecture Document), you'll need to save it into your project:
-
-- **Gemini:**
-  - After the document is produced, click the `...` (more options) menu typically found near the response.
-  - Select "Copy". The content will be copied as Markdown.
-  - Paste this content into a new `.md` file within your project's `docs` folder (or a similar designated location).
-  - **Passing to a new chat instance:** Gemini's chat interface may not directly support pasting Markdown with full fidelity in all scenarios.
-    - You can paste the raw Markdown content directly.
-    - Alternatively, save the content as a `.txt` file and paste from there.
-    - For sharing or preserving formatting in Google Docs: Create a new Google Doc, right-click, and select "Paste without formatting" if pasting directly, or look for options to import/paste Markdown. Some browser extensions can facilitate Markdown rendering in Google Docs.
-- **ChatGPT:**
-  - ChatGPT generally handles Markdown well. You can copy the generated Markdown output directly.
-  - Paste it into a `.md` file in your project's `docs` folder.
-  - Sharing `.md` files or their content with new ChatGPT instances (e.g., by uploading the file or pasting the text) is typically straightforward.
-
-### Document Sharding
-
-Large documents like PRDs or Architecture Documents can become unwieldy for AI agents to process efficiently, especially in environments with context window limitations. The `doc-sharding-task.md` is designed to break these down:
-
-- **Purpose:** The sharding task splits a large document (e.g., PRD, Architecture, Front-End Architecture) into smaller, more granular sections or individual user stories. This makes it easier for subsequent agents, like the SM (Scrum Master) or Dev Agents, to work with specific parts of the document without needing to process the entire thing.
-- **How to Use:**
-  1.  Ensure the large document you want to shard (e.g., `prd.md`, `architecture.md`) exists in your project's `.bmad/current/specs/` folder.
-  2.  Instruct your active IDE agent (e.g., PO, SM, or the BMAD Orchestrator embodying one of these roles) to run the `doc-sharding-task.md`.
-  3.  You will typically specify the _source file_ to be sharded. For example: "Run the `doc-sharding-task.md` against `.bmad/current/specs/prd.md`."
-  4.  The task will guide the agent to break down the document. The output might be new smaller files or instructions on how the document is logically segmented.
-
-### Utilizing Dedicated IDE Agents (SM and Dev)
-
-While the BMAD IDE Orchestrator can embody any persona, for common and intensive tasks like story generation (SM) and code implementation (Dev), it's highly recommended to use dedicated, specialized agents:
-
-- **Why Dedicated Agents?**
-  - **Context Efficiency:** Dedicated agents (e.g., `sm.ide.md`, `dev.ide.md`) are leaner as their persona files are smaller and more focused. This is crucial in IDEs where context window limits can impact performance and output quality.
-  - **Performance:** Less overhead means faster responses and more focused interactions.
-- **Recommendation:**
-  - Favor using `sm.ide.md` for Scrum Master tasks (like generating the next story).
-  - Favor using `dev.ide.md` (or specialized versions like `dev-frontend.ide.md`) for development tasks.
-- **Creating Your Own Dedicated Agents:**
-  - If your IDE supports more than a few custom agent modes (unlike Cursor's typical limit of 5 without paying for more), you can easily create your own specialized agents.
-  - Take the content of a base persona file (e.g., `bmad-agent/personas/architect.md`).
-  - Optionally, integrate the content of frequently used task files directly into this new persona file.
-  - Save this combined content as a new agent mode in your IDE (e.g., `my-architect.ide.md`). This approach mirrors how the `sm.ide.md` agent is structured.
-
-### When to Use the BMAD IDE Orchestrator
-
-The BMAD IDE Orchestrator (`ide-bmad-orchestrator.md` configured by `ide-bmad-orchestrator.cfg.md`) provides flexibility but might not always be the most efficient choice.
-
-- **Useful Scenarios:**
-  - **Cursor IDE with Agent Limits:** If you're using an IDE like Cursor and frequently need to switch between many different agent personalities (Analyst, PM, Architect, etc.) beyond the typical free limit for custom modes, the Orchestrator allows you to access all configured personas through a single agent slot.
-  - **Unified Experience (Gemini/ChatGPT Parity):** If you prefer to interact with the BMAD agent system in your IDE in the same way you would in a web UI like Gemini (using the BMAD Orchestrator to call upon different specialists), and you are not concerned about context limits or potential costs associated with larger LLM models that can handle the Orchestrator's broader context.
-  - **Access to all Personas:** You want quick access to any of the defined agent personas without setting them up as individual IDE modes.
-- **Potentially Unnecessary / Less Optimal Scenarios:**
-  - **Simple Projects / Feature Additions (Caution Advised):** For very simple projects or when adding a small feature to an existing codebase, you _might_ consider a streamlined flow using the Orchestrator to embody the PM, generate a PRD with epics/stories, and then directly move to development, potentially skipping detailed architecture.
-    - In such cases, the PM persona might be prompted to ask more technical questions to ensure generated stories are sufficiently detailed for developers.
-    - **This is generally NOT recommended** as it deviates from the robust BMAD process and is not yet a fully streamlined or validated path. It risks insufficient planning and lower quality outputs.
-  - **Frequent SM/Dev Tasks:** As mentioned above, for regular story creation and development, dedicated SM and Dev agents are more efficient due to smaller context overhead.
-
-Always consider the trade-offs between the Orchestrator's versatility and the efficiency of dedicated agents, especially concerning your IDE's capabilities and the complexity of your project.
-
-## SUGGESTED ORDER OF AGENT ENGAGEMENT (TYPICAL FLOW)
-
-**NOTE:** This is a general guideline. The BMAD method is iterative; phases/agents might be revisited.
-
-1. **Analyst** - brainstorm and create a project brief.
-2. **PM (Product Manager)** - use the brief to produce a PRD with high level epics and stories.
-3. **Design Architect UX UI Spec for PRD (If project has a UI)** - create the front end UX/UI Specification.
-4. **Architect** - create the architecture and ensure we can meet the prd requirements technically - with enough specification that the dev agents will work consistently.
-5. **Design Architect (If project has a UI)** - create the front end architecture and ensure we can meet the prd requirements technically - with enough specification that the dev agents will work consistently.
-6. **Design Architect (If project has a UI)** - Optionally create a prompt to generate a UI from AI services such as Lovable or V0 from Vercel.
-7. **PO**: Validate documents are aligned, sequencing makes sense, runs a final master checklist. The PO can also help midstream development replan or course correct if major changes occur.
-8. **PO or SM**: Generate Stories 1 at a time (or multiple but not recommended) - this is generally done in the IDE after each story is completed by the Developer Agents.
-9. **Developer Agents**: Implement Stories 1 at a time. You can craft different specialized Developer Agents, or use a generic developer agent. It is recommended to create specialized developer agents and configure them in the `ide-bmad-orchestrator.cfg`.
-
-## HANDLING MAJOR CHANGES
-
-Major changes are an inherent part of ambitious projects. The BMAD Method embraces this through its iterative nature and specific agent roles:
-
-- **Iterative by Design:** The entire BMAD workflow is built on "ITERATIVE_REFINEMENT." Expect to revisit previous steps and agents as new information emerges or requirements evolve. It's "not a linear process."
-- **Embrace and Adapt:** The core ethos includes "EMBRACE_THE_CHAOS" and "ADAPT & EXPERIMENT." Major changes are opportunities to refine the vision and approach.
-- **PO's Role in Re-planning:** The **Product Owner (PO)** is key in managing the impact of significant changes. They can "help midstream development replan or course correct if major changes occur." This involves reassessing priorities, adjusting the backlog, and ensuring alignment with the overall project goals.
-- **Strategic Oversight by Vibe CEO:** As the "Vibe CEO," your role is to maintain "STRATEGIC_OVERSIGHT." When major changes arise, you guide the necessary pivots, ensuring the project remains aligned with your singular vision.
-- **Re-engage Agents as Needed:** Don't hesitate to re-engage earlier-phase agents (e.g., Analyst for re-evaluating market fit, PM for revising PRDs, Architect for assessing technical impact) if a change significantly alters the project's scope or foundations.
-
-## IDE VS UI USAGE - GENERAL RECOMMENDATIONS
-
-The BMAD method can be orchestrated through different interfaces, typically a web UI for higher-level planning and an IDE for development and detailed developer story generation. The most general recommendation is to do all document generation from the brief, PRD, Architecture, Design Architecture, and potentially UI Prompts. Also use the PO to run the full final checklist to ensure all documents are aligned with various changes. For example, did the architect discover something that requires an update to a epic or story sequence in the PRD? The PO will help you there. Once done, then export the documents to the IDE. If documents have been modified, you can ask the specific proper agents in Gemini or chatGPT to give you the final unredacted complete document. Save these into the docs folder of your project.
-
-### CONCEPTUAL, PLANNING PHASES and TECHNICAL DESIGN
-
-- **Interface:** Often best managed via a Web UI (leveraging the **Web Agent Orchestrator** with its bundled assets and `agent-prompt.txt`) or dedicated project management tools where orchestrator agents can guide the process.
-- **Agents Involved:**
-  - **Analyst:** Brainstorming, research, and initial project brief creation.
-  - **PM (Product Manager):** PRD development, epic and high-level story definition.
-  - **Architect / Design Architect (UI):** Detailed technical design and specification.
-  - **PO:** Checklist runner to make sure all of the documents are aligned.
-- **Activities:** Defining the vision, initial requirements gathering, market analysis, high-level planning. The `web-bmad-orchestrator-agent.md` and its configuration likely support these activities.
-
-### DOCUMENTATION MANAGEMENT & IMPLEMENTATION PHASES
-
-- **Interface:** Primarily within the Integrated Development Environment (IDE), leveraging specialized agents (standalone or via the **IDE Agent Orchestrator** configured with `ide-bmad-orchestrator.cfg.md`).
-- **Agents Involved:**
-  - "**PO or SM or BMad Agent:** Run the doc sharing task to split the large files that have been created (PRD, Architecture etc...) into smaller granular documents that are easier for the SM and Dev Agents to work with.
-  - **SM (Scrum Master):** Detailed story generation, backlog refinement, often directly in the IDE or tools integrated with it.
-  - **Developer Agents:** Code implementation for stories, working directly with the codebase in the IDE.
-- **Activities:** Detailed architecture, front-end/back-end design, code development, testing, leveraging IDE tasks (see "LEVERAGING IDE TASKS FOR EFFICIENCY"), using configurations like `ide-bmad-orchestrator.cfg.md`.
-
-### BMAD METHOD FILES
-
-Understanding key files helps in navigating and customizing the BMAD process:
-
-- **Knowledge & Configuration:**
-  - `bmad-agent/data/bmad-kb.md`: This central knowledge base.
-  - `ide-bmad-orchestrator.cfg.md`: Configuration for IDE developer agents.
-  - `ide-bmad-orchestrator.md`: Definition of the IDE orchestrator agent.
-  - `web-bmad-orchestrator-agent.cfg.md`: Configuration for the web orchestrator agent.
-  - `web-bmad-orchestrator-agent.md`: Definition of the web orchestrator agent.
-- **Task Definitions:**
-  - Files in `bmad-agent/tasks/` or `bmad-agent/checklists/` (e.g., `checklist-run-task.md`): Reusable prompts for specific actions and also used by agents to keep agent persona files lean.
-- **Agent Personas & Templates:**
-  - Files in `bmad-agent/personas/`: Define the core behaviors of different agents.
-  - Files in `bmad-agent/templates/`: Standard formats for documents like Project Briefs, PRDs that the agents will use to populate instances of these documents.
-- **Project Artifacts (Outputs - locations vary based on project setup):**
-  - Project Briefs
-  - Product Requirements Documents (PRDs)
-  - UX/UI Specifications
-  - Architecture Documents
-  - Codebase and related development files.
-
-## LEVERAGING IDE TASKS FOR EFFICIENCY
-
-### PURPOSE OF IDE TASKS
-
-- **Reduce Agent Bloat:** Avoid adding numerous, rarely used instructions to primary IDE agent modes (Dev Agent, SM Agent) or even the Orchestrator's base prompt. Keeps agents lean, beneficial for IDEs with limits on custom agent complexity/numbers.
-- **On-Demand Functionality:** Instruct an active IDE agent (standalone or an embodied persona within the IDE Orchestrator) to perform a task by providing the content of the relevant task file (e.g., from `bmad-agent/tasks/checklist-run-task.md`) as a prompt, or by referencing it if the agent is configured to find it (as with the IDE Orchestrator).
-- **Versatility:** Any sufficiently capable agent can be asked to execute a task. Tasks can handle specific functions like running checklists, creating stories, sharding documents, indexing libraries, etc. They are self-contained instruction sets.
-
-### EXAMPLES OF TASK FUNCTIONALITY
-
-**CONCEPT:** Think of tasks as specialized, callable mini-agents or on-demand instruction sets that main IDE agents or the Orchestrator (when embodying a persona) can invoke, keeping primary agent definitions streamlined. They are particularly useful for operations not performed frequently. The `.bmad/current/specs/instructions.md` file provides more details on task setup and usage.
-
-Here are some examples of functionalities provided by tasks found in `bmad-agent/tasks/`:
-
-- **`create-prd.md`:** Guides the generation of a Product Requirements Document.
-- **`create-next-story-task.md`:** Helps in defining and creating the next user story for development.
-- **`create-architecture.md`:** Assists in outlining the technical architecture for a project.
-- **`create-frontend-architecture.md`:** Focuses specifically on designing the front-end architecture.
-- **`create-uxui-spec.md`:** Facilitates the creation of a UX/UI Specification document.
-- **`create-ai-frontend-prompt.md`:** Helps in drafting a prompt for an AI service to generate UI/frontend elements.
-- **`doc-sharding-task.md`:** Provides a process for breaking down large documents into smaller, manageable parts.
-- **`library-indexing-task.md`:** Assists in creating an index or overview of a code library.
-- **`checklist-run-task.md`:** Executes a predefined checklist (likely using `checklist-mappings.yml`).
-- **`correct-course.md`:** Provides guidance or steps for when a project needs to adjust its direction.
-- **`create-deep-research-prompt.md`:** Helps formulate prompts for conducting in-depth research on a topic.
-
-These tasks allow agents to perform complex, multi-step operations by following the detailed instructions within each task file, often leveraging templates and checklists as needed.
+  - [BMAD METHOD v3.0 - REVOLUTIONARY AI BEHAVIORAL FRAMEWORK](#bmad-method-v30---revolutionary-ai-behavioral-framework)
+  - [ARCHITECTURAL REVOLUTION - v3.0 TRANSFORMATION](#architectural-revolution---v30-transformation)
+  - [BMAD METHOD - CORE PHILOSOPHY & ENHANCED PRINCIPLES](#bmad-method---core-philosophy--enhanced-principles)
+  - [AI BEHAVIORAL OPTIMIZATION FRAMEWORK](#ai-behavioral-optimization-framework)
+    - [Example-Driven Learning System](#example-driven-learning-system)
+    - [Structured Thinking Enforcement](#structured-thinking-enforcement)
+    - [Anti-Pattern Prevention](#anti-pattern-prevention)
+    - [Progressive Disclosure System](#progressive-disclosure-system)
+    - [Behavioral Gamification](#behavioral-gamification)
+  - [BMAD v3.0 INSTALLATION & DEPLOYMENT](#bmad-v30-installation--deployment)
+    - [One-Script Installation](#one-script-installation)
+    - [Project Type Detection & Adaptation](#project-type-detection--adaptation)
+    - [Memory System Bootstrap](#memory-system-bootstrap)
+    - [Architecture Migration (v2.x → v3.0)](#architecture-migration-v2x--v30)
+  - [COMPREHENSIVE COMMAND SYSTEM](#comprehensive-command-system)
+    - [Command Registry Architecture](#command-registry-architecture)
+    - [Core Command Groups](#core-command-groups)
+    - [Claude Code Integration](#claude-code-integration)
+    - [Behavioral Requirements Integration](#behavioral-requirements-integration)
+  - [MEMORY-ENHANCED INTELLIGENCE SYSTEM](#memory-enhanced-intelligence-system)
+    - [Memory Architecture](#memory-architecture)
+    - [Brownfield Memory Bootstrap](#brownfield-memory-bootstrap)
+    - [Pattern Recognition & Learning](#pattern-recognition--learning)
+    - [Memory Integration with Personas](#memory-integration-with-personas)
+  - [QUALITY ENFORCEMENT FRAMEWORK](#quality-enforcement-framework)
+    - [Zero-Tolerance Quality Gates](#zero-tolerance-quality-gates)
+    - [Ultra-Deep Thinking Mode (UDTM)](#ultra-deep-thinking-mode-udtm)
+    - [Anti-Pattern Detection System](#anti-pattern-detection-system)
+    - [Brotherhood Review Process](#brotherhood-review-process)
+  - [MULTI-PERSONA COLLABORATION SYSTEM](#multi-persona-collaboration-system)
+    - [Persona Ecosystem](#persona-ecosystem)
+    - [Structured Handoff Protocol](#structured-handoff-protocol)
+    - [Multi-Persona Consultations](#multi-persona-consultations)
+    - [Context-Aware Adaptation](#context-aware-adaptation)
+  - [AGENT ROLES AND RESPONSIBILITIES v3.0](#agent-roles-and-responsibilities-v30)
+    - [Core Orchestrator (BMAD)](#core-orchestrator-bmad)
+    - [Specialized Personas](#specialized-personas)
+  - [EXAMPLE-DRIVEN LEARNING ARCHITECTURE](#example-driven-learning-architecture)
+    - [Example Library Structure](#example-library-structure)
+    - [Pattern Selection & Application](#pattern-selection--application)
+    - [Behavioral Enforcement](#behavioral-enforcement)
+  - [BROWNFIELD PROJECT METHODOLOGY](#brownfield-project-methodology)
+    - [Brownfield Characteristics](#brownfield-characteristics)
+    - [Bootstrap Memory Process](#bootstrap-memory-process)
+    - [Gradual Adoption Strategy](#gradual-adoption-strategy)
+  - [WORKFLOW PATTERNS & ORCHESTRATION](#workflow-patterns--orchestration)
+    - [Standard Workflow Sequences](#standard-workflow-sequences)
+    - [Context-Aware Workflow Adaptation](#context-aware-workflow-adaptation)
+    - [Quality-Integrated Workflows](#quality-integrated-workflows)
+  - [PERFORMANCE METRICS & SUCCESS CRITERIA](#performance-metrics--success-criteria)
+  - [BMAD METHOD - TOOLING AND INTEGRATION ECOSYSTEM](#bmad-method---tooling-and-integration-ecosystem)
+  - [COMMUNITY AND CONTRIBUTIONS](#community-and-contributions)
+  - [TROUBLESHOOTING & OPTIMIZATION GUIDE](#troubleshooting--optimization-guide)
+
+## BMAD METHOD v3.0 - REVOLUTIONARY AI BEHAVIORAL FRAMEWORK
+
+**STATEMENT:** BMAD Method v3.0 represents a quantum leap in AI behavior optimization - transforming "vibe coding" into a systematic, evidence-based approach to AI-assisted development. This version introduces unprecedented behavioral tracking, memory-enhanced intelligence, and zero-tolerance quality enforcement that delivers measurable improvements in AI effectiveness.
+
+**v3.0 BREAKTHROUGH FEATURES:**
+
+### 🧠 **Memory-Enhanced Intelligence**
+- **Persistent Learning**: System remembers successful patterns across sessions
+- **Brownfield Bootstrap**: Automatically captures knowledge from existing codebases
+- **Context-Aware Recommendations**: Proactive suggestions based on historical success
+- **Cross-Project Learning**: Pattern recognition that improves with each project
+
+### 🎯 **AI Behavioral Optimization**
+- **Example-Driven Learning**: Mandatory reference to 47+ proven patterns
+- **Structured Thinking**: Required analysis tags for all decisions
+- **Anti-Pattern Prevention**: Zero tolerance enforcement with automatic penalties
+- **Progressive Disclosure**: Cognitive load management with adaptive detail levels
+
+### 🏆 **Behavioral Gamification**
+- **Achievement System**: Unlock accomplishments for quality excellence
+- **Streak Tracking**: Maintain momentum with consistency rewards
+- **Leaderboards**: Healthy competition with team performance tracking
+- **Penalty/Reward System**: Financial consequences for behavioral compliance
+
+### 🔧 **Comprehensive Command System**
+- **46 Specialized Commands**: Organized into 9 logical command groups
+- **Claude Code Integration**: Native slash commands with full behavioral framework
+- **System Management**: Complete orchestrator control and health monitoring
+- **Meta-Prompting**: Advanced prompt generation and optimization
+
+### 🏗️ **Enterprise-Grade Architecture**
+- **Clean Separation**: Method definition vs. project usage completely separated
+- **One-Script Installation**: Deploy to any project with intelligent adaptation
+- **Memory System**: Persistent state management with OpenMemory integration
+- **Quality Framework**: Comprehensive validation and enforcement pipeline
+
+## ARCHITECTURE
+
+```
+# Method Repository (BMAD-METHOD)
+bmad-agent/                    # ✅ Method definition only
+  commands/command-registry.yml # 46 commands with behavioral requirements
+  data/memory-system/          # Memory infrastructure
+  templates/project-state/     # Clean templates with placeholders
+  examples/                    # 47+ patterns: good/, bad/, personas/, tasks/
+  personas/                    # 8 specialized AI personas
+  tasks/                       # Self-contained instruction sets
+  
+# Target Project (After Installation)
+project-root/
+  bmad-agent/                  # Copied method framework
+  .bmad/                       # ✅ Project-specific data only
+    state/orchestrator-state.md # Session & progress tracking
+    memory/fallback-storage.json # Project learning & patterns
+    config/                    # Team-specific configuration
+```
+
+### Installation
+```bash
+# One command deploys BMAD to any project
+./install-bmad.sh /path/to/target/project
+
+# Auto-detects: project type, technology stack, architecture style
+# Creates: .bmad structure, initializes templates, updates gitignore
+# Supports: greenfield, brownfield, mvp, feature projects
+```
+
+## BMAD METHOD - CORE PHILOSOPHY & ENHANCED PRINCIPLES
+
+**EVOLVED CORE ETHOS:**
+- **Memory-Enhanced CEO**: Think like a CEO with unlimited resources AND institutional memory of what works
+- **Behavioral Excellence**: AI behavior is systematically optimized through proven patterns and quality enforcement  
+- **Evidence-Based Decisions**: Every choice backed by examples, data, and structured analysis
+- **Continuous Learning**: System improves with each interaction through memory integration
+- **Zero-Tolerance Quality**: Uncompromising standards with automatic enforcement
+- **Context-Aware Adaptation**: Intelligent adjustment to project type, team expertise, and constraints
+
+**v3.0 ENHANCED PRACTICES:**
+- **MEMORY_FIRST_APPROACH**: Check memory for patterns before starting any task
+- **EXAMPLE_DRIVEN_EXECUTION**: Reference library examples in every response (-$1,000 penalty if missed)
+- **STRUCTURED_THINKING_MANDATORY**: Use analysis tags for all decisions (automatic blocking)
+- **PROGRESSIVE_DISCLOSURE_OPTIMIZATION**: Start essential, expand intelligently based on context
+- **QUALITY_GATE_ENFORCEMENT**: Mandatory validation at 25%, 50%, 75%, and 100% completion
+- **BEHAVIORAL_TRACKING_ACTIVE**: All interactions contribute to performance scoring and improvement
+
+## AI BEHAVIORAL OPTIMIZATION FRAMEWORK
+
+### Example-Driven Learning System
+
+**Architecture**: 47+ curated examples organized by category and persona
+```yaml
+examples/
+├── good/               # Best practice patterns (15+ files)
+├── bad/                # Anti-patterns to avoid (12+ files)  
+├── personas/           # Persona-specific examples (8 files)
+├── tasks/              # Task execution examples (10+ files)
+└── workflows/          # Process examples (5+ files)
+```
+
+**Enforcement**:
+- **Mandatory Reference**: Every response must cite relevant examples
+- **Penalty System**: -$1,000 for missing examples, +$500 for good usage
+- **Context Matching**: Examples selected based on project type and persona
+- **Quality Scoring**: Example utilization tracked for performance metrics
+
+### Structured Thinking Enforcement
+
+**Required Analysis Tags**:
+- `<decision_analysis>` for strategic choices
+- `<problem_analysis>` for issue investigation  
+- `<architecture_analysis>` for system design
+- `<quality_analysis>` for validation and review
+- `<risk_analysis>` for risk assessment
+
+**Enforcement**: Actions blocked without proper analysis (-$1,500 penalty)
+
+### Anti-Pattern Prevention
+
+**Critical Patterns (Zero Tolerance)**:
+- "I think" → "Based on [evidence]" (-$500 penalty)
+- "Should work" → "Will work because [tested reason]" (-$1,000 penalty)
+- "TODO/FIXME" in production → Complete implementation required (-$2,000 penalty)
+
+**Detection**: Automatic scanning with immediate intervention and correction
+
+### Progressive Disclosure System
+
+**Adaptive Detail Levels**:
+- **Level 0**: Essential information only (1-3 lines)
+- **Level 1**: Context and key considerations (4-8 lines)
+- **Level 2**: Comprehensive details (10-20 lines)
+- **Level 3**: Expert-level deep dive (unlimited)
+
+**Context Adaptation**:
+- **Junior developers**: Default to Level 2 (more detail)
+- **Senior developers**: Default to Level 1 (balanced)
+- **Expert context**: Default to Level 0 (minimal)
+
+### Behavioral Gamification
+
+**Achievement Categories**:
+- **Quality Excellence**: Zero anti-patterns, high scores
+- **Speed Mastery**: Efficient task completion
+- **Collaboration**: Multi-persona coordination
+- **Innovation**: Creative problem solving
+- **Learning**: Continuous improvement
+
+**Tracking Systems**:
+- **Streaks**: Consecutive quality performance
+- **Leaderboards**: Anonymous team rankings
+- **Balance**: Current behavioral score with trend analysis
+- **Reports**: Detailed performance analytics with improvement suggestions
+
+## BMAD v3.0 INSTALLATION & DEPLOYMENT
+
+### One-Script Installation
+
+```bash
+# From BMAD-METHOD repository
+./install-bmad.sh /path/to/target/project
+
+# What it does:
+✅ Analyzes target project (type, tech stack, architecture)
+✅ Copies bmad-agent/ framework 
+✅ Creates .bmad/ project structure
+✅ Initializes templates with project-specific data
+✅ Updates .gitignore with proper exclusions
+✅ Runs verification and displays next steps
+```
+
+### Project Type Detection & Adaptation
+
+**Automatic Detection**:
+- **Greenfield**: New projects with minimal git history
+- **Brownfield**: Established projects with substantial codebase
+- **MVP**: Early-stage projects with basic functionality
+- **Feature**: Specific feature additions to existing systems
+
+**Technology Stack Recognition**:
+- **JavaScript/Node.js**: package.json detection
+- **Python**: requirements.txt detection  
+- **Go**: go.mod detection
+- **Java**: pom.xml detection
+- **Rust**: Cargo.toml detection
+
+**Architecture Style Inference**:
+- **Microservices**: docker-compose.yml presence
+- **Serverless**: serverless.yml detection
+- **Monolith**: Default for single-repository projects
+
+### Memory System Bootstrap
+
+**For Brownfield Projects**:
+```bash
+# Auto-bootstrap existing codebase knowledge
+/bootstrap-memory --mode=auto --depth=standard
+
+# Captures:
+✅ Architectural decisions and rationale
+✅ Existing patterns and conventions
+✅ Technical constraints and dependencies
+✅ Team preferences and standards
+✅ Historical issues and solutions
+```
+
+**Bootstrap Modes**:
+- **Auto** (5-15 min): Automated codebase analysis
+- **Interactive** (30-60 min): Guided knowledge capture with user input
+- **Guided** (45-90 min): Comprehensive structured knowledge extraction
+
+## COMPREHENSIVE COMMAND SYSTEM
+
+### Command Registry Architecture
+
+**Central Registry**: `bmad-agent/commands/command-registry.yml`
+- **46 Total Commands** across 9 categories
+- **Behavioral Requirements** integrated for each command
+- **Parameter Validation** with types and constraints
+- **Success Metrics** and quality thresholds
+
+### Core Command Groups
+
+**1. Persona Management**
+- `/analyst`, `/pm`, `/architect`, `/dev`, `/sm`, `/po`, `/quality`, `/design-architect`
+- Domain expertise activation with behavioral continuity
+
+**2. Memory Operations**
+- `/remember`, `/recall`, `/insights`, `/patterns`, `/bootstrap-memory`
+- Persistent learning and organizational knowledge management
+
+**3. Quality Enforcement**
+- `/udtm`, `/quality-gate`, `/anti-pattern-check`, `/brotherhood-review`
+- Zero-tolerance quality standards with automated enforcement
+
+**4. Workflow Management**
+- `/suggest`, `/handoff`, `/core-dump`, `/tasks`, `/run-task`
+- Structured task execution and context preservation
+
+**5. Multi-Persona Consultation**
+- `/consult`, `/panel-status`, `/consensus-check`
+- Collaborative decision making with diverse perspectives
+
+**6. System Analysis**
+- `/diagnose`, `/optimize`, `/learn`
+- Performance optimization and system intelligence
+
+**7. Behavioral Tracking**
+- `/balance`, `/achievements`, `/streaks`, `/leaderboard`, `/behavioral-report`
+- Performance tracking and gamification
+
+**8. System Management**
+- `/init`, `/status`, `/config`, `/session`, `/validate`
+- Orchestrator control and infrastructure management
+
+**9. Core Operations**
+- `/help`, `/agents`, `/context`, `/checklist`, `/exit`, `/yolo`
+- Essential utilities and assistance
+
+### Claude Code Integration
+
+**Generation Process**:
+```bash
+# Automatic conversion of BMAD commands to Claude Code
+python generate_claude_commands.py  # Creates .claude/commands/*.md
+python generate_claude_docs.py      # Creates comprehensive documentation
+./update_bmad_commands.sh           # Combined generation and cleanup
+```
+
+**Claude Code Structure**:
+```
+.claude/commands/
+├── persona.md          # /project:persona [name] [args]
+├── memory.md           # /project:memory [operation] [args]  
+├── quality.md          # /project:quality [operation] [args]
+├── workflow.md         # /project:workflow [operation] [args]
+├── consultation.md     # /project:consultation [type] [args]
+├── analysis.md         # /project:analysis [operation] [args]
+├── behavioral.md       # /project:behavioral [operation] [args]
+├── system.md           # /project:system [operation] [args]
+└── core.md            # /project:core [operation] [args]
+```
+
+### Behavioral Requirements Integration
+
+**Every Command Enforces**:
+- **Example References**: Mandatory citation of relevant patterns
+- **Structured Thinking**: Required analysis tags for decisions
+- **Anti-Pattern Prevention**: Automatic detection and blocking
+- **Progressive Disclosure**: Context-appropriate detail levels
+- **Quality Standards**: Minimum scores and validation requirements
+
+**Penalty System**:
+- Missing examples: -$1,000
+- Anti-patterns: -$500 to -$2,000
+- Poor structure: -$1,500
+- Quality violations: -$3,000+
+
+## MEMORY-ENHANCED INTELLIGENCE SYSTEM
+
+### Memory Architecture
+
+**Storage Layers**:
+1. **Session State**: `.bmad/state/orchestrator-state.md` (current session)
+2. **Project Memory**: `.bmad/memory/fallback-storage.json` (project-specific learning)
+3. **System Memory**: OpenMemory MCP integration (if available)
+
+**Memory Categories**:
+- **Decisions**: Architectural choices and rationale
+- **Patterns**: Successful approaches and conventions
+- **Mistakes**: Failed attempts and lessons learned
+- **Handoffs**: Context transfers between personas
+- **Consultations**: Multi-persona collaboration outcomes
+- **User Preferences**: Individual and team working styles
+- **Quality Metrics**: Performance data and improvement areas
+
+### Brownfield Memory Bootstrap
+
+**Automated Extraction**:
+```yaml
+bootstrap_process:
+  project_analysis:
+    - Repository structure and organization
+    - Technology stack and dependencies
+    - Documentation maturity assessment
+    - Team size and activity inference
+    
+  decision_archaeology:
+    - Database and framework choices
+    - Architecture patterns and rationale
+    - API design decisions
+    - Deployment and infrastructure choices
+    
+  pattern_mining:
+    - Coding conventions and standards
+    - Testing strategies and coverage
+    - Error handling approaches
+    - Performance optimization techniques
+    
+  issue_mapping:
+    - Known technical debt areas
+    - Recurring problems and solutions
+    - Performance bottlenecks
+    - Security considerations
+```
+
+### Pattern Recognition & Learning
+
+**Success Pattern Identification**:
+- Which approaches led to successful outcomes
+- Context where specific patterns work well
+- Team preferences and effective adaptations
+- Cross-project applicable insights
+
+**Failure Pattern Detection**:
+- Anti-patterns discovered through experience
+- Approaches that didn't work in specific contexts
+- Lessons learned from project challenges
+- Prevention strategies for known issues
+
+### Memory Integration with Personas
+
+**Pre-Activation Briefing**:
+- Search memory for relevant context for target persona
+- Identify successful patterns for similar tasks
+- Surface potential pitfalls and mitigation strategies
+- Prepare context-enhanced persona activation
+
+**Continuous Enhancement**:
+- All persona interactions contribute to memory
+- Decision outcomes tracked for pattern validation
+- Cross-persona insights captured for future reference
+- Team collaboration patterns refined over time
+
+## QUALITY ENFORCEMENT FRAMEWORK
+
+### Zero-Tolerance Quality Gates
+
+**Milestone Gates** (Automatic Enforcement):
+- **25% Completion**: Structured thinking initiated, examples referenced
+- **50% Completion**: Decision analysis complete, evidence validated
+- **75% Completion**: Implementation quality verified, testing complete
+- **100% Completion**: All criteria met, quality score >90%
+
+**Gate Requirements**:
+```yaml
+quality_gate_criteria:
+  behavioral_adherence: 40% weight
+  technical_correctness: 35% weight  
+  communication_clarity: 25% weight
+  
+minimum_scores:
+  "25%": 70 points
+  "50%": 80 points
+  "75%": 85 points
+  "100%": 90 points
+```
+
+### Ultra-Deep Thinking Mode (UDTM)
+
+**Mandatory Activation**: Critical decisions require UDTM analysis
+- **Duration**: 90-120 minutes for major architectural decisions
+- **Perspectives**: Minimum 3, typically 5-7 different viewpoints
+- **Evidence Requirement**: All claims backed by verifiable data
+- **Confidence Scoring**: Rate confidence in final recommendations
+
+**UDTM Process**:
+1. **Problem Definition**: Clear scope and objectives
+2. **Perspective Analysis**: Multiple expert viewpoints
+3. **Evidence Gathering**: Data collection and validation
+4. **Alternative Evaluation**: Compare 3+ approaches
+5. **Risk Assessment**: Identify and mitigate potential issues
+6. **Recommendation**: Evidence-based final choice
+
+### Anti-Pattern Detection System
+
+**Automated Scanning**:
+- **Real-time Detection**: Immediate identification during task execution
+- **Pattern Library**: 20+ documented anti-patterns with alternatives
+- **Context Awareness**: Adapts detection based on project phase and type
+- **Graduated Penalties**: Severity-based consequence system
+
+**Critical Anti-Patterns**:
+- **Assumption Broadcasting**: "I think" → "Based on [evidence]"
+- **Vague Commitments**: "Should work" → "Will work because [tested reason]"
+- **Technical Debt Introduction**: TODO/FIXME → Complete implementation
+- **Quality Compromise**: "Good enough" → Meets quality standards
+
+### Brotherhood Review Process
+
+**Honest Peer Review**:
+- **Evidence-Based Feedback**: All criticism backed by specific examples
+- **Improvement-Focused**: Constructive suggestions with implementation guidance
+- **Quality Scoring**: Quantified assessment across multiple dimensions
+- **Anonymous Option**: Safe space for honest feedback
+
+**Review Standards**:
+- **Comprehensive Coverage**: Security, performance, maintainability, reliability
+- **Specific Remediation**: Step-by-step fix instructions
+- **Risk-Based Prioritization**: Issues ranked by business impact
+- **Continuous Improvement**: Learn from review trends and outcomes
+
+## MULTI-PERSONA COLLABORATION SYSTEM
+
+### Persona Ecosystem
+
+**8 Specialized Personas** with distinct expertise:
+
+1. **Analyst (Larry)**: Research, requirements gathering, market analysis
+2. **Product Manager (Jack)**: Strategy, planning, PRD creation, stakeholder management
+3. **Architect (Mo)**: System design, technical architecture, scalability planning
+4. **Developer**: Implementation, coding, technical execution (multiple variants)
+5. **Scrum Master (SallySM)**: Process facilitation, agile ceremonies, team dynamics
+6. **Product Owner (Curly)**: Backlog management, story validation, delivery coordination
+7. **Quality Enforcer**: Zero-tolerance quality standards, validation, compliance
+8. **Design Architect (Millie)**: UX/UI design, frontend architecture, user experience
+
+### Structured Handoff Protocol
+
+**Handoff Requirements**:
+```yaml
+handoff_protocol:
+  context_preservation: 100% information transfer
+  quality_continuity: Standards maintained across personas
+  structured_transition: Checklist-based completeness validation
+  memory_integration: Insights documented for future reference
+  
+validation_criteria:
+  work_summary: Complete description of accomplished tasks
+  context_transfer: Full background and current state
+  next_actions: Clear steps for receiving persona
+  quality_validation: Confirmation of standards compliance
+```
+
+**Handoff Process**:
+1. **Pre-Handoff Summary**: Current persona documents completed work
+2. **Context Package**: Structured transfer of all relevant information  
+3. **Quality Validation**: Ensure work meets standards before transfer
+4. **Persona Activation**: Target persona briefed with complete context
+5. **Continuity Verification**: Confirm no information loss occurred
+
+### Multi-Persona Consultations
+
+**Consultation Types**:
+
+**Design Review** (`/consult design-review`)
+- **Participants**: PM + Architect + Design Architect + Quality Enforcer
+- **Purpose**: Comprehensive design validation from all perspectives
+- **Process**: Individual analysis → Perspective sharing → Synthesis → Decision
+
+**Technical Feasibility** (`/consult technical-feasibility`)
+- **Participants**: Architect + Dev + SM + Quality Enforcer  
+- **Purpose**: Technical implementation validation and risk assessment
+- **Focus**: Resource requirements, timeline feasibility, technical risks
+
+**Product Strategy** (`/consult product-strategy`)
+- **Participants**: PM + PO + Analyst
+- **Purpose**: Product direction and strategic prioritization
+- **Outcome**: Unified product roadmap with market validation
+
+**Quality Assessment** (`/consult quality-assessment`)
+- **Participants**: Quality Enforcer + Dev + Architect
+- **Purpose**: Quality standards review and compliance validation
+- **Standards**: Security, performance, maintainability, reliability
+
+### Context-Aware Adaptation
+
+**Team Experience Adaptation**:
+```yaml
+junior_team:
+  instruction_detail: 1.5x standard
+  example_requirement: mandatory
+  validation_frequency: every_step
+  
+senior_team:
+  instruction_detail: 0.7x standard
+  example_requirement: on_request
+  validation_frequency: milestone_only
+```
+
+**Project Type Adaptation**:
+```yaml
+greenfield_project:
+  example_focus: modern_patterns
+  quality_standards: strict
+  architecture_emphasis: scalability
+  
+brownfield_project:
+  example_focus: migration_patterns
+  quality_standards: incremental_improvement
+  architecture_emphasis: compatibility
+```
+
+## AGENT ROLES AND RESPONSIBILITIES v3.0
+
+### Core Orchestrator (BMAD)
+
+**Enhanced Orchestrator Functions**:
+- **Memory-Enhanced Guidance**: Proactive suggestions based on historical patterns
+- **Behavioral Oversight**: Continuous monitoring and enforcement of quality standards
+- **Context Management**: Intelligent context preservation across persona switches
+- **System Health**: Monitoring and optimization of all BMAD components
+- **Learning Integration**: Continuous improvement from session outcomes
+
+**Orchestrator Types**:
+- **IDE Orchestrator**: Direct integration with development environments
+- **Web Orchestrator**: Browser-based for planning and strategy phases
+- **Claude Code Orchestrator**: Native slash command integration
+
+### Specialized Personas
+
+Each persona enhanced with v3.0 capabilities:
+
+**Memory Integration**: Access to project memory and pattern recognition
+**Behavioral Framework**: Full compliance with example-driven learning and quality standards
+**Context Awareness**: Intelligent adaptation to project type and team expertise
+**Quality Enforcement**: Integrated quality gates and anti-pattern prevention
+**Collaborative Intelligence**: Seamless handoffs and multi-persona consultation
+
+**Key Enhancements per Persona**:
+- **Evidence Requirements**: All claims backed by data and examples
+- **Structured Analysis**: Mandatory analysis tags for domain decisions
+- **Progressive Disclosure**: Adaptive detail based on user expertise
+- **Memory Contribution**: All interactions enhance system learning
+- **Quality Accountability**: Personal responsibility for domain quality standards
+
+## EXAMPLE-DRIVEN LEARNING ARCHITECTURE
+
+### Example Library Structure
+
+**Comprehensive Pattern Collection**:
+```yaml
+examples/
+├── good/                    # 15+ best practice files
+│   ├── api-design-patterns.md
+│   ├── security-patterns.md
+│   ├── performance-optimization.md
+│   └── ...
+├── bad/                     # 12+ anti-pattern files
+│   ├── security-failures.md
+│   ├── performance-antipatterns.md
+│   ├── architecture-antipatterns.md
+│   └── ...
+├── personas/                # 8 persona-specific example files
+│   ├── analyst-examples.md
+│   ├── architect-examples.md
+│   ├── dev-examples.md
+│   └── ...
+├── tasks/                   # 10+ task execution examples
+│   ├── create-prd-examples.md
+│   ├── udtm-examples.md
+│   ├── quality-gate-examples.md
+│   └── ...
+└── workflows/               # 5+ process examples
+    ├── consultation-examples.md
+    ├── handoff-examples.md
+    └── ...
+```
+
+### Pattern Selection & Application
+
+**Selection Criteria**:
+1. **Task Type Matching**: Identify relevant domain and activity
+2. **Context Appropriateness**: Project type, team experience, constraints
+3. **Success Validation**: Proven patterns with documented outcomes
+4. **Anti-Pattern Avoidance**: Explicit exclusion of known failures
+
+**Application Process**:
+1. **Pattern Identification**: Search relevant example categories
+2. **Context Adaptation**: Modify pattern for specific requirements
+3. **Evidence Integration**: Combine pattern with current context data
+4. **Quality Validation**: Ensure pattern meets quality standards
+5. **Citation Requirement**: Document pattern source and adaptation
+
+### Behavioral Enforcement
+
+**Mandatory Reference System**:
+- **Every Response**: Must cite 1-3 relevant examples
+- **Specific Citations**: Include file name and pattern number
+- **Context Justification**: Explain why pattern applies to current situation
+- **Adaptation Documentation**: Describe any modifications made
+
+**Quality Scoring**:
+```yaml
+example_usage_scoring:
+  no_examples: -1000 penalty
+  vague_reference: -500 penalty
+  inappropriate_example: -750 penalty
+  good_usage: +500 reward
+  excellent_adaptation: +1000 reward
+  pattern_innovation: +1500 reward
+```
+
+## BROWNFIELD PROJECT METHODOLOGY
+
+### Brownfield Characteristics
+
+**Project Indicators**:
+- **Established Codebase**: 50+ commits or 6+ months development
+- **Technical Debt**: Legacy code, inconsistent patterns, optimization opportunities
+- **Team Knowledge**: Tribal knowledge, undocumented decisions, implicit standards
+- **Business Constraints**: Existing users, data migration, compatibility requirements
+- **Integration Dependencies**: Connected systems, external APIs, shared databases
+
+### Bootstrap Memory Process
+
+**Comprehensive Knowledge Extraction**:
+
+**Phase 1: Project Context Discovery** (10-15 minutes)
+- Repository structure analysis and naming conventions
+- Technology stack identification and dependency mapping
+- Documentation maturity assessment
+- Team size and development activity inference
+
+**Phase 2: Decision Archaeology** (15-20 minutes)
+- Database and framework choice rationale
+- Architecture pattern identification
+- API design decisions and evolution
+- Deployment and infrastructure choices
+
+**Phase 3: Pattern Mining** (10-15 minutes)
+- Coding standards and conventions discovery
+- Testing strategies and coverage assessment
+- Error handling and logging approaches
+- Performance optimization techniques identification
+
+**Phase 4: Issue/Solution Mapping** (10-15 minutes)
+- Technical debt identification and prioritization
+- Recurring problem patterns and resolutions
+- Performance bottleneck documentation
+- Security consideration cataloging
+
+**Phase 5: Team Preference Inference** (5-10 minutes)
+- Working style observation and adaptation
+- Communication pattern analysis
+- Quality standard determination
+- Collaboration tool usage assessment
+
+### Gradual Adoption Strategy
+
+**Week 1: Foundation**
+- Install BMAD and run memory bootstrap
+- Identify quick wins and low-risk improvements
+- Establish baseline quality metrics
+- Begin team familiarization
+
+**Week 2-4: Core Adoption**
+- Implement quality gates for new code
+- Start using personas for major decisions
+- Begin memory capture of new insights
+- Establish anti-pattern prevention
+
+**Month 2-3: Full Integration**
+- Apply BMAD to all new development
+- Begin legacy code improvement
+- Full team adoption and training
+- Performance tracking and optimization
+
+**Month 4-6: Optimization**
+- Comprehensive quality assessment
+- Technical debt reduction planning
+- Process optimization and refinement
+- Cross-project pattern sharing
+
+## WORKFLOW PATTERNS & ORCHESTRATION
+
+### Standard Workflow Sequences
+
+**Analysis → Strategy → Design Pattern**:
+```bash
+/analyst
+/recall "similar-projects"
+/handoff pm
+/pm
+/remember "strategic-decisions"
+/handoff architect
+/architect
+/udtm "architecture-approach"
+```
+
+**Quality-First Development Pattern**:
+```bash
+/quality-gate pre-implementation
+/dev
+/anti-pattern-check --scope=current
+/quality-gate 50%
+/handoff quality
+/brotherhood-review
+```
+
+**Multi-Persona Consultation Pattern**:
+```bash
+/consult design-review
+/consensus-check --threshold=80
+/remember "design-decisions"
+/suggest --alternatives=3
+```
+
+### Context-Aware Workflow Adaptation
+
+**Greenfield Projects**:
+- Emphasis on scalable architecture and modern patterns
+- Comprehensive planning and validation phases
+- Full quality gate enforcement from start
+- Knowledge capture for future projects
+
+**Brownfield Projects**:
+- Memory bootstrap for existing knowledge
+- Incremental improvement and debt reduction
+- Legacy compatibility and migration strategies
+- Gradual quality standard implementation
+
+**MVP Development**:
+- Balanced speed and quality approach
+- Critical path quality enforcement
+- Rapid iteration with learning capture
+- Technical debt tracking for future resolution
+
+### Quality-Integrated Workflows
+
+**Continuous Quality Validation**:
+- Automatic quality gates at workflow milestones
+- Real-time anti-pattern detection and correction
+- Memory-enhanced decision support
+- Behavioral tracking and optimization
+
+**Fail-Fast Quality Enforcement**:
+- Immediate halting of work on critical violations
+- Escalation protocols for quality gate failures
+- Recovery procedures with root cause analysis
+- Learning integration for prevention
+
+## PERFORMANCE METRICS & SUCCESS CRITERIA
+
+**Target Performance Metrics v3.0**:
+```yaml
+success_metrics:
+  first_attempt_success_rate: 95%
+  clarification_reduction: 80%
+  anti_pattern_violations: 0
+  example_utilization: 90%
+  structured_analysis_compliance: 100%
+  response_conciseness: 4_lines_max_default
+  token_efficiency: 40%_reduction
+  context_utilization: 80%_effective
+  memory_integration: 85%_sessions
+  quality_gate_pass_rate: 95%
+  behavioral_score_improvement: 25%_monthly
+```
+
+**Behavioral Framework Results**:
+- **Quality Improvement**: 40% reduction in rework cycles
+- **Speed Enhancement**: 30% faster task completion with maintained quality
+- **Knowledge Retention**: 85% of project insights captured and reusable
+- **Team Collaboration**: 50% improvement in handoff effectiveness
+- **Decision Quality**: 60% reduction in decision reversals
+
+## BMAD METHOD - TOOLING AND INTEGRATION ECOSYSTEM
+
+### Core Infrastructure Files
+
+**Configuration & Control**:
+- `bmad-agent/ide-bmad-orchestrator.md`: Main orchestrator definition
+- `bmad-agent/ide-bmad-orchestrator.cfg.md`: IDE orchestrator configuration
+- `bmad-agent/commands/command-registry.yml`: Central command definition
+- `install-bmad.sh`: One-script deployment system
+- `verify-setup.sh`: Comprehensive system validation
+
+**Generation & Automation**:
+- `generate_claude_commands.py`: Claude Code command generation
+- `generate_claude_docs.py`: Comprehensive documentation generation
+- `update_bmad_commands.sh`: Combined generation and maintenance
+
+**Memory & Intelligence**:
+- `bmad-agent/data/memory-system/`: Memory infrastructure components
+- `bmad-agent/examples/`: 47+ pattern libraries
+- `bmad-agent/templates/`: Clean templates for project initialization
+
+### IDE Integration Patterns
+
+**Native IDE Integration** (Cursor, Windsurf, etc.):
+- Direct loading of orchestrator files
+- Specialized persona files for frequent tasks
+- Memory integration with project context
+- Quality enforcement in development workflow
+
+**Claude Code Integration**:
+- Slash command interface with full behavioral framework
+- Grouped command organization for discoverability
+- Native argument handling and context management
+- Team collaboration and sharing capabilities
+
+### Project Structure Integration
+
+**Method Repository** (BMAD-METHOD):
+- Pure method definition and infrastructure
+- Version controlled templates and examples
+- Shared across all projects and teams
+- Regular updates and community contributions
+
+**Target Projects**:
+- Deployed method framework in `bmad-agent/`
+- Project-specific state in `.bmad/`
+- Team configuration and customization
+- Gitignore patterns for appropriate privacy
+
+## COMMUNITY AND CONTRIBUTIONS
+
+### Enhanced Contribution Framework
+
+**Community Development**:
+- **Pattern Library Expansion**: Contribute proven examples and anti-patterns
+- **Persona Enhancement**: Improve specialized persona effectiveness
+- **Integration Extensions**: Add support for new IDEs and platforms
+- **Quality Metrics**: Contribute validation and measurement improvements
+
+**Quality Standards for Contributions**:
+- All contributions must include behavioral framework integration
+- Examples must be validated in real projects
+- Anti-patterns must include specific alternatives
+- Documentation must follow progressive disclosure principles
+
+### Licensing & Usage
+
+**MIT License with Community Enhancement**:
+- Open source with commercial usage permitted
+- Community contributions encouraged and credited
+- Enterprise support and customization available
+- Training and certification programs in development
+
+## TROUBLESHOOTING & OPTIMIZATION GUIDE
+
+### Common Issues & Solutions
+
+**Installation Problems**:
+```bash
+# Issue: Command generation fails
+Solution: python3 generate_claude_commands.py --verbose
+
+# Issue: Memory system not working
+Solution: /validate --memory --fix
+
+# Issue: Quality gates failing unexpectedly
+Solution: /quality-gate custom --strict=false
+```
+
+**Performance Optimization**:
+- **Memory Usage**: Configure memory depth and cleanup policies
+- **Response Speed**: Adjust progressive disclosure defaults
+- **Context Management**: Optimize handoff and consultation processes
+- **Behavioral Tracking**: Tune penalty/reward thresholds
+
+**Team Adoption Challenges**:
+- **Gradual Introduction**: Start with quality gates and basic commands
+- **Training Programs**: Structured onboarding with practice exercises
+- **Success Metrics**: Track improvement and celebrate achievements
+- **Customization**: Adapt examples and patterns to team context
+
+### System Health Monitoring
+
+**Regular Health Checks**:
+```bash
+# Comprehensive system validation
+/validate --full --memory --personas
+
+# Performance monitoring
+/diagnose --component=all --deep
+
+# Behavioral framework assessment
+/behavioral-report --period=week
+```
+
+**Maintenance Procedures**:
+- Weekly system validation and optimization
+- Monthly memory system cleanup and organization
+- Quarterly pattern library review and updates
+- Annual architectural review and enhancement planning
+
+---
+
+**BMAD Method v3.0** represents the evolution of AI-assisted development from an art to a science. Through systematic behavioral optimization, memory-enhanced intelligence, and zero-tolerance quality enforcement, teams achieve unprecedented levels of AI effectiveness and project success.
+
+The method transforms how teams think about AI collaboration - from ad-hoc prompting to structured, evidence-based interaction patterns that improve with every session. This is not just better AI tooling; this is the foundation for the next generation of software development productivity.

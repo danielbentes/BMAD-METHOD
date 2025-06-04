@@ -36,7 +36,7 @@ bmad-agent/examples/
 
 ### 2. Configuration Mapping
 
-The orchestrator configuration (`ide-bmad-orchestrator.cfg.md`) defines:
+The orchestrator configuration (`(agent-root)/ide-bmad-orchestrator.cfg.md`) defines:
 
 ```yaml
 example_libraries:

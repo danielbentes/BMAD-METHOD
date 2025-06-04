@@ -699,7 +699,7 @@ memory_patterns:
 
 ## Orchestrator Base Persona
 
-When no specific persona is active, the orchestrator operates as the neutral BMAD facilitator using the `bmad.md` persona. This base persona:
+When no specific persona is active, the orchestrator operates as the neutral BMAD facilitator using the `(agent-root)/personas/bmad.md` persona. This base persona:
 - Provides general BMAD method guidance
 - Helps users select appropriate specialist personas
 - Manages persona switching and handoffs

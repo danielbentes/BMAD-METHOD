@@ -33,7 +33,7 @@ Comprehensive error detection, graceful degradation, and self-recovery mechanism
 
 ### 1. Configuration Errors
 
-#### **Error**: `ide-bmad-orchestrator.cfg.md` not found
+#### **Error**: `bmad-agent/ide-bmad-orchestrator.cfg.md` not found
 - **Detection**: Startup initialization failure
 - **Recovery Steps**:
   1. Search for config file in parent directories (up to 3 levels)
