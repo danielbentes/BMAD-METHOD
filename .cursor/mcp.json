@@ -1,23 +1,22 @@
 {
-    "mcpServers": {
-      "TAV2": {
-        "command": "env",
-        "args": [
-          "TAVILY_API_KEY=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",
-          "npx",
-          "-y",
-          "tavily-mcp@0.2.0"
-        ]
-      },
-      "OpenMemory": {
-        "command": "npx",
-        "args": [
-          "-y",
-          "supergateway",
-          "--sse",
-          "http://localhost:8765/mcp/cursor/sse/danielbentes"
-        ]
-      }
+  "mcpServers": {
+    "TAV2": {
+      "command": "env",
+      "args": [
+        "TAVILY_API_KEY=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",
+        "npx",
+        "-y",
+        "tavily-mcp@0.2.0"
+      ]
+    },
+    "OpenMemory": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "supergateway",
+        "--sse",
+        "http://localhost:8765/mcp/cursor/sse/danielbentes"
+      ]
     }
   }
-  
+}
