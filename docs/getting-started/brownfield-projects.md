@@ -605,7 +605,7 @@ bmad memory insights --focus=all --actionable
 ### Resources for Continued Learning
 - [Persona Selection Guide](../workflows/persona-selection.md) - Master strategic persona usage
 - [Quality Framework](../workflows/quality-framework.md) - Comprehensive quality standards
-- [Command Reference](../reference/commands.md) - Complete command documentation
+- [Command Reference](../commands/quick-reference.md) - Complete command documentation
 
 ### Community and Support
 - Share your brownfield success stories and challenges
