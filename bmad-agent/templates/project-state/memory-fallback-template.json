@@ -1,0 +1,12 @@
+{
+  "memories": [],
+  "patterns": [],
+  "preferences": {},
+  "decisions": [],
+  "insights": [],
+  "created": "{{TEMPLATE_CREATION_DATE}}",
+  "last_updated": "{{TEMPLATE_CREATION_DATE}}",
+  "template_version": "1.0",
+  "project_name": "{{PROJECT_NAME}}",
+  "initialization_note": "This is a template file. Replace {{PLACEHOLDER}} values during project initialization."
+}
