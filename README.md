@@ -1,8 +1,10 @@
-# BMAD METHOD - AI Behavioral Optimization Framework
+# BMAD METHOD PRO - AI Behavioral Optimization Framework
 
 **Transform AI interactions through scientific prompt engineering and behavioral optimization**
 
-The BMAD Method is a cutting-edge AI behavioral optimization framework that leverages proven prompt engineering techniques to achieve exceptional AI performance through example-driven learning, structured thinking enforcement, and intelligent behavioral shaping.
+The BMAD Method PRO (inspired by the original [BMAD Method](https://github.com/bmadcode/BMAD-METHOD) by [bmadcode](https://github.com/bmadcode?tab=repositories)), is a cutting-edge AI behavioral optimization framework that leverages proven prompt engineering techniques to achieve exceptional AI performance through example-driven learning, structured thinking enforcement, and intelligent behavioral shaping.
+
+**NOTE:** This is under constant development based on real world use and new AI advancements! If you're living on the edge you are going to bleed! 🩸
 
 ## 🎯 What Makes BMAD Different?
 
@@ -185,125 +187,9 @@ mkdir -p /path/to/your/project/.bmad/{state,memory,config}
 - Memory system ready for learning
 ```
 
-### 3. **Experience the Difference**
-```markdown
-# Old approach (vague, rule-based)
-User: "How should I structure this API?"
-AI: "You should probably use REST patterns and make sure it's secure"
-
-# BMAD approach (specific, example-driven)
-User: "How should I structure this API?"
-AI: "Use resource-based REST design [references auth-service example]
-   → GET /users/{id} for retrieval
-   → POST /users for creation
-   [Security: JWT middleware required - see security-patterns.md]"
-```
-
 ## 📋 Core Commands
 
-### **Essential Commands**
-- `?` - Context-aware help with examples
-- `@` - View available personas with behavioral stats
-- `#` - Current context with memory insights
-- `>>>` - AI-powered next step suggestions
-
-### **Persona Activation**
-- `/quality` - Zero-tolerance quality enforcement
-- `/architect` - Evidence-based system design  
-- `/pm` - Data-driven product strategy
-- `/dev` - Working code with pattern compliance
-
-### **Behavioral Optimization**
-- `/meta-prompt generate` - Create optimal prompts
-- `/anti-pattern-check` - Scan for violations
-- `/udtm` - Ultra-Deep Thinking Mode
-- `/brotherhood-review` - Honest peer feedback
-
-## 🎯 Example: AI Behavioral Transformation
-
-### **Before BMAD (Traditional Approach)**
-```markdown
-User: "Should we use microservices?"
-AI: "Microservices have pros and cons. They're good for scaling but complex to manage. It depends on your specific situation."
-
-Result: Vague, unhelpful, requires follow-up questions
-```
-
-### **After BMAD (Behavioral Optimization)**
-```xml
-<decision_analysis>
-  <context>E-commerce platform, 5-person team, 6-month timeline</context>
-  <options>
-    1. Modular monolith (recommended)
-    2. Microservices 
-    3. Traditional monolith
-  </options>
-  <evidence>
-    - Team size <10: monolith 40% faster (Netflix study)
-    - 6-month timeline: microservices add 30% complexity overhead
-    - E-commerce: payment isolation valuable but not critical initially
-  </evidence>
-  <recommendation>Modular monolith with extraction plan</recommendation>
-  <confidence>90% - based on 15 similar project patterns</confidence>
-</decision_analysis>
-
-→ **Start with modular monolith, extract payment service when team grows**
-
-Migration triggers: >20 developers OR independent deployment critical
-[Reference: modular-monolith-patterns.md examples 1-3]
-```
-
-**Result: Specific, evidence-based, actionable with clear next steps**
-
-## 📊 Success Metrics Dashboard
-
-Track your AI behavioral optimization improvements:
-
-```yaml
-Behavioral Performance:
-  ✅ First-attempt success: 94% (target: 95%)
-  ✅ Clarification reduction: 82% (target: 80%)
-  ✅ Anti-pattern violations: 0 critical (target: 0)
-  ✅ Example utilization: 91% (target: 90%)
-  ✅ Structured analysis: 100% (target: 100%)
-
-System Performance:
-  ✅ Response conciseness: 3.2 lines avg (target: 4)
-  ✅ Token efficiency: 42% reduction (target: 40%)
-  ✅ Context utilization: 83% effective (target: 80%)
-  ✅ Memory integration: 87% sessions (target: 85%)
-```
-
-## 🧪 Advanced Behavioral Features
-
-### **Contextual Adaptation Examples**
-```yaml
-Junior Team (Greenfield Project):
-  - Detailed step-by-step guidance
-  - Multiple examples per concept
-  - Extra validation and safety checks
-  - Educational explanations included
-
-Senior Team (Production System):
-  - Concise technical direction
-  - Edge cases and gotchas only
-  - Optimized for speed and efficiency
-  - Advanced patterns and shortcuts
-```
-
-### **Progressive Disclosure in Action**
-```markdown
-→ **Use Redis for session storage**
-
-Context:
-• Scales to 100K+ concurrent users
-• Built-in expiration management
-• High availability with clustering
-
-[Implementation details: type '?']
-[Alternative solutions: type '??']
-[Performance benchmarks: type 'benchmarks']
-```
+See [/docs](/docs/index.md)
 
 ## 🔗 Integration & Setup
 
@@ -363,11 +249,11 @@ Organizations using BMAD report:
 - **Consistent quality delivery** via structured thinking
 - **Team adoption >95%** due to immediate productivity gains
 
-## 🎯 The BMAD Promise
+## 🎯 The Promise
 
 **Transform your AI interactions from frustrating conversations into productive partnerships.**
 
-BMAD delivers superior software quality through memory-enhanced intelligence, quality-first approach, expert cognitive lenses, systematic multi-perspective analysis, and evidence-based decisions enhanced by continuous behavioral learning.
+BMAD PRO aims to deliver a superior AI assisted software development quality through memory-enhanced intelligence, quality-first approach, expert cognitive lenses, systematic multi-perspective analysis, and evidence-based decisions enhanced by continuous behavioral learning.
 
 ---
 
@@ -377,4 +263,4 @@ BMAD delivers superior software quality through memory-enhanced intelligence, qu
 
 *Experience the difference behavioral optimization makes.*
 
-**🎭 - The BMAD Method Team**
+**🎭 - Daniel Bentes @synapti.ai **
