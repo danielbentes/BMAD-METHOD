@@ -90,7 +90,7 @@ class MemorySyncIntegration:
         
     def initialize_memory_functions(self, add_memories_func: Callable, 
                                   search_memory_func: Callable, 
-                                  list_memories_func: Callable):
+                                  list_memories_func: Callable) -> None:
         """Initialize memory function callbacks."""
         self.memory_functions['add_memories'] = add_memories_func
         self.memory_functions['search_memory'] = search_memory_func
@@ -202,7 +202,7 @@ class MemorySyncIntegration:
                 logger.warning(f"Orchestrator state file not found: {self.state_file}")
                 return None
                 
-            with open(self.state_file, 'r', encoding='utf-8') as f:
+            with self.state_file.open('r', encoding='utf-8') as f:
                 content = f.read()
             
             # Extract YAML from markdown
@@ -219,7 +219,7 @@ class MemorySyncIntegration:
             logger.error(f"Failed to load orchestrator state: {e}")
             return None
     
-    def _save_orchestrator_state(self, state_data: Dict[str, Any]):
+    def _save_orchestrator_state(self, state_data: Dict[str, Any]) -> None:
         """Save orchestrator state to file."""
         try:
             yaml_content = yaml.dump(state_data, default_flow_style=False, sort_keys=False, allow_unicode=True)
@@ -242,14 +242,14 @@ class MemorySyncIntegration:
                 self.state_file.rename(backup_path)
                 logger.debug(f"Created backup: {backup_path}")
             
-            with open(self.state_file, 'w', encoding='utf-8') as f:
+            with self.state_file.open('w', encoding='utf-8') as f:
                 f.write(content)
                 
         except Exception as e:
             logger.error(f"Failed to save orchestrator state: {e}")
             raise
     
-    def _update_memory_status_in_state(self, state_data: Dict[str, Any], status: MemoryProviderStatus):
+    def _update_memory_status_in_state(self, state_data: Dict[str, Any], status: MemoryProviderStatus) -> None:
         """Update memory provider status in orchestrator state."""
         if "memory_intelligence_state" not in state_data:
             state_data["memory_intelligence_state"] = {}
@@ -333,7 +333,7 @@ class MemorySyncIntegration:
             fallback_file = Path('.bmad/memory/fallback-storage.json')
             
             if fallback_file.exists():
-                with open(fallback_file, 'r') as f:
+                with fallback_file.open('r') as f:
                     data = json.load(f)
             else:
                 data = {
@@ -347,7 +347,7 @@ class MemorySyncIntegration:
             
             # Add memory entry
             memory_entry = {
-                "id": f"mem_{len(data['memories'])}_{int(datetime.now().timestamp())}",
+                "id": f"mem_{len(data['memories'])}_{int(datetime.now(timezone.utc).timestamp())}",
                 "content": json.dumps(memory_content),
                 "tags": tags,
                 "metadata": {
@@ -361,7 +361,7 @@ class MemorySyncIntegration:
             data["last_updated"] = datetime.now(timezone.utc).isoformat()
             
             # Save to file
-            with open(fallback_file, 'w') as f:
+            with fallback_file.open('w') as f:
                 json.dump(data, f, indent=2)
             
             return True
@@ -428,7 +428,7 @@ class MemorySyncIntegration:
             # Search fallback storage for patterns
             fallback_file = Path('.bmad/memory/fallback-storage.json')
             if fallback_file.exists():
-                with open(fallback_file, 'r') as f:
+                with fallback_file.open('r') as f:
                     fallback_data = json.load(f)
                 
                 # Extract patterns from memories
@@ -517,7 +517,7 @@ class MemorySyncIntegration:
             # Search fallback storage for relevant insights
             fallback_file = Path('.bmad/memory/fallback-storage.json')
             if fallback_file.exists():
-                with open(fallback_file, 'r') as f:
+                with fallback_file.open('r') as f:
                     fallback_data = json.load(f)
                 
                 # Generate insights from stored memories
@@ -576,7 +576,7 @@ class MemorySyncIntegration:
             
         return insights[:8]  # Limit to top 8 insights
     
-    def _update_state_with_memory_intelligence(self, state_data: Dict[str, Any], insights: List[Dict[str, Any]]):
+    def _update_state_with_memory_intelligence(self, state_data: Dict[str, Any], insights: List[Dict[str, Any]]) -> None:
         """Update orchestrator state with memory intelligence."""
         memory_state = state_data.get("memory_intelligence_state", {})
         
@@ -611,11 +611,11 @@ class MemorySyncIntegration:
         # Keep only recent insights
         activity_log["insight_generation"] = activity_log["insight_generation"][-10:]
     
-    def start_real_time_monitoring(self):
+    def start_real_time_monitoring(self) -> threading.Thread:
         """Start real-time memory synchronization monitoring."""
         self.running = True
         
-        def monitor_loop():
+        def monitor_loop() -> None:
             logger.info(f"Starting real-time memory monitoring (interval: {self.sync_interval}s)")
             
             while self.running:
@@ -640,7 +640,7 @@ class MemorySyncIntegration:
         
         return monitor_thread
     
-    def stop_monitoring(self):
+    def stop_monitoring(self) -> None:
         """Stop real-time memory monitoring."""
         self.running = False
         logger.info("Memory monitoring stopped")
@@ -678,7 +678,7 @@ class MemorySyncIntegration:
             
         return diagnosis
 
-def main():
+def main() -> None:
     """Main function for memory synchronization integration."""
     import argparse
     

@@ -24,13 +24,13 @@ logger = logging.getLogger(__name__)
 class MemoryWrapper:
     """Wrapper for OpenMemory MCP integration with graceful fallback."""
     
-    def __init__(self):
+    def __init__(self) -> None:
         self.memory_available = False
         self.memory_functions = {}
         self.fallback_storage = Path('.bmad/memory/fallback-storage.json')
         self._initialize_memory_system()
     
-    def _initialize_memory_system(self):
+    def _initialize_memory_system(self) -> None:
         """Initialize memory system connections."""
         try:
             # Try to import OpenMemory MCP functions
@@ -56,7 +56,7 @@ class MemoryWrapper:
             logger.warning(f"Memory system initialization failed: {e}")
             self._initialize_fallback_storage()
     
-    def _initialize_fallback_storage(self):
+    def _initialize_fallback_storage(self) -> None:
         """Initialize fallback JSON storage for when memory system is unavailable."""
         if not self.fallback_storage.exists():
             initial_data = {
@@ -67,7 +67,7 @@ class MemoryWrapper:
                 "insights": [],
                 "created": datetime.now(timezone.utc).isoformat()
             }
-            with open(self.fallback_storage, 'w') as f:
+            with self.fallback_storage.open('w') as f:
                 json.dump(initial_data, f, indent=2)
             logger.info(f"Initialized fallback storage: {self.fallback_storage}")
     
@@ -75,7 +75,7 @@ class MemoryWrapper:
         """Load data from fallback storage."""
         try:
             if self.fallback_storage.exists():
-                with open(self.fallback_storage, 'r') as f:
+                with self.fallback_storage.open('r') as f:
                     return json.load(f)
             else:
                 self._initialize_fallback_storage()
@@ -84,16 +84,16 @@ class MemoryWrapper:
             logger.error(f"Failed to load fallback data: {e}")
             return {"memories": [], "patterns": [], "preferences": {}, "decisions": [], "insights": []}
     
-    def _save_fallback_data(self, data: Dict[str, Any]):
+    def _save_fallback_data(self, data: Dict[str, Any]) -> None:
         """Save data to fallback storage."""
         try:
             data["last_updated"] = datetime.now(timezone.utc).isoformat()
-            with open(self.fallback_storage, 'w') as f:
+            with self.fallback_storage.open('w') as f:
                 json.dump(data, f, indent=2)
         except Exception as e:
             logger.error(f"Failed to save fallback data: {e}")
     
-    def add_memory(self, content: str, tags: List[str] = None, metadata: Dict[str, Any] = None) -> bool:
+    def add_memory(self, content: str, tags: List[str] | None = None, metadata: Dict[str, Any] | None = None) -> bool:
         """Add a memory entry with automatic categorization."""
         if tags is None:
             tags = []
@@ -113,7 +113,7 @@ class MemoryWrapper:
                 # Use fallback storage
                 data = self._load_fallback_data()
                 memory_entry = {
-                    "id": f"mem_{len(data['memories'])}_{int(datetime.now().timestamp())}",
+                    "id": f"mem_{len(data['memories'])}_{int(datetime.now(timezone.utc).timestamp())}",
                     "content": content,
                     "tags": tags,
                     "metadata": metadata,
@@ -414,7 +414,7 @@ class MemoryWrapper:
 memory_wrapper = MemoryWrapper()
 
 # Convenience functions for easy import
-def add_memory(content: str, tags: List[str] = None, metadata: Dict[str, Any] = None) -> bool:
+def add_memory(content: str, tags: List[str] | None = None, metadata: Dict[str, Any] | None = None) -> bool:
     """Add a memory entry."""
     return memory_wrapper.add_memory(content, tags, metadata)
 

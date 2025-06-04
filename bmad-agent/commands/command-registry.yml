@@ -49,7 +49,7 @@ commands:
   help:
     category: core
     description: "Display contextual help with memory-enhanced suggestions"
-    aliases: [h, ?, help-me, assist]
+    aliases: ["h", "?", "help-me", "assist"]
     shortcuts:
       "?": "Quick help"
       "??": "Extended help with examples"

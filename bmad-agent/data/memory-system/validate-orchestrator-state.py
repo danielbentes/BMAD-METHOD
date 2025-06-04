@@ -15,7 +15,7 @@ import json
 import argparse
 import re
 from pathlib import Path
-from datetime import datetime
+from datetime import datetime, timezone
 from typing import Dict, List, Any, Optional, Tuple
 from dataclasses import dataclass
 
@@ -48,7 +48,7 @@ class OrchestratorStateValidator:
     def _load_schema(self) -> Dict[str, Any]:
         """Load the YAML schema definition."""
         try:
-            with open(self.schema_path, 'r') as f:
+            with self.schema_path.open('r') as f:
                 return yaml.safe_load(f)
         except FileNotFoundError:
             raise FileNotFoundError(f"Schema file not found: {self.schema_path}")
@@ -95,10 +95,10 @@ class OrchestratorStateValidator:
         except yaml.YAMLError as e:
             raise ValueError(f"No valid YAML found in file. Error: {e}")
     
-    def validate_file(self, file_path: str) -> ValidationResult:
+    def validate_file(self, file_path: str | Path) -> ValidationResult:
         """Validate an orchestrator state file."""
-        start_time = datetime.now()
-        file_path = Path(file_path)
+        start_time = datetime.now(timezone.utc)
+        if isinstance(file_path, str):\n            file_path = Path(file_path)
         
         if not file_path.exists():
             return ValidationResult(
@@ -112,7 +112,7 @@ class OrchestratorStateValidator:
         
         # Read file content
         try:
-            with open(file_path, 'r', encoding='utf-8') as f:
+            with file_path.open('r', encoding='utf-8') as f:
                 content = f.read()
                 file_size = len(content.encode('utf-8'))
         except Exception as e:
@@ -137,7 +137,7 @@ class OrchestratorStateValidator:
                     "Ensure the file contains valid YAML in code blocks or frontmatter",
                     "Check YAML syntax and indentation"
                 ],
-                validation_time=(datetime.now() - start_time).total_seconds(),
+                validation_time=(datetime.now(timezone.utc) - start_time).total_seconds(),
                 file_size=file_size
             )
         
@@ -160,7 +160,7 @@ class OrchestratorStateValidator:
         warnings.extend(additional_warnings)
         suggestions.extend(additional_suggestions)
         
-        validation_time = (datetime.now() - start_time).total_seconds()
+        validation_time = (datetime.now(timezone.utc) - start_time).total_seconds()
         
         return ValidationResult(
             is_valid=is_valid and not additional_errors,
@@ -222,7 +222,7 @@ class OrchestratorStateValidator:
             if 'last_memory_sync' in memory_state:
                 try:
                     sync_time = datetime.fromisoformat(memory_state['last_memory_sync'].replace('Z', '+00:00'))
-                    if (datetime.now().replace(tzinfo=sync_time.tzinfo) - sync_time).total_seconds() > 3600:
+                    if (datetime.now(timezone.utc).replace(tzinfo=sync_time.tzinfo) - sync_time).total_seconds() > 3600:
                         warnings.append("Memory sync is older than 1 hour")
                 except ValueError:
                     warnings.append("Invalid memory sync timestamp")
@@ -259,14 +259,14 @@ class OrchestratorStateValidator:
         
         return errors, warnings, suggestions
     
-    def fix_common_issues(self, file_path: str) -> bool:
+    def fix_common_issues(self, file_path: str | Path) -> bool:
         """Attempt to fix common validation issues."""
-        file_path = Path(file_path)
+        if isinstance(file_path, str):\n            file_path = Path(file_path)
         if not file_path.exists():
             return False
         
         try:
-            with open(file_path, 'r', encoding='utf-8') as f:
+            with file_path.open('r', encoding='utf-8') as f:
                 content = f.read()
             
             # Extract and fix YAML data
@@ -281,7 +281,7 @@ class OrchestratorStateValidator:
                 fixed = True
             
             metadata = data['session_metadata']
-            current_time = datetime.now().isoformat() + 'Z'
+            current_time = datetime.now(timezone.utc).isoformat() + 'Z'
             
             if 'session_id' not in metadata:
                 import uuid
@@ -329,11 +329,11 @@ class OrchestratorStateValidator:
                 
                 # Create backup
                 backup_path = file_path.with_suffix(file_path.suffix + '.backup')
-                with open(backup_path, 'w', encoding='utf-8') as f:
+                with backup_path.open('w', encoding='utf-8') as f:
                     f.write(content)
                 
                 # Write fixed content
-                with open(file_path, 'w', encoding='utf-8') as f:
+                with file_path.open('w', encoding='utf-8') as f:
                     f.write(new_content)
                 
                 print(f"✅ Fixed common issues. Backup created at {backup_path}")
@@ -345,7 +345,7 @@ class OrchestratorStateValidator:
         
         return False
 
-def print_validation_report(result: ValidationResult, file_path: str):
+def print_validation_report(result: ValidationResult, file_path: str) -> None:
     """Print a comprehensive validation report."""
     print(f"\n🔍 ORCHESTRATOR STATE VALIDATION REPORT")
     print(f"📁 File: {file_path}")
@@ -375,7 +375,7 @@ def print_validation_report(result: ValidationResult, file_path: str):
         print("🚨 ORCHESTRATOR STATE HAS ISSUES - SEE ERRORS ABOVE")
     print(f"{'='*60}")
 
-def main():
+def main() -> None:
     """Main function."""
     parser = argparse.ArgumentParser(description='Validate BMAD Orchestrator State files')
     parser.add_argument('--file', '-f', default='.bmad/state/orchestrator-state.md',

@@ -40,9 +40,9 @@ except ImportError as e:
     
     # Fallback class for when memory integration is not available
     class MemoryWrapper:
-        def get_memory_status(self):
+        def get_memory_status(self) -> Dict[str, Any]:
             return {"provider": "file-based", "status": "offline"}
-        def sync_with_orchestrator_state(self, state_data):
+        def sync_with_orchestrator_state(self, state_data: Dict[str, Any]) -> Dict[str, Any]:
             return {"status": "offline", "memories_synced": 0, "insights_generated": 0}
 
 try:
@@ -454,7 +454,7 @@ class StatePopulator:
             )
             if result.returncode == 0:
                 first_commit_date = datetime.fromisoformat(result.stdout.strip().split()[0])
-                age_days = (datetime.now() - first_commit_date).days
+                age_days = (datetime.now(timezone.utc) - first_commit_date).days
                 if age_days < 30:
                     return "new"
                 elif age_days < 365:
@@ -980,7 +980,7 @@ class StatePopulator:
         
         return state
     
-    def populate_full_state(self, output_file: str = ".bmad/state/orchestrator-state.md"):
+    def populate_full_state(self, output_file: str = ".bmad/state/orchestrator-state.md") -> None:
         """Populate complete orchestrator state with full analysis and memory sync."""
         print("🎯 Generating Complete BMAD Orchestrator State...")
         print(f"📁 Base path: {self.workspace_root}")
@@ -1049,7 +1049,7 @@ class StatePopulator:
                 print(f"📦 Created backup: {backup_path}")
             
             # Write final state
-            with open(output_file, 'w', encoding='utf-8') as f:
+            with output_path.open('w', encoding='utf-8') as f:
                 f.write(content)
             
             # Performance summary
@@ -1069,7 +1069,7 @@ class StatePopulator:
             print(f"❌ Error generating orchestrator state: {e}")
             raise
 
-def main():
+def main() -> None:
     """Main function with memory integration support."""
     import argparse
     
@@ -1139,7 +1139,7 @@ def main():
                 output_path.rename(backup_path)
                 print(f"📦 Created backup: {backup_path}")
             
-            with open(args.output_file, 'w', encoding='utf-8') as f:
+            with Path(args.output_file).open('w', encoding='utf-8') as f:
                 f.write(content)
             
             file_size = Path(args.output_file).stat().st_size
