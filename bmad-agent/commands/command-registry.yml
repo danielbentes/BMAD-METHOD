@@ -557,7 +557,7 @@ commands:
       - evidence_required: "All claims backed by verifiable data"
       - multiple_perspectives: "Consider minimum 3 viewpoints"
       - confidence_scoring: "Rate confidence in final recommendation"
-    implementation: "ultra-deep-thinking-mode.md"
+    implementation: "quality-tasks/ultra-deep-thinking-mode.md"
 
   quality-gate:
     category: quality
@@ -716,7 +716,7 @@ commands:
         type: string
         required: true
         description: "Target persona"
-        values: [analyst, pm, architect, dev, sm, po, quality, design-architect]
+        values: [analyst, pm, architect, dev, sm, po, quality_enforcer, design-architect]
       summary:
         type: boolean
         required: false
