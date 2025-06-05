@@ -3,7 +3,7 @@
 ## CRITICAL SAFETY RULES - MANDATORY COMPLIANCE
 
 ### STOP CONDITIONS - ABORT IMMEDIATELY IF:
-- User session contains sensitive data (passwords, API keys, secrets)
+- User context contains sensitive data (passwords, API keys, secrets)
 - Core dump would exceed 10KB size limit
 - Previous core dump corruption detected
 - Memory system reports integrity issues
@@ -17,7 +17,7 @@
 5. **System State**: Confirm memory system health status
 
 ### QUALITY GATES - MUST PASS ALL:
-- [ ] No sensitive data detected in session
+- [ ] No sensitive data detected in context
 - [ ] File size projection under 10KB
 - [ ] User consent confirmed or implied
 - [ ] Memory system operational
@@ -30,7 +30,7 @@ To create a concise memory recording file (`.bmad/system/core-dumps/core-dump-n.
 ## Progressive Disclosure Phases
 
 ### Phase 1: Safety Assessment (MANDATORY)
-1. Scan session for sensitive data patterns
+1. Scan context for sensitive data patterns
 2. Check existing core dump integrity
 3. Validate system permissions
 4. Estimate content size
@@ -43,12 +43,14 @@ To create a concise memory recording file (`.bmad/system/core-dumps/core-dump-n.
 4. Capture user preferences
 5. **GATE**: Meaningful content identified → Continue to Phase 3
 
-### Phase 3: Core Dump Creation
+### Phase 3: Core Dump Creation with Context Preservation
 1. Structure content for minimal tokens
 2. Apply compression strategies
-3. Validate completeness
-4. Write to persistent storage
-5. **GATE**: File created successfully → Continue to Phase 4
+3. Create automatic context checkpoint
+4. Validate completeness
+5. Write to persistent storage
+6. Update context restoration indices
+7. **GATE**: File created successfully → Continue to Phase 4
 
 ### Phase 4: Verification
 1. Read back created file
@@ -67,7 +69,7 @@ To create a concise memory recording file (`.bmad/system/core-dumps/core-dump-n.
 - User requests and agent responses that shaped the session
 
 ### Validation Requirements:
-- **Session History**: Must be complete and uncorrupted
+- **Context History**: Must be complete and uncorrupted
 - **File Changes**: Must have accurate before/after states
 - **Decision Log**: Must include rationale and context
 - **Project State**: Must reflect actual current conditions
@@ -85,8 +87,8 @@ Before proceeding, check if `.bmad/system/core-dumps/core-dump-1.md` already exi
 2. **Backup Creation**: Create `.bmad/system/core-dumps/backup/core-dump-1.bak`
 3. **User Query**: "Core dump file exists. Should I: 1. Overwrite, 2. Update, 3. Append or 4. Create new?"
    - **Overwrite**: Replace entire file with new content (after backup)
-   - **Update**: Merge new session info with existing content, updating relevant sections
-   - **Append**: Add new session as a separate entry while preserving existing content
+   - **Update**: Merge new context info with existing content, updating relevant sections
+   - **Append**: Add new context as a separate entry while preserving existing content
    - **Create New**: Create next sequential file (e.g., core-dump-2.md)
 4. **Confirmation**: Require explicit user confirmation for destructive operations
 
@@ -102,7 +104,7 @@ Before proceeding, check if `.bmad/system/core-dumps/core-dump-1.md` already exi
 - **Disk Full**: Calculate required space, suggest cleanup
 - **Invalid Path**: Create directory structure if missing
 
-### 1. Analyze Session Context
+### 1. Analyze Current Context
 
 - Review the entire conversation to identify key accomplishments
 - Note any specific tasks, procedures, or workflows that were executed
@@ -125,7 +127,7 @@ Before proceeding, check if `.bmad/system/core-dumps/core-dump-1.md` already exi
 
 ### 4. Capture Current Project State
 
-- **Project Progress**: Where the project stands after this session
+- **Project Progress**: Where the project stands after this context
 - **Current Issues**: Any blockers or problems that need resolution
 - **Next Logical Steps**: What would be the natural next actions to take
 
@@ -198,7 +200,28 @@ Based on user's choice from step 0, handle the file accordingly:
 - User satisfaction with continuity: >90%
 - Zero security incidents from dumps
 
-### 10. Continuous Improvement
+### 10. Context Preservation Integration
+
+#### Automatic Context Checkpoint:
+When creating core dump, simultaneously:
+1. Create timestamped context checkpoint
+2. Update `.bmad/state/context-state.md` 
+3. Tag with "core-dump" for easy retrieval
+4. Link to memory system for enhanced recall
+
+#### Smart Restoration Linkage:
+- Core dumps automatically indexed for context restoration
+- Quick restore command: `/context restore core-dump-{n}`
+- Memory system notified of significant state capture
+- Enables "what's changed" analysis from this point
+
+#### Context Continuity Features:
+- Auto-detect if user is leaving (farewell phrases)
+- Create "end-of-session" summary in addition to core dump
+- Prepare "welcome back" briefing for next session
+- Track time gaps for intelligent restoration
+
+### 11. Continuous Improvement
 
 #### Post-Execution Analysis:
 1. Log execution time and file size

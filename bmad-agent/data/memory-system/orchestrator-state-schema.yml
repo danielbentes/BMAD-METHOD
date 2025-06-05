@@ -1,5 +1,5 @@
 # BMAD Orchestrator State YAML Schema Definition
-# This schema validates the structure and data types of .bmad/state/orchestrator-state.md
+# This schema validates the structure and data types of .bmad/state/context-state.md
 
 type: object
 required:

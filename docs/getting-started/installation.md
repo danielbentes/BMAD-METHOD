@@ -1,6 +1,6 @@
 # Installation & Behavioral Setup
 
-Transform your AI interactions through scientific behavioral optimization. This guide will install BMAD Method and activate all behavioral enhancement components.
+Transform your AI interactions through scientific behavioral optimization. This guide will install BMAD Method v3.0 and activate all behavioral enhancement components including context management and intelligent workflows.
 
 ## 🎯 What You'll Activate
 
@@ -8,10 +8,14 @@ By the end of this installation, your AI assistant will have:
 
 - **95% first-attempt success rate** capability
 - **Example-driven learning** with 47+ proven patterns
-- **Anti-pattern detection** with -$10,000 penalty enforcement
+- **Anti-pattern detection** with automatic enforcement
 - **Structured thinking** enforcement via analysis tags
 - **Progressive disclosure** for optimal cognitive load
 - **Context-aware adaptation** based on your expertise and project
+- **NEW: Context management** for seamless work continuity
+- **NEW: Memory bootstrap** for existing codebases
+- **NEW: Style consistency** enforcement
+- **NEW: Automated quality gates** with improvement guidance
 
 ## Prerequisites
 
@@ -60,6 +64,9 @@ cd bmad-method
 
 # Create your customization branch
 git checkout -b behavioral-customization
+
+# Initialize v3.0 features
+./verify-setup.sh --init-v3
 ```
 
 ---
@@ -76,15 +83,17 @@ In your AI assistant, load the main orchestrator file:
 
 **Expected Response:**
 ```
-BMAD IDE Orchestrator ready. Config loaded. Starting fresh session.
+BMAD IDE Orchestrator v3.0 ready. Config loaded. Context initialized.
 
 🎭 Behavioral optimization systems activated:
-✅ Example-driven learning system online
+✅ Example-driven learning system online (47+ patterns)
 ✅ Anti-pattern detection active (23 rules)
 ✅ Structured thinking enforcement enabled
 ✅ Progressive disclosure configured
-✅ Context awareness operational
+✅ Context management operational
 ✅ Quality validation running
+✅ Memory system ready
+✅ Intelligent workflows available
 
 Type '?' for help or '@' to see available personas.
 ```
@@ -97,6 +106,7 @@ Test that behavioral optimization is working:
 ?                    # Should show progressive disclosure help
 @                    # Should show personas with behavioral requirements
 # context            # Should show current context with insights
+# memory status      # Should show memory system state
 ```
 
 **Expected Behavioral Response:**
@@ -107,9 +117,11 @@ Core:
 • ? - Context-aware help with examples
 • @ - Personas with behavioral stats  
 • # - Current context + memory insights
+• memory - Bootstrap, recall, and pattern recognition
 
 [Detailed commands: type '??']
 [Behavioral optimization: type 'behavioral']
+[Memory operations: type 'memory help']
 ```
 
 ### 2.3 Test Example-Driven Learning
@@ -177,16 +189,19 @@ bmad.example.driven.learning=enabled
 ./verify-setup.sh
 
 # Expected output with behavioral validation:
-✅ BMAD Method core files present
+✅ BMAD Method v3.0 core files present
 ✅ Behavioral shaping system active
-✅ Example libraries loaded (47 patterns from bmad-agent/examples/)
+✅ Example libraries loaded (47+ patterns from bmad-agent/examples/)
 ✅ Anti-pattern detection enabled (23 rules)
 ✅ Structured thinking enforcement active
 ✅ Progressive disclosure configured
-✅ Context awareness operational
+✅ Context management operational
 ✅ Quality validation running
 ✅ Meta-prompting architecture ready
 ✅ Memory integration available
+✅ Intelligent workflows detected
+✅ Style consistency patterns found
+✅ Bootstrap capability ready
 ```
 
 ### 4.2 Test Anti-Pattern Detection
@@ -235,8 +250,8 @@ Verify analysis tags are enforced:
 
 ## Step 5: Advanced Behavioral Features
 
-### 5.1 Memory Integration (Optional but Recommended)
-For persistent behavioral learning across sessions:
+### 5.1 Memory Integration (Highly Recommended for v3.0)
+For persistent behavioral learning and brownfield bootstrap:
 
 ```bash
 # Install OpenMemory MCP (if desired)
@@ -245,7 +260,15 @@ npm install -g @openmemory/mcp-client
 # Configure for behavioral learning
 echo "OPENMEMORY_BEHAVIORAL_LEARNING=true" >> .env
 echo "OPENMEMORY_PATTERN_RECOGNITION=enabled" >> .env
+echo "OPENMEMORY_BOOTSTRAP_MODE=auto" >> .env
+echo "OPENMEMORY_CONTEXT_PRESERVATION=true" >> .env
 ```
+
+**NEW v3.0 Memory Features:**
+- **Bootstrap from existing code**: Extract patterns automatically
+- **Context preservation**: Resume work seamlessly
+- **Pattern insights**: AI-powered recommendations
+- **Style consistency**: Enforce discovered conventions
 
 **See**: [OpenMemory Setup Guide](../setup-configuration/openmemory-setup.md) for complete memory integration.
 
@@ -293,17 +316,21 @@ Run comprehensive behavioral optimization test:
 /meta-prompt test behavioral-optimization
 
 # Expected comprehensive test results:
-🧪 BEHAVIORAL OPTIMIZATION TEST RESULTS:
+🧪 BEHAVIORAL OPTIMIZATION TEST RESULTS (v3.0):
 
 ✅ Example-driven learning: 94% utilization (target: 90%)
 ✅ Anti-pattern detection: 0 violations detected
 ✅ Structured thinking: 100% compliance (target: 100%)
 ✅ Progressive disclosure: Context-appropriate (Level 1 for intermediate)
-✅ Context awareness: Correctly detected project type and team
+✅ Context management: Active and tracking changes
+✅ Memory system: Bootstrap ready, patterns recognized
+✅ Style consistency: Conventions detected and enforced
+✅ Intelligent workflows: Suggestions available
 ✅ Response quality: 91/100 (target: 85+)
 
-🎯 OPTIMIZATION STATUS: FULLY OPERATIONAL
+🎯 OPTIMIZATION STATUS: FULLY OPERATIONAL (v3.0)
 📈 PREDICTED PERFORMANCE: 95% first-attempt success rate
+🚀 NEW CAPABILITIES: Context preservation, memory bootstrap, style enforcement
 ```
 
 ### 6.2 Performance Baseline
@@ -356,6 +383,9 @@ The AI must now reference examples from the 47+ pattern library in `bmad-agent/e
 1. **[Verify Your Setup](verification.md)** - Run complete validation tests
 2. **[Experience the Demo](first-project.md)** - See dramatic before/after comparison
 3. **[Activate Memory Enhancement](../setup-configuration/openmemory-setup.md)** - 40% additional effectiveness
+4. **[Bootstrap Existing Projects](brownfield-projects.md)** - Apply BMAD to your current codebase
+5. **[Context Management Guide](../workflows/context-management.md)** - Master seamless work continuity
+6. **[Memory Bootstrap Guide](../workflows/memory-bootstrap.md)** - Extract knowledge from existing code
 
 ## Troubleshooting
 
@@ -397,6 +427,8 @@ The AI must now reference examples from the 47+ pattern library in `bmad-agent/e
 
 - **Documentation**: [Behavioral Commands Guide](../commands/behavioral-commands-guide.md)
 - **Workflow Patterns**: [BMAD Workflows](../workflows/index.md)
+- **Context Management**: [Context Continuity Guide](../workflows/context-management.md)
+- **Memory Bootstrap**: [Brownfield Integration](brownfield-projects.md)
 - **Issues**: [GitHub Issues](https://github.com/your-org/bmad-method/issues)
 - **Community**: [Discussions](https://github.com/your-org/bmad-method/discussions)
 

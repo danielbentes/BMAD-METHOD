@@ -2,7 +2,7 @@
 """
 BMAD Orchestrator State Validation Script
 
-Validates .bmad/state/orchestrator-state.md against the YAML schema definition.
+Validates .bmad/state/context-state.md against the YAML schema definition.
 Provides detailed error reporting and validation summaries.
 
 Usage:
@@ -380,8 +380,8 @@ def print_validation_report(result: ValidationResult, file_path: str) -> None:
 def main() -> None:
     """Main function."""
     parser = argparse.ArgumentParser(description='Validate BMAD Orchestrator State files')
-    parser.add_argument('--file', '-f', default='.bmad/state/orchestrator-state.md',
-                       help='Path to orchestrator state file (default: .bmad/state/orchestrator-state.md)')
+    parser.add_argument('--file', '-f', default='.bmad/state/context-state.md',
+                       help='Path to orchestrator state file (default: .bmad/state/context-state.md)')
     parser.add_argument('--fix-common', action='store_true',
                        help='Attempt to fix common validation issues')
     parser.add_argument('--schema', default='bmad-agent/data/memory-system/orchestrator-state-schema.yml',

@@ -1,9 +1,35 @@
+workflow_tracking:
+  enabled: true
+  state_file: ".bmad/state/workflow-state.md"
+  analytics_enabled: true
+  tracking_metadata:
+    capture_timestamps: true
+    track_blockers: true
+    measure_phase_duration: true
+    compare_to_typical: true
+    memory_integration: true
+  analytics_config:
+    bottleneck_threshold: "150% of typical duration"
+    efficiency_metrics:
+      - phase_completion_time
+      - handoff_efficiency
+      - rework_frequency
+      - blocker_resolution_time
+    reporting:
+      frequency: "per_phase"
+      format: "markdown"
+      location: ".bmad/analytics/workflow-reports/"
+
 workflows:
   new-project:
     name: "New Project - Full BMAD Flow"
     description: "Complete flow from concept to implementation for new projects"
     project_types: ["mvp", "prototype", "greenfield"]
     estimated_duration: "2-4 weeks"
+    quality_gates:
+      enabled: true
+      automatic_triggers: true
+      enforcement_level: "strict"
     phases:
       - phase: "Discovery"
         personas: ["Analyst"]
@@ -23,6 +49,26 @@ workflows:
           - "Clear problem-solution fit"
           - "Well-defined user personas"
           - "Realistic scope boundaries"
+        quality_gates:
+          phase_entry:
+            checks:
+              - name: "context_loaded"
+                required: true
+                description: "Previous context restored if available"
+              - name: "memory_ready"
+                required: true
+                description: "Memory system initialized"
+          phase_exit:
+            checks:
+              - name: "problem_validation"
+                threshold: 90
+                description: "Problem clearly defined with evidence"
+              - name: "user_research"
+                threshold: 85
+                description: "Target users researched and documented"
+              - name: "scope_definition"
+                threshold: 95
+                description: "Scope boundaries clearly established"
         
       - phase: "Requirements"
         personas: ["PM", "Design Architect"]
@@ -44,6 +90,29 @@ workflows:
           - "UI/UX wireframes complete"
         dependencies:
           - "Discovery phase artifacts exist"
+        quality_gates:
+          phase_entry:
+            checks:
+              - name: "discovery_complete"
+                required: true
+                description: "Discovery phase gates passed"
+              - name: "stakeholder_ready"
+                required: true
+                description: "Stakeholders available for review"
+          phase_exit:
+            checks:
+              - name: "prd_completeness"
+                threshold: 95
+                description: "PRD complete with all sections"
+              - name: "acceptance_criteria"
+                threshold: 100
+                description: "All stories have clear acceptance criteria"
+              - name: "ui_specification"
+                threshold: 90
+                description: "UI flows and wireframes documented"
+              - name: "technical_feasibility"
+                threshold: 85
+                description: "Technical assumptions validated"
         
       - phase: "Architecture"
         personas: ["Architect", "Design Architect"]
@@ -65,6 +134,32 @@ workflows:
           - "Performance considerations addressed"
         dependencies:
           - "PRD and UI specifications complete"
+        quality_gates:
+          phase_entry:
+            checks:
+              - name: "requirements_complete"
+                required: true
+                description: "Requirements phase gates passed"
+              - name: "architecture_udtm_ready"
+                required: true
+                description: "Ready for Ultra-Deep Thinking Mode"
+          phase_exit:
+            checks:
+              - name: "architecture_analysis"
+                threshold: 100
+                description: "Architecture analysis tag present and complete"
+              - name: "scalability_design"
+                threshold: 90
+                description: "Scalability considerations documented"
+              - name: "security_architecture"
+                threshold: 95
+                description: "Security patterns implemented"
+              - name: "performance_planning"
+                threshold: 85
+                description: "Performance targets defined"
+              - name: "component_boundaries"
+                threshold: 95
+                description: "Clear module separation"
           
       - phase: "Development Prep"
         personas: ["PO", "SM"]
@@ -87,6 +182,26 @@ workflows:
           - "First story well-specified"
         dependencies:
           - "Architecture documents complete"
+        quality_gates:
+          phase_entry:
+            checks:
+              - name: "architecture_approved"
+                required: true
+                description: "Architecture phase gates passed"
+              - name: "po_available"
+                required: true
+                description: "Product Owner ready for validation"
+          phase_exit:
+            checks:
+              - name: "document_validation"
+                threshold: 100
+                description: "All documents pass PO master checklist"
+              - name: "story_quality"
+                threshold: 95
+                description: "Stories have clear DoD and acceptance criteria"
+              - name: "development_ready"
+                threshold: 90
+                description: "Development guidelines documented"
           
       - phase: "Development"
         personas: ["SM", "Dev"]
@@ -110,6 +225,48 @@ workflows:
           - "Regular story completion"
         dependencies:
           - "Development prep phase complete"
+        quality_gates:
+          pre_commit:
+            automatic_trigger: true
+            checks:
+              - name: "linting"
+                threshold: 100
+                description: "Zero linting violations"
+              - name: "type_checking"
+                threshold: 100
+                description: "Zero type errors"
+              - name: "unit_tests"
+                threshold: 100
+                description: "All unit tests passing"
+              - name: "style_consistency"
+                threshold: 95
+                description: "Code matches project style patterns"
+          story_completion:
+            automatic_trigger: true
+            checks:
+              - name: "dod_checklist"
+                threshold: 100
+                description: "Definition of Done complete"
+              - name: "test_coverage"
+                threshold: 85
+                description: "Minimum test coverage met"
+              - name: "code_review"
+                threshold: 100
+                description: "Code review approved"
+              - name: "integration_tests"
+                threshold: 100
+                description: "Integration tests passing"
+          sprint_end:
+            checks:
+              - name: "sprint_goals"
+                threshold: 90
+                description: "Sprint goals achieved"
+              - name: "technical_debt"
+                threshold: 85
+                description: "Technical debt within limits"
+              - name: "performance_baseline"
+                threshold: 95
+                description: "Performance metrics maintained"
 
   feature-addition:
     name: "Add Feature to Existing Project"
@@ -392,3 +549,81 @@ anti_patterns:
     - "incomplete_handoffs"
     - "missing_documentation"
     - "scope_creep_without_replan"
+
+# Quality Gate Automation Configuration
+quality_gate_automation:
+  automatic_triggers:
+    enabled: true
+    trigger_points:
+      - "phase_completion"
+      - "story_completion"
+      - "pre_commit"
+      - "pre_merge"
+      - "milestone_reached"
+      - "critical_change"
+    
+  enforcement_levels:
+    strict:
+      description: "Zero tolerance - all checks must pass"
+      failure_action: "block_progress"
+      override_allowed: false
+    standard:
+      description: "Standard enforcement - critical checks must pass"
+      failure_action: "require_review"
+      override_allowed: true
+    advisory:
+      description: "Advisory only - warnings provided"
+      failure_action: "log_warning"
+      override_allowed: true
+  
+  phase_specific_configs:
+    discovery:
+      enforcement: "standard"
+      critical_checks: ["context_loaded", "memory_ready"]
+      automated_checks: ["problem_validation"]
+    requirements:
+      enforcement: "strict"
+      critical_checks: ["prd_completeness", "acceptance_criteria"]
+      automated_checks: ["technical_feasibility"]
+    architecture:
+      enforcement: "strict"
+      critical_checks: ["architecture_analysis", "security_architecture"]
+      automated_checks: ["scalability_design", "performance_planning"]
+    development:
+      enforcement: "strict"
+      critical_checks: ["linting", "type_checking", "unit_tests"]
+      automated_checks: ["style_consistency", "test_coverage"]
+  
+  override_mechanism:
+    requires_justification: true
+    approval_levels:
+      minor_override: "tech_lead"
+      major_override: "architect"
+      critical_override: "project_manager"
+    documentation_required:
+      - "business_justification"
+      - "risk_assessment"
+      - "remediation_timeline"
+      - "accountability_assignment"
+  
+  improvement_guidance:
+    automatic_suggestions: true
+    sources:
+      - "memory_patterns"
+      - "best_practices"
+      - "similar_projects"
+      - "team_history"
+    format: "actionable_steps"
+    priority: "based_on_impact"
+  
+  metrics_tracking:
+    gate_performance:
+      - "pass_rate_by_phase"
+      - "common_failure_reasons"
+      - "time_to_resolution"
+      - "override_frequency"
+    quality_trends:
+      - "improvement_over_time"
+      - "regression_detection"
+      - "team_performance"
+      - "project_health"

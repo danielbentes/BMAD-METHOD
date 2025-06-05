@@ -58,6 +58,8 @@ nav:
     - workflows/index.md
     - Persona Selection: workflows/persona-selection.md
     - Quality Framework: workflows/quality-framework.md
+    - Context Management: workflows/context-management.md
+    - Memory Bootstrap: workflows/memory-bootstrap.md
     - Workflow Diagram: workflow-diagram.md
   - Reference:
     - Personas: reference/personas.md

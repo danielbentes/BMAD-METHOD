@@ -4,7 +4,7 @@ Welcome to the BMAD Method integration with Claude Code! This section provides e
 
 ## Overview
 
-The BMAD Method provides **46 specialized commands** organized into **9 logical groups** for Claude Code. Each command maintains the full BMAD behavioral framework including:
+The BMAD Method provides **49 specialized commands** organized into **9 logical groups** for Claude Code. Each command maintains the full BMAD behavioral framework including:
 
 - **Example-driven learning** from proven patterns
 - **Structured thinking** with analysis tags  
@@ -75,4 +75,4 @@ Zero-tolerance quality gates with comprehensive validation and automated improve
 !!! info "Auto-Generated Documentation"
     This documentation is automatically generated from BMAD Method Registry v3.0.0 and updates when the command registry changes.
     
-    **Last Updated:** 2025-06-05 11:48:58 UTC
+    **Last Updated:** 2025-06-06 01:45:28 UTC

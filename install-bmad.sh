@@ -145,7 +145,7 @@ initialize_project_state() {
     
     # Copy and populate orchestrator state template
     cp "$TARGET_DIR/bmad-agent/templates/project-state/orchestrator-state-template.md" \
-       "$TARGET_DIR/.bmad/state/orchestrator-state.md"
+       "$TARGET_DIR/.bmad/state/context-state.md"
     
     # Copy and populate memory fallback template
     cp "$TARGET_DIR/bmad-agent/templates/project-state/memory-fallback-template.json" \
@@ -156,7 +156,7 @@ initialize_project_state() {
        "$TARGET_DIR/.bmad/state/error-log.md"
     
     # Replace template placeholders
-    replace_placeholders "$TARGET_DIR/.bmad/state/orchestrator-state.md"
+    replace_placeholders "$TARGET_DIR/.bmad/state/context-state.md"
     replace_placeholders "$TARGET_DIR/.bmad/memory/fallback-storage.json"
     replace_placeholders "$TARGET_DIR/.bmad/state/error-log.md"
     

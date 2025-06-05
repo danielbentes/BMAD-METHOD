@@ -29,7 +29,9 @@ If ANY critical issue is found, you MUST:
 - Comprehensive test coverage (>80%)
 - No code duplication (DRY principle)
 - SOLID principles adherence
-- Consistent style guide compliance
+- **Consistent style guide compliance (>95% consistency score)**
+- **Project-specific coding pattern adherence**
+- **Memory-validated style conformance**
 
 ### RULE 3: Review Completeness
 **EVERY** review MUST examine:
@@ -72,6 +74,10 @@ pre_review_gates:
   - security_scan: NO_VULNERABILITIES
   - complexity_check: "<10"
   - duplication_check: "<3%"
+  - style_consistency_score: ">95%"
+  - naming_pattern_compliance: "100%"
+  - formatting_rule_adherence: "100%"
+  - memory_style_validation: "PASSED"
 ```
 
 **Auto-Rejection Triggers:**
@@ -80,6 +86,10 @@ pre_review_gates:
 - Critical security findings
 - Merge conflicts present
 - Files >500 lines changed without justification
+- **Style consistency score <95%**
+- **Naming pattern violations detected**
+- **Formatting rule violations**
+- **Memory style validation failure**
 
 **Review Assignment Logic:**
 ```python
@@ -156,6 +166,11 @@ IF review_not_started_by(SLA):
 - [ ] Proper abstraction levels
 - [ ] DRY principle followed
 - [ ] SOLID principles applied
+- [ ] **Style consistency with project patterns (>95% score)**
+- [ ] **Naming conventions match discovered patterns**
+- [ ] **Formatting follows project standards**
+- [ ] **Code organization matches established structure**
+- [ ] **Import/include patterns consistent with codebase**
 
 **Review Checklist - Security:**
 - [ ] Input validation present
@@ -340,6 +355,10 @@ reviewer_metrics:
 5. **Deep Nesting**: >3 levels
 6. **Poor Naming**: Unclear variables/functions
 7. **Missing Error Handling**: Catch without action
+8. **Inconsistent Style**: Violating discovered project patterns
+9. **Mixed Naming Conventions**: Using multiple naming styles
+10. **Formatting Inconsistency**: Ignoring established formatting rules
+11. **Import/Organization Violations**: Breaking established code organization patterns
 
 ### Review Anti-Patterns (MUST PREVENT)
 1. **Rubber Stamping**: Approval without real review
@@ -403,4 +422,116 @@ review_automation:
 - Team retrospectives on quality
 - External audit quarterly
 
-Remember: Code review is where quality is ensured or compromised. Every approved line of code is your responsibility. Review like the code will run in production forever—because it might. Be thorough, be kind, be uncompromising on standards.
+## STYLE CONSISTENCY INTEGRATION
+
+### Memory-Enhanced Style Validation
+```python
+def validate_style_consistency_in_review(pr_files, project_context):
+    """Integrate style consistency validation into code review process"""
+    
+    style_validation_results = []
+    
+    for file_path in pr_files:
+        # Load style rules from memory
+        language = detect_language(file_path)
+        style_rules = load_style_rules_from_memory(language, project_context)
+        
+        # Analyze file for style compliance
+        consistency_score = calculate_style_consistency(file_path, style_rules)
+        violations = detect_style_violations(file_path, style_rules)
+        
+        # Generate review feedback
+        style_feedback = generate_style_review_comments(violations, style_rules)
+        
+        style_validation_results.append({
+            "file": file_path,
+            "consistency_score": consistency_score,
+            "violations": violations,
+            "review_comments": style_feedback,
+            "blocking_issues": [v for v in violations if v["severity"] == "blocker"]
+        })
+    
+    return style_validation_results
+```
+
+### Style Review Comment Templates
+```markdown
+## Style Consistency Issues
+
+### [BLOCKER] Naming Convention Violation
+**File**: `src/components/userProfile.tsx`
+**Line**: 23
+**Issue**: Function name `GetUserData` violates project camelCase pattern
+**Expected**: `getUserData` (based on 94% confidence pattern from memory)
+**Pattern Source**: Discovered from 47 similar files in project
+**Fix Required**: Yes, must match project conventions before merge
+
+### [CRITICAL] Import Organization Violation  
+**File**: `src/services/user.service.ts`
+**Lines**: 1-8
+**Issue**: Import order violates established pattern (external → internal → relative)
+**Expected Pattern**: React/external imports first, then `../services/*`, then `./local`
+**Current Consistency Score**: 67% (below 95% requirement)
+**Auto-Fix Available**: Yes, can be corrected automatically
+
+### [MAJOR] Formatting Inconsistency
+**File**: `src/utils/validation.ts`
+**Lines**: Multiple
+**Issue**: Mixed indentation (2 spaces vs 4 spaces) violates project standard
+**Project Standard**: 2 spaces (confidence: 96% from memory analysis)
+**Impact**: Reduces code readability and maintainability
+**Recommendation**: Run project formatter or apply style correction task
+```
+
+### Style Gate Integration
+```yaml
+style_review_gates:
+  pre_human_review:
+    - style_consistency_score: ">95%"
+    - naming_pattern_compliance: "100%"
+    - formatting_adherence: "100%"
+    - memory_pattern_validation: "PASSED"
+    
+  human_review_requirements:
+    - verify_style_appropriateness_for_context
+    - check_style_decision_documentation
+    - validate_pattern_exceptions_justified
+    - confirm_cross_file_consistency
+    
+  merge_requirements:
+    - all_style_blockers_resolved: "YES"
+    - consistency_score_maintained: ">95%"
+    - no_new_style_debt_introduced: "VERIFIED"
+    - style_patterns_reinforced: "DOCUMENTED"
+```
+
+### Reviewer Style Checklist Addition
+- [ ] **Style Memory Validation**: Code follows patterns discovered in memory bootstrap
+- [ ] **Naming Consistency**: All naming follows project-specific conventions with >95% accuracy
+- [ ] **Formatting Compliance**: Indentation, spacing, quotes match project standards
+- [ ] **Code Organization**: Imports, function order, class structure follow established patterns
+- [ ] **Cross-Language Alignment**: Full-stack changes maintain naming/pattern consistency
+- [ ] **Style Decision Documentation**: Any style deviations are justified and documented
+- [ ] **Future Pattern Impact**: Style choices support or enhance existing project patterns
+
+### Style Violation Escalation
+```yaml
+style_violation_escalation:
+  minor_violations:
+    - action: "auto_comment_with_fix_suggestion"
+    - requires: "author_acknowledgment"
+    - timeline: "fix_within_24_hours"
+    
+  major_violations:
+    - action: "request_changes_with_detailed_feedback"
+    - requires: "complete_fix_before_re_review"
+    - timeline: "fix_within_8_hours"
+    
+  blocking_violations:
+    - action: "immediate_merge_block"
+    - requires: "mandatory_fix_and_re_review"
+    - timeline: "fix_before_any_approval"
+    - escalation: "notify_tech_lead_if_not_fixed_4_hours"
+```
+
+Remember: Code review is where quality is ensured or compromised. Every approved line of code is your responsibility. Review like the code will run in production forever—because it might. Be thorough, be kind, be uncompromising on standards. **Style consistency is not optional—it's a quality requirement that impacts long-term maintainability and team productivity.**

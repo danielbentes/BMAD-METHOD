@@ -115,34 +115,38 @@ commands:
 
   context:
     category: core
-    description: "Display rich context with memory insights and suggestions"
+    description: "Display and manage project context without technical identifiers"
     aliases: [ctx, status, where, state, info]
     usage: |
-      /context [--full] [--memory] [--suggestions]
+      /context [action] [--full] [--search]
       Examples:
-        /context            # Current context summary
-        /context --full     # Detailed context information
-        /context --memory   # Include memory insights
+        /context                    # Current context summary
+        /context save checkpoint1   # Save context
+        /context restore checkpoint1 # Restore context
+        /context search "API decision" # Search context
     parameters:
+      action:
+        type: string
+        required: false
+        values: [save, restore, search]
+      name:
+        type: string
+        required: false
+        description: "Context checkpoint name"
+      query:
+        type: string
+        required: false
+        description: "Search query for context"
       full:
         type: boolean
         required: false
         default: false
         description: "Show full context details"
-      memory:
-        type: boolean
-        required: false
-        default: true
-        description: "Include memory insights"
-      suggestions:
-        type: boolean
-        required: false
-        default: true
-        description: "Show next step suggestions"
     behavioral_requirements:
       - memory_integration: "Surface relevant memories for current context"
       - proactive_suggestions: "Recommend next steps based on context"
       - progressive_disclosure: "Essential context first, details on request"
+      - no_technical_ids: "Never expose session IDs or technical identifiers"
 
   # Persona Commands
   analyst:
@@ -667,6 +671,111 @@ commands:
     implementation: "brotherhood_review.md"
 
   # Workflow Commands
+  workflow-suggest:
+    category: workflow
+    description: "Get intelligent, memory-enhanced workflow suggestions"
+    aliases: [workflow-next, wf-suggest, next-step]
+    usage: |
+      /workflow suggest [--context] [--depth] [--show-rationale]
+      Examples:
+        /workflow suggest                        # Get next step suggestions
+        /workflow suggest --depth=detailed       # Include detailed analysis
+        /workflow suggest --show-rationale       # Explain reasoning
+    parameters:
+      context:
+        type: string
+        required: false
+        description: "Additional context for suggestions"
+      depth:
+        type: string
+        required: false
+        default: "standard"
+        values: [quick, standard, detailed]
+        description: "Analysis depth for suggestions"
+      show_rationale:
+        type: boolean
+        required: false
+        default: false
+        description: "Include reasoning for each suggestion"
+    behavioral_requirements:
+      - memory_integration: "Search memory for similar workflow positions"
+      - pattern_matching: "Identify successful patterns from past projects"
+      - constraint_awareness: "Consider project constraints and deadlines"
+      - confidence_scoring: "Rate each suggestion with confidence level"
+      - progressive_disclosure: "Start with top suggestion, expand on request"
+    implementation: "workflow-suggestion-task.md"
+
+  workflow-status:
+    category: workflow
+    description: "Show current workflow position and progress"
+    aliases: [wf-status, workflow-position, where-am-i]
+    usage: |
+      /workflow status [--detailed] [--compare] [--visual]
+      Examples:
+        /workflow status                         # Basic workflow status
+        /workflow status --detailed              # Include phase details
+        /workflow status --compare=typical       # Compare to typical duration
+        /workflow status --visual                # Show progress visualization
+    parameters:
+      detailed:
+        type: boolean
+        required: false
+        default: false
+        description: "Show detailed phase information"
+      compare:
+        type: string
+        required: false
+        values: [typical, team-average, personal-best]
+        description: "Compare progress to baseline"
+      visual:
+        type: boolean
+        required: false
+        default: true
+        description: "Include visual progress indicator"
+    behavioral_requirements:
+      - workflow_tracking: "Track position in standard workflows"
+      - progress_calculation: "Calculate completion percentage"
+      - blocker_identification: "Identify and highlight blockers"
+      - dependency_mapping: "Show task dependencies"
+      - time_estimation: "Estimate remaining effort"
+    implementation: "workflow-status-task.md"
+
+  workflow-optimize:
+    category: workflow
+    description: "Analyze and optimize workflow efficiency"
+    aliases: [wf-optimize, improve-workflow, efficiency]
+    usage: |
+      /workflow optimize [--focus] [--simulate] [--compare-to]
+      Examples:
+        /workflow optimize                       # General optimization analysis
+        /workflow optimize --focus=bottlenecks   # Focus on bottlenecks
+        /workflow optimize --simulate            # Show potential improvements
+        /workflow optimize --compare-to=best     # Compare to best practices
+    parameters:
+      focus:
+        type: string
+        required: false
+        default: "all"
+        values: [all, bottlenecks, handoffs, quality, speed]
+        description: "Optimization focus area"
+      simulate:
+        type: boolean
+        required: false
+        default: false
+        description: "Simulate optimization impact"
+      compare_to:
+        type: string
+        required: false
+        values: [team, best-practices, historical]
+        description: "Comparison baseline"
+    behavioral_requirements:
+      - bottleneck_detection: "Identify workflow bottlenecks"
+      - pattern_analysis: "Compare to successful workflow patterns"
+      - optimization_suggestions: "Provide specific improvements"
+      - impact_estimation: "Estimate time/effort savings"
+      - memory_learning: "Learn from past optimizations"
+    implementation: "workflow-optimization-task.md"
+
   suggest:
     category: workflow
     description: "Get AI-powered next step recommendations"
@@ -1156,11 +1265,12 @@ commands:
     description: "Bootstrap memory from existing codebase (brownfield)"
     aliases: [bootstrap, mem-bootstrap, init-memory]
     usage: |
-      /bootstrap-memory [--mode] [--focus] [--depth]
+      /bootstrap-memory [--mode] [--focus] [--depth] [--incremental] [--progress]
       Examples:
         /bootstrap-memory --mode=auto
         /bootstrap-memory --focus=architecture --depth=deep
         /bootstrap-memory --mode=interactive
+        /bootstrap-memory --incremental --progress
     parameters:
       mode:
         type: string
@@ -1179,11 +1289,23 @@ commands:
         default: "standard"
         values: [shallow, standard, deep]
         description: "Analysis depth"
+      incremental:
+        type: boolean
+        required: false
+        default: false
+        description: "Bootstrap incrementally for large projects"
+      progress:
+        type: boolean
+        required: false
+        default: true
+        description: "Show progress indicators"
     behavioral_requirements:
       - pattern_extraction: "Identify existing successful patterns"
       - decision_documentation: "Capture architectural choices"
       - anti_pattern_detection: "Flag problematic code patterns"
       - context_understanding: "Build comprehensive project knowledge"
+      - progress_tracking: "Display visual progress during execution"
+      - error_recovery: "Handle failures gracefully with fallback options"
     implementation: "memory-bootstrap-task.md"
 
   # Behavioral Tracking Commands

@@ -51,9 +51,13 @@
 - `/scan {codebase}` - Execute comprehensive anti-pattern detection
 - `/validate {implementation}` - Verify standards compliance
 - `/gate {phase}` - Execute quality gate validation
+- `/gate-check {trigger}` - Run automatic gate check for trigger point
+- `/gate-override {gate} --reason {justification}` - Request gate override
+- `/gate-status` - Show current gate status and metrics
 - `/review {code}` - Perform brotherhood review without bias
 - `/enforce {standard}` - Apply zero-tolerance enforcement
 - `/reject {violation}` - Issue work stoppage order
+- `/improve {failure}` - Generate improvement guidance
 
 ## SUCCESS METRICS:
 - [ ] Violation Detection: 100% accuracy
@@ -302,34 +306,99 @@ VERIFICATION: Test coverage for 5 different regions
 - Missing error handling
 - Incomplete test coverage
 
-## QUALITY GATE SPECIFICATIONS:
+## QUALITY GATE AUTOMATION:
 
-### Pre-Implementation Gate
-**Requirements**:
-- [ ] UDTM analysis documented
-- [ ] All assumptions challenged
-- [ ] Dependencies verified
-- [ ] Standards reviewed
+### Automatic Gate Triggers
+Quality gates execute automatically at:
+```yaml
+trigger_points:
+  phase_completion:
+    - discovery_complete
+    - requirements_complete
+    - architecture_complete
+    - development_prep_complete
+  
+  development_milestones:
+    - pre_commit
+    - story_completion
+    - sprint_end
+    - pre_merge
+    
+  critical_changes:
+    - architecture_modification
+    - security_component_change
+    - performance_critical_path
+    - data_model_alteration
+```
 
-**Verification**: Documentation review + assumption validation
+### Phase-Specific Gate Enforcement
+```yaml
+enforcement_by_phase:
+  discovery:
+    level: "standard"
+    automated_percentage: 60
+    critical_checks: ["context", "memory", "problem_definition"]
+    
+  requirements:
+    level: "strict"
+    automated_percentage: 75
+    critical_checks: ["prd_completeness", "acceptance_criteria"]
+    
+  architecture:
+    level: "strict"
+    automated_percentage: 80
+    critical_checks: ["analysis_tag", "security", "scalability"]
+    
+  development:
+    level: "strict"
+    automated_percentage: 95
+    critical_checks: ["linting", "types", "tests", "coverage"]
+```
 
-### Implementation Gate
-**Requirements**:
-- [ ] Zero linting violations
-- [ ] Zero type errors
-- [ ] 100% critical path coverage
-- [ ] No anti-patterns detected
+### Gate Check Execution Protocol
+```python
+def execute_gate_check(trigger, context):
+    """Execute automatic quality gate check"""
+    
+    # Determine applicable gates
+    gates = determine_gates_for_trigger(trigger, context.phase)
+    
+    # Run automated checks
+    automated_results = run_automated_checks(gates.automated)
+    
+    # Evaluate thresholds
+    gate_status = evaluate_thresholds(automated_results, gates.thresholds)
+    
+    # Handle failures
+    if not gate_status.passed:
+        if gates.enforcement_level == "strict":
+            block_progress()
+            generate_improvement_guidance(gate_status.failures)
+        elif gates.enforcement_level == "standard":
+            require_review()
+            suggest_improvements(gate_status.failures)
+        else:  # advisory
+            log_warnings(gate_status.failures)
+    
+    return gate_status
+```
 
-**Verification**: Automated scan + manual review
+### Override Authority Matrix
+| Gate Type | Enforcement | Override Authority | Documentation Required |
+|-----------|-------------|-------------------|----------------------|
+| Pre-Commit | Strict | Tech Lead | Justification + Timeline |
+| Story Completion | Strict | Architect | Risk Assessment + Mitigation |
+| Phase Exit | Strict | PM + Architect | Executive Justification + Full Plan |
+| Architecture | Strict | No Override | Must Fix - No Exceptions |
+| Security | Strict | No Override | Must Fix - No Exceptions |
 
-### Completion Gate
-**Requirements**:
-- [ ] End-to-end tests passing
-- [ ] Performance benchmarks met
-- [ ] Security scan clean
-- [ ] Production checklist complete
-
-**Verification**: Full system validation
+### Improvement Guidance Integration
+When gates fail, automatic guidance includes:
+- Memory search for similar failures and resolutions
+- Team-specific success patterns
+- Estimated time to resolution based on history
+- Step-by-step remediation instructions
+- Links to relevant examples and documentation
 
 ## ENFORCEMENT PROTOCOLS:
 

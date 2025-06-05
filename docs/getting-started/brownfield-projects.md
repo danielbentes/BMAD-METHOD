@@ -48,14 +48,20 @@ bmad system status --detailed
 - Sets up configuration for your environment
 - Prepares memory system for knowledge capture
 
-#### **Step 2: Automated Memory Bootstrap**
+#### **Step 2: Automated Memory Bootstrap with Progress Tracking**
 ```bash
 # For Claude Code - Start with auto mode
-/project:memory bootstrap-memory --mode=auto --depth=standard
+/project:memory bootstrap-memory --mode=auto --depth=standard --progress
 
 # For Regular IDE
-bmad memory bootstrap-memory --mode=auto --depth=standard
+bmad memory bootstrap-memory --mode=auto --depth=standard --progress
 ```
+
+**NEW in v3.0 - Progress Tracking:**
+- Real-time progress indicators for large codebases
+- Incremental bootstrap support for interrupted sessions
+- Automatic style pattern extraction
+- Enhanced error handling and recovery
 
 **What This Captures:**
 - Codebase structure and organization
@@ -63,6 +69,8 @@ bmad memory bootstrap-memory --mode=auto --depth=standard
 - Technology stack and dependencies
 - Basic architectural patterns
 - File and directory organization
+- **NEW: Coding style patterns and conventions**
+- **NEW: Historical decisions from code comments**
 
 **Expected Time:** 10-20 minutes depending on codebase size
 
@@ -85,7 +93,7 @@ bmad memory insights --focus=architecture --actionable
 
 ### Day 2: Deep Dive Analysis
 
-#### **Step 4: Interactive Bootstrap Session**
+#### **Step 4: Interactive Bootstrap Session with Dialogue Templates**
 ```bash
 # For Claude Code - Deep dive with team input
 /project:memory bootstrap-memory --mode=interactive --focus=decisions --depth=deep
@@ -93,6 +101,12 @@ bmad memory insights --focus=architecture --actionable
 # For Regular IDE
 bmad memory bootstrap-memory --mode=interactive --focus=decisions --depth=deep
 ```
+
+**NEW in v3.0 - Interactive Bootstrap Features:**
+- Structured dialogue templates guide the conversation
+- Automatic categorization of captured knowledge
+- Real-time pattern recognition during discussion
+- Progress saving for resumable sessions
 
 **Team Collaboration Required:**
 - Gather 2-3 team members with historical knowledge
@@ -104,6 +118,8 @@ bmad memory bootstrap-memory --mode=interactive --focus=decisions --depth=deep
 - What are the most important business rules?
 - Where are the biggest pain points?
 - What attempted solutions didn't work?
+- **NEW: What coding patterns have evolved over time?**
+- **NEW: Which team conventions are most important?**
 
 #### **Step 5: Quality Baseline Assessment**
 ```bash
@@ -466,19 +482,19 @@ bmad memory remember "Team feedback: [specific concerns and solutions]" --catego
 
 **Solution Strategy:**
 ```bash
-# For Claude Code - Enhanced interactive bootstrap
-/project:memory bootstrap-memory --mode=interactive --focus=decisions --depth=deep
+# For Claude Code - Enhanced interactive bootstrap with incremental mode
+/project:memory bootstrap-memory --mode=interactive --focus=decisions --depth=deep --incremental
 
 # Manual knowledge capture sessions
 /project:memory remember "Critical business rule: [rule and rationale]" --category=decisions --priority=critical
 /project:memory remember "Architectural constraint: [constraint and historical context]" --category=patterns
 
-# Regular knowledge validation
+# Regular knowledge validation with insights
 /project:memory patterns --type=decision --context=team
 /project:memory insights --focus=all --actionable
 
 # For Regular IDE
-bmad memory bootstrap-memory --mode=interactive --focus=decisions --depth=deep
+bmad memory bootstrap-memory --mode=interactive --focus=decisions --depth=deep --incremental
 
 # Manual knowledge capture sessions
 bmad memory remember "Critical business rule: [rule and rationale]" --category=decisions --priority=critical
@@ -489,11 +505,18 @@ bmad memory patterns --type=decision --context=team
 bmad memory insights --focus=all --actionable
 ```
 
+**NEW v3.0 Features for Context Capture:**
+- **Incremental Bootstrap**: Resume interrupted sessions without losing progress
+- **Context Restoration**: Automatically restore previous bootstrap state
+- **Pattern Insights**: AI-powered suggestions based on captured patterns
+- **Style Enforcement**: Ensure new code matches discovered conventions
+
 **Best Practices:**
 - Schedule dedicated knowledge capture sessions
 - Include senior team members in interactive bootstrap
 - Regular validation of captured knowledge
 - Document not just what, but why decisions were made
+- **NEW: Use context save/restore for multi-session bootstraps**
 
 ## Success Metrics for Brownfield BMAD Adoption
 

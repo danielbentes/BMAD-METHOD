@@ -197,6 +197,94 @@ pre_commit_checks:
 - [ ] All functions <50 lines
 - [ ] Error handling complete
 - [ ] Tests cover edge cases
+
+## CODING STYLE CONSISTENCY (MANDATORY):
+
+### Style Adherence Requirements:
+**CRITICAL**: All generated code MUST follow project-specific style conventions discovered during memory bootstrap or explicitly defined in project style guide.
+
+**Style Compliance Checks (Automatic Enforcement)**:
+1. **Load Project Style Rules**: Query memory for coding-style entries before writing code
+2. **Apply Naming Conventions**: Use exact patterns found in existing codebase
+3. **Follow Formatting Rules**: Match indentation, spacing, and bracket styles
+4. **Respect Code Organization**: Use established import order, function structure patterns
+5. **Maintain Consistency Score**: Aim for >95% consistency with existing code
+
+**Memory-Based Style Application**:
+```python
+def apply_project_style(code_to_write, language):
+    # Query memory for style rules
+    style_rules = search_memory(f"coding-style {language}")
+    naming_rules = search_memory(f"naming-conventions {language}")
+    formatting_rules = search_memory(f"formatting {language}")
+    
+    # Apply discovered patterns
+    if style_rules:
+        apply_style_patterns(code_to_write, style_rules)
+    if naming_rules:
+        apply_naming_conventions(code_to_write, naming_rules)
+    if formatting_rules:
+        apply_formatting_rules(code_to_write, formatting_rules)
+    
+    return consistent_code
+```
+
+**Mandatory Style Analysis Before Coding**:
+```xml
+<style_analysis>
+  <project_language>typescript</project_language>
+  <discovered_patterns>
+    <naming>camelCase variables, PascalCase classes</naming>
+    <formatting>2-space indent, single quotes, trailing commas</formatting>
+    <organization>external imports first, then internal, then relative</organization>
+  </discovered_patterns>
+  <consistency_score>94%</consistency_score>
+  <style_guide_location>.bmad/project/style-guide.md</style_guide_location>
+</style_analysis>
+```
+
+**Style Violation Prevention**:
+- **Before Writing**: Load style rules from memory
+- **During Writing**: Apply patterns consistently
+- **After Writing**: Validate against project patterns
+- **On Review**: Check consistency score
+
+**Automatic Style Correction**:
+If style violations detected:
+1. Load correct patterns from memory
+2. Apply automated fixes where possible
+3. Flag manual corrections needed
+4. Update code to match project standards
+5. Verify consistency before commit
+
+**Style Memory Integration**:
+- Reference coding-style memories for each language
+- Apply naming-convention patterns from memory
+- Use formatting rules discovered in bootstrap
+- Follow code-organization patterns from project analysis
+
+**Example Style Application**:
+```typescript
+// WRONG: Inconsistent with project style
+function process_user_data(userData: any): void {
+    console.log("Processing...");  // Debug log
+    const data=userData; // No spacing
+}
+
+// CORRECT: Following project patterns from memory
+const processUserData = (userData: UserData): ProcessResult => {
+  logger.info('Processing user data', { userId: userData.id });
+  
+  const validatedData = validateUserInput(userData);
+  return processValidatedData(validatedData);
+};
+```
+
+**Style Consistency Penalties**:
+- **Naming violations**: -$500 per instance
+- **Formatting inconsistency**: -$300 per file
+- **Organization pattern violations**: -$400 per file
+- **Ignoring discovered style rules**: -$1000 per violation
 - [ ] Performance measured
 - [ ] Documentation updated
 
@@ -359,7 +447,7 @@ class OAuth2Authenticator:
             return AuthResult(
                 success=True,
                 user_id=token_response.user_id,
-                session_token=self._create_session_token(token_response.user_id)
+                context_token=self._create_context_token(token_response.user_id)
             )
             
         except AuthenticationError:

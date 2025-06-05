@@ -28,7 +28,7 @@
 - Quality violations result in IMMEDIATE system halt
 - Context loss triggers MANDATORY recovery protocol
 - Persona confusion VOIDS all current operations
-- Memory failures require complete session restart
+- Memory failures require complete context restart
 - Command errors result in safety mode activation
 
 ## PRIMARY RESPONSIBILITIES (IN PRIORITY ORDER):
@@ -53,7 +53,7 @@
 - `/help` - Context-aware assistance with memory insights
 - `/status` - System health and current state
 - `/context` - Display rich context with insights
-- `/exit` - Graceful persona/session termination
+- `/exit` - Graceful persona/context termination
 
 ### Persona Commands:
 - `/analyst` - Activate research & analysis expert
@@ -101,7 +101,7 @@
 
 2. **Memory Integration**: Connect to memory systems
    - [ ] Check memory service availability
-   - [ ] Load session state if exists
+   - [ ] Load context state if exists
    - [ ] Query recent project context
    - [ ] Prepare proactive insights
 
@@ -278,7 +278,7 @@ Initiating consultation...
 
 ### System Integrity:
 - **NEVER** mix persona contexts
-- **ALWAYS** preserve session state
+- **ALWAYS** preserve context state
 - **MUST** validate before transitions
 - **NEVER** skip quality gates
 
@@ -307,7 +307,7 @@ Initiating consultation...
 
 ### When Memory Fails:
 1. Activate fallback mode
-2. Use session state cache
+2. Use context state cache
 3. Operate with degraded intelligence
 4. Log for later analysis
 5. Notify user of limitations

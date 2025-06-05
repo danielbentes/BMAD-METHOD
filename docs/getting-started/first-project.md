@@ -10,10 +10,12 @@ Build a complete project using BMad Method to experience the full workflow from 
 We'll build a **Simple Task Manager** web application that demonstrates:
 
 - 📋 **Complete BMad workflow** from requirements to deployment
-- 🎭 **Persona switching** for different development phases
-- ⚡ **Quality gates** and validation in practice
-- 🧠 **Memory system** for learning and improvement
-- 🤝 **Brotherhood review** process
+- 🎭 **Persona switching** with context-aware transitions
+- ⚡ **Quality gates** with automatic enforcement and improvement guidance
+- 🧠 **Memory system** with pattern recognition and insights
+- 🤝 **Brotherhood review** process with collaborative validation
+- 🔄 **Context management** for seamless work continuity
+- 🎨 **Style consistency** enforcement based on project patterns
 
 **Expected time:** 45-60 minutes
 
@@ -30,7 +32,7 @@ Let's start by setting up a new project using BMad Method:
 mkdir task-manager-app
 cd task-manager-app
 
-# Initialize the project with BMad Method
+# Initialize the project with BMad Method v3.0
 # (This copies the BMad system into your project)
 cp -r /path/to/bmad-method/bmad-agent .
 cp /path/to/bmad-method/verify-setup.sh .
@@ -38,7 +40,13 @@ cp /path/to/bmad-method/verify-setup.sh .
 # Initialize git repository
 git init
 git add .
-git commit -m "Initial project setup with BMad Method"
+git commit -m "Initial project setup with BMad Method v3.0"
+
+# Initialize memory system for new project
+# This creates a baseline for pattern recognition
+echo "Project: Task Manager App" > .bmad-context
+echo "Type: Greenfield" >> .bmad-context
+echo "Stack: Vanilla JS" >> .bmad-context
 ```
 
 ### 1.2 Activate BMad Orchestrator
@@ -67,9 +75,12 @@ Let's start by understanding what we need to build:
 In BMad Orchestrator:
 ```
 /pm
+
+# v3.0 - Context is automatically preserved
+# The system knows this is a new greenfield project
 ```
 
-This activates the Product Manager persona (Jack), who will help us define requirements.
+This activates the Product Manager persona (Jack), who will help us define requirements. In v3.0, the context is automatically tracked.
 
 ### 2.2 Create Product Requirements
 
@@ -107,6 +118,9 @@ Run the PM checklist to validate requirements:
 
 ```
 /checklist pm-checklist
+
+# v3.0 - Automatic quality gate triggers
+# If issues are found, improvement guidance is provided
 ```
 
 **Key validations:**
@@ -114,6 +128,8 @@ Run the PM checklist to validate requirements:
 - [ ] Defined target user  
 - [ ] Specific success metrics
 - [ ] Feasible scope for MVP
+
+**v3.0 Enhancement**: Quality gates now provide specific improvement suggestions based on memory patterns when issues are detected.
 
 ---
 
@@ -125,9 +141,13 @@ Switch to technical architecture planning:
 
 ```
 /architect
+
+# v3.0 - Intelligent handoff
+# Context from PM persona is automatically transferred
+# Previous decisions and requirements are preserved
 ```
 
-This activates the Architect persona (Mo) for technical design.
+This activates the Architect persona (Mo) for technical design. In v3.0, context handoffs preserve all previous work.
 
 ### 3.2 Create Architecture
 
@@ -173,7 +193,12 @@ task-manager-app/
 Run Ultra-Deep Thinking Mode (UDTM) on the architecture:
 
 ```
-/udtm
+/udtm "task manager architecture"
+
+# v3.0 - UDTM now includes:
+# - Pattern recognition from similar projects
+# - Memory-based recommendations
+# - Style consistency validation
 ```
 
 **UDTM Analysis:**
@@ -182,6 +207,8 @@ Run Ultra-Deep Thinking Mode (UDTM) on the architecture:
 - ✅ Progressive enhancement ensures accessibility
 - ⚠️ Consider: Future scalability if user growth occurs
 - ✅ Technology choices match team skills
+- 🧠 **Memory Insight**: Similar projects succeeded with this architecture
+- 🎨 **Style Pattern**: Vanilla JS approach matches project conventions
 
 ---
 
@@ -193,9 +220,15 @@ Time to build the application:
 
 ```
 /dev
+
+# v3.0 - Developer receives full context:
+# - Architecture decisions from Mo
+# - Requirements from Jack
+# - Quality standards to enforce
+# - Style patterns to follow
 ```
 
-This activates the Developer persona for implementation.
+This activates the Developer persona for implementation with complete context awareness.
 
 ### 4.2 Build Core Components
 
@@ -563,6 +596,11 @@ Run the development checklist:
 
 ```
 /checklist code-review
+
+# v3.0 - Enhanced validations:
+# - Automatic style consistency checks
+# - Pattern compliance verification
+# - Memory-based improvement suggestions
 ```
 
 **Key validations:**
@@ -571,6 +609,9 @@ Run the development checklist:
 - [ ] Accessible HTML structure
 - [ ] Responsive CSS design
 - [ ] Clean JavaScript with separation of concerns
+- [ ] **v3.0**: Style consistency with project conventions
+- [ ] **v3.0**: Anti-pattern detection passed
+- [ ] **v3.0**: Quality gate compliance verified
 
 ---
 
@@ -597,6 +638,11 @@ Request a Brotherhood review:
 
 ```
 /brotherhood-review
+
+# v3.0 - Collaborative review features:
+# - Multi-persona consultation
+# - Pattern-based feedback
+# - Improvement guidance from memory
 ```
 
 **Review Criteria:**
@@ -605,6 +651,9 @@ Request a Brotherhood review:
 - ✅ Proper error handling
 - ✅ Accessibility compliance
 - ✅ Performance considerations
+- ✅ **v3.0**: Style consistency verified
+- ✅ **v3.0**: Memory patterns applied
+- ✅ **v3.0**: Context continuity maintained
 
 ---
 
@@ -684,15 +733,24 @@ Capture insights from your first BMad project:
 ### 7.1 Memory Creation
 
 ```
-/memory add-project-insights
+/memory remember "Task Manager project: Successful MVP using vanilla JS, clean architecture, 2-hour completion"
+/memory patterns --type=success
+/memory insights --actionable
+
+# v3.0 - Memory operations now include:
+# - Automatic pattern extraction
+# - Success metric tracking
+# - Reusable insights for future projects
 ```
 
 **Key Learnings:**
-- BMad Method provides clear structure for development
-- Persona switching helps focus on different concerns
-- Quality gates prevent issues early
-- UDTM ensures thorough thinking
-- Brotherhood review catches blind spots
+- BMad Method v3.0 provides intelligent structure for development
+- Context-aware persona switching maintains continuity
+- Automatic quality gates with improvement guidance
+- UDTM with memory-based recommendations
+- Brotherhood review with collaborative validation
+- Style consistency enforcement prevents technical debt
+- Memory system enables continuous improvement
 
 ### 7.2 Process Improvements
 
@@ -710,14 +768,16 @@ Capture insights from your first BMad project:
 
 ## Congratulations! 🎉
 
-You've successfully built your first project using BMad Method! You've experienced:
+You've successfully built your first project using BMad Method v3.0! You've experienced:
 
-✅ **Complete workflow** from requirements to deployment  
-✅ **Persona switching** for different development phases  
-✅ **Quality gates** ensuring high standards  
-✅ **UDTM analysis** for thorough decision-making  
-✅ **Brotherhood review** for code quality  
-✅ **Memory system** for continuous learning  
+✅ **Complete workflow** with intelligent guidance from requirements to deployment  
+✅ **Context-aware persona switching** maintaining continuity throughout  
+✅ **Automatic quality gates** with improvement suggestions  
+✅ **Enhanced UDTM analysis** with memory-based insights  
+✅ **Collaborative Brotherhood review** with multi-persona validation  
+✅ **Intelligent memory system** capturing patterns for future projects  
+✅ **Style consistency enforcement** ensuring maintainable code  
+✅ **Context management** preserving work across sessions  
 
 ## Next Steps
 
@@ -731,23 +791,23 @@ Now that you understand the basics, explore advanced BMad Method features:
 
     Learn all available BMad commands and their advanced usage patterns.
 
--   :fontawesome-solid-diagram-project:{ .lg .middle } **[Advanced Workflows](first-project.md)**
+-   :fontawesome-solid-diagram-project:{ .lg .middle } **[Advanced Workflows](../workflows/index.md)**
 
     ---
 
-    Explore workflows for larger projects, team collaboration, and complex scenarios.
+    Explore intelligent workflows, context management, and complex scenarios.
 
--   :fontawesome-solid-lightbulb:{ .lg .middle } **[Real Examples](first-project.md)**
-
-    ---
-
-    Study real-world examples and common patterns from successful BMad projects.
-
--   :fontawesome-solid-graduation-cap:{ .lg .middle } **[Best Practices](first-project.md)**
+-   :fontawesome-solid-lightbulb:{ .lg .middle } **[Memory Bootstrap](../workflows/memory-bootstrap.md)**
 
     ---
 
-    Master advanced techniques and patterns for professional BMad development.
+    Learn to extract knowledge from existing codebases for brownfield projects.
+
+-   :fontawesome-solid-graduation-cap:{ .lg .middle } **[Context Management](../workflows/context-management.md)**
+
+    ---
+
+    Master seamless work continuity across sessions and interruptions.
 
 </div>
 

@@ -9,7 +9,7 @@ Intelligently restore context using both session state and accumulated memory in
 **Immediate Context Loading**:
 ```python
 def load_session_context():
-    session_state = load_file('.bmad/state/orchestrator-state.md')
+    session_state = load_file('.bmad/state/context-state.md')
     return {
         "project_name": extract_project_name(session_state),
         "current_phase": extract_current_phase(session_state),

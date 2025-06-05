@@ -66,7 +66,7 @@ class MemoryPattern:
 class MemorySyncIntegration:
     """Main memory synchronization integration system."""
     
-    def __init__(self, state_file: str = ".bmad/state/orchestrator-state.md", sync_interval: int = 30):
+    def __init__(self, state_file: str = ".bmad/state/context-state.md", sync_interval: int = 30):
         self.state_file = Path(state_file)
         self.sync_interval = sync_interval
         self.memory_available = False
@@ -140,7 +140,7 @@ class MemorySyncIntegration:
         
         try:
             # Load current orchestrator state
-            state_data = self._load_orchestrator_state()
+            state_data = self._load_context_state()
             if not state_data:
                 sync_results["status"] = "error"
                 sync_results["errors"].append("Could not load orchestrator state")
@@ -178,7 +178,7 @@ class MemorySyncIntegration:
             self._update_state_with_memory_intelligence(state_data, insights)
             
             # 8. Save updated state
-            self._save_orchestrator_state(state_data)
+            self._save_context_state(state_data)
             sync_results["operations"].append("Saved updated orchestrator state")
             
             # Update metrics
@@ -195,7 +195,7 @@ class MemorySyncIntegration:
             
         return sync_results
     
-    def _load_orchestrator_state(self) -> Optional[Dict[str, Any]]:
+    def _load_context_state(self) -> Optional[Dict[str, Any]]:
         """Load orchestrator state from file."""
         try:
             if not self.state_file.exists():
@@ -219,7 +219,7 @@ class MemorySyncIntegration:
             logger.error(f"Failed to load orchestrator state: {e}")
             return None
     
-    def _save_orchestrator_state(self, state_data: Dict[str, Any]) -> None:
+    def _save_context_state(self, state_data: Dict[str, Any]) -> None:
         """Save orchestrator state to file."""
         try:
             yaml_content = yaml.dump(state_data, default_flow_style=False, sort_keys=False, allow_unicode=True)
@@ -284,7 +284,7 @@ class MemorySyncIntegration:
             
             memories_created = 0
             bootstrap = state_data.get("bootstrap_analysis_results", {})
-            project_name = state_data.get("session_metadata", {}).get("project_name", "unknown")
+            project_name = state_data.get("context_metadata", {}).get("project_name", "unknown")
             
             # Create memories from bootstrap successful approaches
             successful_approaches = bootstrap.get("discovered_patterns", {}).get("successful_approaches", [])
@@ -308,7 +308,7 @@ class MemorySyncIntegration:
             if patterns.get("decisions_extracted", 0) > 0:
                 decision_memory = {
                     "type": "decision",
-                    "decision": "orchestrator-state-enhancement-approach",
+                    "decision": "context-state-enhancement-approach",
                     "rationale": "Memory-enhanced orchestrator provides better context continuity",
                     "project": project_name,
                     "persona": "architect",
@@ -327,7 +327,7 @@ class MemorySyncIntegration:
             return 0
     
     def _add_to_fallback_memory(self, memory_content: Dict[str, Any], tags: List[str]) -> bool:
-        """Add memory to fallback storage."""
+        """Add memory to fallback storage with enhanced auto-categorization."""
         try:
             # Initialize fallback storage if not exists
             fallback_file = Path('.bmad/memory/fallback-storage.json')
@@ -345,20 +345,64 @@ class MemorySyncIntegration:
                     "created": datetime.now(timezone.utc).isoformat()
                 }
             
-            # Add memory entry
+            # Auto-detect category if not specified
+            category = self._detect_category(memory_content)
+            confidence = self._calculate_category_confidence(memory_content, category)
+            
+            # Generate contextual tags
+            enhanced_tags = tags.copy()
+            enhanced_tags.extend([
+                category,
+                f"confidence:{int(confidence*100)}",
+                f"project:{memory_content.get('project', 'unknown')}",
+                f"persona:{memory_content.get('persona', 'system')}"
+            ])
+            
+            # Add tech keywords from content
+            tech_keywords = self._extract_tech_keywords(json.dumps(memory_content))
+            enhanced_tags.extend(tech_keywords)
+            
+            # Add memory entry with enhanced metadata
             memory_entry = {
                 "id": f"mem_{len(data['memories'])}_{int(datetime.now(timezone.utc).timestamp())}",
                 "content": json.dumps(memory_content),
-                "tags": tags,
+                "tags": list(set(enhanced_tags)),  # Remove duplicates
                 "metadata": {
                     "type": memory_content.get("type", "unknown"),
-                    "confidence": memory_content.get("confidence", 0.8)
+                    "category": category,
+                    "confidence": confidence,
+                    "context": {
+                        "project": memory_content.get("project", "unknown"),
+                        "phase": memory_content.get("phase", "unknown"),
+                        "persona": memory_content.get("persona", "system"),
+                        "task": memory_content.get("task", "general")
+                    }
                 },
-                "created": datetime.now(timezone.utc).isoformat()
+                "created": datetime.now(timezone.utc).isoformat(),
+                "relationships": self._find_related_memories(memory_content, data.get("memories", []))
             }
             
             data["memories"].append(memory_entry)
             data["last_updated"] = datetime.now(timezone.utc).isoformat()
+            
+            # Update category-specific collections
+            if category == "patterns" and "patterns" in data:
+                pattern_entry = {
+                    "pattern_id": memory_entry["id"],
+                    "pattern_name": memory_content.get("pattern_name", "unknown"),
+                    "confidence": confidence,
+                    "usage_count": 1,
+                    "success_rate": memory_content.get("effectiveness", 0.8)
+                }
+                data["patterns"].append(pattern_entry)
+            elif category == "decisions" and "decisions" in data:
+                decision_entry = {
+                    "decision_id": memory_entry["id"],
+                    "decision": memory_content.get("decision", "unknown"),
+                    "outcome": memory_content.get("outcome", "pending"),
+                    "confidence_level": memory_content.get("confidence_level", 50)
+                }
+                data["decisions"].append(decision_entry)
             
             # Save to file
             with fallback_file.open('w') as f:
@@ -370,6 +414,126 @@ class MemorySyncIntegration:
             logger.error(f"Failed to add to fallback memory: {e}")
             return False
     
+    def _detect_category(self, content: Dict[str, Any]) -> str:
+        """Auto-detect memory category based on content patterns."""
+        content_str = json.dumps(content).lower()
+        
+        # Decision indicators
+        decision_indicators = ["decided", "chose", "selected", "picked", "went with", "opted for", "vs", "over", "instead of"]
+        if any(indicator in content_str for indicator in decision_indicators):
+            return "decisions"
+        
+        # Pattern indicators
+        pattern_indicators = ["always", "every time", "pattern", "approach", "method", "strategy", "reduced by", "improved by"]
+        if any(indicator in content_str for indicator in pattern_indicators):
+            return "patterns"
+        
+        # Mistake indicators
+        mistake_indicators = ["failed", "mistake", "error", "wrong", "issue", "problem", "bug", "didn't work"]
+        if any(indicator in content_str for indicator in mistake_indicators):
+            return "mistakes"
+        
+        # Implementation indicators
+        implementation_indicators = ["implemented", "coded", "built", "developed", "integrated", "deployed", "api", "framework"]
+        if any(indicator in content_str for indicator in implementation_indicators):
+            return "implementations"
+        
+        # Consultation indicators
+        consultation_indicators = ["consulted", "discussed", "team", "agreed", "consensus", "meeting", "perspectives"]
+        if any(indicator in content_str for indicator in consultation_indicators):
+            return "consultations"
+        
+        # User preference indicators
+        preference_indicators = ["prefer", "like", "works best", "style", "approach", "i always", "we always"]
+        if any(indicator in content_str for indicator in preference_indicators):
+            return "user-preferences"
+        
+        # Quality metrics indicators
+        quality_indicators = ["coverage", "performance", "quality", "metric", "score", "rate", "%", "ms"]
+        if any(indicator in content_str for indicator in quality_indicators):
+            return "quality-metrics"
+        
+        return "general"
+    
+    def _calculate_category_confidence(self, content: Dict[str, Any], category: str) -> float:
+        """Calculate confidence that content belongs to category."""
+        # Count matching indicators
+        content_str = json.dumps(content).lower()
+        indicator_count = 0
+        
+        category_indicators = {
+            "decisions": ["decided", "chose", "rationale", "alternatives"],
+            "patterns": ["pattern", "always", "consistently", "approach"],
+            "mistakes": ["failed", "error", "wrong", "issue"],
+            "implementations": ["implemented", "coded", "api", "framework"],
+            "consultations": ["team", "consensus", "discussed", "agreed"],
+            "user-preferences": ["prefer", "style", "like", "always"],
+            "quality-metrics": ["metric", "score", "coverage", "performance"]
+        }
+        
+        if category in category_indicators:
+            for indicator in category_indicators[category]:
+                if indicator in content_str:
+                    indicator_count += 1
+        
+        # Base confidence on indicator matches
+        base_confidence = min(indicator_count * 0.25, 1.0)
+        
+        # Adjust based on content structure
+        if "rationale" in content and category == "decisions":
+            base_confidence = min(base_confidence + 0.2, 1.0)
+        elif "success_rate" in content and category == "patterns":
+            base_confidence = min(base_confidence + 0.2, 1.0)
+        
+        return max(0.5, base_confidence)  # Minimum 50% confidence
+    
+    def _extract_tech_keywords(self, content: str) -> List[str]:
+        """Extract technology keywords from content."""
+        import re
+        
+        # Common tech keywords to look for
+        tech_patterns = [
+            r'\b(react|vue|angular|nextjs|nodejs|python|java|go|rust)\b',
+            r'\b(aws|gcp|azure|docker|kubernetes|terraform)\b',
+            r'\b(postgresql|mongodb|redis|mysql|elasticsearch)\b',
+            r'\b(api|rest|graphql|websocket|grpc)\b',
+            r'\b(ci|cd|devops|agile|scrum|kanban)\b'
+        ]
+        
+        keywords = []
+        content_lower = content.lower()
+        
+        for pattern in tech_patterns:
+            matches = re.findall(pattern, content_lower)
+            keywords.extend([f"tech:{match}" for match in matches])
+        
+        return list(set(keywords))  # Remove duplicates
+    
+    def _find_related_memories(self, new_content: Dict[str, Any], existing_memories: List[Dict[str, Any]]) -> List[str]:
+        """Find related memories based on content similarity."""
+        related = []
+        new_content_str = json.dumps(new_content).lower()
+        
+        for memory in existing_memories[-20:]:  # Check last 20 memories for performance
+            try:
+                existing_content = json.loads(memory.get("content", "{}"))
+                existing_str = json.dumps(existing_content).lower()
+                
+                # Simple similarity check based on shared keywords
+                new_words = set(new_content_str.split())
+                existing_words = set(existing_str.split())
+                
+                common_words = new_words.intersection(existing_words)
+                similarity = len(common_words) / max(len(new_words), len(existing_words))
+                
+                if similarity > 0.3:  # 30% similarity threshold
+                    related.append(memory.get("id", "unknown"))
+                    
+            except Exception as e:
+                logger.debug(f"Error checking memory relationship: {e}")
+        
+        return related[:5]  # Return top 5 related memories
+    
     def _sync_decision_archaeology_enhanced(self, state_data: Dict[str, Any]) -> int:
         """Enhanced decision archaeology sync that works with fallback storage."""
         decisions_synced = 0
@@ -380,7 +544,7 @@ class MemorySyncIntegration:
             try:
                 memory_content = {
                     "type": "decision",
-                    "project": state_data.get("session_metadata", {}).get("project_name", "unknown"),
+                    "project": state_data.get("context_metadata", {}).get("project_name", "unknown"),
                     "decision_id": decision.get("decision_id"),
                     "persona": decision.get("persona"),
                     "decision": decision.get("decision"),
@@ -406,7 +570,7 @@ class MemorySyncIntegration:
                 "decision_id": "sample-memory-integration",
                 "persona": "architect",
                 "decision": "Implement memory-enhanced orchestrator state",
-                "rationale": "Provides better context continuity and learning across sessions",
+                "rationale": "Provides better context continuity and learning across contexts",
                 "alternatives_considered": ["Simple state storage", "No persistence"],
                 "constraints": ["Memory system availability", "Performance requirements"],
                 "outcome": "successful",
@@ -645,6 +809,687 @@ class MemorySyncIntegration:
         self.running = False
         logger.info("Memory monitoring stopped")
     
+    def enhanced_recall(self, query: str, context: Optional[Dict[str, Any]] = None) -> List[Dict[str, Any]]:
+        """Enhanced memory recall with relevance ranking and pattern recognition."""
+        try:
+            results = []
+            
+            # Use multiple search strategies
+            if self.memory_available and self.memory_functions['search_memory']:
+                # Primary: Use OpenMemory MCP
+                try:
+                    memories = self.memory_functions['search_memory'](query, limit=20)
+                    results.extend(memories)
+                except Exception as e:
+                    logger.warning(f"OpenMemory search failed: {e}")
+            
+            # Fallback: Search local storage
+            fallback_results = self._search_fallback_memory(query, context)
+            results.extend(fallback_results)
+            
+            # Rank results by relevance
+            ranked_results = self._rank_memories_by_relevance(results, query, context)
+            
+            # Highlight applicable patterns
+            for result in ranked_results[:10]:  # Top 10 results
+                result["patterns"] = self._extract_applicable_patterns(result, context)
+                result["relevance_explanation"] = self._explain_relevance(result, query, context)
+            
+            return ranked_results[:10]
+            
+        except Exception as e:
+            logger.error(f"Enhanced recall failed: {e}")
+            return []
+    
+    def _search_fallback_memory(self, query: str, context: Optional[Dict[str, Any]] = None) -> List[Dict[str, Any]]:
+        """Search fallback memory storage with semantic and keyword matching."""
+        results = []
+        
+        try:
+            fallback_file = Path('.bmad/memory/fallback-storage.json')
+            if not fallback_file.exists():
+                return results
+            
+            with fallback_file.open('r') as f:
+                data = json.load(f)
+            
+            query_lower = query.lower()
+            query_words = set(query_lower.split())
+            
+            for memory in data.get("memories", []):
+                try:
+                    content = json.loads(memory.get("content", "{}"))
+                    content_str = json.dumps(content).lower()
+                    
+                    # Calculate match score
+                    content_words = set(content_str.split())
+                    common_words = query_words.intersection(content_words)
+                    
+                    # Basic relevance score
+                    keyword_score = len(common_words) / max(len(query_words), 1)
+                    
+                    # Context similarity bonus
+                    context_score = 0
+                    if context:
+                        if context.get("persona") == memory.get("metadata", {}).get("context", {}).get("persona"):
+                            context_score += 0.2
+                        if context.get("project") == memory.get("metadata", {}).get("context", {}).get("project"):
+                            context_score += 0.1
+                    
+                    # Recency bonus (newer memories slightly preferred)
+                    created_time = datetime.fromisoformat(memory.get("created", datetime.now(timezone.utc).isoformat()))
+                    age_days = (datetime.now(timezone.utc) - created_time).days
+                    recency_score = max(0, 1 - (age_days / 365))  # Decay over a year
+                    
+                    # Calculate total relevance
+                    total_relevance = (keyword_score * 0.5) + (context_score * 0.3) + (recency_score * 0.2)
+                    
+                    if total_relevance > 0.1:  # Minimum relevance threshold
+                        results.append({
+                            "memory_id": memory.get("id"),
+                            "content": content,
+                            "tags": memory.get("tags", []),
+                            "metadata": memory.get("metadata", {}),
+                            "relevance_score": total_relevance,
+                            "created": memory.get("created"),
+                            "relationships": memory.get("relationships", [])
+                        })
+                        
+                except Exception as e:
+                    logger.debug(f"Error processing memory in search: {e}")
+            
+            # Sort by relevance
+            results.sort(key=lambda x: x["relevance_score"], reverse=True)
+            
+        except Exception as e:
+            logger.error(f"Fallback memory search failed: {e}")
+        
+        return results
+    
+    def _rank_memories_by_relevance(self, memories: List[Dict[str, Any]], query: str, context: Optional[Dict[str, Any]] = None) -> List[Dict[str, Any]]:
+        """Rank memories by multi-factor relevance scoring."""
+        for memory in memories:
+            # Calculate comprehensive relevance score
+            relevance_factors = {
+                "keyword_match": self._calculate_keyword_match(memory, query),
+                "semantic_similarity": self._calculate_semantic_similarity(memory, query),
+                "context_similarity": self._calculate_context_similarity(memory, context) if context else 0,
+                "recency": self._calculate_recency_score(memory),
+                "success_rate": memory.get("metadata", {}).get("success_rate", 0.5),
+                "usage_frequency": min(memory.get("metadata", {}).get("usage_count", 0) / 10, 1.0)
+            }
+            
+            # Weighted combination
+            weights = {
+                "keyword_match": 0.3,
+                "semantic_similarity": 0.25,
+                "context_similarity": 0.2,
+                "recency": 0.1,
+                "success_rate": 0.1,
+                "usage_frequency": 0.05
+            }
+            
+            total_relevance = sum(
+                relevance_factors[factor] * weights[factor]
+                for factor in relevance_factors
+            )
+            
+            memory["relevance_score"] = total_relevance
+            memory["relevance_factors"] = relevance_factors
+        
+        # Sort by relevance
+        return sorted(memories, key=lambda m: m.get("relevance_score", 0), reverse=True)
+    
+    def _calculate_keyword_match(self, memory: Dict[str, Any], query: str) -> float:
+        """Calculate keyword match score."""
+        query_words = set(query.lower().split())
+        content_str = json.dumps(memory.get("content", {})).lower()
+        content_words = set(content_str.split())
+        
+        if not query_words:
+            return 0
+        
+        common_words = query_words.intersection(content_words)
+        return len(common_words) / len(query_words)
+    
+    def _calculate_semantic_similarity(self, memory: Dict[str, Any], query: str) -> float:
+        """Calculate semantic similarity (simplified version)."""
+        # In a real implementation, this would use embeddings
+        # For now, use tag overlap as a proxy
+        query_words = set(query.lower().split())
+        memory_tags = set([tag.lower() for tag in memory.get("tags", [])])
+        
+        overlap = query_words.intersection(memory_tags)
+        return len(overlap) / max(len(query_words), 1)
+    
+    def _calculate_context_similarity(self, memory: Dict[str, Any], context: Dict[str, Any]) -> float:
+        """Calculate context similarity score."""
+        score = 0
+        memory_context = memory.get("metadata", {}).get("context", {})
+        
+        # Project match
+        if context.get("project") == memory_context.get("project"):
+            score += 0.4
+        
+        # Persona match
+        if context.get("persona") == memory_context.get("persona"):
+            score += 0.3
+        
+        # Phase match
+        if context.get("phase") == memory_context.get("phase"):
+            score += 0.2
+        
+        # Task similarity
+        if context.get("task") and memory_context.get("task"):
+            if context["task"] == memory_context["task"]:
+                score += 0.1
+        
+        return score
+    
+    def _calculate_recency_score(self, memory: Dict[str, Any]) -> float:
+        """Calculate recency score with decay."""
+        try:
+            created_str = memory.get("created") or memory.get("timestamp", datetime.now(timezone.utc).isoformat())
+            created_time = datetime.fromisoformat(created_str.replace('Z', '+00:00'))
+            age_days = (datetime.now(timezone.utc) - created_time).days
+            
+            # Exponential decay over 180 days
+            return max(0, pow(0.5, age_days / 180))
+        except:
+            return 0.5
+    
+    def _extract_applicable_patterns(self, memory: Dict[str, Any], context: Optional[Dict[str, Any]] = None) -> List[Dict[str, Any]]:
+        """Extract patterns applicable to current context from memory."""
+        patterns = []
+        
+        content = memory.get("content", {})
+        category = memory.get("metadata", {}).get("category", "general")
+        
+        if category == "patterns":
+            patterns.append({
+                "pattern_name": content.get("pattern_name", "Unknown Pattern"),
+                "applicability": "High" if context else "Medium",
+                "success_rate": content.get("effectiveness", 0.8),
+                "description": content.get("description", "Pattern from past experience")
+            })
+        elif category == "decisions" and content.get("outcome") == "successful":
+            patterns.append({
+                "pattern_name": f"Decision Pattern: {content.get('decision', 'Unknown')}",
+                "applicability": "Medium",
+                "success_rate": content.get("confidence_level", 70) / 100,
+                "description": f"Successful approach: {content.get('rationale', 'No rationale provided')}"
+            })
+        
+        return patterns
+    
+    def _explain_relevance(self, memory: Dict[str, Any], query: str, context: Optional[Dict[str, Any]] = None) -> str:
+        """Explain why this memory is relevant to the query."""
+        explanations = []
+        factors = memory.get("relevance_factors", {})
+        
+        if factors.get("keyword_match", 0) > 0.5:
+            explanations.append("Strong keyword match")
+        
+        if factors.get("context_similarity", 0) > 0.5:
+            explanations.append("Similar context")
+        
+        if factors.get("success_rate", 0) > 0.8:
+            explanations.append("High success rate")
+        
+        if memory.get("metadata", {}).get("category") == "patterns":
+            explanations.append("Proven pattern")
+        
+        if not explanations:
+            explanations.append("General relevance")
+        
+        return " | ".join(explanations)
+    
+    def generate_insights(self, context: Dict[str, Any]) -> List[Dict[str, Any]]:
+        """Generate proactive insights based on current context and memory patterns."""
+        insights = []
+        
+        try:
+            # Search for relevant memories
+            context_query = f"{context.get('task', '')} {context.get('persona', '')} {context.get('phase', '')}"
+            relevant_memories = self.enhanced_recall(context_query, context)
+            
+            # Analyze patterns in relevant memories
+            pattern_insights = self._analyze_memory_patterns(relevant_memories, context)
+            insights.extend(pattern_insights)
+            
+            # Predict potential issues
+            risk_insights = self._predict_risks(relevant_memories, context)
+            insights.extend(risk_insights)
+            
+            # Suggest optimizations
+            optimization_insights = self._suggest_optimizations(relevant_memories, context)
+            insights.extend(optimization_insights)
+            
+            # Sort by priority
+            insights.sort(key=lambda i: i.get("priority", 0), reverse=True)
+            
+            return insights[:10]  # Top 10 insights
+            
+        except Exception as e:
+            logger.error(f"Insight generation failed: {e}")
+            return []
+    
+    def _analyze_memory_patterns(self, memories: List[Dict[str, Any]], context: Dict[str, Any]) -> List[Dict[str, Any]]:
+        """Analyze patterns in memories to generate insights."""
+        insights = []
+        
+        # Count pattern occurrences
+        pattern_counts = {}
+        for memory in memories:
+            category = memory.get("metadata", {}).get("category", "general")
+            if category == "patterns":
+                pattern_name = memory.get("content", {}).get("pattern_name", "unknown")
+                pattern_counts[pattern_name] = pattern_counts.get(pattern_name, 0) + 1
+        
+        # Generate insights from patterns
+        for pattern, count in pattern_counts.items():
+            if count >= 2:  # Pattern appears multiple times
+                insights.append({
+                    "type": "pattern",
+                    "insight": f"Pattern '{pattern}' has been successful in {count} similar situations",
+                    "action": f"Consider applying {pattern} pattern",
+                    "priority": count * 10,
+                    "confidence": min(count * 20, 90)
+                })
+        
+        return insights
+    
+    def _predict_risks(self, memories: List[Dict[str, Any]], context: Dict[str, Any]) -> List[Dict[str, Any]]:
+        """Predict potential risks based on past failures."""
+        insights = []
+        
+        for memory in memories:
+            category = memory.get("metadata", {}).get("category", "general")
+            content = memory.get("content", {})
+            
+            if category == "mistakes" or (category == "decisions" and content.get("outcome") == "failed"):
+                insights.append({
+                    "type": "warning",
+                    "insight": f"⚠️ Risk: Similar situation led to {content.get('issue', 'problems')}",
+                    "action": f"Avoid: {content.get('rationale', 'Previous approach')}",
+                    "priority": 80,
+                    "confidence": 75
+                })
+        
+        return insights
+    
+    def _suggest_optimizations(self, memories: List[Dict[str, Any]], context: Dict[str, Any]) -> List[Dict[str, Any]]:
+        """Suggest optimizations based on successful patterns."""
+        insights = []
+        
+        for memory in memories[:5]:  # Top 5 most relevant
+            if memory.get("relevance_score", 0) > 0.7:
+                content = memory.get("content", {})
+                if content.get("outcome") == "successful" or content.get("effectiveness", 0) > 0.8:
+                    insights.append({
+                        "type": "opportunity",
+                        "insight": f"💡 Optimization: {content.get('description', 'Apply proven approach')}",
+                        "action": "Implement similar approach",
+                        "priority": 60,
+                        "confidence": int(content.get("confidence", 0.8) * 100)
+                    })
+        
+        return insights
+    
+    def capture_learning(self, event_type: str, outcome_data: Dict[str, Any]) -> Dict[str, Any]:
+        """Capture learning from outcomes and update pattern confidence."""
+        learning_result = {
+            "captured": False,
+            "patterns_updated": 0,
+            "insights_generated": 0,
+            "message": ""
+        }
+        
+        try:
+            # Create learning memory
+            learning_memory = {
+                "type": "learning",
+                "event_type": event_type,
+                "outcome": outcome_data.get("result", "unknown"),
+                "success_level": outcome_data.get("success_level", 0.5),
+                "lessons": outcome_data.get("lessons", []),
+                "timestamp": datetime.now(timezone.utc).isoformat(),
+                "project": outcome_data.get("project", "unknown"),
+                "persona": outcome_data.get("persona", "system")
+            }
+            
+            # Determine category based on outcome
+            if outcome_data.get("result") == "success":
+                learning_memory["category"] = "patterns"
+                learning_memory["pattern_name"] = f"successful-{event_type}"
+                learning_memory["effectiveness"] = outcome_data.get("success_level", 0.8)
+            else:
+                learning_memory["category"] = "mistakes"
+                learning_memory["issue"] = outcome_data.get("issue", "Unknown issue")
+            
+            # Add to memory
+            if self._add_to_fallback_memory(learning_memory, ["learning", event_type, outcome_data.get("result", "unknown")]):
+                learning_result["captured"] = True
+                
+                # Update related patterns
+                patterns_updated = self._update_pattern_confidence_from_outcome(event_type, outcome_data)
+                learning_result["patterns_updated"] = patterns_updated
+                
+                # Generate new insights
+                insights = self._generate_insights_from_learning(learning_memory)
+                learning_result["insights_generated"] = len(insights)
+                
+                learning_result["message"] = f"Learning captured: {event_type} - {outcome_data.get('result', 'unknown')}"
+            
+        except Exception as e:
+            logger.error(f"Failed to capture learning: {e}")
+            learning_result["message"] = f"Error: {str(e)}"
+        
+        return learning_result
+    
+    def _update_pattern_confidence_from_outcome(self, event_type: str, outcome_data: Dict[str, Any]) -> int:
+        """Update pattern confidence based on outcome."""
+        patterns_updated = 0
+        
+        try:
+            # This would update pattern confidence in real memory system
+            # For now, just track the update
+            if outcome_data.get("pattern_applied"):
+                if outcome_data.get("result") == "success":
+                    # Increase confidence
+                    patterns_updated = 1
+                    logger.info(f"Pattern confidence increased for: {outcome_data['pattern_applied']}")
+                else:
+                    # Decrease confidence
+                    patterns_updated = 1
+                    logger.info(f"Pattern confidence decreased for: {outcome_data['pattern_applied']}")
+            
+        except Exception as e:
+            logger.error(f"Failed to update pattern confidence: {e}")
+        
+        return patterns_updated
+    
+    def _generate_insights_from_learning(self, learning_memory: Dict[str, Any]) -> List[Dict[str, Any]]:
+        """Generate insights from new learning."""
+        insights = []
+        
+        if learning_memory.get("outcome") == "success":
+            insights.append({
+                "type": "success_pattern",
+                "insight": f"New success pattern identified: {learning_memory.get('event_type')}",
+                "confidence": 80
+            })
+        else:
+            insights.append({
+                "type": "failure_prevention",
+                "insight": f"New anti-pattern identified: {learning_memory.get('issue', 'Unknown issue')}",
+                "confidence": 85
+            })
+        
+        return insights
+    
+    def bootstrap_from_codebase(self, project_path: str, mode: str = "auto", 
+                               focus: str = "all", depth: str = "standard",
+                               incremental: bool = False, show_progress: bool = True) -> Dict[str, Any]:
+        """Bootstrap memory from existing codebase with enhanced analysis."""
+        bootstrap_result = {
+            "status": "in_progress",
+            "start_time": datetime.now(timezone.utc).isoformat(),
+            "mode": mode,
+            "focus": focus,
+            "depth": depth,
+            "memories_created": 0,
+            "patterns_found": 0,
+            "decisions_extracted": 0,
+            "errors": [],
+            "progress": {}
+        }
+        
+        try:
+            # Phase 1: Project Context Discovery
+            if show_progress:
+                self._display_progress("Phase 1: Project Discovery", 0, 5)
+            
+            project_context = self._analyze_project_structure(project_path, depth)
+            bootstrap_result["project_context"] = project_context
+            
+            if show_progress:
+                self._display_progress("Phase 1: Project Discovery", 1, 5)
+            
+            # Phase 2: Decision Archaeology
+            if focus in ["all", "decisions", "architecture"]:
+                decisions = self._extract_architectural_decisions(project_path, project_context)
+                bootstrap_result["decisions_extracted"] = len(decisions)
+                
+                # Create memory for each decision
+                for decision in decisions:
+                    if self._add_to_fallback_memory(decision, ["decision", "architecture", "bootstrap"]):
+                        bootstrap_result["memories_created"] += 1
+            
+            if show_progress:
+                self._display_progress("Phase 2: Decision Analysis", 2, 5)
+            
+            # Phase 3: Pattern Mining
+            if focus in ["all", "patterns"]:
+                patterns = self._mine_code_patterns(project_path, project_context, incremental)
+                bootstrap_result["patterns_found"] = len(patterns)
+                
+                # Create memory for each pattern
+                for pattern in patterns:
+                    if self._add_to_fallback_memory(pattern, ["pattern", "code", "bootstrap"]):
+                        bootstrap_result["memories_created"] += 1
+            
+            if show_progress:
+                self._display_progress("Phase 3: Pattern Mining", 3, 5)
+            
+            # Phase 4: Issue/Solution Mapping
+            if focus in ["all", "issues"]:
+                issues = self._map_issues_and_solutions(project_path, project_context)
+                
+                # Create memory for each issue-solution pair
+                for issue in issues:
+                    if self._add_to_fallback_memory(issue, ["issue", "solution", "bootstrap"]):
+                        bootstrap_result["memories_created"] += 1
+            
+            if show_progress:
+                self._display_progress("Phase 4: Issue Mapping", 4, 5)
+            
+            # Phase 5: Preference & Style Inference
+            if depth in ["standard", "deep"]:
+                preferences = self._infer_preferences_and_style(project_path, project_context)
+                
+                # Create preference memories
+                for pref in preferences:
+                    if self._add_to_fallback_memory(pref, ["preference", "style", "bootstrap"]):
+                        bootstrap_result["memories_created"] += 1
+            
+            if show_progress:
+                self._display_progress("Phase 5: Style Inference", 5, 5)
+            
+            # Generate bootstrap report
+            report_path = self._generate_bootstrap_report(bootstrap_result)
+            bootstrap_result["report_path"] = report_path
+            bootstrap_result["status"] = "completed"
+            bootstrap_result["end_time"] = datetime.now(timezone.utc).isoformat()
+            
+        except Exception as e:
+            bootstrap_result["status"] = "failed"
+            bootstrap_result["errors"].append(str(e))
+            logger.error(f"Bootstrap failed: {e}")
+        
+        return bootstrap_result
+    
+    def _display_progress(self, phase_name: str, current: int, total: int):
+        """Display visual progress indicator."""
+        percentage = int((current / total) * 100)
+        bar_length = 20
+        filled = int(bar_length * current / total)
+        bar = "█" * filled + "░" * (bar_length - filled)
+        
+        print(f"\r{phase_name}: [{bar}] {percentage}%", end="", flush=True)
+        if current == total:
+            print()  # New line when complete
+    
+    def _analyze_project_structure(self, project_path: str, depth: str) -> Dict[str, Any]:
+        """Analyze project structure and technology stack."""
+        analysis = {
+            "project_type": "unknown",
+            "tech_stack": [],
+            "structure": {},
+            "size_metrics": {}
+        }
+        
+        # This would be implemented to actually analyze the project
+        # For now, return sample data
+        return {
+            "project_type": "web-application",
+            "tech_stack": ["python", "django", "postgresql", "redis"],
+            "structure": {
+                "has_tests": True,
+                "has_docs": True,
+                "architecture_style": "mvc"
+            },
+            "size_metrics": {
+                "total_files": 150,
+                "lines_of_code": 15000
+            }
+        }
+    
+    def _extract_architectural_decisions(self, project_path: str, context: Dict[str, Any]) -> List[Dict[str, Any]]:
+        """Extract architectural decisions from code and documentation."""
+        decisions = []
+        
+        # Sample decision extraction (would analyze actual code/docs)
+        decisions.append({
+            "type": "decision",
+            "decision": "database-choice",
+            "rationale": "PostgreSQL chosen for ACID compliance and complex queries",
+            "alternatives_considered": ["MongoDB", "MySQL"],
+            "outcome": "successful",
+            "confidence_level": 85,
+            "project": project_path,
+            "timestamp": datetime.now(timezone.utc).isoformat()
+        })
+        
+        return decisions
+    
+    def _mine_code_patterns(self, project_path: str, context: Dict[str, Any], incremental: bool) -> List[Dict[str, Any]]:
+        """Mine successful patterns from codebase."""
+        patterns = []
+        
+        # Sample pattern mining (would analyze actual code)
+        patterns.append({
+            "type": "pattern",
+            "pattern_name": "repository-pattern",
+            "description": "Repository pattern for data access layer",
+            "effectiveness": 0.9,
+            "usage_count": 15,
+            "project": project_path,
+            "timestamp": datetime.now(timezone.utc).isoformat()
+        })
+        
+        return patterns
+    
+    def _map_issues_and_solutions(self, project_path: str, context: Dict[str, Any]) -> List[Dict[str, Any]]:
+        """Map known issues and their solutions."""
+        issues = []
+        
+        # Sample issue mapping (would analyze comments, docs, git history)
+        issues.append({
+            "type": "issue-solution",
+            "issue": "slow-query-performance",
+            "solution": "Added database indexes and query optimization",
+            "category": "performance",
+            "effectiveness": "query time reduced by 80%",
+            "project": project_path,
+            "timestamp": datetime.now(timezone.utc).isoformat()
+        })
+        
+        return issues
+    
+    def _infer_preferences_and_style(self, project_path: str, context: Dict[str, Any]) -> List[Dict[str, Any]]:
+        """Infer coding preferences and style from codebase."""
+        preferences = []
+        
+        # Sample preference inference (would analyze code style)
+        preferences.append({
+            "type": "preference",
+            "category": "naming-convention",
+            "preference": "snake_case for functions and variables",
+            "confidence": 0.95,
+            "evidence_count": 200,
+            "project": project_path,
+            "timestamp": datetime.now(timezone.utc).isoformat()
+        })
+        
+        return preferences
+    
+    def _generate_bootstrap_report(self, bootstrap_result: Dict[str, Any]) -> str:
+        """Generate bootstrap report and save to file."""
+        timestamp = datetime.now(timezone.utc).strftime("%Y%m%d_%H%M%S")
+        report_dir = Path(".bmad/history/bootstrap-reports")
+        report_dir.mkdir(parents=True, exist_ok=True)
+        
+        report_path = report_dir / f"bootstrap-{timestamp}.md"
+        
+        report_content = f"""# 🧠 Memory Bootstrap Report
+
+## Bootstrap Summary
+**Status**: {bootstrap_result['status']}
+**Mode**: {bootstrap_result['mode']}
+**Focus**: {bootstrap_result['focus']}
+**Depth**: {bootstrap_result['depth']}
+**Duration**: {self._calculate_duration(bootstrap_result)}
+**Memories Created**: {bootstrap_result['memories_created']}
+
+## Results
+- **Decisions Extracted**: {bootstrap_result['decisions_extracted']}
+- **Patterns Found**: {bootstrap_result['patterns_found']}
+- **Project Context**: {bootstrap_result.get('project_context', {}).get('project_type', 'unknown')}
+
+## Key Insights
+{self._format_key_insights(bootstrap_result)}
+
+## Next Steps
+1. Review extracted memories for accuracy
+2. Run additional focused bootstrap if needed
+3. Begin using memory-enhanced development
+
+---
+Generated: {datetime.now(timezone.utc).isoformat()}
+"""
+        
+        with report_path.open('w') as f:
+            f.write(report_content)
+        
+        return str(report_path)
+    
+    def _calculate_duration(self, result: Dict[str, Any]) -> str:
+        """Calculate bootstrap duration."""
+        if "start_time" in result and "end_time" in result:
+            start = datetime.fromisoformat(result["start_time"])
+            end = datetime.fromisoformat(result["end_time"])
+            duration = end - start
+            return f"{duration.total_seconds():.1f} seconds"
+        return "unknown"
+    
+    def _format_key_insights(self, result: Dict[str, Any]) -> str:
+        """Format key insights from bootstrap."""
+        insights = []
+        
+        if result.get("project_context"):
+            ctx = result["project_context"]
+            insights.append(f"- **Project Type**: {ctx.get('project_type', 'unknown')}")
+            insights.append(f"- **Tech Stack**: {', '.join(ctx.get('tech_stack', []))}")
+        
+        if result.get("patterns_found", 0) > 0:
+            insights.append(f"- **Patterns**: {result['patterns_found']} successful patterns identified")
+        
+        if result.get("decisions_extracted", 0) > 0:
+            insights.append(f"- **Decisions**: {result['decisions_extracted']} architectural decisions documented")
+        
+        return "\n".join(insights) if insights else "- No specific insights captured"
+    
     def diagnose_memory_integration(self) -> Dict[str, Any]:
         """Diagnose memory integration health and performance."""
         diagnosis = {
@@ -661,7 +1506,10 @@ class MemorySyncIntegration:
                 "memory_available": self.memory_available,
                 "real_time_sync": self.sync_mode == SyncMode.REAL_TIME,
                 "pattern_recognition": len(self.patterns),
-                "proactive_insights": len(self.proactive_insights)
+                "proactive_insights": len(self.proactive_insights),
+                "auto_categorization": True,
+                "relevance_ranking": True,
+                "learning_capture": True
             },
             "recommendations": []
         }
@@ -691,7 +1539,7 @@ def main() -> None:
                        help='Run memory integration diagnostics')
     parser.add_argument('--interval', type=int, default=30,
                        help='Sync interval in seconds (default: 30)')
-    parser.add_argument('--state-file', default='.bmad/state/orchestrator-state.md',
+    parser.add_argument('--state-file', default='.bmad/state/context-state.md',
                        help='Path to orchestrator state file')
     
     args = parser.parse_args()

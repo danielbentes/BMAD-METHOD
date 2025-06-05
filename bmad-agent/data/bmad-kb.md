@@ -110,7 +110,7 @@ bmad-agent/                    # ✅ Method definition only
 project-root/
   bmad-agent/                  # Copied method framework
   .bmad/                       # ✅ Project-specific data only
-    state/orchestrator-state.md # Session & progress tracking
+    state/context-state.md # Session & progress tracking
     memory/fallback-storage.json # Project learning & patterns
     config/                    # Team-specific configuration
 ```
@@ -360,7 +360,7 @@ python generate_claude_docs.py      # Creates comprehensive documentation
 ### Memory Architecture
 
 **Storage Layers**:
-1. **Session State**: `.bmad/state/orchestrator-state.md` (current session)
+1. **Session State**: `.bmad/state/context-state.md` (current session)
 2. **Project Memory**: `.bmad/memory/fallback-storage.json` (project-specific learning)
 3. **System Memory**: OpenMemory MCP integration (if available)
 

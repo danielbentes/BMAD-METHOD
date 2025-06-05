@@ -41,6 +41,73 @@ Rapidly establish comprehensive contextual memory for existing projects by syste
 ### Phase 5: Preference & Style Inference (5-10 minutes)
 **Goal**: Understand team working style and project-specific preferences
 
+## Progress Tracking
+
+### Visual Progress Indicators
+Display progress during bootstrap execution:
+```
+🔄 Memory Bootstrap Progress
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Phase 1: Project Discovery    [████████░░] 80%
+Phase 2: Decision Analysis    [████░░░░░░] 40%
+Phase 3: Pattern Mining       [░░░░░░░░░░] 0%
+Phase 4: Issue Mapping        [░░░░░░░░░░] 0%
+Phase 5: Style Inference      [░░░░░░░░░░] 0%
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+⏱️  Elapsed: 12 minutes | Est. Remaining: 18 minutes
+📝 Memories Created: 7 | Target: 10-15
+```
+
+## Incremental Bootstrap Support
+
+### Large Project Strategy
+For projects with >1000 files or complex structures:
+
+1. **Phased Analysis**
+   ```
+   Phase 1: Core modules only (src/core, lib/main)
+   Phase 2: Feature modules (src/features/*)
+   Phase 3: Tests and utilities
+   Phase 4: Documentation and configs
+   ```
+
+2. **Checkpoint System**
+   - Save progress after each major phase
+   - Allow resumption from last checkpoint
+   - Store partial results in `.bmad/bootstrap/checkpoints/`
+
+3. **Memory Batching**
+   - Create memories in batches of 5-10
+   - Validate each batch before proceeding
+   - Prevent memory system overload
+
+## Enhanced Error Handling
+
+### Error Recovery Protocol
+```python
+try:
+    # Attempt memory creation
+    add_memories(content, tags, metadata)
+except MemorySystemError as e:
+    # Fallback 1: Queue for retry
+    queue_for_retry(content, tags, metadata)
+    log_error(f"Memory creation failed: {e}")
+except ConnectionError as e:
+    # Fallback 2: Local storage
+    save_to_fallback(content, tags, metadata)
+    log_warning(f"Using fallback storage: {e}")
+except Exception as e:
+    # Fallback 3: Critical error handling
+    save_critical_data(content)
+    notify_user(f"Bootstrap error: {e}")
+    provide_recovery_options()
+```
+
+### Validation Checkpoints
+- After each phase: Verify memories were created
+- Check memory retrieval works before proceeding
+- Validate data integrity and relationships
+
 ## Execution Instructions
 
 ### Phase 1: Project Context Discovery
@@ -177,7 +244,117 @@ Rapidly establish comprehensive contextual memory for existing projects by syste
 
 ### Phase 5: Preference & Style Inference
 
-#### 5.1 Team Working Style Analysis
+#### 5.1 Coding Style Analysis & Extraction
+**CRITICAL**: Extract and document coding conventions for automatic style consistency
+
+**Analyze Codebase for Style Patterns:**
+
+**Naming Conventions:**
+- **Variables**: camelCase, snake_case, PascalCase patterns
+- **Functions**: Naming patterns (get*, set*, handle*, process*, validate*)
+- **Classes**: Noun patterns, interface naming (I*, *Interface, *Impl)
+- **Files**: kebab-case, PascalCase, index patterns
+- **Constants**: SCREAMING_SNAKE_CASE, camelCase patterns
+
+**Code Structure:**
+- **Import Organization**: Grouped by type, alphabetical, relative vs absolute
+- **Function Length**: Average length, maximum acceptable
+- **Class Organization**: Constructor first, private methods last, etc.
+- **Comment Style**: JSDoc, inline, block comment patterns
+- **Error Handling**: try/catch patterns, error throwing conventions
+
+**Formatting Preferences:**
+- **Indentation**: Spaces vs tabs, indent size
+- **Line Length**: Maximum characters per line
+- **Bracket Style**: Same line vs new line for opening braces
+- **Semicolon Usage**: Always, never, or ASI
+- **Quote Style**: Single quotes, double quotes, template literals
+- **Trailing Commas**: Always, never, multiline only
+
+**Language-Specific Patterns:**
+
+*JavaScript/TypeScript:*
+- Function declaration vs arrow functions
+- Async/await vs Promise chains
+- Interface vs type aliases
+- Destructuring patterns
+- Optional chaining usage
+
+*Python:*
+- Function definitions and docstring style
+- Class method organization
+- Import statement organization
+- List comprehension vs loops
+
+*Other Languages:*
+- Access modifier patterns
+- Generic usage conventions
+- Package/module organization
+
+**Memory Creation for Style Rules:**
+```json
+{
+  "type": "coding-style",
+  "language": "typescript",
+  "style_category": "naming-conventions",
+  "rules": {
+    "variables": "camelCase",
+    "functions": "camelCase-with-verb-prefix",
+    "classes": "PascalCase-nouns",
+    "interfaces": "PascalCase-with-I-prefix",
+    "files": "kebab-case-descriptive",
+    "constants": "SCREAMING_SNAKE_CASE"
+  },
+  "evidence_files": ["src/utils/apiClient.ts", "src/components/UserList.tsx"],
+  "consistency_score": 0.92,
+  "project_context": "react-typescript-enterprise"
+}
+```
+
+```json
+{
+  "type": "coding-style",
+  "language": "typescript",
+  "style_category": "formatting",
+  "rules": {
+    "indentation": "2-spaces",
+    "line_length": "100-characters",
+    "bracket_style": "same-line",
+    "semicolons": "always",
+    "quotes": "single-quotes",
+    "trailing_commas": "multiline-only"
+  },
+  "evidence": "analyzed-50-files-consistent-pattern",
+  "consistency_score": 0.95,
+  "enforcement_tools": [".eslintrc.js", ".prettierrc"]
+}
+```
+
+```json
+{
+  "type": "coding-style",
+  "language": "typescript",
+  "style_category": "code-organization",
+  "rules": {
+    "import_order": "external-then-internal-then-relative",
+    "function_length": "max-30-lines-typical-15",
+    "class_organization": "constructor-public-private-static",
+    "comment_style": "jsdoc-for-public-inline-for-complex",
+    "error_handling": "specific-errors-with-context"
+  },
+  "architectural_patterns": ["dependency-injection", "factory-pattern"],
+  "consistency_score": 0.88
+}
+```
+
+**Automatic Style Rule Generation:**
+After analysis, create a style guide template populated with discovered patterns:
+- Save to `.bmad/project/style-guide.md`
+- Include examples from actual codebase
+- Note consistency scores and exceptions
+- Provide linter/formatter configurations
+
+#### 5.2 Team Working Style Analysis
 **Infer from Project:**
 - **Documentation Preference**: Detailed vs minimal, inline vs external
 - **Code Style**: Verbose vs concise, functional vs OOP preference

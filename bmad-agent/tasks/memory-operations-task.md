@@ -178,6 +178,197 @@ Execute memory-aware context management for the current session, integrating his
 }
 ```
 
+## Enhanced Memory Operations with Behavioral Guidance
+
+### Auto-Categorization on Remember
+When capturing memories, automatically categorize and enhance:
+```python
+def enhanced_remember(content, context):
+    """Enhanced memory capture with auto-categorization"""
+    
+    # Auto-detect category
+    category = detect_category(content)  # See memory-categorization-rules.md
+    confidence = calculate_category_confidence(content, category)
+    
+    # Generate contextual tags
+    tags = [
+        category,
+        context.project_name,
+        context.active_persona,
+        context.current_phase,
+        *extract_tech_keywords(content)
+    ]
+    
+    # Enhance with metadata
+    memory_entry = {
+        "content": content,
+        "category": category,
+        "confidence": confidence,
+        "tags": tags,
+        "context": {
+            "project": context.project_name,
+            "phase": context.current_phase,
+            "persona": context.active_persona,
+            "task": context.current_task
+        },
+        "timestamp": current_timestamp(),
+        "relationships": find_related_memories(content)
+    }
+    
+    # Store and return confirmation
+    memory_id = store_memory(memory_entry)
+    return format_memory_confirmation(memory_id, category, tags)
+```
+
+### Relevance-Ranked Recall
+Implement intelligent ranking for memory retrieval:
+```python
+def enhanced_recall(query, context):
+    """Smart memory recall with relevance ranking"""
+    
+    # Multi-strategy search
+    results = {
+        "semantic": semantic_search(query),
+        "keyword": keyword_search(query),
+        "contextual": context_based_search(query, context),
+        "temporal": recent_relevant_search(query)
+    }
+    
+    # Merge and rank
+    all_memories = merge_search_results(results)
+    
+    # Calculate relevance scores
+    for memory in all_memories:
+        memory.relevance_score = calculate_relevance(
+            memory,
+            query,
+            context,
+            weights={
+                "semantic_match": 0.3,
+                "context_similarity": 0.3,
+                "recency": 0.1,
+                "success_rate": 0.2,
+                "usage_frequency": 0.1
+            }
+        )
+    
+    # Sort by relevance
+    ranked_memories = sorted(
+        all_memories,
+        key=lambda m: m.relevance_score,
+        reverse=True
+    )
+    
+    return ranked_memories[:10]
+```
+
+### Pattern Recognition Enhancement
+Continuously identify and strengthen patterns:
+```python
+def continuous_pattern_recognition():
+    """Background process for pattern identification"""
+    
+    # Scan recent memories
+    recent_memories = get_memories(days=30)
+    
+    # Group by similarity
+    memory_clusters = cluster_by_similarity(recent_memories)
+    
+    # Identify patterns
+    for cluster in memory_clusters:
+        if len(cluster) >= MIN_PATTERN_THRESHOLD:
+            pattern = extract_pattern(cluster)
+            
+            # Calculate pattern strength
+            pattern.confidence = calculate_pattern_confidence(cluster)
+            pattern.success_rate = calculate_success_rate(cluster)
+            
+            # Register or update pattern
+            if pattern.confidence > 60:
+                register_pattern(pattern)
+```
+
+### Proactive Insight Generation
+Generate insights before they're requested:
+```python
+def generate_proactive_insights(context):
+    """Generate insights based on current context"""
+    
+    insights = []
+    
+    # Risk detection
+    risk_patterns = find_risk_patterns(context)
+    for risk in risk_patterns:
+        if risk.likelihood > 0.7:
+            insights.append({
+                "type": "warning",
+                "priority": "high",
+                "message": risk.description,
+                "prevention": risk.mitigation_steps,
+                "evidence": risk.historical_examples
+            })
+    
+    # Opportunity identification
+    opportunities = find_optimization_opportunities(context)
+    for opp in opportunities:
+        if opp.roi > 2.0:
+            insights.append({
+                "type": "opportunity",
+                "priority": "medium",
+                "message": opp.description,
+                "implementation": opp.steps,
+                "expected_benefit": opp.benefit
+            })
+    
+    # Next step predictions
+    next_steps = predict_next_actions(context)
+    insights.extend(format_next_step_insights(next_steps))
+    
+    return prioritize_insights(insights)
+```
+
+### Learning Capture Integration
+Automatically capture learnings from outcomes:
+```python
+def capture_outcome_learning(event_id, outcome):
+    """Capture learnings from completed actions"""
+    
+    # Retrieve original context
+    original_event = get_event(event_id)
+    
+    # Analyze outcome
+    analysis = {
+        "success_level": assess_success(outcome),
+        "expectations_met": compare_to_expectations(original_event, outcome),
+        "surprises": identify_surprises(outcome),
+        "time_variance": outcome.actual_time - original_event.estimated_time
+    }
+    
+    # Update related patterns
+    if original_event.pattern_applied:
+        update_pattern_effectiveness(
+            original_event.pattern_id,
+            analysis.success_level
+        )
+    
+    # Extract new insights
+    new_insights = extract_insights(analysis)
+    
+    # Create learning memory
+    learning_memory = {
+        "category": "learning",
+        "event": original_event,
+        "outcome": outcome,
+        "analysis": analysis,
+        "insights": new_insights,
+        "pattern_updates": get_pattern_updates(analysis)
+    }
+    
+    store_memory(learning_memory)
+    
+    return format_learning_summary(analysis, new_insights)
+```
+
 ## Memory Operations Integration
 
 ### Intelligent Memory Queries

@@ -59,7 +59,7 @@ class PopulationConfig:
     git_analysis_enabled: bool = True
     performance_monitoring_enabled: bool = True
     full_analysis: bool = False
-    output_file: str = ".bmad/state/orchestrator-state.md"
+    output_file: str = ".bmad/state/context-state.md"
     
 class StatePopulator:
     """Main class for populating orchestrator state."""
@@ -971,7 +971,7 @@ class StatePopulator:
         
         return state
     
-    def populate_full_state(self, output_file: str = ".bmad/state/orchestrator-state.md") -> None:
+    def populate_full_state(self, output_file: str = ".bmad/state/context-state.md") -> None:
         """Populate complete orchestrator state with full analysis and memory sync."""
         print("🎯 Generating Complete BMAD Orchestrator State...")
         print(f"📁 Base path: {self.workspace_root}")
@@ -1065,8 +1065,8 @@ def main() -> None:
     import argparse
     
     parser = argparse.ArgumentParser(description='BMAD Orchestrator State Population with Memory Integration')
-    parser.add_argument('--output-file', default='.bmad/state/orchestrator-state.md',
-                       help='Output file path (default: .bmad/state/orchestrator-state.md)')
+    parser.add_argument('--output-file', default='.bmad/state/context-state.md',
+                       help='Output file path (default: .bmad/state/context-state.md)')
     parser.add_argument('--base-path', default='.',
                        help='Base workspace path (default: current directory)')
     parser.add_argument('--full-analysis', action='store_true',

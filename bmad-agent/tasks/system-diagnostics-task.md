@@ -175,7 +175,7 @@ def validate_session_state():
     session_checks = []
     
     # Check session state file location
-    state_file = ".bmad/state/orchestrator-state.md"
+    state_file = ".bmad/state/context-state.md"
     
     if file_exists(state_file):
         # Validate state file format

@@ -116,21 +116,21 @@ def analyze_handoff_readiness(source_persona, target_persona, current_context):
 
 ### 2. Context Package Assembly with Error Resilience
 ```python
-def assemble_handoff_context(source_persona, target_persona, session_state):
+def assemble_handoff_context(source_persona, target_persona, context):
     """Assemble context with comprehensive error handling"""
     
     context_package = {
         # Immediate context (always available)
-        "session_state": sanitize_session_state(session_state),
-        "recent_decisions": extract_recent_decisions(session_state),
-        "active_concerns": identify_active_concerns(session_state),
-        "completed_artifacts": list_completed_artifacts(session_state)
+        "context": sanitize_context(context),
+        "recent_decisions": extract_recent_decisions(context),
+        "active_concerns": identify_active_concerns(context),
+        "completed_artifacts": list_completed_artifacts(context)
     }
     
     # Memory-enhanced context with graceful degradation
     try:
         context_package["relevant_experiences"] = search_memory(
-            f"{target_persona} working on {session_state.project_type} {session_state.phase}",
+            f"{target_persona} working on {context.project_type} {context.phase}",
             limit=3,
             threshold=0.8,
             timeout=2000
@@ -177,13 +177,13 @@ def assemble_handoff_context(source_persona, target_persona, session_state):
     
     # Proactive intelligence
     context_package["likely_questions"] = predict_target_persona_questions(
-        source_persona, target_persona, session_state
+        source_persona, target_persona, context
     )
     context_package["recommended_focus"] = generate_focus_recommendations(
-        target_persona, session_state
+        target_persona, context
     )
     context_package["optimization_opportunities"] = identify_optimization_opportunities(
-        session_state
+        context
     )
     
     # Validate context completeness
@@ -236,6 +236,13 @@ def assemble_handoff_context(source_persona, target_persona, session_state):
 **Pending Decisions**: {pending_decisions}
 **Follow-up Required**: {follow_up_items}
 
+## Workflow Context
+**Active Workflow**: {workflow_name}
+**Current Phase**: {workflow_phase} ({phase_progress}% complete)
+**Phase Started**: {phase_start_time}
+**Estimated Remaining**: {time_remaining}
+**Next Milestone**: {next_milestone}
+
 ## Memory-Enhanced Context
 ### 🎯 Relevant Past Experience
 **Similar situations you've handled**:
@@ -268,11 +275,20 @@ Watch out for:
 🎯 **Primary Focus**: {primary_recommendation}
 💡 **Optimization Opportunity**: {efficiency_suggestion}
 ⏱️ **Time-Sensitive Items**: {urgent_items}
+📊 **Workflow Next Steps**: {workflow_suggestions}
+🚀 **Phase Completion Tasks**: {phase_completion_items}
 ```
 
-#### Phase 3: Target Persona Activation
+#### Phase 3: Target Persona Activation with Automatic Context Preservation
 ```python
 def activate_target_persona_with_context(target_persona, context_package):
+    # Automatically preserve context before activation
+    auto_save_context(
+        checkpoint_name=f"handoff_{target_persona}_{timestamp()}",
+        context=context_package,
+        reason="Automatic preservation during persona handoff"
+    )
+    
     # Load target persona
     persona_definition = load_persona(target_persona)
     
@@ -307,31 +323,31 @@ def activate_target_persona_with_context(target_persona, context_package):
 
 ### 4. Handoff Quality Validation
 ```python
-def validate_handoff_quality(handoff_session):
+def validate_handoff_quality(handoff_context):
     validation_checks = [
         {
             "check": "context_understanding",
-            "test": lambda: verify_target_persona_understanding(handoff_session),
+            "test": lambda: verify_target_persona_understanding(handoff_context),
             "required": True
         },
         {
             "check": "artifact_accessibility", 
-            "test": lambda: verify_artifact_access(handoff_session),
+            "test": lambda: verify_artifact_access(handoff_context),
             "required": True
         },
         {
             "check": "decision_continuity",
-            "test": lambda: verify_decision_awareness(handoff_session),
+            "test": lambda: verify_decision_awareness(handoff_context),
             "required": True
         },
         {
             "check": "blocker_clarity",
-            "test": lambda: verify_blocker_understanding(handoff_session),
+            "test": lambda: verify_blocker_understanding(handoff_context),
             "required": True
         },
         {
             "check": "next_steps_clear",
-            "test": lambda: verify_action_clarity(handoff_session),
+            "test": lambda: verify_action_clarity(handoff_context),
             "required": False
         }
     ]
@@ -375,22 +391,22 @@ Before we complete the handoff, let me verify understanding:
 
 ### 5. Post-Handoff Memory Creation
 ```python
-def create_handoff_memory(handoff_session):
+def create_handoff_memory(handoff_context):
     handoff_memory = {
         "type": "handoff",
-        "source_persona": handoff_session.source_persona,
-        "target_persona": handoff_session.target_persona,
-        "project_phase": handoff_session.project_phase,
-        "context_quality": assess_context_quality(handoff_session),
-        "handoff_duration": handoff_session.duration_minutes,
-        "validation_score": calculate_validation_score(handoff_session.validation_results),
-        "success_factors": extract_success_factors(handoff_session),
-        "improvement_areas": identify_improvement_areas(handoff_session),
-        "user_satisfaction": handoff_session.user_satisfaction_rating,
-        "artifacts_transferred": handoff_session.artifacts_list,
-        "decisions_transferred": handoff_session.decisions_list,
+        "source_persona": handoff_context.source_persona,
+        "target_persona": handoff_context.target_persona,
+        "project_phase": handoff_context.project_phase,
+        "context_quality": assess_context_quality(handoff_context),
+        "handoff_duration": handoff_context.duration_minutes,
+        "validation_score": calculate_validation_score(handoff_context.validation_results),
+        "success_factors": extract_success_factors(handoff_context),
+        "improvement_areas": identify_improvement_areas(handoff_context),
+        "user_satisfaction": handoff_context.user_satisfaction_rating,
+        "artifacts_transferred": handoff_context.artifacts_list,
+        "decisions_transferred": handoff_context.decisions_list,
         "follow_up_effectiveness": "to_be_measured",  # Updated later
-        "reusable_insights": extract_reusable_insights(handoff_session)
+        "reusable_insights": extract_reusable_insights(handoff_context)
     }
     
     add_memories(
